@@ -5,14 +5,14 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Budget from './Budget';
+import TakeHomeIncome from './TakeHomeIncome';
 import LatestOrders from './LatestOrders';
 import LatestProducts from './LatestProducts';
-import Sales from './Sales';
-import TasksProgress from './TasksProgress';
-import TotalCustomers from './TotalCustomers';
-import TotalProfit from './TotalProfit';
-import TrafficByDevice from './TrafficByDevice';
+import NetWorth from './NetWorth';
+import TasksProgress from './MonthlyExpenses';
+import InvestingPerMonth from './InvestingPerMonth';
+import TotalProfit from './ExpectedMonthlyIncome';
+import TrafficByDevice from './SavingPercentage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +43,7 @@ const Dashboard = () => {
             xl={3}
             xs={12}
           >
-            <Budget />
+            <TakeHomeIncome />
           </Grid>
           <Grid
             item
@@ -52,7 +52,7 @@ const Dashboard = () => {
             xl={3}
             xs={12}
           >
-            <TotalCustomers />
+            <InvestingPerMonth />
           </Grid>
           <Grid
             item
@@ -79,7 +79,7 @@ const Dashboard = () => {
             xl={9}
             xs={12}
           >
-            <Sales />
+            <NetWorth />
           </Grid>
           <Grid
             item
@@ -97,9 +97,9 @@ const Dashboard = () => {
             xl={3}
             xs={12}
           >
-            <LatestProducts />
+            {/* <LatestProducts /> */}
           </Grid>
-          <Grid
+          {/* <Grid
             item
             lg={8}
             md={12}
@@ -107,7 +107,7 @@ const Dashboard = () => {
             xs={12}
           >
             <LatestOrders />
-          </Grid>
+          </Grid> */}
         </Grid>
       </Container>
     </Page>

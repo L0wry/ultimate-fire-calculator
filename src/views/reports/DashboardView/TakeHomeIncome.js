@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Budget = ({ className, ...rest }) => {
+const TakeHomeIncome = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -52,19 +52,14 @@ const Budget = ({ className, ...rest }) => {
               gutterBottom
               variant="h6"
             >
-              BUDGET
+              Annual Take Home Pay
             </Typography>
             <Typography
               color="textPrimary"
               variant="h3"
             >
-              $24,000
+              £56000
             </Typography>
-          </Grid>
-          <Grid item>
-            <Avatar className={classes.avatar}>
-              <MoneyIcon />
-            </Avatar>
           </Grid>
         </Grid>
         <Box
@@ -72,27 +67,14 @@ const Budget = ({ className, ...rest }) => {
           display="flex"
           alignItems="center"
         >
-          <ArrowDownwardIcon className={classes.differenceIcon} />
-          <Typography
-            className={classes.differenceValue}
-            variant="body2"
-          >
-            12%
-          </Typography>
-          <Typography
-            color="textSecondary"
-            variant="caption"
-          >
-            Since last month
-          </Typography>
         </Box>
       </CardContent>
     </Card>
   );
 };
 
-Budget.propTypes = {
+TakeHomeIncome.propTypes = {
   className: PropTypes.string
 };
 
-export default Budget;
+export default TakeHomeIncome;
