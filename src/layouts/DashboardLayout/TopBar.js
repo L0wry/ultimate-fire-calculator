@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   AppBar,
+  Typography,
   Badge,
   Box,
   Hidden,
@@ -41,7 +42,28 @@ const TopBar = ({
       <Toolbar>
         <RouterLink to="/">
           <Logo />
+
         </RouterLink>
+        <Hidden smDown>
+          <Box>
+            <Typography
+              color="textPrimary"
+              variant="h1">
+              The Ultimate Fire Calculator
+          </Typography>
+          </Box>
+        </Hidden>
+
+        <Hidden mdUp>
+          <Box>
+            <Typography
+              color="textPrimary"
+              variant="h1">
+              UFC
+          </Typography>
+
+          </Box>
+        </Hidden>
         <Box flexGrow={1} />
         <Hidden lgUp>
           <IconButton

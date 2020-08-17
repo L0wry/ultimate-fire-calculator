@@ -62,15 +62,6 @@ const NetWorth = ({ className, ...rest }) => {
       {...rest}
     >
       <CardHeader
-        action={(
-          <Button
-            endIcon={<ArrowDropDownIcon />}
-            size="small"
-            variant="text"
-          >
-            Last 7 days
-          </Button>
-        )}
         title="Net Worth Over Time"
       />
       <Divider />

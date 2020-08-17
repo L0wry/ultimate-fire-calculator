@@ -5,7 +5,9 @@ import PropTypes from 'prop-types';
 import {
   AppBar,
   Toolbar,
-  makeStyles
+  makeStyles,
+  Typography,
+  Box
 } from '@material-ui/core';
 import Logo from 'src/components/Logo';
 
@@ -28,8 +30,16 @@ const TopBar = ({ className, ...rest }) => {
       <Toolbar className={classes.toolbar}>
         <RouterLink to="/">
           <Logo />
+
         </RouterLink>
       </Toolbar>
+      <Box mb={3}>
+        <Typography
+          color="textPrimary"
+          variant="h1">
+          Ultimate Fire Calculator
+          </Typography>
+      </Box>
     </AppBar>
   );
 };
