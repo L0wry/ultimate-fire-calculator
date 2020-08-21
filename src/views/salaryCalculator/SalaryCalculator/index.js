@@ -7,7 +7,7 @@ import {
 } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import Page from 'src/components/Page';
-import Toolbar from './Toolbar';
+import UserFinance from './UserFinance';
 import ProductCard from './ProductCard';
 import data from './data';
 
@@ -27,13 +27,14 @@ const SalaryCalculator = () => {
   const classes = useStyles();
   const [products] = useState(data);
 
+
   return (
     <Page
       className={classes.root}
       title="Salary Calculator"
     >
       <Container maxWidth={false}>
-        <Toolbar />
+        <UserFinance />
         <Box mt={3}>
           <Grid
             container

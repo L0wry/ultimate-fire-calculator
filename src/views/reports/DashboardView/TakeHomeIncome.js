@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
+import { SalaryContextConsumer } from 'src/context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,40 +37,44 @@ const TakeHomeIncome = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
+    <SalaryContextConsumer>
+      {context => (
+        <Card
+          className={clsx(classes.root, className)}
+          {...rest}
         >
-          <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
+          <CardContent>
+            <Grid
+              container
+              justify="space-between"
+              spacing={3}
             >
-              Annual Take Home Pay
-            </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
+              <Grid item>
+                <Typography
+                  color="textSecondary"
+                  gutterBottom
+                  variant="h6"
+                >
+                  Annual Take Home Pay
+     </Typography>
+                <Typography
+                  color="textPrimary"
+                  variant="h3"
+                >
+                  £{context.salary}
+     </Typography>
+              </Grid>
+            </Grid>
+            <Box
+              mt={2}
+              display="flex"
+              alignItems="center"
             >
-              £56000
-            </Typography>
-          </Grid>
-        </Grid>
-        <Box
-          mt={2}
-          display="flex"
-          alignItems="center"
-        >
-        </Box>
-      </CardContent>
-    </Card>
+            </Box>
+          </CardContent>
+        </Card>
+      )}
+    </SalaryContextConsumer>
   );
 };
 
