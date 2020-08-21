@@ -1,65 +1,45 @@
-const calculateTax = ({ salary = 0, employerPensionContribution = 0, personalPensionContribution = 0 }) => {
+import {all, create} from 'mathjs'
 
-  const taxFreePersonalAllowance = 11480
-  const annualPersonalPensionContribution = personalPensionContribution * salary
+const BANDS = ['lowerBand', 'mediumBand', 'upperBand']
 
-  const taxableIncome = salary - taxFreePersonalAllowance - annualPersonalPensionContribution
-  console.log('taxable income', taxableIncome)
+const math = create(all, {
+  number: 'BigNumber',  
+  precision: 32
+});
 
-  const tax = {
-    taxableIncome,
-    bands: ['lowerBand', 'mediumBand', 'upperBand'],
-    lowerBand: {
-      taxPercent: .2,
-      start: taxFreePersonalAllowance + 0.01,
-      end: 50000,
-      taxPaid: 0,
-      carryOver: 0
-    },
-    mediumBand: {
-      taxPercent: .4,
-      start: 50000.01,
-      end: 150000,
-      taxPaid: 0,
-      carryOver: 0
-    },
-    upperBand: {
-      taxPercent: .45,
-      start: 150000.01,
-      end: 99999999,
-      taxPaid: 0,
-      carryOver: 0
-    }
-  }
+const calculateTax = (tax, { salary = 0, personalPensionContribution = 0 }, taxBreaks = []) => {
+  const annualPersonalPensionContribution = math.multiply(personalPensionContribution, salary)
 
+  const taxBreaksTotal = taxBreaks.reduce((accum, item) => math.add(accum, item.amount), 0)
+  tax.taxableIncome = math.chain(salary)
+    .subtract(tax.taxFreePersonalAllowance)
+    .subtract(annualPersonalPensionContribution)
+    .subtract(taxBreaksTotal)
+    .done()
 
-  let carryOver = taxableIncome
+  let carryOver = tax.taxableIncome
 
-  for (const band of tax.bands) {
-    const difference = tax[band].end - tax[band].start
-    console.log(`differnce for band ${band}`, difference)
+  for (const band of BANDS) {
+    const difference = math.subtract(tax[band].end, tax[band].start)
 
-    if (carryOver - difference > 0) {
-      tax[band].taxPaid = difference * tax[band].taxPercent
-      console.log(`tax paid for band ${band}`, tax[band].taxPaid)
-      if (carryOver - difference > 0) {
-        tax[band].carryOver = carryOver - difference
-        carryOver = carryOver - difference
-        console.log(`carry over for band ${band}`, tax[band].carryOver)
-      }
+    if (math.subtract(carryOver, difference) > 0) {
+      tax[band].taxPaid = math.multiply(difference, tax[band].taxPercent)
+      tax.totalIncomeTax = math.add(tax.totalIncomeTax, tax[band].taxPaid)
+      tax[band].carryOver = math.subtract(carryOver, difference)
+      carryOver = math.subtract(carryOver, difference)
+
     } else {
-      console.log(`this is our last tax bracket ${band}: remainder : ${carryOver}`)
-      //carry over * tax percent
-      tax[band].taxPaid = carryOver * tax[band].taxPercent
+      tax[band].taxPaid = math.multiply(carryOver, tax[band].taxPercent) > 0 
+        ? math.multiply(carryOver, tax[band].taxPercent) 
+        : 0
+
+      tax.totalIncomeTax = math.add(tax.totalIncomeTax, tax[band].taxPaid)
       carryOver = 0
       break
     }
-
   }
-
   console.log(tax)
   return tax
-
 }
 
 export default calculateTax
