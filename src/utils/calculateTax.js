@@ -16,6 +16,10 @@ const calculateTax = (tax, { salary = 0, personalPensionContribution = 0 }, taxB
     .subtract(annualPersonalPensionContribution)
     .subtract(taxBreaksTotal)
     .done()
+  
+  tax.taxableIncome = tax.taxableIncome >  0 
+    ? tax.taxableIncome = tax.taxableIncome
+    : 0
 
   let carryOver = tax.taxableIncome
 

@@ -9,7 +9,7 @@ import {
   TextField,
   InputAdornment,
   Typography,
-  makeStyles
+  makeStyles, Grid
 } from '@material-ui/core';
 import { SalaryContextConsumer } from '../../../context/SalaryContext';
 
@@ -34,13 +34,14 @@ const UserFinance = ({ className, ...rest }) => {
     salary: salary || 0,
     employerPensionContribution: employerPensionContribution || 0,
     personalPensionContribution: personalPensionContribution || 0
-  } 
+  }
 
 
   const handleSalaryChange = e => setSalary(e.target.value)
   const handlePersonalPensionContribution = e => setPersonalPensionContribution(e.target.value)
   const handleEmployerPensionContribution = e => setEmployerPensionContribution(e.target.value)
 
+  console.log(userFinance)
 
   return (
     <div
@@ -50,85 +51,85 @@ const UserFinance = ({ className, ...rest }) => {
       <SalaryContextConsumer>
         {
           context => (
-            <Box mt={3}>
-              <Card>
-
-                <CardContent>
-                  <Box justifyContent="center" display="flex" maxWidth={1 / 3}>
-                    <Box justifyContent="center" display="flex" maxWidth={2 / 3}>
+            <Box mt={2}>
+              <Grid
+                container
+                spacing={3}
+              >
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  xs={12}
+                >
+                  <Card>
+                    <CardContent>
 
                       <Typography >
                         What's your annual salary?
                     </Typography >
-                    </Box>
-
-                    <TextField
-                      onChange={handleSalaryChange}
-                      fullWidth
-                      InputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Typography >
-                              £
+                      <TextField
+                        onChange={handleSalaryChange}
+                        fullWidth
+                        InputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <Typography >
+                                £
                             </Typography>
-                          </InputAdornment>
-                        )
-                      }}
-                      defaultValue={context.userFinance.salary}
-                      variant="outlined"
-                    />
-                  </Box>
-                  <Box justifyContent="center" display="flex" maxWidth={1 / 3}>
-                    <Box justifyContent="center" display="flex" maxWidth={2 / 3}>
-
+                            </InputAdornment>
+                          )
+                        }}
+                        defaultValue={context.userFinance.salary}
+                        variant="outlined"
+                      />
                       <Typography >
                         What's your personal contribution?
                       </Typography >
-                    </Box>
 
-                    <TextField
-                      onChange={handlePersonalPensionContribution}
-                      fullWidth
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="start">
-                            <Typography >
-                              %
+                      <TextField
+                        onChange={handlePersonalPensionContribution}
+                        fullWidth
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="start">
+                              <Typography >
+                                %
                             </Typography>
-                          </InputAdornment>)
-                      }}
-                      defaultValue={context.userFinance.personalPensionContribution}
-                      variant="outlined"
-                    />
-                  </Box>
-                  <Box justifyContent="center" display="flex" maxWidth={1 / 3}>
-                    <Box justifyContent="center" display="flex" maxWidth={2 / 3}>
+                            </InputAdornment>)
+                        }}
+                        defaultValue={context.userFinance.personalPensionContribution}
+                        variant="outlined"
+                      />
+
 
                       <Typography >
                         What's your employer contribution?
                       </Typography >
-                    </Box>
 
-                    <TextField
-                      onChange={handleEmployerPensionContribution}
-                      fullWidth
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment position="start">
-                          <Typography >
-                            %
+                      <TextField
+                        onChange={handleEmployerPensionContribution}
+                        fullWidth
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="start">
+                              <Typography >
+                                %
                           </Typography>
-                        </InputAdornment>)
-                      }}
-                      defaultValue={context.userFinance.employerPensionContribution}
-                      variant="outlined"
-                    />
-                  </Box>
-                  <Button onClick={() => context.setUserFinances(userFinance)}>Calculate</Button>
-                </CardContent>
-              </Card>
-            </Box>
+                            </InputAdornment>)
+                        }}
+                        defaultValue={context.userFinance.employerPensionContribution}
+                        variant="outlined"
+                      />
 
+
+                      <Button onClick={() => context.setUserFinances(userFinance)}>Calculate</Button>
+
+                    </CardContent>
+                  </Card>
+                </Grid>
+              </Grid>
+            </Box>
           )}
       </SalaryContextConsumer>
     </div>

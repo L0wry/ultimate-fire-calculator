@@ -10,6 +10,7 @@ import Page from 'src/components/Page';
 import UserFinance from './UserFinance';
 import ProductCard from './ProductCard';
 import data from './data';
+import IncomeTaxCard from './IncomeTaxCard'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +36,22 @@ const SalaryCalculator = () => {
     >
       <Container maxWidth={false}>
         <UserFinance />
+        <Box mt={2} >
+          <Grid
+            container
+            spacing={3}
+          >
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xs={12}
+            >
+              <IncomeTaxCard />
+
+            </Grid>
+          </Grid>
+        </Box>
         <Box mt={3}>
           <Grid
             container

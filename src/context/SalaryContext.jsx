@@ -1,51 +1,12 @@
 import React, { useState } from 'react';
-
+import calculateTax from '../utils/calculateTax';
+import { incomeTax } from '../utils/taxTypes';
 const { Provider, Consumer } = React.createContext();
-
-const calculateTax = ({salary, employerPensionContribution,  personalPensionContribution }) => {
-
-	const taxFreePersonalAllowance = 11480
-	const annualPersonalPensionContribution = personalPensionContribution * salary
-
-	const taxableIncome = salary - taxFreePersonalAllowance - annualPersonalPensionContribution
-
-	console.log('taxable income', taxableIncome)
-	const lowerBand = {
-		taxPercent: .2,
-		start: taxFreePersonalAllowance + 0.1,
-		end: 50000,
-		taxPaid: 0,
-		carryOver: 0
-	}
-
-	const difference = lowerBand.end  - lowerBand.start
-	console.log('differnce: ', difference)
-	
-	if (taxableIncome > 0) {
-		lowerBand.taxPaid = difference * lowerBand.taxPercent
-		console.log('tax Paid : ', lowerBand.taxPaid)
-		if(taxableIncome - difference > 0) {
-			lowerBand.carryOver = taxableIncome - difference 
-			console.log('carryOver : ', lowerBand.carryOver)
-		}
-	} else {
-		//carry over * tax percent
-	}
-
-	// const taxAtLowerBand = 
-	// if carryover is equal or greater than difference {
-		// differnce * taxPercent
-	// } else {
-		// carry over * taxPercentage
-	// }
-	console.log(lowerBand)
-	// const taxAmountAtLowerBand = 
-
-}
 
 const SalaryContextProvider = ({ children }) =>{
     const [userFinance, setUserFinance] = useState({
 		salary: 0,
+		taxFreePersonalAllowance: 12500,
 		employerPensionContribution: 0,
 		personalPensionContribution: 0
 	});
@@ -54,10 +15,11 @@ const SalaryContextProvider = ({ children }) =>{
 		setUserFinance(userFinance);
 	}
 
-	calculateTax(userFinance)
+	const userTax = calculateTax(incomeTax(), userFinance)
 
+  console.log(userTax)
 	return (
-		<Provider value={{userFinance, setUserFinances}}>
+		<Provider value={{userFinance, setUserFinances, userTax}}>
 			{children}
 		</Provider>
 	)
