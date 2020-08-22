@@ -31,6 +31,7 @@ export default function calculateAllTax({
       employerPensionContribution,
       taxBreaksTotal,
       taxableIncome,
-      ...incomeTax,
+      incomeTax,
+      nationalInsuranceTax
     }
 }

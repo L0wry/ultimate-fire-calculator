@@ -51,17 +51,68 @@ const NationalInsuranceCard = ({ className, product, ...rest }) => {
         </Typography>
             <Divider />
             <Box mt={3}>
-            <Grid  >
-
-              <Typography
-                align="center"
-                color="textPrimary"
-                variant="body1"
+            <Grid
+                container
+                spacing={3}
               >
-                National Insurance Paid Band One: £0000
-              </Typography>
 
-            </Grid>
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  xs={12}
+                >
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="body1"
+                  >
+                    Total N.I. Paid: £{context.userTax.nationalInsuranceTax.totalNationalInsuranceTax}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  xs={12}
+                >
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="body1"
+                  >
+                    Tax paid at lower band: £{context.userTax.nationalInsuranceTax.lowerBand.taxPaid}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  xs={12}
+                >
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="body1"
+                  >
+                    Tax paid at medium band: £{context.userTax.nationalInsuranceTax.mediumBand.taxPaid}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  xs={12}
+                >
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="body1"
+                  >
+                    Tax paid at higher band: £{context.userTax.nationalInsuranceTax.upperBand.taxPaid}
+                  </Typography>
+                </Grid>
+              </Grid>
             </Box>
           </CardContent>
           <Box flexGrow={1} />

@@ -31,22 +31,22 @@ const IncomeDetails = ({ className, ...rest }) => {
   const classes = useStyles();
 
   const [salary, setSalary] = useState();
-  const [employerPensionContribution, setEmployerPensionContribution] = useState();
-  const [personalPensionContribution, setPersonalPensionContribution] = useState();
+  const [employerPensionContributionPercent, setEmployerPensionContributionPercent] = useState();
+  const [personalPensionContributionPercent, setPersonalPensionContributionPercent] = useState();
   const [taxFreePersonalAllowance, setTaxFreePersonalAllowance] = useState();
 
 
   const userFinance = {
-    salary: salary || 0,
-    employerPensionContribution: employerPensionContribution || 0,
-    personalPensionContribution: personalPensionContribution || 0,
+    salary: salary,
+    employerPensionContributionPercent: employerPensionContributionPercent,
+    personalPensionContributionPercent: personalPensionContributionPercent,
     taxFreePersonalAllowance: taxFreePersonalAllowance || 12500
   }
 
 
   const handleSalaryChange = e => setSalary(e.target.value)
-  const handlePersonalPensionContribution = e => setPersonalPensionContribution(parseFloat((e.target.value / 100).toFixed(2)))
-  const handleEmployerPensionContribution = e => setEmployerPensionContribution(parseFloat((e.target.value / 100).toFixed(2)))
+  const handlepersonalPensionContributionPercent = e => setPersonalPensionContributionPercent(parseFloat((e.target.value / 100).toFixed(2)))
+  const handleEmployerPensionContributionPercent = e => setEmployerPensionContributionPercent(parseFloat((e.target.value / 100).toFixed(2)))
   const handleTaxFreePersonalAllowance = e => setTaxFreePersonalAllowance(e.target.value)
   
   return (
@@ -107,7 +107,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                       >
 
                         <TextField
-                          onChange={handlePersonalPensionContribution}
+                          onChange={handlepersonalPensionContributionPercent}
                           fullWidth
                           required
                           variant="outlined"
@@ -121,7 +121,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                                 </Typography>
                               </InputAdornment>)
                           }}
-                          defaultValue={context.userFinance.personalPensionContribution}
+                          defaultValue={context.userFinance.personalPensionContributionPercent}
                           variant="outlined"
                         />
                       </Grid>
@@ -133,7 +133,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                         xs={12}
                       >
                         <TextField
-                          onChange={handleEmployerPensionContribution}
+                          onChange={handleEmployerPensionContributionPercent}
                           fullWidth
                           required
                           variant="outlined"
@@ -147,7 +147,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                                     </Typography>
                               </InputAdornment>)
                           }}
-                          defaultValue={context.userFinance.employerPensionContribution}
+                          defaultValue={context.userFinance.employerPensionContributionPercent}
                           variant="outlined"
                         />
                       </Grid>

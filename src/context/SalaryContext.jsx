@@ -12,16 +12,9 @@ const SalaryContextProvider = ({ children }) => {
 		personalPensionContribution: 0
 	});
 
-
 	const setUserFinances = (userFinance) => {
 		setUserFinance(userFinance);
 	}
-
-
-	// const userTax = {
-	// 	...calculateTax(incomeTax(userFinance.taxFreePersonalAllowance), partialTax),
-	// 	...partialTax
-	// }
 
 	const userTax = calculateAllTax(userFinance)
 	console.log(userTax)
