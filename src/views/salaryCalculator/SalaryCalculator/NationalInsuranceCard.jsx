@@ -11,7 +11,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import { SalaryContextConsumer } from 'src/context/SalaryContext';
+import { SalaryContextConsumer } from '../../../context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {

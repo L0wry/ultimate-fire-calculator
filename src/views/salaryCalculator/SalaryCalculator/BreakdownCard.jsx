@@ -10,7 +10,7 @@ import {
     Typography,
     makeStyles
 } from '@material-ui/core';
-import { SalaryContextConsumer } from 'src/context/SalaryContext';
+import { SalaryContextConsumer } from '../../../context/SalaryContext';
 
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

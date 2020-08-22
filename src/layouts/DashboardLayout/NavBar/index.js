@@ -48,9 +48,9 @@ const items = [
   },
 
   {
-    href: '/app/account',
+    href: '/app/net-worth',
     icon: UserIcon,
-    title: 'Account'
+    title: 'Net Worth'
   },
   {
     href: '/app/settings',

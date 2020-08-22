@@ -26,7 +26,7 @@ const Budget = () => {
       title="Budget"
     >
       <Container maxWidth={false}>
-        <Box>
+        <Box  mt={3}>
           <ExpenseHeaderCard />
           <Expenses />
         </Box>
