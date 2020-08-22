@@ -7,22 +7,10 @@ const math = create(all, {
   precision: 32
 });
 
-const calculateTax = (tax, { salary = 0, personalPensionContribution = 0, employerPensionContribution = 0 }, taxBreaks = []) => {
-  tax.personalPensionContribution = math.multiply(personalPensionContribution, salary)
-  tax.employerPensionContribution = math.multiply(employerPensionContribution, salary)
+export const calculateIncomeTax = (tax, taxableIncome) => {
+  taxableIncome = math.subtract(taxableIncome, tax.taxFreePersonalAllowance)
   
-  const taxBreaksTotal = taxBreaks.reduce((accum, item) => math.add(accum, item.amount), 0)
-  tax.taxableIncome = math.chain(salary)
-    .subtract(tax.taxFreePersonalAllowance)
-    .subtract(tax.personalPensionContribution)
-    .subtract(taxBreaksTotal)
-    .done()
-  
-  tax.taxableIncome = tax.taxableIncome >  0 
-    ? tax.taxableIncome = tax.taxableIncome
-    : 0
-
-  let carryOver = tax.taxableIncome
+  let carryOver = taxableIncome
 
   for (const band of BANDS) {
     const difference = math.subtract(tax[band].end, tax[band].start)
@@ -43,8 +31,7 @@ const calculateTax = (tax, { salary = 0, personalPensionContribution = 0, employ
       break
     }
   }
-  console.log(tax)
+
   return tax
 }
 
-export default calculateTax

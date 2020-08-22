@@ -58,17 +58,6 @@ const SalaryCalculator = () => {
             </Grid>
           </Grid>
         </Box>
-        <Box
-          mt={3}
-          display="flex"
-          justifyContent="center"
-        >
-          <Pagination
-            color="primary"
-            count={3}
-            size="small"
-          />
-        </Box>
       </Container>
     </Page>
   );

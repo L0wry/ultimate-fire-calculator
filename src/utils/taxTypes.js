@@ -1,10 +1,6 @@
-export const incomeTax = (taxFreePersonalAllowance = 12500 ) => ({
+export const incomeTaxBands = (taxFreePersonalAllowance = 12500 ) => ({
   taxFreePersonalAllowance,
-  personalPensionContribution: 0,
-  employerPensionContribution: 0,
-  taxableIncome: 0,
   totalIncomeTax: 0,
-  taxBreaks: [],
   lowerBand: {
     taxPercent: .2,
     start: taxFreePersonalAllowance + 0.01,
@@ -28,9 +24,17 @@ export const incomeTax = (taxFreePersonalAllowance = 12500 ) => ({
   }
 })
 
-export const nationalInsuranceTax = () => ({
+export const nationalInsuranceTaxBands = {
   totalNationalInsuranceTax: 0,
+  weeklyNationalInsuranceTax: 0,
   lowerBand: {
+    taxPercent: 0,
+    start: 0,
+    end: 183,
+    taxPaid: 0,
+    carryOver: 0
+  },
+  mediumBand: {
     taxPercent: .12,
     start: 183.01,
     end: 962.00,
@@ -38,10 +42,10 @@ export const nationalInsuranceTax = () => ({
     carryOver: 0
   },
   upperBand: {
-    taxPercent: .2,
+    taxPercent: .02,
     start: 962.01,
     end: 99999999,
     taxPaid: 0,
     carryOver: 0
   }
-})
+}

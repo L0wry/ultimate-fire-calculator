@@ -1,4 +1,4 @@
-import calculateTax from './calculateTax'
+import calculateTax from './calculateIncomeTax'
 import { incomeTax } from './taxTypes'
 
 describe('Calculate Tax', () => {
