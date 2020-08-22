@@ -7,13 +7,14 @@ const math = create(all, {
   precision: 32
 });
 
-const calculateTax = (tax, { salary = 0, personalPensionContribution = 0 }, taxBreaks = []) => {
-  const annualPersonalPensionContribution = math.multiply(personalPensionContribution, salary)
-
+const calculateTax = (tax, { salary = 0, personalPensionContribution = 0, employerPensionContribution = 0 }, taxBreaks = []) => {
+  tax.personalPensionContribution = math.multiply(personalPensionContribution, salary)
+  tax.employerPensionContribution = math.multiply(employerPensionContribution, salary)
+  
   const taxBreaksTotal = taxBreaks.reduce((accum, item) => math.add(accum, item.amount), 0)
   tax.taxableIncome = math.chain(salary)
     .subtract(tax.taxFreePersonalAllowance)
-    .subtract(annualPersonalPensionContribution)
+    .subtract(tax.personalPensionContribution)
     .subtract(taxBreaksTotal)
     .done()
   

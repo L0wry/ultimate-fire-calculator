@@ -7,10 +7,10 @@ import {
 } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import Page from 'src/components/Page';
-import UserFinance from './UserFinance';
+import UserFinance from './IncomeDetails';
 import ProductCard from './ProductCard';
-import data from './data';
 import IncomeTaxCard from './IncomeTaxCard'
+import NationalInsurance from './NationalInsuranceCard'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SalaryCalculator = () => {
   const classes = useStyles();
-  const [products] = useState(data);
 
 
   return (
@@ -48,29 +47,15 @@ const SalaryCalculator = () => {
               xs={12}
             >
               <IncomeTaxCard />
-
             </Grid>
-          </Grid>
-        </Box>
-        <Box mt={3}>
-          <Grid
-            container
-            spacing={3}
-          >
-            {products.map((product) => (
-              <Grid
-                item
-                key={product.id}
-                lg={4}
-                md={6}
-                xs={12}
-              >
-                <ProductCard
-                  className={classes.productCard}
-                  product={product}
-                />
-              </Grid>
-            ))}
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xs={12}
+            >
+              <NationalInsurance />
+            </Grid>
           </Grid>
         </Box>
         <Box

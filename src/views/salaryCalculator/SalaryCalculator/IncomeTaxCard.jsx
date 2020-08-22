@@ -11,8 +11,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import GetAppIcon from '@material-ui/icons/GetApp';
+
 import { SalaryContextConsumer } from 'src/context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const ProductCard = ({ className, product, ...rest }) => {
+const IncomeTaxCard = ({ className, product, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -40,7 +39,6 @@ const ProductCard = ({ className, product, ...rest }) => {
           {...rest}
         >
           <CardContent>
-  
             <Typography
               align="center"
               color="textPrimary"
@@ -49,6 +47,10 @@ const ProductCard = ({ className, product, ...rest }) => {
             >
               Income Tax
         </Typography>
+        <Divider />
+        <Box mt={3} >
+        <Grid  >
+
             <Typography
               align="center"
               color="textPrimary"
@@ -91,6 +93,8 @@ const ProductCard = ({ className, product, ...rest }) => {
             >
               Tax paid at higher band: £{context.userTax.upperBand.taxPaid}
             </Typography>
+            </Grid>
+            </Box>
           </CardContent>
           <Box flexGrow={1} />
           <Divider />
@@ -100,9 +104,9 @@ const ProductCard = ({ className, product, ...rest }) => {
   );
 };
 
-ProductCard.propTypes = {
+IncomeTaxCard.propTypes = {
   className: PropTypes.string,
   product: PropTypes.object.isRequired
 };
 
-export default ProductCard;
+export default IncomeTaxCard;
