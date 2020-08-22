@@ -3,28 +3,21 @@ import shadows from './shadows';
 import typography from './typography';
 
 const theme = createMuiTheme({
-  typography: {
-    "fontFamily": `"Roboto", "Helvetica", "Arial", sans-serif`,
-    "fontSize": 14,
-    "fontWeightLight": 300,
-    "fontWeightRegular": 400,
-    "fontWeightMedium": 500
-  },
   palette: {
     background: {
       dark: '#F4F6F8',
-      default: colors.common.white,
-      paper: colors.common.white
+      default: colors.common.dark,
+      paper: colors.grey[900]
     },
     primary: {
-      main: colors.blue[500]
+      main: colors.lightBlue[700]
     },
     secondary: {
-      main: colors.blue[700]
+      main: colors.grey[100]
     },
     text: {
-      primary: colors.blueGrey[900],
-      secondary: colors.blueGrey[600]
+      primary: colors.grey[100],
+      secondary: colors.grey[100]
     }
   },
   shadows,

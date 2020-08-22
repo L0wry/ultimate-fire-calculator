@@ -1,4 +1,9 @@
 export default {
+  fontFamily: `"Roboto", "Helvetica", "Arial", sans-serif`,
+  fontSize: 14,
+  fontWeightLight: 300,
+  fontWeightRegular: 400,
+  fontWeightMedium: 500,
   h1: {
     fontWeight: 500,
     fontSize: 35,

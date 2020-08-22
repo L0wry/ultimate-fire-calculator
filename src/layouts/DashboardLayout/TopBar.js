@@ -13,8 +13,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
-import InputIcon from '@material-ui/icons/Input';
 import Logo from 'src/components/Logo';
 
 const useStyles = makeStyles(() => ({
@@ -31,7 +29,6 @@ const TopBar = ({
   ...rest
 }) => {
   const classes = useStyles();
-  const [notifications] = useState([]);
 
   return (
     <AppBar
@@ -40,16 +37,12 @@ const TopBar = ({
       {...rest}
     >
       <Toolbar>
-        <RouterLink to="/">
-          <Logo />
-
-        </RouterLink>
         <Hidden smDown>
-          <Box>
+          <Box ml={3}>
             <Typography
               color="textPrimary"
               variant="h1">
-              The Ultimate Fire Calculator
+              Ultimate Fire Calculator
           </Typography>
           </Box>
         </Hidden>

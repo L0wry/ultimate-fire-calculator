@@ -28,18 +28,14 @@ const TopBar = ({ className, ...rest }) => {
       {...rest}
     >
       <Toolbar className={classes.toolbar}>
-        <RouterLink to="/">
-          <Logo />
-
-        </RouterLink>
-      </Toolbar>
-      <Box mb={3}>
-        <Typography
-          color="textPrimary"
-          variant="h1">
-          Ultimate Fire Calculator
+        <Box mb={3}>
+          <Typography
+            color="textPrimary"
+            variant="h1">
+            Ultimate Fire Calculator
           </Typography>
-      </Box>
+        </Box>
+      </Toolbar>
     </AppBar>
   );
 };

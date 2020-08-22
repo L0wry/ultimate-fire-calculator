@@ -92,33 +92,6 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       display="flex"
       flexDirection="column"
     >
-      <Box
-        alignItems="center"
-        display="flex"
-        flexDirection="column"
-        p={2}
-      >
-        <Avatar
-          className={classes.avatar}
-          component={RouterLink}
-          src={user.avatar}
-          to="/app/account"
-        />
-        <Typography
-          className={classes.name}
-          color="textPrimary"
-          variant="h5"
-        >
-          {user.name}
-        </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
-          {user.jobTitle}
-        </Typography>
-      </Box>
-      <Divider />
       <Box p={2}>
         <List>
           {items.map((item) => (
