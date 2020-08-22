@@ -11,8 +11,6 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import AccessTimeIcon from '@material-ui/icons/AccessTime';
-import GetAppIcon from '@material-ui/icons/GetApp';
 import { SalaryContextConsumer } from 'src/context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const NationalInsuranceCard = ({ className, product, ...rest }) => {
+const NationalInsuranceCard = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (

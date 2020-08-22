@@ -5,9 +5,8 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Results from './Results';
-import Toolbar from './Toolbar';
-import data from './data';
+import Expenses from './Expenses';
+import ExpenseHeaderCard from './ExpenseHeaderCard'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Budget = () => {
   const classes = useStyles();
-  const [customers] = useState(data);
 
   return (
     <Page
@@ -28,9 +26,9 @@ const Budget = () => {
       title="Budget"
     >
       <Container maxWidth={false}>
-        <Toolbar />
         <Box mt={3}>
-          <Results customers={customers} />
+          <ExpenseHeaderCard />
+          <Expenses />
         </Box>
       </Container>
     </Page>

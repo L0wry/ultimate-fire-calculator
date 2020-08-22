@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Container,
   Grid,
   makeStyles
 } from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
 import Page from 'src/components/Page';
 import UserFinance from './IncomeDetails';
-import ProductCard from './ProductCard';
 import IncomeTaxCard from './IncomeTaxCard'
 import NationalInsurance from './NationalInsuranceCard'
+import BreakdownCard from './BreakdownCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,6 +39,15 @@ const SalaryCalculator = () => {
             container
             spacing={3}
           >
+              <Grid
+              item
+              lg={12}
+              md={12}
+              xs={12}
+            >
+          <BreakdownCard/>
+
+            </Grid>
             <Grid
               item
               lg={6}

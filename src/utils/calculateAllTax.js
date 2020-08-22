@@ -32,6 +32,7 @@ export default function calculateAllTax({
       taxBreaksTotal,
       taxableIncome,
       incomeTax,
-      nationalInsuranceTax
+      nationalInsuranceTax,
+      totalTakeHome: salary - personalPensionContribution - incomeTax.totalIncomeTax - nationalInsuranceTax.totalNationalInsuranceTax
     }
 }

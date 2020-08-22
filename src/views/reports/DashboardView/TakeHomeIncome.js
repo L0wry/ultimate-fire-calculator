@@ -56,13 +56,13 @@ const TakeHomeIncome = ({ className, ...rest }) => {
                   variant="h6"
                 >
                   Annual Take Home Pay
-     </Typography>
+                </Typography>
                 <Typography
                   color="textPrimary"
                   variant="h3"
                 >
-                  £{context.salary}
-     </Typography>
+                  £{context.userTax.totalTakeHome }
+              </Typography>
               </Grid>
             </Grid>
             <Box

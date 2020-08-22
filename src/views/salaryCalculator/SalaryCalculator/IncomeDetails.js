@@ -11,7 +11,6 @@ import {
   Typography,
   makeStyles,
   Grid,
-  Container,
   CardHeader,
   Divider
 } from '@material-ui/core';
@@ -48,7 +47,7 @@ const IncomeDetails = ({ className, ...rest }) => {
   const handlepersonalPensionContributionPercent = e => setPersonalPensionContributionPercent(parseFloat((e.target.value / 100).toFixed(2)))
   const handleEmployerPensionContributionPercent = e => setEmployerPensionContributionPercent(parseFloat((e.target.value / 100).toFixed(2)))
   const handleTaxFreePersonalAllowance = e => setTaxFreePersonalAllowance(e.target.value)
-  
+
   return (
     <div
       className={clsx(classes.root, className)}
@@ -59,16 +58,21 @@ const IncomeDetails = ({ className, ...rest }) => {
           context => (
             <form
               autoComplete="off"
-              noValidate
 
             >
-              <Box mt={3}>
-                <Card>
-                  <CardHeader
-                    title="What's your situation?"
-                  />
+              <Card>
+                <CardContent>
+
+                  <Typography
+                    align="left"
+                    color="textPrimary"
+                    gutterBottom
+                    variant="h3"
+                  >
+                    Your Situation
+                  </Typography>
                   <Divider />
-                  <CardContent>
+                  <Box mt={3}>
                     <Grid
                       container
                       spacing={3}
@@ -109,7 +113,6 @@ const IncomeDetails = ({ className, ...rest }) => {
                         <TextField
                           onChange={handlepersonalPensionContributionPercent}
                           fullWidth
-                          required
                           variant="outlined"
                           label="Personal Percentage Percentage"
                           name="personalPension"
@@ -121,7 +124,9 @@ const IncomeDetails = ({ className, ...rest }) => {
                                 </Typography>
                               </InputAdornment>)
                           }}
-                          defaultValue={context.userFinance.personalPensionContributionPercent}
+                          defaultValue={context.userFinance.personalPensionContributionPercent
+                            ? context.userFinance.personalPensionContributionPercent * 100
+                            : null}
                           variant="outlined"
                         />
                       </Grid>
@@ -135,7 +140,6 @@ const IncomeDetails = ({ className, ...rest }) => {
                         <TextField
                           onChange={handleEmployerPensionContributionPercent}
                           fullWidth
-                          required
                           variant="outlined"
                           label="Employer Percentage Percentage"
                           name="employerPension"
@@ -147,7 +151,10 @@ const IncomeDetails = ({ className, ...rest }) => {
                                     </Typography>
                               </InputAdornment>)
                           }}
-                          defaultValue={context.userFinance.employerPensionContributionPercent}
+                          defaultValue={
+                            context.userFinance.employerPensionContributionPercent
+                              ? context.userFinance.employerPensionContributionPercent * 100
+                              : null}
                           variant="outlined"
                         />
                       </Grid>
@@ -189,9 +196,9 @@ const IncomeDetails = ({ className, ...rest }) => {
                         onClick={() => context.setUserFinances(userFinance)}>Calculate</Button>
                     </Box>
 
-                  </CardContent>
-                </Card>
-              </Box>
+                  </Box>
+                </CardContent>
+              </Card>
             </form>
           )}
       </SalaryContextConsumer>

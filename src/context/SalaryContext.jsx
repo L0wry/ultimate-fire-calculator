@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import calculateTax from '../utils/calculateIncomeTax';
-import { incomeTax } from '../utils/taxTypes';
 import calculateAllTax from '../utils/calculateAllTax'
 const { Provider, Consumer } = React.createContext();
 
