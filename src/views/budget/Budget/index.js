@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   Box,
   Container,
@@ -6,7 +6,7 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import Expenses from './Expenses';
-import ExpenseHeaderCard from './ExpenseHeaderCard'
+import Budget from './Budget'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Budget = () => {
+const Index = () => {
   const classes = useStyles();
 
   return (
@@ -26,13 +26,12 @@ const Budget = () => {
       title="Budget"
     >
       <Container maxWidth={false}>
-        <Box  mt={3}>
-          <ExpenseHeaderCard />
-          <Expenses />
+        <Box mt={3}>
+          <Budget />
         </Box>
       </Container>
     </Page>
   );
 };
 
-export default Budget;
+export default Index;

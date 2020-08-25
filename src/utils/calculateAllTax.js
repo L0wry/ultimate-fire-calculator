@@ -10,7 +10,7 @@ const math = create(all, {
 
 export default function calculateAllTax({
   salary = 0, 
-  taxFreePersonalAllowance = 0,
+  taxFreePersonalAllowance = 12500,
   employerPensionContributionPercent = 0,
   personalPensionContributionPercent = 0}) {
 

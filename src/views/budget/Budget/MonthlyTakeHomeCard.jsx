@@ -43,6 +43,7 @@ const MonthlyTakeHomeCard = ({ className, ...rest }) => {
                     <CardContent>
                         <Grid
                             container
+                            direction="column"
                             justify="space-between"
                             spacing={3}
                         >
@@ -61,6 +62,38 @@ const MonthlyTakeHomeCard = ({ className, ...rest }) => {
                                     £{context.userTax.totalTakeHome / 12}
                                 </Typography>
                             </Grid>
+                            <Grid item>
+                                <Typography
+                                    color="textSecondary"
+                                    gutterBottom
+                                    variant="h5"
+                                >
+                                    Total Deductions
+                                </Typography>
+                                <Typography
+                                    color="textPrimary"
+                                    variant="h3"
+                                >
+                                    £0
+                                </Typography>
+                            </Grid>
+
+                            <Grid item>
+                                <Typography
+                                    color="textSecondary"
+                                    gutterBottom
+                                    variant="h5"
+                                >
+                                    Amount Left Over
+                                </Typography>
+                                <Typography
+                                    color="textPrimary"
+                                    variant="h3"
+                                >
+                                    £0
+                                </Typography>
+                            </Grid>
+
                         </Grid>
                         <Box
                             mt={2}

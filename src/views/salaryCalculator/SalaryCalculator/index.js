@@ -37,15 +37,19 @@ const SalaryCalculator = () => {
         <Box mt={2} >
           <Grid
             container
+            direction="row"
+            justify="center"
+            alignItems="stretch"
             spacing={3}
+
           >
-              <Grid
+            <Grid
               item
               lg={12}
               md={12}
               xs={12}
             >
-          <BreakdownCard/>
+              <BreakdownCard />
 
             </Grid>
             <Grid

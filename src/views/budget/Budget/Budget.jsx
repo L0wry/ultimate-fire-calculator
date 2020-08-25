@@ -15,6 +15,8 @@ import {
   Divider
 } from '@material-ui/core';
 import MonthlyTakeHomeCard from './MonthlyTakeHomeCard'
+import Expenses from './Expenses'
+
 const useStyles = makeStyles((theme) => ({
   root: {},
   importButton: {
@@ -33,8 +35,6 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
       className={clsx(classes.root, className)}
       {...rest}
     >
-
-
       <Card>
         <CardContent>
 
@@ -50,14 +50,26 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
           <Box mt={3}>
             <Grid
               container
+              direction="row"
+              justify="flex-start"
+              alignItems="stretch"
               spacing={3}
             >
               <Grid
                 item
-                lg={3}
+                lg={6}
                 sm={6}
-                xl={3}
-                xs={12}
+                xl={6}
+                xs={6}
+              >
+                <Expenses />
+              </Grid>
+              <Grid
+                item
+                lg={6}
+                sm={6}
+                xl={6}
+                xs={6}
               >
                 <MonthlyTakeHomeCard />
               </Grid>
