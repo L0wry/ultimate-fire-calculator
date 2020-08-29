@@ -3,8 +3,6 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
   Card,
-  makeStyles,
-  List,
   CardContent,
   Typography,
   Divider,

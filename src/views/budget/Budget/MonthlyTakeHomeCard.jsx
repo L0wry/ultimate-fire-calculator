@@ -10,7 +10,6 @@ import {
     colors,
     makeStyles
 } from '@material-ui/core';
-import { SalaryContextConsumer } from '../../../context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,12 +29,11 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MonthlyTakeHomeCard = ({ className, ...rest }) => {
+const MonthlyTakeHomeCard = ({ className, expensesCost, totalTakeHome, difference, ...rest }) => {
     const classes = useStyles();
 
     return (
-        <SalaryContextConsumer>
-            {context => (
+      
                 <Card
                     className={clsx(classes.root, className)}
                     {...rest}
@@ -59,7 +57,7 @@ const MonthlyTakeHomeCard = ({ className, ...rest }) => {
                                     color="textPrimary"
                                     variant="h3"
                                 >
-                                    £{context.userTax.totalTakeHome / 12}
+                                    £{totalTakeHome}
                                 </Typography>
                             </Grid>
                             <Grid item>
@@ -68,13 +66,13 @@ const MonthlyTakeHomeCard = ({ className, ...rest }) => {
                                     gutterBottom
                                     variant="h5"
                                 >
-                                    Total Deductions
+                                    Total Expenses
                                 </Typography>
                                 <Typography
                                     color="textPrimary"
                                     variant="h3"
                                 >
-                                    £0
+                                    £{expensesCost}
                                 </Typography>
                             </Grid>
 
@@ -90,7 +88,7 @@ const MonthlyTakeHomeCard = ({ className, ...rest }) => {
                                     color="textPrimary"
                                     variant="h3"
                                 >
-                                    £0
+                                    £{difference}
                                 </Typography>
                             </Grid>
 
@@ -103,8 +101,6 @@ const MonthlyTakeHomeCard = ({ className, ...rest }) => {
                         </Box>
                     </CardContent>
                 </Card>
-            )}
-        </SalaryContextConsumer>
     );
 };
 

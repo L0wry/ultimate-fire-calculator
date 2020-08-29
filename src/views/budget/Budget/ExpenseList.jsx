@@ -12,7 +12,6 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    Paper,
     IconButton,
     Checkbox
 } from '@material-ui/core';
@@ -77,9 +76,7 @@ const ExpenseList = memo(({ className, items, onItemRemove, onItemCheck, ...rest
                                 </TableBody>
                             </Table>
                         </TableContainer>
-
                     </Box>
-
                 )}
             </CardContent>
         </Card>

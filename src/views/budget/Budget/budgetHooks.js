@@ -29,7 +29,7 @@ export const useExpenses = (initialValue = []) => {
         setExpenses(
           expenses.concat({
             name,
-            cost,
+            cost: parseFloat(cost),
             checked: false
           })
         );
