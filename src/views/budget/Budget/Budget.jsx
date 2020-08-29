@@ -17,7 +17,7 @@ import {
 import MonthlyTakeHomeCard from './MonthlyTakeHomeCard'
 import AddExpenses from './AddExpenses'
 import ExpenseList from './ExpenseList'
-import { useInputValue, useTodos } from "./budgetHooks";
+import { useInputName, useExpenses } from "./budgetHooks";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -32,16 +32,17 @@ const useStyles = makeStyles((theme) => ({
 const ExpenseHeaderCard = ({ className, ...rest }) => {
   const classes = useStyles();
 
-  const { inputValue, changeInput, clearInput, keyInput } = useInputValue();
-  const { todos, addTodo, checkTodo, removeTodo } = useTodos();
+  const { inputValue, changeInput, clearInput, keyInput } = useInputName();
+  const { expenses, addExpense, checkExpense, removeExpense } = useExpenses();
 
   const clearInputAndAddTodo = _ => {
     clearInput();
-    addTodo(inputValue);
+    console.log('adding' , inputValue)
+    addExpense(inputValue);
   };
 
 
-  console.log(todos)
+  console.log('expense: ', expenses)
   return (
     <div
       className={clsx(classes.root, className)}
@@ -82,9 +83,9 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                 />
 
                 <ExpenseList
-                  items={todos}
-                  onItemCheck={idx => checkTodo(idx)}
-                  onItemRemove={idx => removeTodo(idx)}
+                  items={expenses}
+                  onItemCheck={idx => checkExpense(idx)}
+                  onItemRemove={idx => removeExpense(idx)}
                 />
 
               </Grid>

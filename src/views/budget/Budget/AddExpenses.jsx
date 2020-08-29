@@ -18,7 +18,6 @@ import {
 
 
 const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInputKeyPress, ...rest }) => {
-  const {item, setItem} = useState({})
 
   return (
     <Box>
@@ -48,9 +47,10 @@ const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInput
               >
                 <TextField
                   fullWidth
+                  name="name"
                   placeholder="Name"
                   variant="outlined"
-                  value={inputValue}
+                  // value={inputValue.name}
                   onChange={onInputChange}
                   onKeyPress={onInputKeyPress}
                 />
@@ -62,8 +62,9 @@ const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInput
               >
                 <TextField
                   fullWidth
+                  name="cost"
                   variant="outlined"
-                  value={inputValue}
+                  // value={inputValue.cost}
                   onChange={onInputChange}
                   onKeyPress={onInputKeyPress}
                   InputProps={{

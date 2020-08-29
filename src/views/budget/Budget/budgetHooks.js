@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-export const useInputValue = (initialValue = "") => {
+export const useInputName = (initialValue = {name: "", cost: 0}) => {
   const [inputValue, setInputValue] = useState(initialValue);
-
   return {
     inputValue,
-    changeInput: event => setInputValue(event.target.value),
-    clearInput: () => setInputValue(""),
+    changeInput: event => setInputValue({...inputValue, [event.target.name]:  event.target.value}),
+    clearInput: () => setInputValue({name: "", cost: ""}),
     keyInput: (event, callback) => {
       if (event.which === 13 || event.keyCode === 13) {
         callback(inputValue);
@@ -18,34 +17,37 @@ export const useInputValue = (initialValue = "") => {
   };
 };
 
-export const useTodos = (initialValue = []) => {
-  const [todos, setTodos] = useState(initialValue);
+
+
+export const useExpenses = (initialValue = []) => {
+  const [expenses, setExpenses] = useState(initialValue);
 
   return {
-    todos,
-    addTodo: text => {
-      if (text !== "") {
-        setTodos(
-          todos.concat({
-            text,
+    expenses,
+    addExpense: ({name, cost}) => {
+      if (name !== "" || !cost) {
+        setExpenses(
+          expenses.concat({
+            name,
+            cost,
             checked: false
           })
         );
       }
     },
-    checkTodo: idx => {
-      setTodos(
-        todos.map((todo, index) => {
+    checkExpense: idx => {
+      setExpenses(
+        expenses.map((expense, index) => {
           if (idx === index) {
-            todo.checked = !todo.checked;
+            expense.checked = !expense.checked;
           }
 
-          return todo;
+          return expense;
         })
       );
     },
-    removeTodo: idx => {
-      setTodos(todos.filter((todo, index) => idx !== index));
+    removeExpense: idx => {
+      setExpenses(expenses.filter((_, index) => idx !== index));
     }
   };
 };

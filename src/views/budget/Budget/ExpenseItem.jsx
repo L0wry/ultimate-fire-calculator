@@ -16,8 +16,8 @@ export const ExpenseItem = memo(props => (
       checked={props.checked}
       disableRipple
     />
-    <ListItemText primary={props.text} />
-    <ListItemText primary={props.value} />
+    <ListItemText primary={props.name} />
+    <ListItemText primary={props.cost} />
     <ListItemSecondaryAction>
       <IconButton aria-label="Delete Item" onClick={props.onButtonClick}>
         <DeleteOutlined />
