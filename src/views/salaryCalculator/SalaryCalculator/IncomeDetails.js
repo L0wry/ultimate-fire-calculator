@@ -99,7 +99,10 @@ const IncomeDetails = ({ className, ...rest }) => {
                               </InputAdornment>
                             )
                           }}
-                          defaultValue={context.userFinance.salary}
+                          defaultValue={context.userFinance.salary
+                          ? context.userFinance.salary
+                          : null
+                        }
                           variant="outlined"
                         />
                       </Grid>
@@ -114,7 +117,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                           onChange={handlepersonalPensionContributionPercent}
                           fullWidth
                           variant="outlined"
-                          label="Personal Percentage Percentage"
+                          label="Personal Pension Contribution Percentage"
                           name="personalPension"
                           InputProps={{
                             endAdornment: (
@@ -141,7 +144,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                           onChange={handleEmployerPensionContributionPercent}
                           fullWidth
                           variant="outlined"
-                          label="Employer Percentage Percentage"
+                          label="Employer Pension Contribution Percentage"
                           name="employerPension"
                           InputProps={{
                             endAdornment: (

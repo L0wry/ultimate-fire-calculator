@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 
-export const TodoListItem = memo(props => (
+export const ExpenseItem = memo(props => (
   <ListItem divider={props.divider}>
     <Checkbox
       onClick={props.onCheckBoxToggle}
@@ -26,3 +26,5 @@ export const TodoListItem = memo(props => (
   </ListItem>
 ));
  
+
+export default ExpenseItem

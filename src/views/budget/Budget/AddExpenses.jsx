@@ -14,23 +14,16 @@ import {
   Grid,
   Button
 } from '@material-ui/core';
-import { BudgetItem } from './BudgetItem'
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  avatar: {
-    marginRight: theme.spacing(2)
-  }
-}));
 
-const Expenses = ({ className, customers, ...rest }) => {
-  const classes = useStyles();
 
-  const [list, setList] = useState([{ name: 'example', cost: 500 }, { name: 'example 2', cost: 500 }])
+const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInputKeyPress, ...rest }) => {
+  const {item, setItem} = useState({})
+
   return (
     <Box>
       <Card
-        className={clsx(classes.root, className)}
+        className={clsx(className)}
         {...rest}
       >
         <CardContent>
@@ -41,45 +34,58 @@ const Expenses = ({ className, customers, ...rest }) => {
             gutterBottom
             variant="h4"
           >
-            List Your Expenses
+            List Your Monthly Expenses
         </Typography>
           <Divider />
           <Box mt={3}>
             <Grid
-              container
+              container                
+              alignItems="stretch"
               spacing={1}
             >
               <Grid
                 item
-                xs={3} md={3} 
               >
                 <TextField
                   fullWidth
-                  placeholder="Expense Name"
+                  placeholder="Name"
                   variant="outlined"
+                  value={inputValue}
+                  onChange={onInputChange}
+                  onKeyPress={onInputKeyPress}
                 />
 
               </Grid>
 
               <Grid
                 item
-                xs={3} md={3} 
               >
                 <TextField
                   fullWidth
-                  placeholder="Cost"
                   variant="outlined"
+                  value={inputValue}
+                  onChange={onInputChange}
+                  onKeyPress={onInputKeyPress}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Typography >
+                          £
+                    </Typography>
+                      </InputAdornment>
+                    )
+                  }}
                 />
               </Grid>
               <Grid
                 item
-                xs={2} md={1}
+                xs={2}
               >
               <Button
                   color="primary"
                   fullWidth
                   variant="text"
-                  onClick={() => setList([...list, {}])}>Add Expense</Button>
+                  onClick={onButtonClick}>Add</Button>
               </Grid>
               </Grid>
           </Box>

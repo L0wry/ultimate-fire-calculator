@@ -15,7 +15,9 @@ import {
   Divider
 } from '@material-ui/core';
 import MonthlyTakeHomeCard from './MonthlyTakeHomeCard'
-import Expenses from './Expenses'
+import AddExpenses from './AddExpenses'
+import ExpenseList from './ExpenseList'
+import { useInputValue, useTodos } from "./budgetHooks";
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -30,6 +32,16 @@ const useStyles = makeStyles((theme) => ({
 const ExpenseHeaderCard = ({ className, ...rest }) => {
   const classes = useStyles();
 
+  const { inputValue, changeInput, clearInput, keyInput } = useInputValue();
+  const { todos, addTodo, checkTodo, removeTodo } = useTodos();
+
+  const clearInputAndAddTodo = _ => {
+    clearInput();
+    addTodo(inputValue);
+  };
+
+
+  console.log(todos)
   return (
     <div
       className={clsx(classes.root, className)}
@@ -62,8 +74,22 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                 xl={6}
                 xs={6}
               >
-                <Expenses />
+                <AddExpenses
+                  inputValue={inputValue}
+                  onInputChange={changeInput}
+                  onButtonClick={clearInputAndAddTodo}
+                  onInputKeyPress={event => keyInput(event, clearInputAndAddTodo)}
+                />
+
+                <ExpenseList
+                  items={todos}
+                  onItemCheck={idx => checkTodo(idx)}
+                  onItemRemove={idx => removeTodo(idx)}
+                />
+
               </Grid>
+
+
               <Grid
                 item
                 lg={6}

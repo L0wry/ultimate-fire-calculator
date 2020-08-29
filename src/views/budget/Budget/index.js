@@ -5,7 +5,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Expenses from './Expenses';
+import Expenses from './AddExpenses';
 import Budget from './Budget'
 
 const useStyles = makeStyles((theme) => ({
