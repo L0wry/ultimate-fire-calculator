@@ -20,7 +20,6 @@ import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 
 
 const ExpenseList = memo(({ className, items, onItemRemove, onItemCheck, ...rest }) => (
-
     <Box
         mt={3}
     >
@@ -28,7 +27,6 @@ const ExpenseList = memo(({ className, items, onItemRemove, onItemCheck, ...rest
             className={clsx(className)}
             {...rest}
         >
-            {console.log(items)}
             <CardContent>
 
                 <Typography
@@ -41,16 +39,15 @@ const ExpenseList = memo(({ className, items, onItemRemove, onItemCheck, ...rest
                     </Typography>
                 <Divider />
                 {items.length > 0 && (
-
                     <Box mt={3}>
-                        <TableContainer component={Paper}>
+                        <TableContainer>
                             <Table>
                                 <TableHead>
                                     <TableRow>
                                         <TableCell></TableCell>
                                         <TableCell align="center">Name</TableCell>
                                         <TableCell align="center">Cost</TableCell>
-
+                                        <TableCell></TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -63,13 +60,13 @@ const ExpenseList = memo(({ className, items, onItemRemove, onItemCheck, ...rest
                                                     disableRipple
                                                 />
                                             </TableCell>
-                                            <TableCell >
+                                            <TableCell align="center" >
                                                 {expense.name}
                                             </TableCell>
-                                            <TableCell >
+                                            <TableCell align="center" >
                                                 {expense.cost}
                                             </TableCell>
-                                            <TableCell>
+                                            <TableCell align="center">
                                                 <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
                                                     <DeleteOutlined />
                                                 </IconButton>

@@ -50,7 +50,7 @@ const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInput
                   name="name"
                   placeholder="Name"
                   variant="outlined"
-                  // value={inputValue.name}
+                  value={inputValue.name}
                   onChange={onInputChange}
                   onKeyPress={onInputKeyPress}
                 />
@@ -64,7 +64,7 @@ const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInput
                   fullWidth
                   name="cost"
                   variant="outlined"
-                  // value={inputValue.cost}
+                  value={inputValue.cost}
                   onChange={onInputChange}
                   onKeyPress={onInputKeyPress}
                   InputProps={{

@@ -37,7 +37,6 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
 
   const clearInputAndAddTodo = _ => {
     clearInput();
-    console.log('adding' , inputValue)
     addExpense(inputValue);
   };
 
