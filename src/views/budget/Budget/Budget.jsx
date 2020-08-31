@@ -12,51 +12,50 @@ import {
 import MonthlyTakeHomeCard from './MonthlyTakeHomeCard'
 import AddExpenses from './AddExpenses'
 import ExpenseList from './ExpenseList'
-import { useInputName, useExpenses } from "./budgetHooks";
+import { useInputName } from "./budgetHooks";
 import { SalaryContextConsumer } from '../../../context/SalaryContext';
-
-import {all, create} from 'mathjs'
+import { BudgetContextConsumer } from '../../../context/BudgetContext';
+import { all, create } from 'mathjs'
 
 const math = create(all, {
-  number: 'BigNumber',  
+  number: 'BigNumber',
   precision: 32
 });
+
+
 
 
 const ExpenseHeaderCard = ({ className, ...rest }) => {
 
   const { inputValue, changeInput, clearInput, keyInput } = useInputName();
-  const { expenses, addExpense, checkExpense, removeExpense } = useExpenses();
+  // const { expenses, addExpense, checkExpense, removeExpense } = useExpenses();
 
-  const clearInputAndAddTodo = _ => {
-    clearInput();
-    addExpense(inputValue);
-  };
+  // const clearInputAndAddTodo = _ => {
+  //   clearInput();
+  //   addExpense(inputValue);
+  // };
 
-  const expenseTotal = expenses.length > 0
-    ? expenses.reduce((acc, i) => acc + i.cost, 0)
-    : 0
 
   return (
-    <SalaryContextConsumer>
-      {context => (
-        <div
-          className={clsx(className)}
-          {...rest}
-        >
-          <Card>
-            <CardContent>
+    <div
+      className={clsx(className)}
+      {...rest}
+    >
+      <Card>
+        <CardContent>
 
-              <Typography
-                align="left"
-                color="textPrimary"
-                gutterBottom
-                variant="h3"
-              >
-                Budget
+          <Typography
+            align="left"
+            color="textPrimary"
+            gutterBottom
+            variant="h3"
+          >
+            Budget
                   </Typography>
-              <Divider />
-              <Box mt={3}>
+          <Divider />
+          <Box mt={3}>
+            <BudgetContextConsumer>
+              {budgetContext => (
                 <Grid
                   container
                   direction="row"
@@ -64,6 +63,9 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                   alignItems="stretch"
                   spacing={3}
                 >
+
+
+
                   <Grid
                     item
                     lg={6}
@@ -74,15 +76,16 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                     <AddExpenses
                       inputValue={inputValue}
                       onInputChange={changeInput}
-                      onButtonClick={clearInputAndAddTodo}
-                      onInputKeyPress={event => keyInput(event, clearInputAndAddTodo)}
+                      onButtonClick={() => budgetContext.addExpense(inputValue, clearInput)}
+                      onInputKeyPress={event => keyInput(event, budgetContext.addExpense)}
                     />
 
                     <ExpenseList
-                      items={expenses}
-                      onItemCheck={idx => checkExpense(idx)}
-                      onItemRemove={idx => removeExpense(idx)}
+                      items={budgetContext.expenses}
+                      onItemCheck={idx => budgetContext.checkExpense(idx)}
+                      onItemRemove={idx => budgetContext.removeExpense(idx)}
                     />
+
 
                   </Grid>
 
@@ -93,16 +96,22 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                     xl={6}
                     xs={6}
                   >
-                    <MonthlyTakeHomeCard totalTakeHome={math.divide(context.userTax.totalTakeHome, 12)} difference={math.subtract(math.divide(context.userTax.totalTakeHome, 12), expenseTotal )} expensesCost={expenseTotal} />
+                    <SalaryContextConsumer>
+                      {({userTax, }) => (
+                        <MonthlyTakeHomeCard totalTakeHome={math.divide(userTax.totalTakeHome, 12)} difference={math.subtract(math.divide(userTax.totalTakeHome, 12), budgetContext.expenseTotal)} expensesCost={budgetContext.expenseTotal} />
+                      )}
+                    </SalaryContextConsumer>
                   </Grid>
                 </Grid>
-              </Box>
-            </CardContent>
-          </Card>
+              )}
+            </BudgetContextConsumer>
 
-        </div>
-      )}
-    </SalaryContextConsumer>
+          </Box>
+        </CardContent>
+      </Card>
+
+    </div>
+
   );
 };
 

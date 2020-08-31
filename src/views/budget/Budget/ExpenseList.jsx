@@ -18,7 +18,7 @@ import {
 import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 
 
-const ExpenseList = memo(({ className, items, onItemRemove, onItemCheck, ...rest }) => (
+const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ...rest }) => (
     <Box
         mt={3}
     >
