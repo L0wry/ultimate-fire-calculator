@@ -63,7 +63,7 @@ const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ..
                                                 {expense.name}
                                             </TableCell>
                                             <TableCell align="center" >
-                                                {expense.cost}
+                                                £{expense.cost}
                                             </TableCell>
                                             <TableCell align="center">
                                                 <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>

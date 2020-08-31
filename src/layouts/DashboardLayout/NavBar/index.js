@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link as RouterLink, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
   Avatar,
@@ -10,7 +10,8 @@ import {
   Hidden,
   List,
   Typography,
-  makeStyles
+  makeStyles,
+  Grid
 } from '@material-ui/core';
 import {
   AlertCircle as AlertCircleIcon,
@@ -23,12 +24,8 @@ import {
   Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
+import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
 
-const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith'
-};
 
 const items = [
   {
@@ -67,11 +64,6 @@ const useStyles = makeStyles(() => ({
     width: 256,
     top: 64,
     height: 'calc(100% - 64px)'
-  },
-  avatar: {
-    cursor: 'pointer',
-    width: 64,
-    height: 64
   }
 }));
 
@@ -87,11 +79,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
   }, [location.pathname]);
 
   const content = (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-    >
+ 
       <Box p={2}>
         <List>
           {items.map((item) => (
@@ -103,8 +91,35 @@ const NavBar = ({ onMobileClose, openMobile }) => {
             />
           ))}
         </List>
+
+        <Grid
+          container
+          direction="column"
+          justify="flex-end"
+          alignItems="center"
+        >
+          <Box>
+            <Grid
+            spacing={3}
+              item >
+              <ExpectedMonthlyIncome />
+
+            </Grid>
+            <Grid
+            spacing={3}
+              item >
+              <ExpectedMonthlyIncome />
+
+            </Grid>
+            <Grid
+            spacing={3}
+              item >
+              <ExpectedMonthlyIncome />
+
+            </Grid>
+          </Box>
+        </Grid>
       </Box>
-    </Box>
   );
 
   return (
@@ -140,7 +155,7 @@ NavBar.propTypes = {
 };
 
 NavBar.defaultProps = {
-  onMobileClose: () => {},
+  onMobileClose: () => { },
   openMobile: false
 };
 
