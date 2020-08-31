@@ -15,7 +15,6 @@ const SalaryContextProvider = ({ children }) => {
 	}
 
 	const userTax = calculateAllTax(userFinance)
-	console.log(userTax)
 
 	return (
 		<Provider value={{ userFinance, setUserFinances, userTax }}>
