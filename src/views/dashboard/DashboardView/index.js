@@ -6,8 +6,6 @@ import {
 } from '@material-ui/core';
 import Page from 'src/components/Page';
 import TakeHomeIncome from './TakeHomeIncome';
-import LatestOrders from './LatestOrders';
-import LatestProducts from './LatestProducts';
 import NetWorth from './NetWorth';
 import TasksProgress from './MonthlyExpenses';
 import InvestingPerMonth from './InvestingPerMonth';

@@ -21,7 +21,7 @@ const NetWorth = () => {
   return (
     <Page
       className={classes.root}
-      title="Net Worth"
+      title="Investments"
     >
       <Container maxWidth="lg">
         <Grid

@@ -28,13 +28,6 @@ const math = create(all, {
 const ExpenseHeaderCard = ({ className, ...rest }) => {
 
   const { inputValue, changeInput, clearInput, keyInput } = useInputName();
-  // const { expenses, addExpense, checkExpense, removeExpense } = useExpenses();
-
-  // const clearInputAndAddTodo = _ => {
-  //   clearInput();
-  //   addExpense(inputValue);
-  // };
-
 
   return (
     <div
@@ -63,9 +56,6 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                   alignItems="stretch"
                   spacing={3}
                 >
-
-
-
                   <Grid
                     item
                     lg={6}
@@ -79,14 +69,13 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                       onButtonClick={() => budgetContext.addExpense(inputValue, clearInput)}
                       onInputKeyPress={event => keyInput(event, budgetContext.addExpense)}
                     />
-
-                    <ExpenseList
-                      items={budgetContext.expenses}
-                      onItemCheck={idx => budgetContext.checkExpense(idx)}
-                      onItemRemove={idx => budgetContext.removeExpense(idx)}
-                    />
-
-
+                    {budgetContext.expenses.length > 0 && (
+                      <ExpenseList
+                        items={budgetContext.expenses}
+                        onItemCheck={idx => budgetContext.checkExpense(idx)}
+                        onItemRemove={idx => budgetContext.removeExpense(idx)}
+                      />
+                    )}
                   </Grid>
 
                   <Grid
@@ -97,7 +86,7 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                     xs={6}
                   >
                     <SalaryContextConsumer>
-                      {({userTax, }) => (
+                      {({ userTax, }) => (
                         <MonthlyTakeHomeCard totalTakeHome={math.divide(userTax.totalTakeHome, 12)} difference={math.subtract(math.divide(userTax.totalTakeHome, 12), budgetContext.expenseTotal)} expensesCost={budgetContext.expenseTotal} />
                       )}
                     </SalaryContextConsumer>

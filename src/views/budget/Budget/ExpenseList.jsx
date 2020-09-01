@@ -37,47 +37,45 @@ const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ..
                     Expenses
                     </Typography>
                 <Divider />
-                {items.length > 0 && (
-                    <Box mt={3}>
-                        <TableContainer>
-                            <Table>
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell></TableCell>
-                                        <TableCell align="center">Name</TableCell>
-                                        <TableCell align="center">Cost</TableCell>
-                                        <TableCell></TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {items.map((expense, idx) => (
-                                        <TableRow key={idx}>
-                                            <TableCell padding="checkbox">
-                                                <Checkbox
-                                                    onClick={() => onItemCheck(idx)}
-                                                    checked={expense.checked}
-                                                    disableRipple
-                                                />
-                                            </TableCell>
-                                            <TableCell align="center" >
-                                                {expense.name}
-                                            </TableCell>
-                                            <TableCell align="center" >
-                                                £{expense.cost}
-                                            </TableCell>
-                                            <TableCell align="center">
-                                                <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
-                                                    <DeleteOutlined />
-                                                </IconButton>
-                                            </TableCell>
 
-                                        </TableRow>
-                                    ))}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Box>
-                )}
+                <Box mt={3}>
+                    <TableContainer>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell align="left">Include?</TableCell>
+                                    <TableCell align="center">Name</TableCell>
+                                    <TableCell align="center">Cost</TableCell>
+                                    <TableCell align="center">Remove</TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {items.map((expense, idx) => (
+                                    <TableRow key={idx}>
+                                        <TableCell align="center" padding="checkbox">
+                                            <Checkbox
+                                                onClick={() => onItemCheck(idx)}
+                                                checked={expense.checked}
+                                            />
+                                        </TableCell>
+                                        <TableCell align="center" >
+                                            {expense.name}
+                                        </TableCell>
+                                        <TableCell align="center" >
+                                            £{expense.cost}
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
+                                                <DeleteOutlined />
+                                            </IconButton>
+                                        </TableCell>
+
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Box>
             </CardContent>
         </Card>
     </Box>

@@ -5,7 +5,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Expenses from './AddExpenses';
 import Budget from './Budget'
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +25,7 @@ const Index = () => {
       title="Budget"
     >
       <Container maxWidth={false}>
-        <Box mt={3}>
+        <Box>
           <Budget />
         </Box>
       </Container>

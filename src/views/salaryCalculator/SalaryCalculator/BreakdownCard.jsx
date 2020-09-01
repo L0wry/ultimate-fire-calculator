@@ -43,7 +43,7 @@ const BreakdownCard = ({ className, ...rest }) => {
 
     return (
         <SalaryContextConsumer>
-            {context => (
+            {context => context.userTax.salary > 0 &&  (
                 <Card
                     className={clsx(classes.root, className)}
                     {...rest}
@@ -88,7 +88,6 @@ const BreakdownCard = ({ className, ...rest }) => {
 
 BreakdownCard.propTypes = {
     className: PropTypes.string,
-    product: PropTypes.object.isRequired
 };
 
 export default BreakdownCard;

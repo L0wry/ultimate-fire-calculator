@@ -96,7 +96,6 @@ const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInput
 
 Expenses.propTypes = {
   className: PropTypes.string,
-  customers: PropTypes.array.isRequired
 };
 
 export default Expenses;

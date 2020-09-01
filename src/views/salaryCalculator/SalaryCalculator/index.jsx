@@ -45,15 +45,6 @@ const SalaryCalculator = () => {
           >
             <Grid
               item
-              lg={12}
-              md={12}
-              xs={12}
-            >
-              <BreakdownCard />
-
-            </Grid>
-            <Grid
-              item
               lg={6}
               md={6}
               xs={12}
@@ -67,6 +58,16 @@ const SalaryCalculator = () => {
               xs={12}
             >
               <NationalInsurance />
+            </Grid>
+
+            <Grid
+              item
+              lg={12}
+              md={12}
+              xs={12}
+            >
+              <BreakdownCard />
+
             </Grid>
           </Grid>
         </Box>

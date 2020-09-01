@@ -19,7 +19,7 @@ const BudgetContextProvider = ({ children }) => {
             expenses.concat({
               name,
               cost: parseFloat(cost),
-              checked: false
+              checked: true
             })
           );
         }
@@ -43,7 +43,7 @@ const BudgetContextProvider = ({ children }) => {
       }
     
       const expenseTotal = expenses.length > 0
-      ? expenses.reduce((acc, i) => math.add(acc, i.cost), 0)
+      ? expenses.filter(item => item.checked).reduce((acc, i) => math.add(acc, i.cost), 0)
       : 0
 
       console.log(expenses)
