@@ -1,10 +1,8 @@
 {
   "name": "react-material-dashboard",
-  "author": "DeviasIO",
   "licence": "MIT",
   "version": "1.0.0",
-  "private": false,
-  "homepage": "https://l0wry.github.io/ultimate-fire-calculator/",
+  "homepage": "https://l0wry.github.io/ultimate-fire-calculator",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
