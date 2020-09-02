@@ -5,6 +5,7 @@ import {
   makeStyles,
 } from '@material-ui/core';
 import Page from '../../../components/Page';
+import Investments from './Investments';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const NetWorth = () => {
+const Index = () => {
   const classes = useStyles();
 
   return (
@@ -24,14 +25,10 @@ const NetWorth = () => {
       title="Investments"
     >
       <Container maxWidth="lg">
-        <Grid
-          container
-          spacing={3}
-        >
-        </Grid>
+        <Investments />
       </Container>
     </Page>
   );
 };
 
-export default NetWorth;
+export default Index;
