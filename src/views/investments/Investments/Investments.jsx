@@ -116,7 +116,7 @@ const AddInvestment = ({ className, addInvestment, ...rest }) => {
                     item
                   >
                     <Input
-                      label="Expected Annual Return"
+                      label="Annual Return"
                       name="expectedReturn"
                       type="text"
                       inputProps={{

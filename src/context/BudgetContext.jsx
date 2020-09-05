@@ -13,7 +13,8 @@ const BudgetContextProvider = ({ children }) => {
     const [expenses, setExpenses] = useState([]);
 
 
-      const addExpense = ({name, cost}, clearInput) => {
+      const addExpense = ({name, cost}) => {
+        console.log('p', name, cost)
         if (name !== "" || !cost) {
           setExpenses(
             expenses.concat({
@@ -23,7 +24,6 @@ const BudgetContextProvider = ({ children }) => {
             })
           );
         }
-        clearInput()
       }
 
       const checkExpense = idx => {

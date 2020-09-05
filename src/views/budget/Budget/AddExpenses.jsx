@@ -12,11 +12,28 @@ import {
   Grid,
   Button
 } from '@material-ui/core';
+import { Formik, Form, useField } from "formik";
+import { string, number, object } from "yup";
 
+const Input = ({ label, inputProps, ...props }) => {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <TextField
+        label={label}
+        className="text-input"
+        variant="outlined"
+        required
+        InputProps={inputProps ? inputProps : null}
+        {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </>
+  );
+};
 
-
-const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInputKeyPress, ...rest }) => {
-
+const Expenses = ({ className, addExpense, ...rest }) => {
   return (
     <Box>
       <Card
@@ -24,7 +41,6 @@ const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInput
         {...rest}
       >
         <CardContent>
-
           <Typography
             align="left"
             color="textPrimary"
@@ -35,58 +51,65 @@ const Expenses = ({ className, inputValue, onButtonClick, onInputChange, onInput
         </Typography>
           <Divider />
           <Box mt={3}>
-            <Grid
-              container                
-              alignItems="stretch"
-              spacing={1}
+          <Formik
+              initialValues={{
+                name: "",
+                cost: ""
+              }}
+              validationSchema={object({
+                name: string(),
+                cost: number(),
+               
+
+              })}
+              onSubmit={(expense, { setSubmitting, resetForm }) => {
+                console.log(expense)
+                addExpense(expense)
+                resetForm({})
+                setSubmitting(false);
+              }}
             >
-              <Grid
-                item
-              >
-                <TextField
-                  fullWidth
-                  name="name"
-                  placeholder="Name"
-                  variant="outlined"
-                  value={inputValue.name}
-                  onChange={onInputChange}
-                  onKeyPress={onInputKeyPress}
-                />
+              <Form>
+                <Grid
+                  container
+                  justify="space-evenly"
+                  spacing={1}
+                >
+                  <Grid
+                    item
+                  >
+                    <Input
+                      label="Expense Name"
+                      name="name"
+                      type="text"
+                    />
+                  </Grid>
 
-              </Grid>
-
-              <Grid
-                item
-              >
-                <TextField
-                  fullWidth
-                  name="cost"
-                  variant="outlined"
-                  value={inputValue.cost}
-                  onChange={onInputChange}
-                  onKeyPress={onInputKeyPress}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        <Typography >
-                          £
-                    </Typography>
-                      </InputAdornment>
-                    )
-                  }}
-                />
-              </Grid>
-              <Grid
-                item
-                xs={2}
-              >
-              <Button
-                  color="primary"
-                  fullWidth
-                  variant="text"
-                  onClick={onButtonClick}>Add</Button>
-              </Grid>
-              </Grid>
+                  <Grid
+                    item
+                  >
+                    <Input
+                      label="Expense cost"
+                      name="cost"
+                      type="text"
+                      inputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Typography >
+                              £
+                      </Typography>
+                          </InputAdornment>)
+                      }}
+                    />
+                  </Grid>                
+                    <Button
+                      color="primary"
+                      fullWidth
+                      variant="text"
+                      type="submit">Submit</Button>
+                </Grid>
+              </Form>
+            </Formik>
           </Box>
         </CardContent>
       </Card>

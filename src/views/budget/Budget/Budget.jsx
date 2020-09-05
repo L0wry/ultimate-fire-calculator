@@ -12,7 +12,6 @@ import {
 import MonthlyTakeHomeCard from './MonthlyTakeHomeCard'
 import AddExpenses from './AddExpenses'
 import ExpenseList from './ExpenseList'
-import { useInputName } from "./budgetHooks";
 import { SalaryContextConsumer } from '../../../context/SalaryContext';
 import { BudgetContextConsumer } from '../../../context/BudgetContext';
 import { all, create } from 'mathjs'
@@ -23,11 +22,8 @@ const math = create(all, {
 });
 
 
-
-
 const ExpenseHeaderCard = ({ className, ...rest }) => {
 
-  const { inputValue, changeInput, clearInput, keyInput } = useInputName();
 
   return (
     <div
@@ -64,10 +60,7 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                     xs={6}
                   >
                     <AddExpenses
-                      inputValue={inputValue}
-                      onInputChange={changeInput}
-                      onButtonClick={() => budgetContext.addExpense(inputValue, clearInput)}
-                      onInputKeyPress={event => keyInput(event, budgetContext.addExpense)}
+                      addExpense={budgetContext.addExpense}
                     />
                     {budgetContext.expenses.length > 0 && (
                       <ExpenseList
@@ -98,9 +91,7 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
           </Box>
         </CardContent>
       </Card>
-
     </div>
-
   );
 };
 
