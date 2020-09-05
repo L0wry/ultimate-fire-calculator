@@ -12,7 +12,7 @@ import {
   TextField,
   InputAdornment
 } from '@material-ui/core';
-import { BudgetContextConsumer } from '../../../context/BudgetContext';
+import { InvestmentContextConsumer } from '../../../context/InvestmentContext';
 import { Formik, Form, useField, useFormikContext } from "formik";
 import { string, number, object } from "yup";
 
@@ -38,7 +38,7 @@ const Input = ({ label, inputProps, ...props }) => {
 };
 
 
-const AddInvestment = ({ className, ...rest }) => {
+const AddInvestment = ({ className, addInvestment, ...rest }) => {
   return (
     <Box>
       <Card
@@ -72,8 +72,8 @@ const AddInvestment = ({ className, ...rest }) => {
                 monthlyContribution: number()
 
               })}
-              onSubmit={async (values, { setSubmitting, resetForm }) => {
-                console.log(values)
+              onSubmit={(investment, { setSubmitting, resetForm }) => {
+                addInvestment(investment)
                 resetForm({})
                 setSubmitting(false);
               }}
@@ -185,8 +185,8 @@ const InvestmentHeader = ({ className, ...rest }) => {
                   </Typography>
           <Divider />
           <Box mt={3}>
-            <BudgetContextConsumer>
-              {budgetContext => (
+            <InvestmentContextConsumer>
+              {({addInvestment}) => (
                 <Grid
                   container
                   direction="row"
@@ -194,11 +194,11 @@ const InvestmentHeader = ({ className, ...rest }) => {
                   alignItems="stretch"
                   spacing={3}
                 >
-                  <AddInvestment />
+                  <AddInvestment addInvestment={addInvestment} />
 
                 </Grid>
               )}
-            </BudgetContextConsumer>
+            </InvestmentContextConsumer>
 
           </Box>
         </CardContent>

@@ -4,6 +4,7 @@ import { HashRouter } from 'react-router-dom';
 import * as serviceWorker from './serviceWorker';
 import { SalaryContextProvider } from './context/SalaryContext'
 import { BudgetContextProvider } from './context/BudgetContext'
+import { InvestmentContextProvider } from './context/InvestmentContext'
 
 import App from './App';
 
@@ -11,7 +12,9 @@ ReactDOM.render((
   <HashRouter>
     <SalaryContextProvider>
       <BudgetContextProvider>
-        <App />
+        <InvestmentContextProvider>
+          <App />
+        </InvestmentContextProvider>
       </BudgetContextProvider>
     </SalaryContextProvider>
   </HashRouter>
