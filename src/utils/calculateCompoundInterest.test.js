@@ -1,4 +1,4 @@
-import { calculateCompoundInterest } from './calculateCompoundInterest'
+import { calculateMonthlyCompoundInterest, calculateYearlyCompoundWithCharge } from './calculateCompoundInterest'
 
 
 const data = [
@@ -15,9 +15,22 @@ describe('Compound Interest', () => {
     const investment = {
       initialAmount: 0,
       expectedReturn: 0.1,
-      monthlyContribution: 10,
-      noOfYears: 2,    
+      monthlyContribution: 10,  
+      noOfYearsToMature: 2
   }
-    expect(calculateCompoundInterest(investment)).toStrictEqual({})
+
+    expect(calculateYearlyCompoundWithCharge(investment)).toStrictEqual({})
+  })
+
+  it.only('annual charges', () => {
+    const investment = {
+      initialAmount: 0,
+      expectedReturn: 0.08,
+      monthlyContribution: 5000,  
+      noOfYearsToMature: 40,
+      annualCharge: 0.015
+  }
+
+    expect(calculateYearlyCompoundWithCharge(investment)).toStrictEqual({})
   })
 })
