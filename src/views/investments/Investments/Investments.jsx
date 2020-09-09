@@ -61,13 +61,13 @@ const AddInvestment = ({ className, addInvestment, ...rest }) => {
             <Formik
               initialValues={{
                 name: "",
-                currentValue: "",
+                initialAmount: "",
                 expectedReturn: "",
                 monthlyContribution: ""
               }}
               validationSchema={object({
                 name: string(),
-                currentValue: number(),
+                initialAmount: number(),
                 expectedReturn: number(),
                 monthlyContribution: number()
 
@@ -99,7 +99,7 @@ const AddInvestment = ({ className, addInvestment, ...rest }) => {
                   >
                     <Input
                       label="Current Value"
-                      name="currentValue"
+                      name="initialAmount"
                       type="text"
                       inputProps={{
                         startAdornment: (

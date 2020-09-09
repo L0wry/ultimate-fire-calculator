@@ -1,34 +1,40 @@
 import React, { useState } from 'react';
+import { calculateYearlyCompoundWithCharge } from 'src/utils/calculateCompoundInterest';
 const { Provider, Consumer } = React.createContext();
 
+const noOfYearsToMature = 20;
 
 const InvestmentContextProvider = ({ children }) => {
-    const [investments, setInvestments] = useState([]);
+  const [investments, setInvestments] = useState([]);
 
 
-      const addInvestment = ({name, currentValue, expectedReturn, monthlyContribution}) => {
-            setInvestments(
-            investments.concat({
-              name,
-              currentValue: parseFloat(currentValue),
-              expectedReturn: parseFloat(expectedReturn),
-              monthlyContribution: parseFloat(monthlyContribution)
-            })
-          );
-      }
+  const addInvestment = ({ name, initialAmount, expectedReturn, monthlyContribution }) => {
+    const investment = {
+      name,
+      initialAmount: parseFloat(initialAmount),
+      expectedReturn: parseFloat(expectedReturn),
+      monthlyContribution: parseFloat(monthlyContribution),
+      noOfYearsToMature: noOfYearsToMature
+    }
 
-      const removeInvestment = idx => {
-        setInvestments(investments.filter((_, index) => idx !== index));
-      }
-    
-    
-      console.log(investments)
+    setInvestments(
+      investments.concat({
+        ...investment,
+        compoundData: calculateYearlyCompoundWithCharge(investment)
+      })
+    );
+  }
 
-	return (
-		<Provider value={{ investments, addInvestment, removeInvestment}}>
-			{children}
-		</Provider>
-	)
+  const removeInvestment = idx => {
+    setInvestments(investments.filter((_, index) => idx !== index));
+  }
+
+
+  return (
+    <Provider value={{ investments, addInvestment, removeInvestment }}>
+      {children}
+    </Provider>
+  )
 }
 
 export { InvestmentContextProvider, Consumer as InvestmentContextConsumer }

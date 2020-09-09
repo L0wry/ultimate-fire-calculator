@@ -8,6 +8,7 @@ const math = create(all, {
 const MONTHS_OF_THE_YEAR = 12
 
 export const calculateYearlyCompoundWithCharge = ({
+  name,
   initialAmount = 0, 
   expectedReturn= 0, 
   monthlyContribution = 0,
@@ -15,6 +16,13 @@ export const calculateYearlyCompoundWithCharge = ({
   noOfYearsToMature = 0
 }) => {
 
+  console.log(
+    name,
+    initialAmount, 
+    expectedReturn, 
+    monthlyContribution,
+    annualCharge,
+    noOfYearsToMature)
   const compoundInterest = {}
   let totalAmount = initialAmount;
 
@@ -31,10 +39,6 @@ export const calculateYearlyCompoundWithCharge = ({
     totalAmount = annualCharge
     ? math.round(math.subtract(totalAmountAfterMaturing, math.multiply(totalAmountAfterMaturing, annualCharge)), 2)
     : totalAmountAfterMaturing
-    
-      console.log('amount before charge', totalAmountAfterMaturing)
-      console.log('charge amount', math.multiply(totalAmountAfterMaturing, annualCharge))
-      console.log('new total amount', math.round(math.subtract(totalAmountAfterMaturing, math.multiply(totalAmountAfterMaturing, annualCharge)), 2))
   }
 
   return compoundInterest
