@@ -10,12 +10,16 @@ const SalaryContextProvider = ({ children }) => {
 		personalPensionContribution: 0
 	});
 
-	const setUserFinances = (userFinance) => {
-		setUserFinance(userFinance);
+	const setUserFinances = ({ salary, taxFreePersonalAllowance, personalPensionContribution, employerPensionContribution }) => {
+		setUserFinance({
+			salary,
+			taxFreePersonalAllowance,
+			employerPensionContributionPercent: employerPensionContribution / 100,
+			personalPensionContributionPercent: personalPensionContribution / 100
+		});
 	}
 
 	const userTax = calculateAllTax(userFinance)
-
 	console.log(userTax)
 	return (
 		<Provider value={{ userFinance, setUserFinances, userTax }}>

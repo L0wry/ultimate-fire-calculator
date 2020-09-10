@@ -13,7 +13,7 @@ import {
   InputAdornment
 } from '@material-ui/core';
 import { InvestmentContextConsumer } from '../../../context/InvestmentContext';
-import { Formik, Form, useField, useFormikContext } from "formik";
+import { Formik, Form, useField } from "formik";
 import { string, number, object } from "yup";
 
 

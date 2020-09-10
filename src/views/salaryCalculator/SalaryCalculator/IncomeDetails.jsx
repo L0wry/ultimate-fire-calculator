@@ -11,9 +11,10 @@ import {
   Typography,
   makeStyles,
   Grid,
-  CardHeader,
   Divider
 } from '@material-ui/core';
+import { Formik, Form, useField } from "formik";
+import { number, object } from "yup";
 import { SalaryContextConsumer } from '../../../context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,28 +27,29 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+const Input = ({ label, type, inputProps, ...props }) => {
+  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
+  // which we can spread on <input> and alse replace ErrorMessage entirely.
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <TextField
+        type={type}
+        label={label}
+        className="text-input"
+        variant="outlined"
+        required
+        InputProps={inputProps ? inputProps : null}
+        {...field} {...props} />
+      {meta.touched && meta.error ? (
+        <div className="error">{meta.error}</div>
+      ) : null}
+    </>
+  );
+};
+
 const IncomeDetails = ({ className, ...rest }) => {
   const classes = useStyles();
-
-  const [salary, setSalary] = useState();
-  const [employerPensionContributionPercent, setEmployerPensionContributionPercent] = useState();
-  const [personalPensionContributionPercent, setPersonalPensionContributionPercent] = useState();
-  const [taxFreePersonalAllowance, setTaxFreePersonalAllowance] = useState();
-
-
-  const userFinance = {
-    salary: salary,
-    employerPensionContributionPercent: employerPensionContributionPercent,
-    personalPensionContributionPercent: personalPensionContributionPercent,
-    taxFreePersonalAllowance: taxFreePersonalAllowance || 12500
-  }
-
-
-  const handleSalaryChange = e => setSalary(e.target.value)
-  const handlepersonalPensionContributionPercent = e => setPersonalPensionContributionPercent(parseFloat((e.target.value / 100).toFixed(2)))
-  const handleEmployerPensionContributionPercent = e => setEmployerPensionContributionPercent(parseFloat((e.target.value / 100).toFixed(2)))
-  const handleTaxFreePersonalAllowance = e => setTaxFreePersonalAllowance(e.target.value)
-
   return (
     <div
       className={clsx(classes.root, className)}
@@ -55,11 +57,7 @@ const IncomeDetails = ({ className, ...rest }) => {
     >
       <SalaryContextConsumer>
         {
-          context => (
-            <form
-              autoComplete="off"
-
-            >
+          ({setUserFinances}) => (
               <Card>
                 <CardContent>
 
@@ -73,139 +71,259 @@ const IncomeDetails = ({ className, ...rest }) => {
                   </Typography>
                   <Divider />
                   <Box mt={3}>
-                    <Grid
-                      container
-                      spacing={3}
+
+                    <Formik
+                      initialValues={{
+                        salary: "",
+                        personalPensionContribution: 0,
+                        employerPensionContribution: 0,
+                        taxFreePersonalAllowance: 12500,
+                      }}
+                      validationSchema={object({
+                        salary: number(),
+                        personalPensionContribution: number(),
+                        employerPensionContribution: number(),
+                        taxFreePersonalAllowance: number(),
+
+                      })}
+                      onSubmit={(userFinance, { setSubmitting }) => {
+                        setUserFinances(userFinance)
+                        setSubmitting(false);
+                      }}
                     >
-                      <Grid
-                        item
-                        lg={6}
-                        md={6}
-                        xs={12}
-                      >
-                        <TextField
-                          onChange={handleSalaryChange}
-                          fullWidth
-                          required
-                          variant="outlined"
-                          label="Annual Salary"
-                          name="annualSalary"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <Typography >
-                                  £
+                      <Form>
+                        <Grid
+                          container
+                          spacing={3}
+                        >
+                          <Grid
+                            item
+                            lg={6}
+                            md={6}
+                            xs={12}
+                          >
+                            <Input
+                              label="Annual Salary"
+                              name="salary"
+                              type="number"
+                              inputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <Typography >
+                                      £
+                                    </Typography>
+                                  </InputAdornment>)
+                              }}
+                            />
+                          </Grid>
+
+                          <Grid
+                            item
+                            lg={6}
+                            md={6}
+                            xs={12}
+                          >
+
+                            <Input
+                              label="Personal Pension Contribution Percentage"
+                              name="personalPensionContribution"
+                              type="number"
+                              inputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="start">
+                                    <Typography >
+                                      %
+                                    </Typography>
+                                  </InputAdornment>)
+                              }}
+                            />
+
+                          </Grid>
+
+                          <Grid
+                            item
+                            lg={6}
+                            md={6}
+                            xs={12}
+                          >
+
+                            <Input
+                              label="Employer Pension Contribution Percentage"
+                              name="employerPensionContribution"
+                              type="number"
+                              inputProps={{
+                                endAdornment: (
+                                  <InputAdornment position="start">
+                                    <Typography >
+                                      %
+                                    </Typography>
+                                  </InputAdornment>)
+                              }}
+                            />
+
+                          </Grid>
+
+                          <Grid
+                            item
+                            lg={6}
+                            md={6}
+                            xs={12}
+                          >
+
+                            <Input
+                              label="Tax Free Personal Allowance"
+                              name="taxFreePersonalAllowance"
+                              type="number"
+                              inputProps={{
+                                startAdornment: (
+                                  <InputAdornment position="start">
+                                    <Typography >
+                                      £
+                                    </Typography>
+                                  </InputAdornment>)
+                              }}
+                            />
+
+                          </Grid>
+                        </Grid>
+                        <Box
+                          display="flex"
+                          justifyContent="center"
+                          p={2}
+                          mt={3}>
+                          <Button
+                            type="submit"
+                            color="primary"
+                            fullWidth
+                            variant="text">Calculate</Button>
+                        </Box>
+                      </Form>
+                    </Formik>
+
+{/* 
+                    <TextField
+                      onChange={handleSalaryChange}
+                      fullWidth
+                      required
+                      variant="outlined"
+                      label="Annual Salary"
+                      name="salary"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Typography >
+                              £
                             </Typography>
-                              </InputAdornment>
-                            )
-                          }}
-                          defaultValue={context.userFinance.salary
-                          ? context.userFinance.salary
-                          : null
-                        }
-                          variant="outlined"
-                        />
+                          </InputAdornment>
+                        )
+                      }}
+                      defaultValue={context.userFinance.salary
+                        ? context.userFinance.salary
+                        : null
+                      }
+                      variant="outlined"
+                    />
                       </Grid>
-                      <Grid
-                        item
-                        lg={6}
-                        md={6}
-                        xs={12}
-                      >
+                  <Grid
+                    item
+                    lg={6}
+                    md={6}
+                    xs={12}
+                  >
 
-                        <TextField
-                          onChange={handlepersonalPensionContributionPercent}
-                          fullWidth
-                          variant="outlined"
-                          label="Personal Pension Contribution Percentage"
-                          name="personalPension"
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="start">
-                                <Typography >
-                                  %
+                    <TextField
+                      onChange={handlepersonalPensionContributionContributionPercent}
+                      fullWidth
+                      variant="outlined"
+                      label="Personal Pension Contribution Percentage"
+                      name="personalPensionContribution"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <Typography >
+                              %
                                 </Typography>
-                              </InputAdornment>)
-                          }}
-                          defaultValue={context.userFinance.personalPensionContributionPercent
-                            ? context.userFinance.personalPensionContributionPercent * 100
-                            : null}
-                          variant="outlined"
-                        />
-                      </Grid>
+                          </InputAdornment>)
+                      }}
+                      defaultValue={context.userFinance.personalPensionContributionContributionPercent
+                        ? context.userFinance.personalPensionContributionContributionPercent * 100
+                        : null}
+                      variant="outlined"
+                    />
+                  </Grid>
 
-                      <Grid
-                        item
-                        lg={6}
-                        md={6}
-                        xs={12}
-                      >
-                        <TextField
-                          onChange={handleEmployerPensionContributionPercent}
-                          fullWidth
-                          variant="outlined"
-                          label="Employer Pension Contribution Percentage"
-                          name="employerPension"
-                          InputProps={{
-                            endAdornment: (
-                              <InputAdornment position="start">
-                                <Typography >
-                                  %
+                  <Grid
+                    item
+                    lg={6}
+                    md={6}
+                    xs={12}
+                  >
+                    <TextField
+                      onChange={handleemployerPensionContributionContributionPercent}
+                      fullWidth
+                      variant="outlined"
+                      label="Employer Pension Contribution Percentage"
+                      name="employerPensionContribution"
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position="start">
+                            <Typography >
+                              %
                                     </Typography>
-                              </InputAdornment>)
-                          }}
-                          defaultValue={
-                            context.userFinance.employerPensionContributionPercent
-                              ? context.userFinance.employerPensionContributionPercent * 100
-                              : null}
-                          variant="outlined"
-                        />
-                      </Grid>
-                      <Grid
-                        item
-                        lg={6}
-                        md={6}
-                        xs={12}
-                      >
-                        <TextField
-                          onChange={handleTaxFreePersonalAllowance}
-                          fullWidth
-                          required
-                          variant="outlined"
-                          label="Tax Free Personal Allowance"
-                          name="taxFreePersonalAllowance"
-                          InputProps={{
-                            startAdornment: (
-                              <InputAdornment position="start">
-                                <Typography >
-                                  £
+                          </InputAdornment>)
+                      }}
+                      defaultValue={
+                        context.userFinance.employerPensionContributionContributionPercent
+                          ? context.userFinance.employerPensionContributionContributionPercent * 100
+                          : null}
+                      variant="outlined"
+                    />
+                  </Grid>
+                  <Grid
+                    item
+                    lg={6}
+                    md={6}
+                    xs={12}
+                  >
+                    <TextField
+                      onChange={handleTaxFreePersonalAllowance}
+                      fullWidth
+                      required
+                      variant="outlined"
+                      label="Tax Free Personal Allowance"
+                      name="taxFreePersonalAllowance"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <Typography >
+                              £
                                     </Typography>
-                              </InputAdornment>)
-                          }}
-                          defaultValue={context.userFinance.taxFreePersonalAllowance}
-                          variant="outlined"
-                        />
-                      </Grid>
+                          </InputAdornment>)
+                      }}
+                      defaultValue={context.userFinance.taxFreePersonalAllowance}
+                      variant="outlined"
+                    />
+                  </Grid>
                     </Grid>
-                    <Box
-                      display="flex"
-                      justifyContent="center"
-                      p={2}
-                      mt={3}>
-                      <Button
-                        color="primary"
-                        fullWidth
-                        variant="text"
-                        onClick={() => context.setUserFinances(userFinance)}>Calculate</Button>
-                    </Box>
+                <Box
+                  display="flex"
+                  justifyContent="center"
+                  p={2}
+                  mt={3}>
+                  <Button
+                    color="primary"
+                    fullWidth
+                    variant="text"
+                    onClick={() => context.setUserFinances(userFinance)}>Calculate</Button>
+                </Box> */}
 
                   </Box>
                 </CardContent>
               </Card>
-            </form>
-          )}
-      </SalaryContextConsumer>
-    </div>
+  )
+}
+      </SalaryContextConsumer >
+    </div >
   );
 };
 
