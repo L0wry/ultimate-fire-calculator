@@ -9,13 +9,13 @@ const MONTHS_OF_THE_YEAR = 12
 const ROUND_AMOUNT = 2
 
 export const calculateYearlyCompoundWithCharge = ({
-  name,
   initialAmount = 0, 
   expectedReturn= 0, 
   monthlyContribution = 0,
   annualCharge = 0,
   noOfYearsToMature = 0
 }) => {
+  console.log({initialAmount, expectedReturn,monthlyContribution,annualCharge})
   const compoundInterest = {}
   let totalAmount = initialAmount;
 

@@ -12,7 +12,7 @@ const InvestmentContextProvider = ({ children }) => {
     const investment = {
       name,
       initialAmount: parseFloat(initialAmount),
-      expectedReturn: parseFloat(expectedReturn),
+      expectedReturn: parseFloat(expectedReturn / 100),
       monthlyContribution: parseFloat(monthlyContribution),
       noOfYearsToMature: noOfYearsToMature
     }
