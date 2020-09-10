@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/ultimate-fire-calculator/precache-manifest.60ce96d4913d2c08e696d91d8fb63d25.js"
+  "/ultimate-fire-calculator/precache-manifest.dade7a271fa3fb1a568075cdfb8b6f97.js"
 );
 
 self.addEventListener('message', (event) => {
