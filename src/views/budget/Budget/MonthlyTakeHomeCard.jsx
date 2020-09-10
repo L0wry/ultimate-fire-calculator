@@ -33,74 +33,74 @@ const MonthlyTakeHomeCard = ({ className, expensesCost, totalTakeHome, differenc
     const classes = useStyles();
 
     return (
-      
-                <Card
-                    className={clsx(classes.root, className)}
-                    {...rest}
+
+        <Card
+            className={clsx(classes.root, className)}
+            {...rest}
+        >
+            <CardContent>
+                <Grid
+                    container
+                    direction="column"
+                    justify="space-between"
+                    spacing={3}
                 >
-                    <CardContent>
-                        <Grid
-                            container
-                            direction="column"
-                            justify="space-between"
-                            spacing={3}
+                    <Grid item>
+                        <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h5"
                         >
-                            <Grid item>
-                                <Typography
-                                    color="textSecondary"
-                                    gutterBottom
-                                    variant="h5"
-                                >
-                                    Monthly Net Income
+                            Monthly Net Income
                                 </Typography>
-                                <Typography
-                                    color="textPrimary"
-                                    variant="h3"
-                                >
-                                    £{totalTakeHome}
-                                </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography
-                                    color="textSecondary"
-                                    gutterBottom
-                                    variant="h5"
-                                >
-                                    Total Expenses
-                                </Typography>
-                                <Typography
-                                    color="textPrimary"
-                                    variant="h3"
-                                >
-                                    £{expensesCost}
-                                </Typography>
-                            </Grid>
-
-                            <Grid item>
-                                <Typography
-                                    color="textSecondary"
-                                    gutterBottom
-                                    variant="h5"
-                                >
-                                    Amount Left Over
-                                </Typography>
-                                <Typography
-                                    color="textPrimary"
-                                    variant="h3"
-                                >
-                                    £{difference}
-                                </Typography>
-                            </Grid>
-
-                        </Grid>
-                        <Box
-                            mt={2}
-                            display="flex"
-                            alignItems="center"
+                        <Typography
+                            color="textPrimary"
+                            variant="h3"
                         >
-                        </Box>
-                    </CardContent>
-                </Card>
+                            £{totalTakeHome}
+                        </Typography>
+                    </Grid>
+                    <Grid item>
+                        <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h5"
+                        >
+                            Total Expenses
+                                </Typography>
+                        <Typography
+                            color="textPrimary"
+                            variant="h3"
+                        >
+                            £{expensesCost}
+                        </Typography>
+                    </Grid>
+
+                    <Grid item>
+                        <Typography
+                            color="textSecondary"
+                            gutterBottom
+                            variant="h5"
+                        >
+                            Amount Left Over
+                                </Typography>
+                        <Typography
+                            color="textPrimary"
+                            variant="h3"
+                        >
+                            £{difference}
+                        </Typography>
+                    </Grid>
+
+                </Grid>
+                <Box
+                    mt={2}
+                    display="flex"
+                    alignItems="center"
+                >
+                </Box>
+            </CardContent>
+        </Card>
     );
 };
 

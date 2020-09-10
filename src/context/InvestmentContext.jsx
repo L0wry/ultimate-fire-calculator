@@ -9,7 +9,7 @@ const InvestmentContextProvider = ({ children }) => {
 
 
   const addMultipleInvestments = (investmentsToAdd) => {
-    const investments = investmentsToAdd.map(({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0 }) => {
+    const multipleInvestments = investmentsToAdd.map(({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0 }) => {
       const investment = {
         name,
         initialAmount: parseFloat(initialAmount),
@@ -24,7 +24,11 @@ const InvestmentContextProvider = ({ children }) => {
       }
     })
 
-    setInvestments(investments)
+
+    setInvestments([
+      ...multipleInvestments,
+      ...investments.filter(investment1 => multipleInvestments.includes(investment2 =>  investment2.name !== investment1.name)),
+    ])
   }
 
   const addInvestment = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0 }) => {
@@ -37,13 +41,14 @@ const InvestmentContextProvider = ({ children }) => {
     }
 
     console.log({investments})
- 
+
+
       setInvestments([
+        ...investments.filter(investment => investment.name !== name),
         {
           ...investment,
           compoundData: calculateYearlyCompoundWithCharge(investment)
-        },
-        ...investments,
+        }
       ])
   }
 
