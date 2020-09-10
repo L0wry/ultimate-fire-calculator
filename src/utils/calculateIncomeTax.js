@@ -7,6 +7,8 @@ const math = create(all, {
   precision: 32
 });
 
+const ROUND_AMOUNT = 2
+
 export const calculateIncomeTax = (tax, taxableIncome) => {
   taxableIncome = math.subtract(taxableIncome, tax.taxFreePersonalAllowance)
   
@@ -16,17 +18,17 @@ export const calculateIncomeTax = (tax, taxableIncome) => {
     const difference = math.subtract(tax[band].end, tax[band].start)
 
     if (math.subtract(carryOver, difference) > 0) {
-      tax[band].taxPaid = math.multiply(difference, tax[band].taxPercent)
+      tax[band].taxPaid = math.round(math.multiply(difference, tax[band].taxPercent), ROUND_AMOUNT)
       tax.totalIncomeTax = math.add(tax.totalIncomeTax, tax[band].taxPaid)
       tax[band].carryOver = math.subtract(carryOver, difference)
       carryOver = math.subtract(carryOver, difference)
 
     } else {
       tax[band].taxPaid = math.multiply(carryOver, tax[band].taxPercent) > 0 
-        ? math.multiply(carryOver, tax[band].taxPercent) 
+        ? math.round(math.multiply(carryOver, tax[band].taxPercent), ROUND_AMOUNT)
         : 0
 
-      tax.totalIncomeTax = math.add(tax.totalIncomeTax, tax[band].taxPaid)
+      tax.totalIncomeTax = math.round(math.add(tax.totalIncomeTax, tax[band].taxPaid), ROUND_AMOUNT)
       carryOver = 0
       break
     }

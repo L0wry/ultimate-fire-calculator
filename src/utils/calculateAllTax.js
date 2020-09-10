@@ -33,6 +33,6 @@ export default function calculateAllTax({
       taxableIncome,
       incomeTax,
       nationalInsuranceTax,
-      totalTakeHome: salary - personalPensionContribution - incomeTax.totalIncomeTax - nationalInsuranceTax.totalNationalInsuranceTax
+      totalTakeHome: math.round(salary - personalPensionContribution - incomeTax.totalIncomeTax - nationalInsuranceTax.totalNationalInsuranceTax, 2)
     }
 }
