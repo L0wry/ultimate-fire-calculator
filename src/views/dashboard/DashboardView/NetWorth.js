@@ -55,7 +55,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
               }}
             >
 
-              <XAxis fontFamily={theme.typography.fontFamily} dataKey="year" />
+              <XAxis fontFamily={theme.typography.fontFamily} />
               <YAxis fontFamily={theme.typography.fontFamily} />
               <Tooltip fontFamily={theme.typography.fontFamily} />
               {
