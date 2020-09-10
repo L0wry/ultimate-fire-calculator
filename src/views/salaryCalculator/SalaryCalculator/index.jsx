@@ -38,7 +38,7 @@ const SalaryCalculator = () => {
         {
           ({ setUserFinances, userTax }) => (
             <Container maxWidth={false}>
-              <UserFinance setUserFinances={setUserFinances}/>
+              <UserFinance userTax={userTax} setUserFinances={setUserFinances}/>
               <Box mt={2} >
                 <Grid
                   container

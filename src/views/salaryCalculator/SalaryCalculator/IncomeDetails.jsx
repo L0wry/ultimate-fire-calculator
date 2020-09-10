@@ -50,10 +50,10 @@ const Input = ({ label, type, inputProps, ...props }) => {
 };
 
 
-const IncomeDetails = ({ setUserFinances, className, ...rest }) => {
+const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
   const { addMultipleInvestments } = useContext(InvestmentContextConsumer);
 
-
+  console.log('piss', {userTax})
   const classes = useStyles();
   return (
     <div
@@ -73,13 +73,12 @@ const IncomeDetails = ({ setUserFinances, className, ...rest }) => {
                   </Typography>
           <Divider />
           <Box mt={3}>
-
             <Formik
               initialValues={{
-                salary: "",
-                personalPensionContribution: 0,
-                employerPensionContribution: 0,
-                taxFreePersonalAllowance: 12500,
+                salary: userTax.salary || 0,
+                personalPensionContribution: userTax.personalPensionContributionPercent * 100 || 0,
+                employerPensionContribution: userTax.employerPensionContributionPercent * 100 || 0,
+                taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
               }}
               validationSchema={object({
                 salary: number(),
@@ -89,7 +88,6 @@ const IncomeDetails = ({ setUserFinances, className, ...rest }) => {
 
               })}
               onSubmit={(userFinance, { setSubmitting }) => {
-
                 setUserFinances(userFinance, addMultipleInvestments)
                 setSubmitting(false);
               }}
