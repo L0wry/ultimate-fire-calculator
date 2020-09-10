@@ -8,7 +8,26 @@ const InvestmentContextProvider = ({ children }) => {
   const [investments, setInvestments] = useState([]);
 
 
-  const addInvestment = ({ name, initialAmount, expectedReturn, monthlyContribution }) => {
+  const addMultipleInvestments = (investmentsToAdd) => {
+    const investments = investmentsToAdd.map(({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0 }) => {
+      const investment = {
+        name,
+        initialAmount: parseFloat(initialAmount),
+        expectedReturn: parseFloat(expectedReturn / 100),
+        monthlyContribution: parseFloat(monthlyContribution),
+        noOfYearsToMature: noOfYearsToMature
+      }
+
+      return {
+        ...investment,
+          compoundData: calculateYearlyCompoundWithCharge(investment)
+      }
+    })
+
+    setInvestments(investments)
+  }
+
+  const addInvestment = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0 }) => {
     const investment = {
       name,
       initialAmount: parseFloat(initialAmount),
@@ -17,21 +36,26 @@ const InvestmentContextProvider = ({ children }) => {
       noOfYearsToMature: noOfYearsToMature
     }
 
-    setInvestments(
-      investments.concat({
-        ...investment,
-        compoundData: calculateYearlyCompoundWithCharge(investment)
-      })
-    );
+    console.log({investments})
+ 
+      setInvestments([
+        {
+          ...investment,
+          compoundData: calculateYearlyCompoundWithCharge(investment)
+        },
+        ...investments,
+      ])
   }
+
 
   const removeInvestment = idx => {
     setInvestments(investments.filter((_, index) => idx !== index));
   }
 
+  console.log({ investments })
 
   return (
-    <Provider value={{ investments, addInvestment, removeInvestment }}>
+    <Provider value={{ investments, addInvestment, addMultipleInvestments, removeInvestment }}>
       {children}
     </Provider>
   )

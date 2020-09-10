@@ -10,6 +10,8 @@ import UserFinance from './IncomeDetails';
 import IncomeTaxCard from './IncomeTaxCard'
 import NationalInsurance from './NationalInsuranceCard'
 import BreakdownCard from './BreakdownCard';
+import { SalaryContextConsumer } from '../../../context/SalaryContext';
+import { InvestmentContextConsumer } from 'src/context/InvestmentContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,46 +34,56 @@ const SalaryCalculator = () => {
       className={classes.root}
       title="Salary Calculator"
     >
-      <Container maxWidth={false}>
-        <UserFinance />
-        <Box mt={2} >
-          <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="stretch"
-            spacing={3}
+      <SalaryContextConsumer>
+        {
+          ({ setUserFinances, userTax }) => (
+            <Container maxWidth={false}>
+              <UserFinance setUserFinances={setUserFinances}/>
+              <Box mt={2} >
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="stretch"
+                  spacing={3}
 
-          >
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xs={12}
-            >
-              <IncomeTaxCard />
-            </Grid>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xs={12}
-            >
-              <NationalInsurance />
-            </Grid>
+                >
+                  <Grid
+                    item
+                    lg={6}
+                    md={6}
+                    xs={12}
+                  >
 
-            <Grid
-              item
-              lg={12}
-              md={12}
-              xs={12}
-            >
-              <BreakdownCard />
+                    <IncomeTaxCard userTax={userTax} />
 
-            </Grid>
-          </Grid>
-        </Box>
-      </Container>
+
+                  </Grid>
+                  <Grid
+                    item
+                    lg={6}
+                    md={6}
+                    xs={12}
+                  >
+                    <NationalInsurance />
+                  </Grid>
+
+                  <Grid
+                    item
+                    lg={12}
+                    md={12}
+                    xs={12}
+                  >
+                    <BreakdownCard />
+
+                  </Grid>
+                </Grid>
+              </Box>
+            </Container>
+
+          )}
+
+      </SalaryContextConsumer>
     </Page>
   );
 };
