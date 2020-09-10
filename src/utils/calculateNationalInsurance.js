@@ -7,16 +7,19 @@ const math = create(all, {
   precision: 32
 });
 
+const WEEKS_IN_YEAR = 52
+const ROUND_AMOUNT = 2
+
+
 export const calculateNationalInsurance = (tax, taxableIncome) => {
-  const weeksInYear = 52
-  const weeklyIncome = math.divide(taxableIncome, weeksInYear)
+  const weeklyIncome = math.divide(taxableIncome, WEEKS_IN_YEAR)
 
   let carryOver = weeklyIncome
 
   for (const band of BANDS) {
     const difference = math.subtract(tax[band].end, tax[band].start)
     if (math.subtract(carryOver, difference) > 0) {
-      tax[band].taxPaid = math.multiply(difference, tax[band].taxPercent)
+      tax[band].taxPaid = math.round(math.multiply(difference, tax[band].taxPercent), ROUND_AMOUNT)
       tax.weeklyNationalInsuranceTax = math.add(tax.weeklyNationalInsuranceTax, tax[band].taxPaid)
 
 
@@ -25,7 +28,7 @@ export const calculateNationalInsurance = (tax, taxableIncome) => {
 
     } else {
       tax[band].taxPaid = math.multiply(carryOver, tax[band].taxPercent) > 0
-        ? math.multiply(carryOver, tax[band].taxPercent)
+        ? math.round(math.multiply(carryOver, tax[band].taxPercent), ROUND_AMOUNT)
         : 0
 
       tax.weeklyNationalInsuranceTax = math.add(tax.weeklyNationalInsuranceTax, tax[band].taxPaid)
@@ -34,7 +37,7 @@ export const calculateNationalInsurance = (tax, taxableIncome) => {
     }
   }
 
-  tax.totalNationalInsuranceTax = math.multiply(tax.weeklyNationalInsuranceTax, weeksInYear)
+  tax.totalNationalInsuranceTax = math.round(math.multiply(tax.weeklyNationalInsuranceTax, WEEKS_IN_YEAR), ROUND_AMOUNT)
   return tax
 }
 
