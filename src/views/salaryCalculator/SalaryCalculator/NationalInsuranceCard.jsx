@@ -48,7 +48,7 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
               National Insurance
         </Typography>
             <Divider />
-            <Box mt={3}>
+            <Box height="100%" mt={3}>
             <Grid
                 container
                 spacing={3}
@@ -113,7 +113,7 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
               </Grid>
             </Box>
           </CardContent>
-          <Box flexGrow={1} />
+          <Box  />
           <Divider />
         </Card>
       )}

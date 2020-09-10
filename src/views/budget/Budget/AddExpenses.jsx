@@ -15,11 +15,12 @@ import {
 import { Formik, Form, useField } from "formik";
 import { string, number, object } from "yup";
 
-const Input = ({ label, inputProps, ...props }) => {
+const Input = ({ label, type, inputProps, ...props }) => {
   const [field, meta] = useField(props);
   return (
     <>
       <TextField
+        type={type}
         label={label}
         className="text-input"
         variant="outlined"
@@ -51,7 +52,8 @@ const Expenses = ({ className, addExpense, ...rest }) => {
             List Your Monthly Expenses
         </Typography>
           <Divider />
-          <Box mt={3}>
+          <Box 
+            mt={3}>
           <Formik
               initialValues={{
                 name: "",
@@ -60,11 +62,8 @@ const Expenses = ({ className, addExpense, ...rest }) => {
               validationSchema={object({
                 name: string(),
                 cost: number(),
-               
-
               })}
               onSubmit={(expense, { setSubmitting, resetForm }) => {
-                console.log(expense)
                 addExpense(expense)
                 resetForm({})
                 setSubmitting(false);
@@ -92,7 +91,7 @@ const Expenses = ({ className, addExpense, ...rest }) => {
                     <Input
                       label="Expense cost"
                       name="cost"
-                      type="text"
+                      type="tel"
                       inputProps={{
                         startAdornment: (
                           <InputAdornment position="start">

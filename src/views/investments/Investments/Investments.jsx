@@ -112,7 +112,6 @@ const AddInvestment = ({ className, addInvestment, ...rest }) => {
                       }}
                     />
                   </Grid>
-
                   <Grid
                     item
                   >
@@ -148,13 +147,11 @@ const AddInvestment = ({ className, addInvestment, ...rest }) => {
                       }}
                     />
                   </Grid>
-
-                
-                    <Button
-                      color="primary"
-                      fullWidth
-                      variant="text"
-                      type="submit">Submit</Button>
+                  <Button
+                    color="primary"
+                    fullWidth
+                    variant="text"
+                    type="submit">Submit</Button>
                 </Grid>
               </Form>
             </Formik>
@@ -164,7 +161,6 @@ const AddInvestment = ({ className, addInvestment, ...rest }) => {
     </Box >
   );
 };
-
 
 const InvestmentHeader = ({ className, ...rest }) => {
 
@@ -187,20 +183,10 @@ const InvestmentHeader = ({ className, ...rest }) => {
           <Divider />
           <Box mt={3}>
             <InvestmentContextConsumer>
-              {({addInvestment}) => (
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="stretch"
-                  spacing={3}
-                >
-                  <AddInvestment addInvestment={addInvestment} />
-
-                </Grid>
+              {({ addInvestment }) => (
+                <AddInvestment addInvestment={addInvestment} />
               )}
             </InvestmentContextConsumer>
-
           </Box>
         </CardContent>
       </Card>
