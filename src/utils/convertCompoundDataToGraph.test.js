@@ -30,11 +30,11 @@ describe('Convert Compound Data To Graph', () => {
 
     ]
     expect(convertCompoundDataToGraph(compoundData)).toStrictEqual([
-      { "investment 1": 10, "investment 2": 10, "Time": "Year 1" },
-      { "investment 1": 136.72, "investment 2": 136.72, "Time": "Year 2" },
-      { "investment 1": 276.69, "investment 2": 276.69, "Time": "Year 3" },
-      { "investment 1": 431.32, "investment 2": 431.32, "Time": "Year 4" },
-      { "investment 1": 602.14, "investment 2": 602.14, "Time": "Year 5" }]
+      { "investment 1": 10, "investment 2": 10, "year": "Year 1" },
+      { "investment 1": 136.72, "investment 2": 136.72, "year": "Year 2" },
+      { "investment 1": 276.69, "investment 2": 276.69, "year": "Year 3" },
+      { "investment 1": 431.32, "investment 2": 431.32, "year": "Year 4" },
+      { "investment 1": 602.14, "investment 2": 602.14, "year": "Year 5" }]
     )
   })
 })
