@@ -3,17 +3,31 @@ import { calculateYearlyCompoundWithCharge } from './calculateCompoundInterest'
 
 describe('Compound Interest', () => {
 
-  it.only('annual charges', () => {
+it.only('calculates without monthly contribution', () => {
+  const investment = {
+    initialAmount: 100,
+    expectedReturn: 0.1,
+    monthlyContribution: 0,
+    noOfYearsToMature: 10,
+    annualCharge: 0.00,
+    name: 'sipp'
+  }
+
+  expect(calculateYearlyCompoundWithCharge(investment)['Year 10']['Month 12'].balance).toStrictEqual(270.71)
+})
+
+  it('annual charges', () => {
+
     const investment = {
       initialAmount: 0,
-      expectedReturn: 0.08,
+      expectedReturn: 0.083,
       monthlyContribution: 5000,
       noOfYearsToMature: 3,
       annualCharge: 0.00,
       name: 'sipp'
     }
 
-    expect(calculateYearlyCompoundWithCharge(investment)).toStrictEqual({})
+    expect(calculateYearlyCompoundWithCharge(investment)['Year 3']).toStrictEqual({})
     })
 
   it('annual charges', () => {
