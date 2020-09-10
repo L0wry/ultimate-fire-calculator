@@ -24,6 +24,7 @@ const Input = ({ label, inputProps, ...props }) => {
         className="text-input"
         variant="outlined"
         required
+        fullWidth
         InputProps={inputProps ? inputProps : null}
         {...field} {...props} />
       {meta.touched && meta.error ? (

@@ -39,6 +39,7 @@ const Input = ({ label, type, inputProps, ...props }) => {
         className="text-input"
         variant="outlined"
         required
+        fullWidth
         InputProps={inputProps ? inputProps : null}
         {...field} {...props} />
       {meta.touched && meta.error ? (
@@ -105,7 +106,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                             <Input
                               label="Annual Salary"
                               name="salary"
-                              type="number"
+                              type="tel"
                               inputProps={{
                                 startAdornment: (
                                   <InputAdornment position="start">
@@ -127,7 +128,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                             <Input
                               label="Personal Pension Contribution Percentage"
                               name="personalPensionContribution"
-                              type="number"
+                              type="tel"
                               inputProps={{
                                 endAdornment: (
                                   <InputAdornment position="start">
@@ -150,7 +151,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                             <Input
                               label="Employer Pension Contribution Percentage"
                               name="employerPensionContribution"
-                              type="number"
+                              type="tel"
                               inputProps={{
                                 endAdornment: (
                                   <InputAdornment position="start">
@@ -173,7 +174,7 @@ const IncomeDetails = ({ className, ...rest }) => {
                             <Input
                               label="Tax Free Personal Allowance"
                               name="taxFreePersonalAllowance"
-                              type="number"
+                              type="tel"
                               inputProps={{
                                 startAdornment: (
                                   <InputAdornment position="start">
