@@ -2,30 +2,22 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
-  Avatar,
-  Box,
   Card,
   CardContent,
   Grid,
-  LinearProgress,
   Typography,
   makeStyles,
   colors
 } from '@material-ui/core';
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
+import {InvestmentContextConsumer} from '../../../context/InvestmentContext'
 
 const useStyles = makeStyles(() => ({
   root: {
     height: '100%'
-  },
-  avatar: {
-    backgroundColor: colors.orange[600],
-    height: 56,
-    width: 56
   }
 }));
 
-const MonthlyExpenses = ({ className, ...rest }) => {
+const NetWorthTotal = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
@@ -45,14 +37,18 @@ const MonthlyExpenses = ({ className, ...rest }) => {
               gutterBottom
               variant="h6"
             >
-              Monthly Expenses
+              Total Net Worth in 20 Years
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              £1800
-            </Typography>
+            <InvestmentContextConsumer>
+              {({ getTotalNetWorthInXYears }) => (
+                <Typography
+                  color="textPrimary"
+                  variant="h3"
+                >
+                  £{getTotalNetWorthInXYears(20)}
+                </Typography>
+              )}
+            </InvestmentContextConsumer>
           </Grid>
         </Grid>
       </CardContent>
@@ -60,8 +56,8 @@ const MonthlyExpenses = ({ className, ...rest }) => {
   );
 };
 
-MonthlyExpenses.propTypes = {
+NetWorthTotal.propTypes = {
   className: PropTypes.string
 };
 
-export default MonthlyExpenses;
+export default NetWorthTotal;

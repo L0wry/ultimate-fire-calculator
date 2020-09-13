@@ -1,8 +1,8 @@
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import {InvestmentContextConsumer} from '../../../context/InvestmentContext'
 import {
-  Avatar,
   Card,
   CardContent,
   Grid,
@@ -10,16 +10,10 @@ import {
   makeStyles,
   colors
 } from '@material-ui/core';
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 
 const useStyles = makeStyles(() => ({
   root: {
     height: '100%'
-  },
-  avatar: {
-    backgroundColor: colors.indigo[600],
-    height: 56,
-    width: 56
   }
 }));
 
@@ -43,14 +37,21 @@ const ExpectedMonthlyIncome = ({ className, ...rest }) => {
               gutterBottom
               variant="h6"
             >
-              Expected Monthly Income At Age: 55
+              Expected Monthly Income in 20 years
             </Typography>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-             £6500
-            </Typography>
+            <InvestmentContextConsumer>
+              {({ getExpectedMonthlyIncomeInXYears }) => (
+
+
+
+                <Typography
+                  color="textPrimary"
+                  variant="h3"
+                >
+                  £{getExpectedMonthlyIncomeInXYears(20)}
+                </Typography>
+              )}
+            </InvestmentContextConsumer>
           </Grid>
         </Grid>
       </CardContent>

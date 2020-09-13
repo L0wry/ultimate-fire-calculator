@@ -39,7 +39,6 @@ const InvestmentContextProvider = ({ children }) => {
       noOfYearsToMature: noOfYearsToMature
     }
 
-
     setInvestments([
       ...investments.filter(investment => investment.name !== name),
       {
@@ -49,15 +48,20 @@ const InvestmentContextProvider = ({ children }) => {
     ])
   }
 
+  const getExpectedMonthlyIncomeInXYears = year => investments.length > 0 
+  ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].earnedInterest, 0)
+  : 0
+
+  const getTotalNetWorthInXYears = year => investments.length > 0 
+  ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].balance, 0)
+  : 0
 
   const removeInvestment = idx => {
     setInvestments(investments.filter((_, index) => idx !== index));
   }
 
-  console.log({ investments })
-
   return (
-    <Provider value={{ investments, addInvestment, addMultipleInvestments, removeInvestment }}>
+    <Provider value={{ investments, addInvestment, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, getExpectedMonthlyIncomeInXYears }}>
       {children}
     </Provider>
   )

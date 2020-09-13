@@ -18,6 +18,7 @@ import {
 } from 'react-feather';
 import NavItem from './NavItem';
 import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
+import NetWorthTotal from '../../../views/dashboard/DashboardView/NetWorthTotal';
 
 
 const items = [
@@ -100,7 +101,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           </Grid>
           <Grid
             item >
-            <ExpectedMonthlyIncome />
+            <NetWorthTotal />
 
           </Grid>
           <Grid

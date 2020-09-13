@@ -7,7 +7,7 @@ import {
 import Page from 'src/components/Page';
 import TakeHomeIncome from './TakeHomeIncome';
 import NetWorth from './NetWorth';
-import TasksProgress from './MonthlyExpenses';
+import TasksProgress from './NetWorthTotal';
 import InvestingPerMonth from './InvestingPerMonth';
 import TotalProfit from './ExpectedMonthlyIncome';
 import TrafficByDevice from './SavingPercentage';
