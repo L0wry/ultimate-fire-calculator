@@ -150,7 +150,7 @@ export const AddInvestment = ({ className, addInvestment, ...rest }) => {
                       color="primary"
                       fullWidth
                       variant="text"
-                      type="submit">Submit</Button>
+                      type="submit">Add</Button>
                   </Grid>
                 </Form>
               </Formik>

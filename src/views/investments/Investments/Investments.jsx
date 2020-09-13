@@ -31,11 +31,11 @@ const Investments = ({ className, ...rest }) => {
           <Divider />
           <Box mt={3}>
             <InvestmentContextConsumer>
-              {({ addInvestment, removeInvestment, investments }) => (
+              {({ onItemSave, editInvestment, removeInvestment, investments, addInvestment }) => (
                 <>
                   <AddInvestment addInvestment={addInvestment} />
                   {investments.length > 0 && (
-                    <InvestmentList onItemRemove={removeInvestment} addInvestment={addInvestment} items={investments} />
+                    <InvestmentList onItemSave={onItemSave} onItemEdit={editInvestment} onItemRemove={removeInvestment} items={investments} />
                   )}
                 </>
               )}

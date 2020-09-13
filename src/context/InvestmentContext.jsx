@@ -9,13 +9,15 @@ const InvestmentContextProvider = ({ children }) => {
 
 
   const addMultipleInvestments = (investmentsToAdd) => {
-    const multipleInvestments = investmentsToAdd.map(({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0 }) => {
+    const multipleInvestments = investmentsToAdd.map(({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
       const investment = {
         name,
         initialAmount: parseFloat(initialAmount),
         expectedReturn: parseFloat(expectedReturn / 100),
         monthlyContribution: parseFloat(monthlyContribution),
-        noOfYearsToMature: noOfYearsToMature
+        noOfYearsToMature: noOfYearsToMature,
+        annualCharge: parseFloat(annualCharge),
+        editMode: false
       }
 
       return {
@@ -50,21 +52,40 @@ const InvestmentContextProvider = ({ children }) => {
     ])
   }
 
+  const editInvestment = idx => {
+    setInvestments(
+      investments.map((investment, index) => {
+        if (idx === index) {
+          investment.editMode = !investment.editMode;
+        }
+
+        return investment;
+      })
+    );
+  }
+
+  const onItemSave = (investment, idx) => {
+    setInvestments(
+      investments.splice(idx, 1, {
+        ...investment,
+        editMode: false
+      })
+    )
+  }
   const removeInvestment = idx => {
     setInvestments(investments.filter((_, index) => idx !== index));
   }
 
+  const getExpectedMonthlyIncomeInXYears = year => investments.length > 0
+    ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].earnedInterest, 0)
+    : 0
 
-  const getExpectedMonthlyIncomeInXYears = year => investments.length > 0 
-  ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].earnedInterest, 0)
-  : 0
-
-  const getTotalNetWorthInXYears = year => investments.length > 0 
-  ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].balance, 0)
-  : 0
+  const getTotalNetWorthInXYears = year => investments.length > 0
+    ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].balance, 0)
+    : 0
 
   return (
-    <Provider value={{ investments, addInvestment, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, getExpectedMonthlyIncomeInXYears }}>
+    <Provider value={{ investments, onItemSave, addInvestment, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedMonthlyIncomeInXYears }}>
       {children}
     </Provider>
   )

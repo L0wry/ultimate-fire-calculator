@@ -24,7 +24,7 @@ const Index = () => {
       className={classes.root}
       title="Investments"
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false}>
         <Investments />
       </Container>
     </Page>
