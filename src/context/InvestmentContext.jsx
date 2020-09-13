@@ -64,12 +64,28 @@ const InvestmentContextProvider = ({ children }) => {
     );
   }
 
-  const onItemSave = (investment, idx) => {
+  const onItemSave = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }, idx) => {
+    const investment = {
+      name,
+      initialAmount: parseFloat(initialAmount),
+      expectedReturn: parseFloat(expectedReturn / 100),
+      monthlyContribution: parseFloat(monthlyContribution),
+      noOfYearsToMature: noOfYearsToMature,
+      annualCharge: parseFloat(annualCharge),
+      editMode: false
+    }
+    
+   
+    console.log(investments.splice(idx, 1, {
+      ...investment,
+       compoundData: calculateYearlyCompoundWithCharge(investment)
+   }))
+   
     setInvestments(
-      investments.splice(idx, 1, {
+      [ ...investments.splice(idx, 1, {
         ...investment,
-        editMode: false
-      })
+         compoundData: calculateYearlyCompoundWithCharge(investment)
+     })]
     )
   }
   const removeInvestment = idx => {
