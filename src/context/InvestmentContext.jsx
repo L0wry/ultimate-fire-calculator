@@ -30,13 +30,15 @@ const InvestmentContextProvider = ({ children }) => {
     ])
   }
 
-  const addInvestment = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0 }) => {
+  const addInvestment = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
     const investment = {
       name,
       initialAmount: parseFloat(initialAmount),
       expectedReturn: parseFloat(expectedReturn / 100),
       monthlyContribution: parseFloat(monthlyContribution),
-      noOfYearsToMature: noOfYearsToMature
+      noOfYearsToMature: noOfYearsToMature,
+      annualCharge: parseFloat(annualCharge),
+      editMode: false
     }
 
     setInvestments([
@@ -48,6 +50,11 @@ const InvestmentContextProvider = ({ children }) => {
     ])
   }
 
+  const removeInvestment = idx => {
+    setInvestments(investments.filter((_, index) => idx !== index));
+  }
+
+
   const getExpectedMonthlyIncomeInXYears = year => investments.length > 0 
   ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].earnedInterest, 0)
   : 0
@@ -55,10 +62,6 @@ const InvestmentContextProvider = ({ children }) => {
   const getTotalNetWorthInXYears = year => investments.length > 0 
   ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].balance, 0)
   : 0
-
-  const removeInvestment = idx => {
-    setInvestments(investments.filter((_, index) => idx !== index));
-  }
 
   return (
     <Provider value={{ investments, addInvestment, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, getExpectedMonthlyIncomeInXYears }}>

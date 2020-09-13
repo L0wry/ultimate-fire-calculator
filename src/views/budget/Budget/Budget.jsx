@@ -23,8 +23,6 @@ const math = create(all, {
 
 
 const ExpenseHeaderCard = ({ className, ...rest }) => {
-
-
   return (
     <div
       className={clsx(className)}
