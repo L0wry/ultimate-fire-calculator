@@ -20,14 +20,13 @@ const InvestmentContextProvider = ({ children }) => {
 
       return {
         ...investment,
-          compoundData: calculateYearlyCompoundWithCharge(investment)
+        compoundData: calculateYearlyCompoundWithCharge(investment)
       }
     })
 
-
     setInvestments([
       ...multipleInvestments,
-      ...investments.filter(investment1 => multipleInvestments.includes(investment2 =>  investment2.name !== investment1.name)),
+      ...investments.filter(investment1 => multipleInvestments.findIndex(newInvestments => newInvestments.name === investment1.name) === -1)
     ])
   }
 
@@ -40,16 +39,14 @@ const InvestmentContextProvider = ({ children }) => {
       noOfYearsToMature: noOfYearsToMature
     }
 
-    console.log({investments})
 
-
-      setInvestments([
-        ...investments.filter(investment => investment.name !== name),
-        {
-          ...investment,
-          compoundData: calculateYearlyCompoundWithCharge(investment)
-        }
-      ])
+    setInvestments([
+      ...investments.filter(investment => investment.name !== name),
+      {
+        ...investment,
+        compoundData: calculateYearlyCompoundWithCharge(investment)
+      }
+    ])
   }
 
 

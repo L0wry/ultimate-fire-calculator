@@ -15,7 +15,6 @@ export const calculateYearlyCompoundWithCharge = ({
   annualCharge = 0,
   noOfYearsToMature = 0
 }) => {
-  console.log({initialAmount, expectedReturn,monthlyContribution,annualCharge})
   const compoundInterest = {}
   let totalAmount = initialAmount;
 

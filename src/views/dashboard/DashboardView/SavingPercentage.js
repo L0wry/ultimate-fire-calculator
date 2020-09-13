@@ -26,7 +26,6 @@ const colours = Object.values(colors.green)
 
 
 const renderLabel = function(entry) {
-  console.log(entry)
   return `${entry.name}: ${entry.value}%`;
 }
 

@@ -53,7 +53,6 @@ const Input = ({ label, type, inputProps, ...props }) => {
 const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
   const { addMultipleInvestments } = useContext(InvestmentContextConsumer);
 
-  console.log('piss', {userTax})
   const classes = useStyles();
   return (
     <div

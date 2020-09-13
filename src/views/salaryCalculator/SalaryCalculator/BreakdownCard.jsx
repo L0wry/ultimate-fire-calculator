@@ -75,7 +75,6 @@ const BreakdownCard = ({ className, ...rest }) => {
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {console.log(context.userTax.incomeTax)}
                                         <TableRow key={'id'}>
                                             <TableCell align="center" >
                                                 <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>

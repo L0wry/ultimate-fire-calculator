@@ -18,7 +18,6 @@ export default function calculateAllTax({
     const personalPensionContribution = math.multiply(personalPensionContributionPercent, salary)
     const employerPensionContribution = math.multiply(employerPensionContributionPercent, salary)
   
-    console.log('alltax',personalPensionContribution,employerPensionContribution  )
     const { taxBreaksTotal, taxableIncome} = calculatePreTaxDeductions({taxFreePersonalAllowance, salary, personalPensionContribution }) //TODO : Tax breaks
 
     const incomeTax = calculateIncomeTax(incomeTaxBands(taxFreePersonalAllowance), taxableIncome)

@@ -14,7 +14,6 @@ const BudgetContextProvider = ({ children }) => {
 
 
       const addExpense = ({name, cost}) => {
-        console.log('p', name, cost)
         if (name !== "" || !cost) {
           setExpenses(
             expenses.concat({
@@ -45,8 +44,6 @@ const BudgetContextProvider = ({ children }) => {
       const expenseTotal = expenses.length > 0
       ? expenses.filter(item => item.checked).reduce((acc, i) => math.add(acc, i.cost), 0)
       : 0
-
-      console.log(expenses)
 
 	return (
 		<Provider value={{ expenses, addExpense, checkExpense, removeExpense, expenseTotal }}>
