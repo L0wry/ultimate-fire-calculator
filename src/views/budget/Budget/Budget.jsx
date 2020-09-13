@@ -79,8 +79,8 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                     xs={6}
                   >
                     <SalaryContextConsumer>
-                      {({ userTax, }) => (
-                        <MonthlyTakeHomeCard totalTakeHome={math.divide(userTax.totalTakeHome, 12)} difference={math.subtract(math.divide(userTax.totalTakeHome, 12), budgetContext.expenseTotal)} expensesCost={budgetContext.expenseTotal} />
+                      {({ userTax, }) => userTax.totalTakeHome && (
+                        <MonthlyTakeHomeCard totalTakeHome={math.round(math.divide(userTax.totalTakeHome, 12), 2)} difference={math.round(math.subtract(math.divide(userTax.totalTakeHome, 12), budgetContext.expenseTotal), 2)} expensesCost={budgetContext.expenseTotal} />
                       )}
                     </SalaryContextConsumer>
                   </Grid>
