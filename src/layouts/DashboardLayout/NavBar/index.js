@@ -19,6 +19,7 @@ import {
 import NavItem from './NavItem';
 import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
 import NetWorthTotal from '../../../views/dashboard/DashboardView/NetWorthTotal';
+import AmountInvested from '../../../views/dashboard/DashboardView/AmountInvestedPerMonth';
 
 
 const items = [
@@ -106,7 +107,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           </Grid>
           <Grid
             item >
-            <ExpectedMonthlyIncome />
+            <AmountInvested />
 
           </Grid>
         </Box>

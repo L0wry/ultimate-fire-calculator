@@ -44,14 +44,14 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
       <Divider />
       <CardContent>
         <Box
-          height={400}
+          height={600}
           position="relative"
         >
           <ResponsiveContainer width={"100%"} height="100%">
             <AreaChart
               data={chartData.data}
               margin={{
-                top: 10, right: 0, left: 0, bottom: 0,
+                top: 10, right: 0, left: 30, bottom: 0,
               }}
             >
 

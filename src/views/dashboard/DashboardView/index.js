@@ -8,7 +8,7 @@ import Page from 'src/components/Page';
 import TakeHomeIncome from './TakeHomeIncome';
 import NetWorth from './NetWorth';
 import TasksProgress from './NetWorthTotal';
-import InvestingPerMonth from './InvestingPerMonth';
+import AmountInvestedPerMonth from './AmountInvestedPerMonth';
 import TotalProfit from './ExpectedMonthlyIncome';
 import TrafficByDevice from './SavingPercentage';
 import { InvestmentContextConsumer } from '../../../context/InvestmentContext';
@@ -56,7 +56,7 @@ const Dashboard = () => {
                 xl={3}
                 xs={12}
               >
-                <InvestingPerMonth />
+                <AmountInvestedPerMonth />
               </Grid>
               <Grid
                 item

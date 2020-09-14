@@ -97,8 +97,13 @@ const InvestmentContextProvider = ({ children }) => {
     ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].balance, 0)
     : 0
 
+    const getAmountInvestedPerMonth = () => investments.length > 0
+    ? investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0)
+    : 0
+
+console.log(investments)
   return (
-    <Provider value={{ investments, onItemSave, addInvestment, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedMonthlyIncomeInXYears }}>
+    <Provider value={{ investments, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedMonthlyIncomeInXYears }}>
       {children}
     </Provider>
   )

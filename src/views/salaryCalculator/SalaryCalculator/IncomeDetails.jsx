@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
@@ -51,157 +51,158 @@ const Input = ({ label, type, inputProps, ...props }) => {
 
 
 const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
-  const { addMultipleInvestments } = useContext(InvestmentContextConsumer);
-
   const classes = useStyles();
   return (
     <div
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <Card>
-        <CardContent>
+      <InvestmentContextConsumer>{({ addMultipleInvestments }) => (
+        <Card>
+          <CardContent>
 
-          <Typography
-            align="left"
-            color="textPrimary"
-            gutterBottom
-            variant="h3"
-          >
-            Your Situation
-                  </Typography>
-          <Divider />
-          <Box mt={3}>
-            <Formik
-              initialValues={{
-                salary: userTax.salary || 0,
-                personalPensionContribution: userTax.personalPensionContributionPercent * 100 || 0,
-                employerPensionContribution: userTax.employerPensionContributionPercent * 100 || 0,
-                taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
-              }}
-              validationSchema={object({
-                salary: number(),
-                personalPensionContribution: number(),
-                employerPensionContribution: number(),
-                taxFreePersonalAllowance: number(),
-
-              })}
-              onSubmit={(userFinance, { setSubmitting }) => {
-                setUserFinances(userFinance, addMultipleInvestments)
-                setSubmitting(false);
-              }}
+            <Typography
+              align="left"
+              color="textPrimary"
+              gutterBottom
+              variant="h3"
             >
-              <Form>
-                <Grid
-                  container
-                  spacing={3}
-                >
+              Your Situation
+                  </Typography>
+            <Divider />
+            <Box mt={3}>
+              <Formik
+                initialValues={{
+                  salary: userTax.salary || 0,
+                  personalPensionContribution: userTax.personalPensionContributionPercent * 100 || 0,
+                  employerPensionContribution: userTax.employerPensionContributionPercent * 100 || 0,
+                  taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
+                }}
+                validationSchema={object({
+                  salary: number(),
+                  personalPensionContribution: number(),
+                  employerPensionContribution: number(),
+                  taxFreePersonalAllowance: number(),
+
+                })}
+                onSubmit={(userFinance, { setSubmitting }) => {
+                  setUserFinances(userFinance, addMultipleInvestments)
+                  setSubmitting(false);
+                }}
+              >
+                <Form>
                   <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
+                    container
+                    spacing={3}
                   >
-                    <Input
-                      label="Annual Salary"
-                      name="salary"
-                      type="tel"
-                      inputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Typography >
-                              £
+                    <Grid
+                      item
+                      lg={6}
+                      md={6}
+                      xs={12}
+                    >
+                      <Input
+                        label="Annual Salary"
+                        name="salary"
+                        type="tel"
+                        inputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <Typography >
+                                £
                                     </Typography>
-                          </InputAdornment>)
-                      }}
-                    />
-                  </Grid>
+                            </InputAdornment>)
+                        }}
+                      />
+                    </Grid>
 
-                  <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
+                    <Grid
+                      item
+                      lg={6}
+                      md={6}
+                      xs={12}
+                    >
 
-                    <Input
-                      label="Personal Pension Contribution Percentage"
-                      name="personalPensionContribution"
-                      type="tel"
-                      inputProps={{
-                        endAdornment: (
-                          <InputAdornment position="start">
-                            <Typography >
-                              %
+                      <Input
+                        label="Personal Pension Contribution Percentage"
+                        name="personalPensionContribution"
+                        type="tel"
+                        inputProps={{
+                          endAdornment: (
+                            <InputAdornment position="start">
+                              <Typography >
+                                %
                                     </Typography>
-                          </InputAdornment>)
-                      }}
-                    />
+                            </InputAdornment>)
+                        }}
+                      />
 
-                  </Grid>
+                    </Grid>
 
-                  <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
+                    <Grid
+                      item
+                      lg={6}
+                      md={6}
+                      xs={12}
+                    >
 
-                    <Input
-                      label="Employer Pension Contribution Percentage"
-                      name="employerPensionContribution"
-                      type="tel"
-                      inputProps={{
-                        endAdornment: (
-                          <InputAdornment position="start">
-                            <Typography >
-                              %
+                      <Input
+                        label="Employer Pension Contribution Percentage"
+                        name="employerPensionContribution"
+                        type="tel"
+                        inputProps={{
+                          endAdornment: (
+                            <InputAdornment position="start">
+                              <Typography >
+                                %
                                     </Typography>
-                          </InputAdornment>)
-                      }}
-                    />
+                            </InputAdornment>)
+                        }}
+                      />
 
-                  </Grid>
+                    </Grid>
 
-                  <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
+                    <Grid
+                      item
+                      lg={6}
+                      md={6}
+                      xs={12}
+                    >
 
-                    <Input
-                      label="Tax Free Personal Allowance"
-                      name="taxFreePersonalAllowance"
-                      type="tel"
-                      inputProps={{
-                        startAdornment: (
-                          <InputAdornment position="start">
-                            <Typography >
-                              £
+                      <Input
+                        label="Tax Free Personal Allowance"
+                        name="taxFreePersonalAllowance"
+                        type="tel"
+                        inputProps={{
+                          startAdornment: (
+                            <InputAdornment position="start">
+                              <Typography >
+                                £
                                     </Typography>
-                          </InputAdornment>)
-                      }}
-                    />
+                            </InputAdornment>)
+                        }}
+                      />
 
+                    </Grid>
                   </Grid>
-                </Grid>
-                <Box
-                  display="flex"
-                  justifyContent="center"
-                  p={2}
-                  mt={3}>
-                  <Button
-                    type="submit"
-                    color="primary"
-                    fullWidth
-                    variant="text">Calculate</Button>
-                </Box>
-              </Form>
-            </Formik>
-          </Box>
-        </CardContent>
-      </Card>
+                  <Box
+                    display="flex"
+                    justifyContent="center"
+                    p={2}
+                    mt={3}>
+                    <Button
+                      type="submit"
+                      color="primary"
+                      fullWidth
+                      variant="text">Calculate</Button>
+                  </Box>
+                </Form>
+              </Formik>
+            </Box>
+          </CardContent>
+        </Card>
+      )}
+      </InvestmentContextConsumer>
     </div >
   );
 };
