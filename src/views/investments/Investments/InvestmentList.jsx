@@ -81,7 +81,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                         </TableRow>
                                     </TableHead>
                                     <TableBody>
-                                        {items.map((investment, idx) =>
+                                        {items.map((investment, idx) => 
                                             investment.editMode ? (
                                                 <Formik
                                                     key='form'
@@ -98,19 +98,16 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                                         monthlyContribution: number()
 
                                                     })}
-                                                    onSubmit={(investment, { setSubmitting }) => {
+                                                    onSubmit={(investment, { setStatus }) => {
+                                                        setStatus()
                                                         onItemSave(investment, idx)
-                                                        setSubmitting(false);
                                                     }}
                                                 >{({ submitForm }) => (
                                                     <TableRow key={idx}>
-
                                                         <TableCell align="center">
-
                                                             <Save onClick={submitForm} >
                                                                 <SaveOutlined />
                                                             </Save>
-
                                                         </TableCell>
                                                         <TableCell align="center" >
                                                             <Input

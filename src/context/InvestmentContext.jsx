@@ -6,8 +6,7 @@ const noOfYearsToMature = 20;
 
 const InvestmentContextProvider = ({ children }) => {
   const [investments, setInvestments] = useState([]);
-
-
+  
   const addMultipleInvestments = (investmentsToAdd) => {
     const multipleInvestments = investmentsToAdd.map(({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
       const investment = {
@@ -56,7 +55,7 @@ const InvestmentContextProvider = ({ children }) => {
     setInvestments(
       investments.map((investment, index) => {
         if (idx === index) {
-          investment.editMode = !investment.editMode;
+          investment.editMode = true;
         }
 
         return investment;
@@ -74,20 +73,18 @@ const InvestmentContextProvider = ({ children }) => {
       annualCharge: parseFloat(annualCharge),
       editMode: false
     }
-    
-   
-    console.log(investments.splice(idx, 1, {
+
+    const investmentCopy = [...investments]
+
+
+    investmentCopy[idx] = {
       ...investment,
-       compoundData: calculateYearlyCompoundWithCharge(investment)
-   }))
+      compoundData: calculateYearlyCompoundWithCharge(investment)
+    }
    
-    setInvestments(
-      [ ...investments.splice(idx, 1, {
-        ...investment,
-         compoundData: calculateYearlyCompoundWithCharge(investment)
-     })]
-    )
+    setInvestments(investmentCopy)
   }
+
   const removeInvestment = idx => {
     setInvestments(investments.filter((_, index) => idx !== index));
   }
