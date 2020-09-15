@@ -11,7 +11,6 @@ import {
 } from '@material-ui/core';
 import {
   BarChart as BarChartIcon,
-  Settings as SettingsIcon,
   TrendingUp,
   DollarSign,
   Download
@@ -20,7 +19,6 @@ import NavItem from './NavItem';
 import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
 import NetWorthTotal from '../../../views/dashboard/DashboardView/NetWorthTotal';
 import AmountInvested from '../../../views/dashboard/DashboardView/AmountInvestedPerMonth';
-
 
 const items = [
   {
@@ -43,11 +41,6 @@ const items = [
     href: '/app/net-worth',
     icon: BarChartIcon,
     title: 'Net Worth'
-  },
-  {
-    href: '/app/settings',
-    icon: SettingsIcon,
-    title: 'Settings'
   }
 ];
 
@@ -120,10 +113,9 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       <Hidden lgUp>
         <Drawer
           anchor="left"
-          classes={{ paper: classes.mobileDrawer }}
+          classes={{ paper: classes.mobileDrawer}}
           onClose={onMobileClose}
           open={openMobile}
-          variant="temporary"
         >
           {content}
         </Drawer>

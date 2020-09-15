@@ -10,18 +10,19 @@ const math = create(all, {
   
 
 const BudgetContextProvider = ({ children }) => {
-    const [expenses, setExpenses] = useState([]);
-
+  const state = JSON.parse(localStorage.getItem('expenses')) ? JSON.parse(localStorage.getItem('expenses')) : []
+    const [expenses, setExpenses] = useState(state);
 
       const addExpense = ({name, cost}) => {
         if (name !== "" || !cost) {
-          setExpenses(
-            expenses.concat({
-              name,
-              cost: parseFloat(cost),
-              checked: true
-            })
-          );
+          const newExpenses = expenses.concat({
+            name,
+            cost: parseFloat(cost),
+            checked: true
+          })
+
+          setExpenses(newExpenses);
+          localStorage.setItem('expenses', JSON.stringify(newExpenses))
         }
       }
 
@@ -38,7 +39,9 @@ const BudgetContextProvider = ({ children }) => {
       }
 
       const removeExpense = idx => {
-        setExpenses(expenses.filter((_, index) => idx !== index));
+        const newExpenses = expenses.filter((_, index) => idx !== index)
+        setExpenses(newExpenses);
+        localStorage.setItem('expenses', JSON.stringify(newExpenses))
       }
     
       const expenseTotal = expenses.length > 0

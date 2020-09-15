@@ -18,7 +18,6 @@ const routes = [
       { path: 'budget', element: <Budget /> },
       { path: 'net-worth', element: <NetWorthDashboard /> },
       { path: 'salary-calculator', element: <SalaryCalculator /> },
-      { path: 'settings', element: <SettingsView /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

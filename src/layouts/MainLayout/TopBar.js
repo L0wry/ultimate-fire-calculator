@@ -9,7 +9,6 @@ import {
   Typography,
   Box
 } from '@material-ui/core';
-import Logo from 'src/components/Logo';
 
 const useStyles = makeStyles(({
   root: {},
