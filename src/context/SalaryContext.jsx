@@ -9,7 +9,7 @@ const math = create(all, {
 });
 
 const SalaryContextProvider = ({ children }) => {
-	const state = JSON.parse(localStorage.getItem('salary')).salary ? JSON.parse(localStorage.getItem('salary')) : {}
+	const state = JSON.parse(localStorage.getItem('salary')) ? JSON.parse(localStorage.getItem('salary')) : {}
 	const [userTax, setUserTax] = useState(state)
 
 	const setUserFinances = ({ salary, taxFreePersonalAllowance, personalPensionContribution = 0, employerPensionContribution = 0 }, addMultipleInvestments) => {

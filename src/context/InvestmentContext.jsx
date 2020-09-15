@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { calculateYearlyCompoundWithCharge } from 'src/utils/calculateCompoundInterest';
+import { all, create } from 'mathjs'
 const { Provider, Consumer } = React.createContext();
+
+const math = create(all, {
+  number: 'BigNumber',
+  precision: 32
+});
 
 const noOfYearsToMature = 20;
 
@@ -9,10 +15,9 @@ const InvestmentContextProvider = ({ children }) => {
 
   const [investments, setInvestments] = useState(state);
   
-  const saveInvestments = (investment) => {
-
-    setInvestments(investment)
-    localStorage.setItem('investments', JSON.stringify(investment))
+  const saveInvestments = (investmentToSave) => {
+    setInvestments(investmentToSave)
+    localStorage.setItem('investments', JSON.stringify(investmentToSave))
   }
 
   const addMultipleInvestments = (investmentsToAdd) => {
@@ -20,7 +25,7 @@ const InvestmentContextProvider = ({ children }) => {
       const investment = {
         name,
         initialAmount: parseFloat(initialAmount),
-        expectedReturn: parseFloat(expectedReturn / 100),
+        expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
         monthlyContribution: parseFloat(monthlyContribution),
         noOfYearsToMature: noOfYearsToMature,
         annualCharge: parseFloat(annualCharge),
@@ -43,7 +48,7 @@ const InvestmentContextProvider = ({ children }) => {
     const investment = {
       name,
       initialAmount: parseFloat(initialAmount),
-      expectedReturn: parseFloat(expectedReturn / 100),
+      expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
       monthlyContribution: parseFloat(monthlyContribution),
       noOfYearsToMature: noOfYearsToMature,
       annualCharge: parseFloat(annualCharge),
@@ -75,7 +80,7 @@ const InvestmentContextProvider = ({ children }) => {
     const investment = {
       name,
       initialAmount: parseFloat(initialAmount),
-      expectedReturn: parseFloat(expectedReturn / 100),
+      expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
       monthlyContribution: parseFloat(monthlyContribution),
       noOfYearsToMature: noOfYearsToMature,
       annualCharge: parseFloat(annualCharge),
@@ -84,12 +89,11 @@ const InvestmentContextProvider = ({ children }) => {
 
     const investmentCopy = [...investments]
 
-
     investmentCopy[idx] = {
       ...investment,
       compoundData: calculateYearlyCompoundWithCharge(investment)
     }
-   
+
     saveInvestments(investmentCopy)
   }
 
@@ -97,7 +101,7 @@ const InvestmentContextProvider = ({ children }) => {
     saveInvestments(investments.filter((_, index) => idx !== index));
   }
 
-  const getExpectedMonthlyIncomeInXYears = year => investments.length > 0
+  const getExpectedInterestIncomeInXYears = year => investments.length > 0
     ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].earnedInterest, 0)
     : 0
 
@@ -109,9 +113,8 @@ const InvestmentContextProvider = ({ children }) => {
     ? investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0)
     : 0
 
-  console.log(investments)
   return (
-    <Provider value={{ investments, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedMonthlyIncomeInXYears }}>
+    <Provider value={{ investments, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
       {children}
     </Provider>
   )

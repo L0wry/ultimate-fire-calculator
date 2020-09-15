@@ -37,10 +37,10 @@ const ExpectedMonthlyIncome = ({ className, ...rest }) => {
               gutterBottom
               variant="h6"
             >
-              Expected Monthly Income in 20 years
+              Expected Monthly Interest in 20 years
             </Typography>
             <InvestmentContextConsumer>
-              {({ getExpectedMonthlyIncomeInXYears }) => (
+              {({ getExpectedInterestIncomeInXYears }) => (
 
 
 
@@ -48,7 +48,7 @@ const ExpectedMonthlyIncome = ({ className, ...rest }) => {
                   color="textPrimary"
                   variant="h3"
                 >
-                  £{getExpectedMonthlyIncomeInXYears(20)}
+                  £{getExpectedInterestIncomeInXYears(20)}
                 </Typography>
               )}
             </InvestmentContextConsumer>

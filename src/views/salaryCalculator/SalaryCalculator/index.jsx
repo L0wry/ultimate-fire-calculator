@@ -59,7 +59,7 @@ const SalaryCalculator = () => {
                     <NationalInsurance />
                   </Grid>
                 </Grid>
-                <BreakdownCard />
+                {/* <BreakdownCard /> */}
               </Box>
             </Container>
           )}

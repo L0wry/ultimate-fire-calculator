@@ -20,6 +20,12 @@ import {
 import { DeleteOutlined, Edit, EditOutlined, SaveOutlined, Save } from '@material-ui/icons';
 import { Formik, useField } from "formik";
 import { string, number, object } from "yup";
+import { all, create } from 'mathjs'
+
+const math = create(all, {
+	number: 'BigNumber',
+	precision: 32
+});
 
 
 const Input = ({ label, inputProps, ...props }) => {
@@ -84,19 +90,20 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                         {items.map((investment, idx) => 
                                             investment.editMode ? (
                                                 <Formik
-                                                    key='form'
+                                                    key={`form-${idx}`}
                                                     initialValues={{
                                                         name: investment.name,
                                                         initialAmount: investment.initialAmount,
-                                                        expectedReturn: investment.expectedReturn * 100,
-                                                        monthlyContribution: investment.monthlyContribution
+                                                        expectedReturn: math.round(investment.expectedReturn * 100, 2),
+                                                        monthlyContribution: investment.monthlyContribution,
+                                                        annualCharge: math.round(investment.annualCharge * 100, 2)
                                                     }}
                                                     validationSchema={object({
                                                         name: string(),
                                                         initialAmount: number(),
                                                         expectedReturn: number(),
-                                                        monthlyContribution: number()
-
+                                                        monthlyContribution: number(),
+                                                        annualCharge: number()
                                                     })}
                                                     onSubmit={(investment, { setStatus }) => {
                                                         setStatus()
@@ -199,13 +206,13 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                                             £{investment.initialAmount}
                                                         </TableCell>
                                                         <TableCell align="center" >
-                                                            {investment.expectedReturn * 100}%
+                                                            {math.round(investment.expectedReturn * 100, 2)}%
                                             </TableCell>
                                                         <TableCell align="center" >
                                                             £{investment.monthlyContribution}
                                                         </TableCell>
                                                         <TableCell align="center" >
-                                                            {investment.annualCharge * 100}%
+                                                            {math.round(investment.annualCharge * 100, 2)}%
                                             </TableCell>
                                                         <TableCell align="center">
                                                             <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>

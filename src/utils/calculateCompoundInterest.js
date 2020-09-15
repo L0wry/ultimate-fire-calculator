@@ -10,7 +10,7 @@ const ROUND_AMOUNT = 2
 
 export const calculateYearlyCompoundWithCharge = ({
   initialAmount = 0, 
-  expectedReturn= 0, 
+  expectedReturn = 0, 
   monthlyContribution = 0,
   annualCharge = 0,
   noOfYearsToMature = 0
