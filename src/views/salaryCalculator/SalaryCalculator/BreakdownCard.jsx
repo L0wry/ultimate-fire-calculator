@@ -47,6 +47,7 @@ const BreakdownCard = ({ className, ...rest }) => {
     return (
         <SalaryContextConsumer>
             {context => context.userTax.salary > 0 && (
+                <Box mt={3}>
                 <Card
                     className={clsx(classes.root, className)}
                     {...rest}
@@ -106,33 +107,27 @@ const BreakdownCard = ({ className, ...rest }) => {
                                                             </TableRow>
                                                         </TableHead>
                                                         <TableBody>
-
                                                             <TableRow key='id'>
                                                                 <TableCell component="th" scope="row">
                                                                     date
                                                                     </TableCell>
                                                                 <TableCell>id</TableCell>
                                                                 <TableCell align="right">sigh</TableCell>
-
                                                             </TableRow>
-
                                                         </TableBody>
                                                     </Table>
                                                 </Box>
                                             </Collapse>
-
                                         </TableRow>
-
                                     </TableBody>
-
                                 </Table>
                             </TableContainer>
                         </Box>
                     </CardContent>
                     <Divider />
                 </Card>
-            )
-            }
+            </Box>
+            )}
         </SalaryContextConsumer >
     );
 };

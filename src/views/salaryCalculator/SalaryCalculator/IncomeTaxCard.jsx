@@ -31,115 +31,118 @@ const useStyles = makeStyles((theme) => ({
 const IncomeTaxCard = ({ className, userTax, ...rest }) => {
   const classes = useStyles();
 
-  return userTax.salary > 0 &&(
-  
+  return userTax.salary > 0 && (
 
-        <Card
-          className={clsx(classes.root, className)}
-          {...rest}
-        >
-            <CardContent>
-              <Typography
-                align="center"
-                color="textPrimary"
-                gutterBottom
-                variant="h4"
-              >
-                Income Tax
+    <Box>
+
+
+      <Card
+        className={clsx(classes.root, className)}
+        {...rest}
+      >
+        <CardContent>
+          <Typography
+            align="center"
+            color="textPrimary"
+            gutterBottom
+            variant="h4"
+          >
+            Income Tax
         </Typography>
-              <Divider />
-              <Box mt={3} >
-                <Grid
-                  container
-                  spacing={3}
+          <Divider />
+          <Box mt={3} >
+            <Grid
+              container
+              spacing={3}
+            >
+              <Grid
+                item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <Typography
+                  align="center"
+                  color="textPrimary"
+                  variant="body1"
                 >
-                  <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
-                    <Typography
-                      align="center"
-                      color="textPrimary"
-                      variant="body1"
-                    >
-                      Tax free allowance: £{userTax.incomeTax.taxFreePersonalAllowance}
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
-                    <Typography
-                      align="center"
-                      color="textPrimary"
-                      variant="body1"
-                    >
-                      Total Income Tax: £{userTax.incomeTax.totalIncomeTax}
-                    </Typography>
-                  </Grid>
-                  <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
-                    <Typography
-                      align="center"
-                      color="textPrimary"
-                      variant="body1"
-                    >
-                      Taxable Income: £{userTax.taxableIncome}
-                    </Typography>
-                  </Grid>       <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
-                    <Typography
-                      align="center"
-                      color="textPrimary"
-                      variant="body1"
-                    >
-                      Tax paid at lower band: £{userTax.incomeTax.lowerBand.taxPaid}
-                    </Typography>
-                  </Grid>       <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
-                    <Typography
-                      align="center"
-                      color="textPrimary"
-                      variant="body1"
-                    >
-                      Tax paid at medium band: £{userTax.incomeTax.mediumBand.taxPaid}
-                    </Typography>
-                  </Grid>       <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={12}
-                  >
-                    <Typography
-                      align="center"
-                      color="textPrimary"
-                      variant="body1"
-                    >
-                      Tax paid at higher band: £{userTax.incomeTax.upperBand.taxPaid}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Box>
-            </CardContent>
-            <Box flexGrow={1} />
-            <Divider />
-        </Card>
+                  Tax free allowance: £{userTax.incomeTax.taxFreePersonalAllowance}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <Typography
+                  align="center"
+                  color="textPrimary"
+                  variant="body1"
+                >
+                  Total Income Tax: £{userTax.incomeTax.totalIncomeTax}
+                </Typography>
+              </Grid>
+              <Grid
+                item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <Typography
+                  align="center"
+                  color="textPrimary"
+                  variant="body1"
+                >
+                  Taxable Income: £{userTax.taxableIncome}
+                </Typography>
+              </Grid>       <Grid
+                item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <Typography
+                  align="center"
+                  color="textPrimary"
+                  variant="body1"
+                >
+                  Tax paid at lower band: £{userTax.incomeTax.lowerBand.taxPaid}
+                </Typography>
+              </Grid>       <Grid
+                item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <Typography
+                  align="center"
+                  color="textPrimary"
+                  variant="body1"
+                >
+                  Tax paid at medium band: £{userTax.incomeTax.mediumBand.taxPaid}
+                </Typography>
+              </Grid>       <Grid
+                item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <Typography
+                  align="center"
+                  color="textPrimary"
+                  variant="body1"
+                >
+                  Tax paid at higher band: £{userTax.incomeTax.upperBand.taxPaid}
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        </CardContent>
+        <Box flexGrow={1} />
+        <Divider />
+      </Card>
+    </Box>
   );
 };
 

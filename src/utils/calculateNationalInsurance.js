@@ -12,6 +12,8 @@ const ROUND_AMOUNT = 2
 
 
 export const calculateNationalInsurance = (tax, taxableIncome) => {
+  tax.weeklyNationalInsuranceTax = 0;
+  tax.totalNationalInsuranceTax = 0;
   const weeklyIncome = math.divide(taxableIncome, WEEKS_IN_YEAR)
 
   let carryOver = weeklyIncome
@@ -32,11 +34,11 @@ export const calculateNationalInsurance = (tax, taxableIncome) => {
         : 0
 
       tax.weeklyNationalInsuranceTax = math.add(tax.weeklyNationalInsuranceTax, tax[band].taxPaid)
+      
       carryOver = 0
       break
     }
   }
-
   tax.totalNationalInsuranceTax = math.round(math.multiply(tax.weeklyNationalInsuranceTax, WEEKS_IN_YEAR), ROUND_AMOUNT)
   return tax
 }
