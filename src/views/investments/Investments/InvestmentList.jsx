@@ -94,9 +94,9 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                                     initialValues={{
                                                         name: investment.name,
                                                         initialAmount: investment.initialAmount,
-                                                        expectedReturn: math.round(investment.expectedReturn * 100, 2),
+                                                        expectedReturn: math.round(math.multiply(investment.expectedReturn, 100), 2),
                                                         monthlyContribution: investment.monthlyContribution,
-                                                        annualCharge: math.round(investment.annualCharge * 100, 2)
+                                                        annualCharge: math.round(math.multiply(investment.annualCharge, 100), 2)
                                                     }}
                                                     validationSchema={object({
                                                         name: string(),
@@ -206,13 +206,13 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                                             £{investment.initialAmount}
                                                         </TableCell>
                                                         <TableCell align="center" >
-                                                            {math.round(investment.expectedReturn * 100, 2)}%
+                                                            {math.round(math.multiply(investment.expectedReturn, 100), 2)}%
                                             </TableCell>
                                                         <TableCell align="center" >
                                                             £{investment.monthlyContribution}
                                                         </TableCell>
                                                         <TableCell align="center" >
-                                                            {math.round(investment.annualCharge * 100, 2)}%
+                                                            {math.round(math.multiply(investment.annualCharge, 100), 2)}%
                                             </TableCell>
                                                         <TableCell align="center">
                                                             <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>

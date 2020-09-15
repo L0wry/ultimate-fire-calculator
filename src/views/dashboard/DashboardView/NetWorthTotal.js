@@ -9,7 +9,7 @@ import {
   makeStyles,
   colors
 } from '@material-ui/core';
-import {InvestmentContextConsumer} from '../../../context/InvestmentContext'
+import { InvestmentContextConsumer } from '../../../context/InvestmentContext'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -21,38 +21,42 @@ const NetWorthTotal = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
+    <InvestmentContextConsumer>
+      {({ getTotalNetWorthInXYears }) => (
+        <Card
+          className={clsx(classes.root, className)}
+          {...rest}
         >
-          <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
+          <CardContent>
+            <Grid
+             container
+             direction="column"
+             alignItems="center"
+             justify="center"
             >
-              Total Net Worth in 20 Years
-            </Typography>
-            <InvestmentContextConsumer>
-              {({ getTotalNetWorthInXYears }) => (
+              <Grid item>
+                <Typography
+                  align="center"
+                  color="textSecondary"
+                  gutterBottom
+                  variant="h6"
+                >
+                  Total Net Worth in 20 Years
+                </Typography>
+                </Grid>
+                <Grid item> 
                 <Typography
                   color="textPrimary"
                   variant="h3"
                 >
                   £{getTotalNetWorthInXYears(20)}
                 </Typography>
-              )}
-            </InvestmentContextConsumer>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      )}
+    </InvestmentContextConsumer>
   );
 };
 

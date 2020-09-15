@@ -18,18 +18,6 @@ import { SalaryContextConsumer } from 'src/context/SalaryContext';
 const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%'
-  },
-  avatar: {
-    backgroundColor: colors.red[600],
-    height: 56,
-    width: 56
-  },
-  differenceIcon: {
-    color: colors.red[900]
-  },
-  differenceValue: {
-    color: colors.red[900],
-    marginRight: theme.spacing(1)
   }
 }));
 
@@ -46,31 +34,29 @@ const TakeHomeIncome = ({ className, ...rest }) => {
           <CardContent>
             <Grid
               container
-              justify="space-between"
-              spacing={3}
+              direction="column"
+              alignItems="center"
+              justify="center"
             >
               <Grid item>
                 <Typography
                   color="textSecondary"
-                  gutterBottom
                   variant="h6"
-                >
+                  >
                   Annual Take Home Pay
                 </Typography>
+                </Grid>
+
+                <Grid item> 
                 <Typography
                   color="textPrimary"
+                  gutterBottom
                   variant="h3"
                 >
                   £{context.userTax.totalTakeHome }
               </Typography>
               </Grid>
             </Grid>
-            <Box
-              mt={2}
-              display="flex"
-              alignItems="center"
-            >
-            </Box>
           </CardContent>
         </Card>
       )}

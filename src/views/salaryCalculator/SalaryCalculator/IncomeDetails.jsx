@@ -16,6 +16,11 @@ import {
 import { Formik, Form, useField } from "formik";
 import { number, object } from "yup";
 import { InvestmentContextConsumer } from '../../../context/InvestmentContext';
+import { all, create } from 'mathjs'
+const math = create(all, {
+  number: 'BigNumber',
+  precision: 32
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -74,8 +79,8 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
               <Formik
                 initialValues={{
                   salary: userTax.salary || 0,
-                  personalPensionContribution: userTax.personalPensionContributionPercent * 100 || 0,
-                  employerPensionContribution: userTax.employerPensionContributionPercent * 100 || 0,
+                  personalPensionContribution: math.round(math.multiply(userTax.personalPensionContributionPercent, 100), 2) || 0,
+                  employerPensionContribution: math.round(math.multiply(userTax.employerPensionContributionPercent, 100), 2) || 0,
                   taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
                 }}
                 validationSchema={object({

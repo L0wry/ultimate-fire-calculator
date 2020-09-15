@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import {InvestmentContextConsumer} from '../../../context/InvestmentContext'
+import { InvestmentContextConsumer } from '../../../context/InvestmentContext'
 import {
   Card,
   CardContent,
@@ -21,41 +21,41 @@ const ExpectedMonthlyIncome = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
+    <InvestmentContextConsumer>
+      {({ getExpectedInterestIncomeInXYears }) => (
+        <Card
+          className={clsx(classes.root, className)}
+          {...rest}
         >
-          <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
+          <CardContent>
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
             >
-              Expected Monthly Interest in 20 years
+              <Grid item>
+                <Typography
+                  align="center"
+                  color="textSecondary"
+                  gutterBottom
+                  variant="h6"
+                >
+                  Expected Monthly Interest in 20 years
             </Typography>
-            <InvestmentContextConsumer>
-              {({ getExpectedInterestIncomeInXYears }) => (
-
-
-
+              </Grid>
+              <Grid item>
                 <Typography
                   color="textPrimary"
                   variant="h3"
                 >
                   £{getExpectedInterestIncomeInXYears(20)}
                 </Typography>
-              )}
-            </InvestmentContextConsumer>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card>
+      )}
+    </InvestmentContextConsumer>
   );
 };
 

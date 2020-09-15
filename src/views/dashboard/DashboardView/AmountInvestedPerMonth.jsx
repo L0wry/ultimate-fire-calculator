@@ -9,7 +9,7 @@ import {
   makeStyles,
   colors
 } from '@material-ui/core';
-import {InvestmentContextConsumer} from '../../../context/InvestmentContext'
+import { InvestmentContextConsumer } from '../../../context/InvestmentContext'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -21,38 +21,43 @@ const AmountInvestedPerMonth = ({ className, ...rest }) => {
   const classes = useStyles();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardContent>
-        <Grid
-          container
-          justify="space-between"
-          spacing={3}
+    <InvestmentContextConsumer>
+      {({ getAmountInvestedPerMonth }) => (
+        <Card
+          className={clsx(classes.root, className)}
+          {...rest}
         >
-          <Grid item>
-            <Typography
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
+          <CardContent>
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+              justify="center"
             >
-              Amount being invested into the market per month
-            </Typography>
-            <InvestmentContextConsumer>
-              {({ getAmountInvestedPerMonth }) => (
+              <Grid item>
                 <Typography
+                  align="center"
+                  color="textSecondary"
+                  variant="h6"
+                >
+                  Amount being invested into the market per month
+                </Typography>
+                </Grid>
+                <Grid item> 
+                
+                <Typography
+                  gutterBottom
                   color="textPrimary"
                   variant="h3"
                 >
                   £{getAmountInvestedPerMonth()}
                 </Typography>
-              )}
-            </InvestmentContextConsumer>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+              </Grid>
+            </Grid>
+          </CardContent>
+        </Card >
+      )}
+    </InvestmentContextConsumer>
   );
 };
 

@@ -14,34 +14,55 @@ const InvestmentContextProvider = ({ children }) => {
   const state = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
 
   const [investments, setInvestments] = useState(state);
-  
+
   const saveInvestments = (investmentToSave) => {
     setInvestments(investmentToSave)
     localStorage.setItem('investments', JSON.stringify(investmentToSave))
   }
 
   const addMultipleInvestments = (investmentsToAdd) => {
-    const multipleInvestments = investmentsToAdd.map(({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
-      const investment = {
-        name,
-        initialAmount: parseFloat(initialAmount),
-        expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
-        monthlyContribution: parseFloat(monthlyContribution),
-        noOfYearsToMature: noOfYearsToMature,
-        annualCharge: parseFloat(annualCharge),
-        editMode: false
+
+    const copy = [...investments]
+
+    for (const newInvestment of investmentsToAdd) {
+
+      let isInvestmentAlreadyInList = copy.findIndex(oldInvestments => oldInvestments.name === newInvestment.name)
+
+      if (isInvestmentAlreadyInList > -1) {
+        const { monthlyContribution } = newInvestment
+        const investment = {
+          ...copy[isInvestmentAlreadyInList],
+          monthlyContribution: parseFloat(monthlyContribution),
+        }
+
+        copy[isInvestmentAlreadyInList] = {
+          ...investment,
+          compoundData: calculateYearlyCompoundWithCharge(investment)
+        }
+
+        console.log(isInvestmentAlreadyInList)
+
+      } else {
+        const investment = {
+          name: newInvestment.name,
+          initialAmount: 0,
+          expectedReturn: 0,
+          annualCharge: 0,
+          monthlyContribution: parseFloat(newInvestment.monthlyContribution),
+          editMode: false,
+          noOfYearsToMature: noOfYearsToMature,
+        }
+
+        copy.push({
+          ...investment,
+          compoundData: calculateYearlyCompoundWithCharge(investment)
+        })
       }
 
-      return {
-        ...investment,
-        compoundData: calculateYearlyCompoundWithCharge(investment)
-      }
-    })
+    }
+    console.log(copy)
 
-    saveInvestments([
-      ...multipleInvestments,
-      ...investments.filter(investment1 => multipleInvestments.findIndex(newInvestments => newInvestments.name === investment1.name) === -1)
-    ])
+    saveInvestments(copy)
   }
 
   const addInvestment = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
@@ -51,8 +72,8 @@ const InvestmentContextProvider = ({ children }) => {
       expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
       monthlyContribution: parseFloat(monthlyContribution),
       noOfYearsToMature: noOfYearsToMature,
-      annualCharge: parseFloat(annualCharge),
-      editMode: false
+      annualCharge: math.divide(annualCharge, 100),
+      editMode: false,
     }
 
     saveInvestments([
@@ -83,8 +104,8 @@ const InvestmentContextProvider = ({ children }) => {
       expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
       monthlyContribution: parseFloat(monthlyContribution),
       noOfYearsToMature: noOfYearsToMature,
-      annualCharge: parseFloat(annualCharge),
-      editMode: false
+      annualCharge: math.divide(annualCharge, 100),
+      editMode: false,
     }
 
     const investmentCopy = [...investments]
@@ -102,16 +123,18 @@ const InvestmentContextProvider = ({ children }) => {
   }
 
   const getExpectedInterestIncomeInXYears = year => investments.length > 0
-    ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].earnedInterest, 0)
+    ? math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].earnedInterest, 0), 2)
     : 0
 
   const getTotalNetWorthInXYears = year => investments.length > 0
-    ? investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].balance, 0)
+    ? math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].balance, 0), 2)
     : 0
 
-    const getAmountInvestedPerMonth = () => investments.length > 0
+  const getAmountInvestedPerMonth = () => investments.length > 0
     ? investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0)
     : 0
+
+  console.log(investments)
 
   return (
     <Provider value={{ investments, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
