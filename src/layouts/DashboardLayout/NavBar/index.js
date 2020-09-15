@@ -116,6 +116,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           classes={{ paper: classes.mobileDrawer}}
           onClose={onMobileClose}
           open={openMobile}
+          variant="temporary"
         >
           {content}
         </Drawer>
