@@ -80,7 +80,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                             <TableCell align="center"></TableCell>
                                             <TableCell align="center">Name</TableCell>
                                             <TableCell align="center">Initial Amount</TableCell>
-                                            <TableCell align="center">Expected Return</TableCell>
+                                            <TableCell align="center">Expected Annual Return</TableCell>
                                             <TableCell align="center">Monthly Contribution</TableCell>
                                             <TableCell align="center">Annual Charge</TableCell>
                                             <TableCell />

@@ -23,12 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-// const SomeContent = React.forwardRef((props, ref) => <div {...props} ref={ref}>Hello, World!</div>);
-// const SomeContent = React.forwardRef((props, ref) => <div {...props} ref={ref}>Hello, World!</div>);
-
-const years = new Array(70).fill(0).map((_, i) => i + 1)
-
-// const generateYears = () => new Array(1).fill(0).map((_, i) => React.forwardRef((props, ref) => )
+const years = new Array(100).fill(0).map((_, i) => i + 1)
 
 export const SelectYears = () => {
     const classes = useStyles();
