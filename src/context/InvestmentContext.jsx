@@ -8,13 +8,28 @@ const math = create(all, {
   precision: 32
 });
 
-const noOfYearsToMature = 20;
 
 const InvestmentContextProvider = ({ children }) => {
   const state = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
 
   const [investments, setInvestments] = useState(state);
 
+  const [yearsToMature, setYearsToMature] = useState(1)
+
+  const saveYearsToMature = years => {
+    setYearsToMature(years)
+    setInvestments([...investments].map(investment => {
+      const investmentToRecalculate = {
+        ...investment,
+        noOfYearsToMature: years,
+      }
+
+      return {
+        ...investmentToRecalculate,
+        compoundData: calculateYearlyCompoundWithCharge(investmentToRecalculate)
+      }
+    }))
+  }
   const saveInvestments = (investmentToSave) => {
     setInvestments(investmentToSave)
     localStorage.setItem('investments', JSON.stringify(investmentToSave))
@@ -40,8 +55,6 @@ const InvestmentContextProvider = ({ children }) => {
           compoundData: calculateYearlyCompoundWithCharge(investment)
         }
 
-        console.log(isInvestmentAlreadyInList)
-
       } else {
         const investment = {
           name: newInvestment.name,
@@ -50,7 +63,7 @@ const InvestmentContextProvider = ({ children }) => {
           annualCharge: 0,
           monthlyContribution: parseFloat(newInvestment.monthlyContribution),
           editMode: false,
-          noOfYearsToMature: noOfYearsToMature,
+          noOfYearsToMature: yearsToMature,
         }
 
         copy.push({
@@ -60,7 +73,6 @@ const InvestmentContextProvider = ({ children }) => {
       }
 
     }
-    console.log(copy)
 
     saveInvestments(copy)
   }
@@ -71,7 +83,7 @@ const InvestmentContextProvider = ({ children }) => {
       initialAmount: parseFloat(initialAmount),
       expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
       monthlyContribution: parseFloat(monthlyContribution),
-      noOfYearsToMature: noOfYearsToMature,
+      noOfYearsToMature: yearsToMature,
       annualCharge: math.divide(annualCharge, 100),
       editMode: false,
     }
@@ -103,7 +115,7 @@ const InvestmentContextProvider = ({ children }) => {
       initialAmount: parseFloat(initialAmount),
       expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
       monthlyContribution: parseFloat(monthlyContribution),
-      noOfYearsToMature: noOfYearsToMature,
+      noOfYearsToMature: yearsToMature,
       annualCharge: math.divide(annualCharge, 100),
       editMode: false,
     }
@@ -122,22 +134,20 @@ const InvestmentContextProvider = ({ children }) => {
     saveInvestments(investments.filter((_, index) => idx !== index));
   }
 
-  const getExpectedInterestIncomeInXYears = year => investments.length > 0
-    ? math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].earnedInterest, 0), 2)
+  const getExpectedInterestIncomeInXYears = () => investments.length > 0
+    ? math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].earnedInterest, 0), 2)
     : 0
 
-  const getTotalNetWorthInXYears = year => investments.length > 0
-    ? math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${year}`]['Month 12'].balance, 0), 2)
+  const getTotalNetWorthInXYears = () => investments.length > 0
+    ? math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].balance, 0), 2)
     : 0
 
   const getAmountInvestedPerMonth = () => investments.length > 0
     ? investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0)
     : 0
 
-  console.log(investments)
-
   return (
-    <Provider value={{ investments, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
+    <Provider value={{ investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
       {children}
     </Provider>
   )

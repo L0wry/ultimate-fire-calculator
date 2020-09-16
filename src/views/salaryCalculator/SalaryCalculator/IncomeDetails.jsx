@@ -79,8 +79,8 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
               <Formik
                 initialValues={{
                   salary: userTax.salary || 0,
-                  personalPensionContribution: math.round(math.multiply(userTax.personalPensionContributionPercent, 100), 2) || 0,
-                  employerPensionContribution: math.round(math.multiply(userTax.employerPensionContributionPercent, 100), 2) || 0,
+                  personalPensionContribution:  userTax.personalPensionContributionPercent ? math.round(math.multiply(userTax.personalPensionContributionPercent, 100), 2) : 0,
+                  employerPensionContribution: userTax.employerPensionContributionPercent ? math.round(math.multiply(userTax.employerPensionContributionPercent, 100), 2) : 0,
                   taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
                 }}
                 validationSchema={object({

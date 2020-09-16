@@ -53,7 +53,7 @@ const TakeHomeIncome = ({ className, ...rest }) => {
                   gutterBottom
                   variant="h3"
                 >
-                  £{context.userTax.totalTakeHome }
+                  £{context.userTax.totalTakeHome || 0 }
               </Typography>
               </Grid>
             </Grid>

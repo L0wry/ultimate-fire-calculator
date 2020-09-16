@@ -24,11 +24,6 @@ const data = [
 ];
 const colours = Object.values(colors.green)
 
-
-const renderLabel = function(entry) {
-  return `${entry.name}: ${entry.value}%`;
-}
-
 const useStyles = makeStyles(() => ({
   root: {
     height: '100%'
@@ -46,7 +41,7 @@ const TrafficByDevice = ({ className, ...rest }) => {
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <CardHeader title="Saving Percentage" />
+      <CardHeader title="Saving Percentage (hardcoded)" />
       <Divider />
       <CardContent>
         <Box

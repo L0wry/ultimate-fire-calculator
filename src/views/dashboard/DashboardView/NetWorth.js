@@ -62,7 +62,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
                 Object.keys(chartData.data[0])
                   .filter(key => key !== 'year')
                   .map((investmentType, i) =>
-                    <Area type="monotone" dataKey={investmentType} stackId='1' stroke={colours[i]} fill={colours[i]} />
+                    <Area key={`${investmentType}-${i}`}type="monotone" dataKey={investmentType} stackId='1' stroke={colours[i]} fill={colours[i]} />
                   )}
             </AreaChart>
           </ResponsiveContainer>
@@ -70,7 +70,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
         </Box>
       </CardContent>
       <Divider />
-      <Box
+      {/* <Box
         display="flex"
         justifyContent="flex-end"
         p={2}
@@ -83,7 +83,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
         >
           Overview
         </Button>
-      </Box>
+      </Box> */}
     </Card>
   );
 };

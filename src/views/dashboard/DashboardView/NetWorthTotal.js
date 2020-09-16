@@ -22,7 +22,7 @@ const NetWorthTotal = ({ className, ...rest }) => {
 
   return (
     <InvestmentContextConsumer>
-      {({ getTotalNetWorthInXYears }) => (
+      {({ getTotalNetWorthInXYears, yearsToMature }) => (
         <Card
           className={clsx(classes.root, className)}
           {...rest}
@@ -41,7 +41,7 @@ const NetWorthTotal = ({ className, ...rest }) => {
                   gutterBottom
                   variant="h6"
                 >
-                  Total Net Worth in 20 Years
+                  Total Net Worth in {yearsToMature} Years
                 </Typography>
                 </Grid>
                 <Grid item> 
@@ -49,7 +49,7 @@ const NetWorthTotal = ({ className, ...rest }) => {
                   color="textPrimary"
                   variant="h3"
                 >
-                  £{getTotalNetWorthInXYears(20)}
+                  £{getTotalNetWorthInXYears()}
                 </Typography>
               </Grid>
             </Grid>

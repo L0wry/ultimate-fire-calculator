@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -16,9 +16,11 @@ import {
   Download
 } from 'react-feather';
 import NavItem from './NavItem';
+import { SelectYears } from './SelectYears'
 import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
 import NetWorthTotal from '../../../views/dashboard/DashboardView/NetWorthTotal';
 import AmountInvested from '../../../views/dashboard/DashboardView/AmountInvestedPerMonth';
+
 
 const items = [
   {
@@ -44,7 +46,7 @@ const items = [
   }
 ];
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   mobileDrawer: {
     width: 256
   },
@@ -55,9 +57,10 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+
 const NavBar = ({ onMobileClose, openMobile }) => {
-  const classes = useStyles();
   const location = useLocation();
+  const classes = useStyles();
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -79,6 +82,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           />
         ))}
       </List>
+      <SelectYears />
 
       <Grid
         spacing={3}
@@ -113,7 +117,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       <Hidden lgUp>
         <Drawer
           anchor="left"
-          classes={{ paper: classes.mobileDrawer}}
+          classes={{ paper: classes.mobileDrawer }}
           onClose={onMobileClose}
           open={openMobile}
           variant="temporary"

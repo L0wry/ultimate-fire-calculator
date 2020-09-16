@@ -22,7 +22,7 @@ const ExpectedMonthlyIncome = ({ className, ...rest }) => {
 
   return (
     <InvestmentContextConsumer>
-      {({ getExpectedInterestIncomeInXYears }) => (
+      {({ getExpectedInterestIncomeInXYears, yearsToMature }) => (
         <Card
           className={clsx(classes.root, className)}
           {...rest}
@@ -40,7 +40,7 @@ const ExpectedMonthlyIncome = ({ className, ...rest }) => {
                   gutterBottom
                   variant="h6"
                 >
-                  Expected Monthly Interest in 20 years
+                  Expected Monthly Interest in {yearsToMature} Years
             </Typography>
               </Grid>
               <Grid item>
@@ -48,7 +48,7 @@ const ExpectedMonthlyIncome = ({ className, ...rest }) => {
                   color="textPrimary"
                   variant="h3"
                 >
-                  £{getExpectedInterestIncomeInXYears(20)}
+                  £{getExpectedInterestIncomeInXYears()}
                 </Typography>
               </Grid>
             </Grid>

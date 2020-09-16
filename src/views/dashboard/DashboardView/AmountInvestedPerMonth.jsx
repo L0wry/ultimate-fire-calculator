@@ -40,7 +40,7 @@ const AmountInvestedPerMonth = ({ className, ...rest }) => {
                   color="textSecondary"
                   variant="h6"
                 >
-                  Amount being invested into the market per month
+                  Amount Invested Per Month
                 </Typography>
                 </Grid>
                 <Grid item> 
