@@ -8,10 +8,13 @@ import {
   Typography,
   Divider,
 } from '@material-ui/core';
-import { InvestmentContextConsumer } from '../../../context/InvestmentContext';
+import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { AddInvestment } from './AddInvestment'
 import { InvestmentList } from './InvestmentList'
 const Investments = ({ className, ...rest }) => {
+
+  const { onItemSave, editInvestment, removeInvestment, investments, addInvestment } = useInvestmentContext();
+
   return (
     <div
       className={clsx(className)}
@@ -30,16 +33,10 @@ const Investments = ({ className, ...rest }) => {
                   </Typography>
           <Divider />
           <Box mt={3}>
-            <InvestmentContextConsumer>
-              {({ onItemSave, editInvestment, removeInvestment, investments, addInvestment }) => (
-                <>
-                  <AddInvestment addInvestment={addInvestment} />
-                  {(
-                    <InvestmentList onItemSave={onItemSave} onItemEdit={editInvestment} onItemRemove={removeInvestment} items={investments} />
-                  )}
-                </>
+            <AddInvestment addInvestment={addInvestment} />
+              {(
+                <InvestmentList onItemSave={onItemSave} onItemEdit={editInvestment} onItemRemove={removeInvestment} items={investments} />
               )}
-            </InvestmentContextConsumer>
           </Box>
         </CardContent>
       </Card>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { calculateYearlyCompoundWithCharge } from 'src/utils/calculateCompoundInterest';
 import { all, create } from 'mathjs'
-const { Provider } = React.createContext();
 
 const math = create(all, {
   number: 'BigNumber',
@@ -10,9 +9,7 @@ const math = create(all, {
 
 const InvestmentContext = React.createContext({});
 
-const Consumer = InvestmentContext.Consumer;
-
-const InvestmentContextProvider = ({ children }) => {
+export const InvestmentContextProvider = ({ children }) => {
   const state = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
 
   const [investments, setInvestments] = useState(state);
@@ -156,12 +153,10 @@ const InvestmentContextProvider = ({ children }) => {
   )
 }
 
-const useInvestmentContext = () => {
+export const useInvestmentContext = () => {
   const context = React.useContext(InvestmentContext);
   if (context === undefined) {
     throw new Error('useInvestmentContext must be used within InvestmentProvider');
   }
   return context;
 }
-
-export { InvestmentContextProvider, Consumer as InvestmentContextConsumer, useInvestmentContext }

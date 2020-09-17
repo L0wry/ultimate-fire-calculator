@@ -11,7 +11,7 @@ import {
   Typography,
   makeStyles
 } from '@material-ui/core';
-import { SalaryContextConsumer } from '../../../context/SalaryContext';
+import { useSalaryContext } from '../../../context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,11 +29,21 @@ const useStyles = makeStyles((theme) => ({
 
 const NationalInsuranceCard = ({ className, ...rest }) => {
   const classes = useStyles();
+  const {
+    userTax: {
+      salary,
+      nationalInsuranceTax: {
+        totalNationalInsuranceTax,
+        lowerBand,
+        mediumBand,
+        upperBand,
+      },
+    },
+  } = useSalaryContext();
 
   return (
     <Box >
-      <SalaryContextConsumer>
-        {context => context.userTax.salary > 0 && (
+      {salary > 0 && (
           <Card
             className={clsx(classes.root, className)}
             {...rest}
@@ -66,7 +76,7 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
                       color="textPrimary"
                       variant="body1"
                     >
-                      Total N.I. Paid: £{context.userTax.nationalInsuranceTax.totalNationalInsuranceTax}
+                      Total N.I. Paid: £{totalNationalInsuranceTax}
                     </Typography>
                   </Grid>
                   <Grid
@@ -80,7 +90,7 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
                       color="textPrimary"
                       variant="body1"
                     >
-                      Tax paid at lower band: £{context.userTax.nationalInsuranceTax.lowerBand.taxPaid}
+                      Tax paid at lower band: £{lowerBand.taxPaid}
                     </Typography>
                   </Grid>
                   <Grid
@@ -94,7 +104,7 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
                       color="textPrimary"
                       variant="body1"
                     >
-                      Tax paid at medium band: £{context.userTax.nationalInsuranceTax.mediumBand.taxPaid}
+                      Tax paid at medium band: £{mediumBand.taxPaid}
                     </Typography>
                   </Grid>
                   <Grid
@@ -108,7 +118,7 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
                       color="textPrimary"
                       variant="body1"
                     >
-                      Tax paid at higher band: £{context.userTax.nationalInsuranceTax.upperBand.taxPaid}
+                      Tax paid at higher band: £{upperBand.taxPaid}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -118,7 +128,6 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
             <Divider />
           </Card>
         )}
-      </SalaryContextConsumer>
     </Box>
   );
 };

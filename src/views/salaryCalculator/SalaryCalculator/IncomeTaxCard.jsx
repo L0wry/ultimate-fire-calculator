@@ -12,8 +12,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 
-import { InvestmentContextConsumer } from '../../../context/InvestmentContext';
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -31,11 +29,21 @@ const useStyles = makeStyles((theme) => ({
 const IncomeTaxCard = ({ className, userTax, ...rest }) => {
   const classes = useStyles();
 
+  const {
+      incomeTax: {
+        taxFreePersonalAllowance,
+        totalIncomeTax,
+        lowerBand,
+        mediumBand,
+        upperBand,
+      },
+      taxableIncome,
+      studentLoan,
+  } = userTax;
+
   return userTax.salary > 0 && (
 
     <Box>
-
-
       <Card
         className={clsx(classes.root, className)}
         {...rest}
@@ -66,7 +74,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Tax free allowance: £{userTax.incomeTax.taxFreePersonalAllowance}
+                  Tax free allowance: £{taxFreePersonalAllowance}
                 </Typography>
               </Grid>
               <Grid
@@ -80,7 +88,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Total Income Tax: £{userTax.incomeTax.totalIncomeTax}
+                  Total Income Tax: £{totalIncomeTax}
                 </Typography>
               </Grid>
               <Grid
@@ -94,7 +102,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Taxable Income: £{userTax.taxableIncome}
+                  Taxable Income: £{taxableIncome}
                 </Typography>
               </Grid>       <Grid
                 item
@@ -107,7 +115,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Tax paid at lower band: £{userTax.incomeTax.lowerBand.taxPaid}
+                  Tax paid at lower band: £{lowerBand.taxPaid}
                 </Typography>
               </Grid>       <Grid
                 item
@@ -120,7 +128,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Tax paid at medium band: £{userTax.incomeTax.mediumBand.taxPaid}
+                  Tax paid at medium band: £{mediumBand.taxPaid}
                 </Typography>
               </Grid>
               <Grid
@@ -134,10 +142,10 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Tax paid at higher band: £{userTax.incomeTax.upperBand.taxPaid}
+                  Tax paid at higher band: £{upperBand.taxPaid}
                 </Typography>
               </Grid>
-              {userTax.studentLoan.yearlyAmountPaid > 0 && (
+              {studentLoan?.yearlyAmountPaid > 0 && (
                 <Grid
                   item
                   lg={6}
@@ -149,7 +157,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                     color="textPrimary"
                     variant="body1"
                   >
-                    Student Loan Paid: £{userTax.studentLoan.yearlyAmountPaid }
+                    Student Loan Paid: £{studentLoan?.yearlyAmountPaid }
                   </Typography>
                 </Grid>
               )}

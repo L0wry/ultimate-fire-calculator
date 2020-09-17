@@ -6,11 +6,11 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import UserFinance from './IncomeDetails';
+import IncomeDetails from './IncomeDetails';
 import IncomeTaxCard from './IncomeTaxCard'
 import NationalInsurance from './NationalInsuranceCard'
 import BreakdownCard from './BreakdownCard';
-import { SalaryContextConsumer } from '../../../context/SalaryContext';
+import { useSalaryContext } from '../../../context/SalaryContext';
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -25,50 +25,43 @@ const useStyles = makeStyles((theme) => ({
 const SalaryCalculator = () => {
   const classes = useStyles();
 
-  const { investments } = useInvestmentContext();
-
-  console.log('investments', investments);
+  const { setUserFinances, userTax } = useSalaryContext();
 
   return (
     <Page
       className={classes.root}
       title="Salary Calculator"
     >
-      <SalaryContextConsumer>
-        {
-          ({ setUserFinances, userTax }) => (
-            <Container maxWidth={false}>
-              <UserFinance userTax={userTax} setUserFinances={setUserFinances}/>
-              <Box mt={3} >
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="stretch"
-                  spacing={3}
-                >
-                  <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={6}
-                  >                  
-                  <IncomeTaxCard userTax={userTax} />
-                  </Grid>
-                  <Grid
-                    item
-                    lg={6}
-                    md={6}
-                    xs={6}
-                  >
-                    <NationalInsurance />
-                  </Grid>
-                </Grid>
-                {/* <BreakdownCard /> */}
-              </Box>
-            </Container>
-          )}
-      </SalaryContextConsumer>
+      <Container maxWidth={false}>
+        <IncomeDetails userTax={userTax} setUserFinances={setUserFinances}/>
+        <Box mt={3} >
+          <Grid
+            container
+            direction="row"
+            justify="flex-start"
+            alignItems="stretch"
+            spacing={3}
+          >
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xs={6}
+            >                  
+            <IncomeTaxCard userTax={userTax} />
+            </Grid>
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xs={6}
+            >
+              <NationalInsurance />
+            </Grid>
+          </Grid>
+          {/* <BreakdownCard /> */}
+        </Box>
+      </Container>
     </Page>
   );
 };

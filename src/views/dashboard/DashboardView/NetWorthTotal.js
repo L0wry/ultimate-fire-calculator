@@ -9,7 +9,7 @@ import {
   makeStyles,
   colors
 } from '@material-ui/core';
-import { InvestmentContextConsumer } from '../../../context/InvestmentContext'
+import { useInvestmentContext } from '../../../context/InvestmentContext'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -20,43 +20,41 @@ const useStyles = makeStyles(() => ({
 const NetWorthTotal = ({ className, ...rest }) => {
   const classes = useStyles();
 
+  const { getTotalNetWorthInXYears, yearsToMature } = useInvestmentContext();
+
   return (
-    <InvestmentContextConsumer>
-      {({ getTotalNetWorthInXYears, yearsToMature }) => (
-        <Card
-          className={clsx(classes.root, className)}
-          {...rest}
+    <Card
+      className={clsx(classes.root, className)}
+      {...rest}
+    >
+      <CardContent>
+        <Grid
+         container
+         direction="column"
+         alignItems="center"
+         justify="center"
         >
-          <CardContent>
-            <Grid
-             container
-             direction="column"
-             alignItems="center"
-             justify="center"
+          <Grid item>
+            <Typography
+              align="center"
+              color="textSecondary"
+              gutterBottom
+              variant="h6"
             >
-              <Grid item>
-                <Typography
-                  align="center"
-                  color="textSecondary"
-                  gutterBottom
-                  variant="h6"
-                >
-                  Total Net Worth in {yearsToMature} Years
-                </Typography>
-                </Grid>
-                <Grid item> 
-                <Typography
-                  color="textPrimary"
-                  variant="h3"
-                >
-                  £{getTotalNetWorthInXYears()}
-                </Typography>
-              </Grid>
+              Total Net Worth in {yearsToMature} Years
+            </Typography>
             </Grid>
-          </CardContent>
-        </Card>
-      )}
-    </InvestmentContextConsumer>
+            <Grid item> 
+            <Typography
+              color="textPrimary"
+              variant="h3"
+            >
+              £{getTotalNetWorthInXYears()}
+            </Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
   );
 };
 

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { all, create } from 'mathjs'
-// const { Provider, Consumer } = React.createContext();
 
 const math = create(all, {
   number: 'BigNumber',
@@ -9,9 +8,7 @@ const math = create(all, {
 
 const BudgetContext = React.createContext({}); 
 
-const { Consumer } = BudgetContext;
-
-const BudgetContextProvider = ({ children }) => {
+export const BudgetContextProvider = ({ children }) => {
   const state = JSON.parse(localStorage.getItem('expenses')) ? JSON.parse(localStorage.getItem('expenses')) : []
   const [expenses, setExpenses] = useState(state);
 
@@ -70,5 +67,3 @@ export const useBudgetContext = () => {
   }
   return context;
 }
-
-export { BudgetContextProvider, Consumer as BudgetContextConsumer }

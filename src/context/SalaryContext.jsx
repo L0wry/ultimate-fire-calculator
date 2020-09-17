@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import calculateAllTax from '../utils/calculateAllTax'
 import { all, create } from 'mathjs'
-// const { Provider, Consumer } = React.createContext();
 
 const math = create(all, {
 	number: 'BigNumber',
@@ -10,9 +9,7 @@ const math = create(all, {
 
 const SalaryContext = React.createContext({}); 
 
-const { Consumer } = SalaryContext;
-
-const SalaryContextProvider = ({ children }) => {
+export const SalaryContextProvider = ({ children }) => {
 	const state = JSON.parse(localStorage.getItem('salary')) ? JSON.parse(localStorage.getItem('salary')) : {}
 	const [userTax, setUserTax] = useState(state)
 
@@ -44,7 +41,6 @@ const SalaryContextProvider = ({ children }) => {
 		])
 	}
 
-	console.log(userTax)
 	return (
 		<SalaryContext.Provider value={{ setUserFinances, userTax }}>
 			{children}
@@ -60,4 +56,3 @@ export const useSalaryContext = () => {
 	return context;
 }
 
-export { SalaryContextProvider, Consumer as SalaryContextConsumer }
