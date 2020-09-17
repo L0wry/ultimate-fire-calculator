@@ -11,6 +11,7 @@ import IncomeTaxCard from './IncomeTaxCard'
 import NationalInsurance from './NationalInsuranceCard'
 import BreakdownCard from './BreakdownCard';
 import { SalaryContextConsumer } from '../../../context/SalaryContext';
+import { useInvestmentContext } from '../../../context/InvestmentContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,6 +24,10 @@ const useStyles = makeStyles((theme) => ({
 
 const SalaryCalculator = () => {
   const classes = useStyles();
+
+  const { investments } = useInvestmentContext();
+
+  console.log('investments', investments);
 
   return (
     <Page

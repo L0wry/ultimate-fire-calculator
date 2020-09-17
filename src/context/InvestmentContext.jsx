@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { calculateYearlyCompoundWithCharge } from 'src/utils/calculateCompoundInterest';
 import { all, create } from 'mathjs'
-const { Provider, Consumer } = React.createContext();
+const { Provider } = React.createContext();
 
 const math = create(all, {
   number: 'BigNumber',
   precision: 32
 });
 
+const InvestmentContext = React.createContext({});
+
+const Consumer = InvestmentContext.Consumer;
 
 const InvestmentContextProvider = ({ children }) => {
   const state = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
@@ -134,23 +137,31 @@ const InvestmentContextProvider = ({ children }) => {
     saveInvestments(investments.filter((_, index) => idx !== index));
   }
 
-  const getExpectedInterestIncomeInXYears = () => investments.length > 0
-    ? math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].earnedInterest, 0), 2)
-    : 0
+  const getExpectedInterestIncomeInXYears = () => investments.length > 0 ?
+    math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].earnedInterest, 0), 2) :
+    0
 
-  const getTotalNetWorthInXYears = () => investments.length > 0
-    ? math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].balance, 0), 2)
-    : 0
+  const getTotalNetWorthInXYears = () => investments.length > 0 ?
+    math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].balance, 0), 2) :
+    0
 
-  const getAmountInvestedPerMonth = () => investments.length > 0
-    ? investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0)
-    : 0
+  const getAmountInvestedPerMonth = () => investments.length > 0 ?
+    investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0) :
+    0
 
   return (
-    <Provider value={{ investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
+    <InvestmentContext.Provider value={{ investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
       {children}
-    </Provider>
+    </InvestmentContext.Provider>
   )
 }
 
-export { InvestmentContextProvider, Consumer as InvestmentContextConsumer }
+const useInvestmentContext = () => {
+  const context = React.useContext(InvestmentContext);
+  if (context === undefined) {
+    throw new Error('useInvestmentContext must be used within InvestmentProvider');
+  }
+  return context;
+}
+
+export { InvestmentContextProvider, Consumer as InvestmentContextConsumer, useInvestmentContext }
