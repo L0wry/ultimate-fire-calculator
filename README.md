@@ -28,7 +28,7 @@
 - automatic enrollement into investment
 
 ### p2
-
+- Finish tax breakdown table
 -	Display compound data in table 
 - child support 
 - dividend options on investment
