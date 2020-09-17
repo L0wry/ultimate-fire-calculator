@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/ultimate-fire-calculator/static/js/main.f4a74186.chunk.js",
-    "main.js.map": "/ultimate-fire-calculator/static/js/main.f4a74186.chunk.js.map",
+    "main.js": "/ultimate-fire-calculator/static/js/main.50cc1308.chunk.js",
+    "main.js.map": "/ultimate-fire-calculator/static/js/main.50cc1308.chunk.js.map",
     "runtime-main.js": "/ultimate-fire-calculator/static/js/runtime-main.c9ccb031.js",
     "runtime-main.js.map": "/ultimate-fire-calculator/static/js/runtime-main.c9ccb031.js.map",
     "static/css/2.18fb2ca0.chunk.css": "/ultimate-fire-calculator/static/css/2.18fb2ca0.chunk.css",
-    "static/js/2.0b4d537a.chunk.js": "/ultimate-fire-calculator/static/js/2.0b4d537a.chunk.js",
-    "static/js/2.0b4d537a.chunk.js.map": "/ultimate-fire-calculator/static/js/2.0b4d537a.chunk.js.map",
+    "static/js/2.cc708afb.chunk.js": "/ultimate-fire-calculator/static/js/2.cc708afb.chunk.js",
+    "static/js/2.cc708afb.chunk.js.map": "/ultimate-fire-calculator/static/js/2.cc708afb.chunk.js.map",
     "index.html": "/ultimate-fire-calculator/index.html",
-    "precache-manifest.0c25c7e567c022ad0cf657dc86c0bfa3.js": "/ultimate-fire-calculator/precache-manifest.0c25c7e567c022ad0cf657dc86c0bfa3.js",
+    "precache-manifest.dbac8bed7d8d7df73f0744bb7aa8243c.js": "/ultimate-fire-calculator/precache-manifest.dbac8bed7d8d7df73f0744bb7aa8243c.js",
     "service-worker.js": "/ultimate-fire-calculator/service-worker.js",
     "static/css/2.18fb2ca0.chunk.css.map": "/ultimate-fire-calculator/static/css/2.18fb2ca0.chunk.css.map",
-    "static/js/2.0b4d537a.chunk.js.LICENSE.txt": "/ultimate-fire-calculator/static/js/2.0b4d537a.chunk.js.LICENSE.txt"
+    "static/js/2.cc708afb.chunk.js.LICENSE.txt": "/ultimate-fire-calculator/static/js/2.cc708afb.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.c9ccb031.js",
     "static/css/2.18fb2ca0.chunk.css",
-    "static/js/2.0b4d537a.chunk.js",
-    "static/js/main.f4a74186.chunk.js"
+    "static/js/2.cc708afb.chunk.js",
+    "static/js/main.50cc1308.chunk.js"
   ]
 }
