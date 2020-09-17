@@ -72,7 +72,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
               gutterBottom
               variant="h3"
             >
-              Your Situation
+              Your Circumstance
                   </Typography>
             <Divider />
             <Box mt={3}>
