@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
   Box,
+  InputLabel,
+  Select,
   Button,
   Card,
+  MenuItem,
   CardContent,
   TextField,
   InputAdornment,
@@ -57,6 +60,17 @@ const Input = ({ label, type, inputProps, ...props }) => {
 
 const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
   const classes = useStyles();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <div
       className={clsx(classes.root, className)}
@@ -79,22 +93,23 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
               <Formik
                 initialValues={{
                   salary: userTax.salary || 0,
-                  personalPensionContribution:  userTax.personalPensionContributionPercent ? math.round(math.multiply(userTax.personalPensionContributionPercent, 100), 2) : 0,
+                  personalPensionContribution: userTax.personalPensionContributionPercent ? math.round(math.multiply(userTax.personalPensionContributionPercent, 100), 2) : 0,
                   employerPensionContribution: userTax.employerPensionContributionPercent ? math.round(math.multiply(userTax.employerPensionContributionPercent, 100), 2) : 0,
                   taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
+                  studentLoanPlanType: userTax.studentLoan.studentLoanPlanType || 0
                 }}
                 validationSchema={object({
                   salary: number(),
                   personalPensionContribution: number(),
                   employerPensionContribution: number(),
                   taxFreePersonalAllowance: number(),
-
+                  studentLoanPlanType: number()
                 })}
                 onSubmit={(userFinance, { setSubmitting }) => {
                   setUserFinances(userFinance, addMultipleInvestments)
                   setSubmitting(false);
                 }}
-              >
+              >{({values, handleChange}) => (
                 <Form>
                   <Grid
                     container
@@ -173,7 +188,6 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                       md={6}
                       xs={12}
                     >
-
                       <Input
                         label="Tax Free Personal Allowance"
                         name="taxFreePersonalAllowance"
@@ -187,7 +201,29 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                             </InputAdornment>)
                         }}
                       />
+                    </Grid>
 
+                    <Grid
+                      item
+                      lg={6}
+                      md={6}
+                      xs={12}>
+
+                      <InputLabel id="plan-name">Student Loan Type</InputLabel>
+
+                      <Select
+                        labelId="studentLoanPlanType"
+                        id="studentLoanPlanType"
+                        open={open}
+                        onClose={handleClose}
+                        onOpen={handleOpen}
+                        onChange={handleChange("studentLoanPlanType")}
+                        value={values.studentLoanPlanType}
+                      >
+                        <MenuItem key={'plan0'} value={0}>{`No Loan`}</MenuItem>
+                        <MenuItem key={'plan1'} value={1}>{`Plan 1`}</MenuItem>
+                        <MenuItem key={'plan2'} value={2}>{`Plan 2`}</MenuItem>
+                      </Select>
                     </Grid>
                   </Grid>
                   <Box
@@ -202,6 +238,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                       variant="text">Calculate</Button>
                   </Box>
                 </Form>
+              )}
               </Formik>
             </Box>
           </CardContent>

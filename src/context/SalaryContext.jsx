@@ -12,12 +12,13 @@ const SalaryContextProvider = ({ children }) => {
 	const state = JSON.parse(localStorage.getItem('salary')) ? JSON.parse(localStorage.getItem('salary')) : {}
 	const [userTax, setUserTax] = useState(state)
 
-	const setUserFinances = ({ salary, taxFreePersonalAllowance, personalPensionContribution = 0, employerPensionContribution = 0 }, addMultipleInvestments) => {
+	const setUserFinances = ({ salary, taxFreePersonalAllowance, personalPensionContribution = 0, employerPensionContribution = 0, studentLoanPlanType = 0 }, addMultipleInvestments) => {
 		const tax = calculateAllTax({
 			salary,
 			taxFreePersonalAllowance,
 			employerPensionContributionPercent: employerPensionContribution / 100,
-			personalPensionContributionPercent: personalPensionContribution / 100
+			personalPensionContributionPercent: personalPensionContribution / 100,
+			studentLoanPlanType
 		})
 		setUserTax(tax)
 		localStorage.setItem('salary', JSON.stringify(tax))
@@ -32,6 +33,7 @@ const SalaryContextProvider = ({ children }) => {
 		}])
 	}
 
+	console.log(userTax)
 	return (
 		<Provider value={{ setUserFinances, userTax }}>
 			{children}

@@ -122,7 +122,8 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                 >
                   Tax paid at medium band: £{userTax.incomeTax.mediumBand.taxPaid}
                 </Typography>
-              </Grid>       <Grid
+              </Grid>
+              <Grid
                 item
                 lg={6}
                 md={6}
@@ -136,6 +137,22 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   Tax paid at higher band: £{userTax.incomeTax.upperBand.taxPaid}
                 </Typography>
               </Grid>
+              {userTax.studentLoan.yearlyAmountPaid > 0 && (
+                <Grid
+                  item
+                  lg={6}
+                  md={6}
+                  xs={12}
+                >
+                  <Typography
+                    align="center"
+                    color="textPrimary"
+                    variant="body1"
+                  >
+                    Student Loan Paid: £{userTax.studentLoan.yearlyAmountPaid }
+                  </Typography>
+                </Grid>
+              )}
             </Grid>
           </Box>
         </CardContent>
