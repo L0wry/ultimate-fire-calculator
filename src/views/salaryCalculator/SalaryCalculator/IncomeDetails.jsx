@@ -96,7 +96,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                   personalPensionContribution: userTax.personalPensionContributionPercent ? math.round(math.multiply(userTax.personalPensionContributionPercent, 100), 2) : 0,
                   employerPensionContribution: userTax.employerPensionContributionPercent ? math.round(math.multiply(userTax.employerPensionContributionPercent, 100), 2) : 0,
                   taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
-                  studentLoanPlanType: userTax.studentLoan.studentLoanPlanType || 0
+                  studentLoanPlanType: userTax.studentLoan && userTax.studentLoan.studentLoanPlanType || 0
                 }}
                 validationSchema={object({
                   salary: number(),

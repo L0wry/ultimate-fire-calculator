@@ -137,7 +137,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   Tax paid at higher band: £{userTax.incomeTax.upperBand.taxPaid}
                 </Typography>
               </Grid>
-              {userTax.studentLoan.yearlyAmountPaid > 0 && (
+              {userTax.studentLoan && userTax.studentLoan.yearlyAmountPaid > 0 && (
                 <Grid
                   item
                   lg={6}
