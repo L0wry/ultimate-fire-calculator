@@ -37,7 +37,6 @@ const Input = ({ label, type, inputProps, ...props }) => {
 
 const Expenses = ({ className, addExpense, ...rest }) => {
   return (
-    <Box>
       <Card
         className={clsx(className)}
         {...rest}
@@ -72,11 +71,13 @@ const Expenses = ({ className, addExpense, ...rest }) => {
               <Form>
                 <Grid
                   container
-                  justify="space-evenly"
-                  spacing={1}
+                  spacing={3}
                 >
                   <Grid
-                    item
+                      item
+                      lg={6}
+                      md={6}
+                      xs={12}
                   >
                     <Input
                       label="Expense Name"
@@ -86,7 +87,10 @@ const Expenses = ({ className, addExpense, ...rest }) => {
                   </Grid>
 
                   <Grid
-                    item
+                      item
+                      lg={6}
+                      md={6}
+                      xs={12}
                   >
                     <Input
                       label="Expense cost"
@@ -106,14 +110,13 @@ const Expenses = ({ className, addExpense, ...rest }) => {
                       color="primary"
                       fullWidth
                       variant="text"
-                      type="submit">Submit</Button>
+                      type="submit">ADD</Button>
                 </Grid>
               </Form>
             </Formik>
           </Box>
         </CardContent>
       </Card>
-    </Box >
   );
 };
 
