@@ -33,12 +33,13 @@ export const calculateNationalInsurance = (tax, taxableIncome) => {
         ? math.round(math.multiply(carryOver, tax[band].taxPercent), ROUND_AMOUNT)
         : 0
 
-      tax.weeklyNationalInsuranceTax = math.add(tax.weeklyNationalInsuranceTax, tax[band].taxPaid)
+      tax.weeklyNationalInsuranceTax = math.round(math.add(tax.weeklyNationalInsuranceTax, tax[band].taxPaid), ROUND_AMOUNT)
       
       carryOver = 0
       break
     }
   }
+
   tax.totalNationalInsuranceTax = math.round(math.multiply(tax.weeklyNationalInsuranceTax, WEEKS_IN_YEAR), ROUND_AMOUNT)
   return tax
 }
