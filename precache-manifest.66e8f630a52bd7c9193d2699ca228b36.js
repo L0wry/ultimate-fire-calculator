@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "acf2c60bf51a377ab80341a312bdcd66",
+    "revision": "55ce25bf2c7816257812a2dc75bf6f7c",
     "url": "/ultimate-fire-calculator/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/ultimate-fire-calculator/static/js/2.09cbf924.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4dc5b30d6c1a54dd0d93",
-    "url": "/ultimate-fire-calculator/static/js/main.271a6aaa.chunk.js"
+    "revision": "486ceb8eaaa48ee3c320",
+    "url": "/ultimate-fire-calculator/static/js/main.89d7c252.chunk.js"
   },
   {
     "revision": "df577487c10672c19549",
