@@ -69,6 +69,23 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   Tax free allowance: £{userTax.incomeTax.taxFreePersonalAllowance}
                 </Typography>
               </Grid>
+              {userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax && (
+                <Grid
+                item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <Typography
+                  align="center"
+                  color="textPrimary"
+                  variant="body1"
+                >
+                  100k Personal Allowance Deduction: £{userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax}
+                </Typography>
+              </Grid>
+              )}
+
               <Grid
                 item
                 lg={6}
