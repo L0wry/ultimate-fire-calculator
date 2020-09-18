@@ -55,7 +55,7 @@ const TakeHomeIncome = ({ className, ...rest }) => {
               gutterBottom
               variant="h3"
             >
-              £{totalTakeHome}
+              £{totalTakeHome.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
           </Typography>
           </Grid>
         </Grid>

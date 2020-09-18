@@ -50,7 +50,7 @@ const AmountInvestedPerMonth = ({ className, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              £{getAmountInvestedPerMonth()}
+              £{getAmountInvestedPerMonth().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Typography>
           </Grid>
         </Grid>

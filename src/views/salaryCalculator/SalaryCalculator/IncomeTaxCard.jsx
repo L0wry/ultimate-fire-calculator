@@ -74,7 +74,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Tax free allowance: £{taxFreePersonalAllowance}
+                  Tax free allowance: £{taxFreePersonalAllowance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </Typography>
               </Grid>
               {userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax && (
@@ -89,7 +89,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  100k Personal Allowance Deduction: £{userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax}
+                  100k Personal Allowance Deduction: £{userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </Typography>
               </Grid>
               )}
@@ -105,7 +105,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Total Income Tax: £{totalIncomeTax}
+                  Total Income Tax: £{totalIncomeTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </Typography>
               </Grid>
               <Grid
@@ -119,7 +119,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Taxable Income: £{taxableIncome}
+                  Taxable Income: £{taxableIncome.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </Typography>
               </Grid>       <Grid
                 item
@@ -132,7 +132,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Tax paid at lower band: £{lowerBand.taxPaid}
+                  Tax paid at lower band: £{lowerBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </Typography>
               </Grid>       <Grid
                 item
@@ -145,7 +145,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Tax paid at medium band: £{mediumBand.taxPaid}
+                  Tax paid at medium band: £{mediumBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </Typography>
               </Grid>
               <Grid
@@ -159,7 +159,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                   color="textPrimary"
                   variant="body1"
                 >
-                  Tax paid at higher band: £{upperBand.taxPaid}
+                  Tax paid at higher band: £{upperBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 </Typography>
               </Grid>
               {studentLoan?.yearlyAmountPaid > 0 && (
@@ -174,7 +174,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                     color="textPrimary"
                     variant="body1"
                   >
-                    Student Loan Paid: £{studentLoan?.yearlyAmountPaid }
+                    Student Loan Paid: £{studentLoan?.yearlyAmountPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                   </Typography>
                 </Grid>
               )}

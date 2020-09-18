@@ -48,7 +48,7 @@ const ExpectedMonthlyIncome = ({ className, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              £{getExpectedInterestIncomeInXYears()}
+              £{getExpectedInterestIncomeInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Typography>
           </Grid>
         </Grid>
