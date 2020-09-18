@@ -221,8 +221,8 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                         value={values.studentLoanPlanType}
                       >
                         <MenuItem key={'plan0'} value={0}>{`No Loan`}</MenuItem>
-                        <MenuItem key={'plan1'} value={1}>{`Plan 1`}</MenuItem>
-                        <MenuItem key={'plan2'} value={2}>{`Plan 2`}</MenuItem>
+                        <MenuItem key={'plan1'} value={1}>{`Plan 1 (before 1 September 2012)`}</MenuItem>
+                        <MenuItem key={'plan2'} value={2}>{`Plan 2 (after 1 September 2012)`}</MenuItem>
                       </Select>
                     </Grid>
                   </Grid>
