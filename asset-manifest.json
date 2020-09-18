@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.js": "/ultimate-fire-calculator/static/js/main.89d7c252.chunk.js",
-    "main.js.map": "/ultimate-fire-calculator/static/js/main.89d7c252.chunk.js.map",
+    "main.js": "/ultimate-fire-calculator/static/js/main.a2a33a96.chunk.js",
+    "main.js.map": "/ultimate-fire-calculator/static/js/main.a2a33a96.chunk.js.map",
     "runtime-main.js": "/ultimate-fire-calculator/static/js/runtime-main.c9ccb031.js",
     "runtime-main.js.map": "/ultimate-fire-calculator/static/js/runtime-main.c9ccb031.js.map",
     "static/css/2.18fb2ca0.chunk.css": "/ultimate-fire-calculator/static/css/2.18fb2ca0.chunk.css",
     "static/js/2.09cbf924.chunk.js": "/ultimate-fire-calculator/static/js/2.09cbf924.chunk.js",
     "static/js/2.09cbf924.chunk.js.map": "/ultimate-fire-calculator/static/js/2.09cbf924.chunk.js.map",
     "index.html": "/ultimate-fire-calculator/index.html",
-    "precache-manifest.66e8f630a52bd7c9193d2699ca228b36.js": "/ultimate-fire-calculator/precache-manifest.66e8f630a52bd7c9193d2699ca228b36.js",
+    "precache-manifest.7156310a0e45ba47c25595000cbf54ed.js": "/ultimate-fire-calculator/precache-manifest.7156310a0e45ba47c25595000cbf54ed.js",
     "service-worker.js": "/ultimate-fire-calculator/service-worker.js",
     "static/css/2.18fb2ca0.chunk.css.map": "/ultimate-fire-calculator/static/css/2.18fb2ca0.chunk.css.map",
     "static/js/2.09cbf924.chunk.js.LICENSE.txt": "/ultimate-fire-calculator/static/js/2.09cbf924.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.c9ccb031.js",
     "static/css/2.18fb2ca0.chunk.css",
     "static/js/2.09cbf924.chunk.js",
-    "static/js/main.89d7c252.chunk.js"
+    "static/js/main.a2a33a96.chunk.js"
   ]
 }
