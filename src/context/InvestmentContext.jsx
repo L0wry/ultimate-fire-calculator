@@ -17,8 +17,8 @@ export const InvestmentContextProvider = ({ children }) => {
 
   const saveYearsToMature = years => {
     setYearsToMature(years)
-    localStorage.setItem('yearsToMature', years)
-    setInvestments([...investments].map(investment => {
+
+    const newInvestments = [...investments].map(investment => {
       const investmentToRecalculate = {
         ...investment,
         noOfYearsToMature: years,
@@ -28,7 +28,12 @@ export const InvestmentContextProvider = ({ children }) => {
         ...investmentToRecalculate,
         compoundData: calculateYearlyCompoundWithCharge(investmentToRecalculate)
       }
-    }))
+    })
+
+    setInvestments(newInvestments)
+
+    localStorage.setItem('investments', JSON.stringify(newInvestments))
+    localStorage.setItem('yearsToMature', years)
   }
   const saveInvestments = (investmentToSave) => {
     setInvestments(investmentToSave)
