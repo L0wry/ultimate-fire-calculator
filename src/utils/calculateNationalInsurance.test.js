@@ -3,6 +3,7 @@ import { nationalInsuranceTaxBands } from './taxTypes'
 
 describe('Calculate National Insurance', () => {
 
+
   it("calculates lower band correctly with the default tax free amount", () => {
     const taxableIncome = 77550
     expect(calculateNationalInsurance(nationalInsuranceTaxBands, taxableIncome).lowerBand).toStrictEqual({"carryOver": 1308.3461538461538, "end": 183, "start": 0, "taxPaid": 0, "taxPercent": 0})
@@ -49,9 +50,9 @@ describe('Calculate National Insurance', () => {
     expect(calculateNationalInsurance(nationalInsuranceTaxBands, taxableIncome)).toStrictEqual({
       "lowerBand": {"carryOver": 3663.153846153846, "end": 183, "start": 0, "taxPaid": 0, "taxPercent": 0}, 
       "mediumBand": {"carryOver": 2884.163846153846, "end": 962, "start": 183.01, "taxPaid": 93.48, "taxPercent": 0.12}, 
-      "totalNationalInsuranceTax": 48248.72,
+      "totalNationalInsuranceTax": 7860.32,
       "upperBand": {"carryOver": 0, "end": 99999999, "start": 962.01, "taxPaid": 57.68, "taxPercent": 0.02}, 
-      "weeklyNationalInsuranceTax": 927.86
+      "weeklyNationalInsuranceTax": 151.16
     })
   })
 })
