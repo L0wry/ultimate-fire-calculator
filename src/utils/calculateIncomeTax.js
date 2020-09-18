@@ -21,8 +21,8 @@ export const calculateIncomeTax = (tax, taxableIncome) => {
       math.subtract(tax.taxFreePersonalAllowance, amountToRemoveFromPersonalAllowance) :
       0
 
+    tax.taxFreePersonalAllowanceRemovedBy100kTax = amountToRemoveFromPersonalAllowance > tax.taxFreePersonalAllowance ? tax.taxFreePersonalAllowance : amountToRemoveFromPersonalAllowance
     tax.taxFreePersonalAllowance = newTaxFreeAmount
-    tax.taxFreePersonalAllowanceRemovedBy100kTax = amountToRemoveFromPersonalAllowance
   }
 
   taxableIncome = math.subtract(taxableIncome, tax.taxFreePersonalAllowance)
