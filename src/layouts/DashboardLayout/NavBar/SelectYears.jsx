@@ -35,14 +35,14 @@ export const SelectYears = () => {
 
     const { saveYearsToMature, yearsToMature } = useInvestmentContext();
 
-
     return (
         <Box
             display="flex"
             mt={3}
             alignItems="center">
-            <FormControl className={classes.formControl}>
+            <FormControl style={{ width: "100%"}} className={classes.formControl}>
                 <Typography
+                    align="center"
                     color="textSecondary"
                     gutterBottom
                     variant="h6"
@@ -50,6 +50,7 @@ export const SelectYears = () => {
                     Predict Net Worth In
                 </Typography>
                 <Select
+                    style={{  textAlign: 'center'}}
                     labelId="open-select-label"
                     id="open-select"
                     open={open}
@@ -59,7 +60,7 @@ export const SelectYears = () => {
                     onChange={e => saveYearsToMature(e.target.value)}
                 >
                     {years.map((year) =>
-                        <MenuItem key={`${year}-Years`} value={year}>{`${year} Years`}</MenuItem>
+                        <MenuItem key={`${year}-Years`} style={{ justifyContent: 'center' }} value={year}>{`${year} Years`}</MenuItem>
                     )}
                 </Select>
             </FormControl>

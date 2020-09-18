@@ -32,16 +32,18 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
   } = useBudgetContext();
 
   const [takeHome, setTakeHome] = useState({
-    totalTakeHome: null,
-    difference: null,
-    expensesCost: null,
+    totalTakeHome: 0,
+    difference: 0,
+    expensesCost: 0,
   });
+
+  const totalTakeHome = userTax.totalTakeHome || 0
 
   useEffect(() => {
     setTakeHome((prevState) => ({
       ...prevState,
-      totalTakeHome: math.round(math.divide(userTax.totalTakeHome, 12), 2),
-      difference: math.round(math.subtract(math.divide(userTax.totalTakeHome, 12), expenseTotal), 2),
+      totalTakeHome: math.round(math.divide(totalTakeHome, 12), 2),
+      difference: math.round(math.subtract(math.divide(totalTakeHome, 12), expenseTotal), 2),
       expensesCost: expenseTotal,
     }))
     // subscribe to changes in userTax and expense total to trigger effect
@@ -98,9 +100,7 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                 xl={6}
                 xs={6}
               >
-                {takeHome.totalTakeHome && (
-                  <MonthlyTakeHomeCard { ...takeHome } />
-                )}
+                <MonthlyTakeHomeCard {...takeHome} />
               </Grid>
             </Grid>
           </Box>

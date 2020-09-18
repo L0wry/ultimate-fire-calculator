@@ -10,14 +10,14 @@ const math = create(all, {
 const InvestmentContext = React.createContext({});
 
 export const InvestmentContextProvider = ({ children }) => {
-  const state = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
-
-  const [investments, setInvestments] = useState(state);
-
-  const [yearsToMature, setYearsToMature] = useState(1)
+  const investmentState = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
+  const yearState = localStorage.getItem('yearsToMature') || 1
+  const [investments, setInvestments] = useState(investmentState);
+  const [yearsToMature, setYearsToMature] = useState(yearState)
 
   const saveYearsToMature = years => {
     setYearsToMature(years)
+    localStorage.setItem('yearsToMature', years)
     setInvestments([...investments].map(investment => {
       const investmentToRecalculate = {
         ...investment,

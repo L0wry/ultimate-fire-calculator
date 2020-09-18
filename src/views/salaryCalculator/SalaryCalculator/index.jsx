@@ -27,40 +27,45 @@ const SalaryCalculator = () => {
 
   const { setUserFinances, userTax } = useSalaryContext();
 
+  console.log('piss', userTax)
   return (
     <Page
       className={classes.root}
       title="Salary Calculator"
     >
       <Container maxWidth={false}>
-        <IncomeDetails userTax={userTax} setUserFinances={setUserFinances}/>
-        <Box mt={3} >
-          <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="stretch"
-            spacing={3}
-          >
+        <IncomeDetails userTax={userTax} setUserFinances={setUserFinances} />
+        {userTax.salary && (
+          <Box mt={3} >
             <Grid
-              item
-              lg={6}
-              md={6}
-              xs={6}
-            >                  
-            <IncomeTaxCard userTax={userTax} />
-            </Grid>
-            <Grid
-              item
-              lg={6}
-              md={6}
-              xs={6}
+              container
+              direction="row"
+              justify="flex-start"
+              alignItems="stretch"
+              spacing={3}
             >
-              <NationalInsurance />
+
+              <Grid
+                item
+                lg={6}
+                md={6}
+                xs={6}
+              >
+                <IncomeTaxCard userTax={userTax} />
+              </Grid>
+              <Grid
+                item
+                lg={6}
+                md={6}
+                xs={6}
+              >
+                <NationalInsurance />
+              </Grid>
             </Grid>
-          </Grid>
-          {/* <BreakdownCard /> */}
-        </Box>
+            {/* <BreakdownCard /> */}
+          </Box>
+        )}
+
       </Container>
     </Page>
   );

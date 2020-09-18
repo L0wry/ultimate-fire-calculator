@@ -22,9 +22,10 @@
 ### p1
 
  - [ ] sort out dashboard graph styling
+ - [ ] add expenses to the dashboard to show retirement in years
  - [x] Support student loans
  - [ ] Add secondary tax free income
- - [ ] suport 100K plus salaries
+ - [x] suport 100K plus salaries
  - [ ] Handle form validation
 	 - [ ] Use Yup package? https://formik.org/docs/guides/validation
  - [ ] automatic enrollement into investment

@@ -82,16 +82,20 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           />
         ))}
       </List>
-      <SelectYears />
+     
+
+      <Box mt={10}>
 
       <Grid
         spacing={3}
         container
         direction="column"
         justify="flex-end"
-        alignItems="center"
+        alignItems="stretch"
       >
-        <Box mt={10}>
+        <Grid item>
+          <SelectYears/>
+        </Grid>
           <Grid
             item >
             <ExpectedMonthlyIncome />
@@ -107,8 +111,8 @@ const NavBar = ({ onMobileClose, openMobile }) => {
             <AmountInvested />
 
           </Grid>
-        </Box>
       </Grid>
+    </Box>
     </Box>
   );
 
