@@ -49,7 +49,7 @@ const NetWorthTotal = ({ className, ...rest }) => {
               color="textPrimary"
               variant="h3"
             >
-              £{getTotalNetWorthInXYears()}
+              £{getTotalNetWorthInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
             </Typography>
           </Grid>
         </Grid>
