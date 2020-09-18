@@ -95,7 +95,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
             <AreaChart
               data={chartData.data}
               margin={{
-                top: 0, right: 35, left: 20, bottom: 0,
+                top: 0, right: 35, left: 35, bottom: 0,
               }}
             >
               <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
