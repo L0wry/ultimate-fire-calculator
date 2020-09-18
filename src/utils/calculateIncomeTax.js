@@ -1,6 +1,6 @@
 import { all, create } from 'mathjs'
 
-const BANDS = ['lowerBand', 'mediumBand', 'upperBand']
+import { TAX_BANDS } from 'src/consts/';
 
 const math = create(all, {
   number: 'BigNumber',
@@ -29,7 +29,7 @@ export const calculateIncomeTax = (tax, taxableIncome) => {
 
   let carryOver = taxableIncome
 
-  for (const band of BANDS) {
+  for (const band of TAX_BANDS) {
     const difference = math.subtract(tax[band].end, tax[band].start)
 
     if (math.subtract(carryOver, difference) > 0) {

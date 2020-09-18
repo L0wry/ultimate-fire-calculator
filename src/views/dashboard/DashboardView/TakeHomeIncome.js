@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoneyIcon from '@material-ui/icons/Money';
-import { SalaryContextConsumer } from 'src/context/SalaryContext';
+import { useSalaryContext } from 'src/context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,43 +24,44 @@ const useStyles = makeStyles((theme) => ({
 const TakeHomeIncome = ({ className, ...rest }) => {
   const classes = useStyles();
 
-  return (
-    <SalaryContextConsumer>
-      {context => (
-        <Card
-          className={clsx(classes.root, className)}
-          {...rest}
-        >
-          <CardContent>
-            <Grid
-              container
-              direction="column"
-              alignItems="center"
-              justify="center"
-            >
-              <Grid item>
-                <Typography
-                  color="textSecondary"
-                  variant="h6"
-                  >
-                  Annual Take Home Pay
-                </Typography>
-                </Grid>
+  const {
+    userTax: { totalTakeHome = 0 },
+  } = useSalaryContext();
 
-                <Grid item> 
-                <Typography
-                  color="textPrimary"
-                  gutterBottom
-                  variant="h3"
-                >
-                  £{context.userTax.totalTakeHome || 0 }
-              </Typography>
-              </Grid>
+  return (
+    <Card
+      className={clsx(classes.root, className)}
+      {...rest}
+    >
+      <CardContent>
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
+          justify="center"
+        >
+          <Grid item>
+            <Typography
+              color="textSecondary"
+              variant="h6"
+              >
+              Annual Take Home Pay
+            </Typography>
             </Grid>
-          </CardContent>
-        </Card>
-      )}
-    </SalaryContextConsumer>
+
+            <Grid item> 
+            <Typography
+              color="textPrimary"
+              gutterBottom
+              variant="h3"
+            >
+              £{totalTakeHome}
+          </Typography>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
+
   );
 };
 

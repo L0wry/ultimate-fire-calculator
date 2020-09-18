@@ -8,7 +8,7 @@ import {
     Typography,
     Box
 } from '@material-ui/core';
-import { InvestmentContextConsumer } from '../../../context/InvestmentContext';
+import { useInvestmentContext } from '../../../context/InvestmentContext';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -33,43 +33,37 @@ export const SelectYears = () => {
         setOpen(true);
     };
 
+    const { saveYearsToMature, yearsToMature } = useInvestmentContext();
 
     return (
-        <InvestmentContextConsumer>
-            {({ saveYearsToMature, yearsToMature }) => (
-                <Box
-                    display="flex"
-                    mt={3}
-                    width={1}
-                    >
-                    <FormControl style={{ width: "100%"}} className={classes.formControl}>
-                        <Typography
-                            align="center"
-                            color="textSecondary"
-                            gutterBottom
-                            variant="h6"
-                        >
-                            Predict Net Worth In
-                        </Typography>
-                        <Select
-                            style={{  textAlign: 'center'}}
-                            labelId="open-select-label"
-                            id="open-select"
-                            open={open}
-                            onClose={handleClose}
-                            onOpen={handleOpen}
-                            value={yearsToMature}
-                            onChange={e => saveYearsToMature(e.target.value)}
-                        >
-                            {years.map((year) =>
-                                <MenuItem key={`${year}-Years`}  style={{ justifyContent:'center'}}  value={year}>{`${year} Years`}</MenuItem>
-                            )}
-                        </Select>
-                    </FormControl>
-                </Box>
-            )}
-        </InvestmentContextConsumer>
-
-
+        <Box
+            display="flex"
+            mt={3}
+            alignItems="center">
+            <FormControl style={{ width: "100%"}} className={classes.formControl}>
+                <Typography
+                    align="center"
+                    color="textSecondary"
+                    gutterBottom
+                    variant="h6"
+                >
+                    Predict Net Worth In
+                </Typography>
+                <Select
+                    style={{  textAlign: 'center'}}
+                    labelId="open-select-label"
+                    id="open-select"
+                    open={open}
+                    onClose={handleClose}
+                    onOpen={handleOpen}
+                    value={yearsToMature}
+                    onChange={e => saveYearsToMature(e.target.value)}
+                >
+                    {years.map((year) =>
+                        <MenuItem key={`${year}-Years`} style={{ justifyContent: 'center' }} value={year}>{`${year} Years`}</MenuItem>
+                    )}
+                </Select>
+            </FormControl>
+        </Box>
     )
 }
