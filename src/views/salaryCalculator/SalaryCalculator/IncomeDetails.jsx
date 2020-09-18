@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core';
 import { Formik, Form, useField } from "formik";
 import { number, object } from "yup";
-import { InvestmentContextConsumer } from '../../../context/InvestmentContext';
+import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { all, create } from 'mathjs'
 const math = create(all, {
   number: 'BigNumber',
@@ -71,12 +71,13 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
     setOpen(true);
   };
 
+  const { addMultipleInvestments } = useInvestmentContext();
+
   return (
     <div
       className={clsx(classes.root, className)}
       {...rest}
     >
-      <InvestmentContextConsumer>{({ addMultipleInvestments }) => (
         <Card>
           <CardContent>
 
@@ -96,7 +97,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                   personalPensionContribution: userTax.personalPensionContributionPercent ? math.round(math.multiply(userTax.personalPensionContributionPercent, 100), 2) : 0,
                   employerPensionContribution: userTax.employerPensionContributionPercent ? math.round(math.multiply(userTax.employerPensionContributionPercent, 100), 2) : 0,
                   taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
-                  studentLoanPlanType: userTax.studentLoan && userTax.studentLoan.studentLoanPlanType || 0
+                  studentLoanPlanType: userTax.studentLoan?.studentLoanPlanType || 0
                 }}
                 validationSchema={object({
                   salary: number(),
@@ -243,8 +244,6 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
             </Box>
           </CardContent>
         </Card>
-      )}
-      </InvestmentContextConsumer>
     </div >
   );
 };

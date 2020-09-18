@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { InvestmentContextConsumer } from '../../../context/InvestmentContext'
+import { useInvestmentContext } from '../../../context/InvestmentContext'
 import {
   Card,
   CardContent,
@@ -20,42 +20,40 @@ const useStyles = makeStyles(() => ({
 const ExpectedMonthlyIncome = ({ className, ...rest }) => {
   const classes = useStyles();
 
+  const { getExpectedInterestIncomeInXYears, yearsToMature } = useInvestmentContext();
+
   return (
-    <InvestmentContextConsumer>
-      {({ getExpectedInterestIncomeInXYears, yearsToMature }) => (
-        <Card
-          className={clsx(classes.root, className)}
-          {...rest}
+    <Card
+      className={clsx(classes.root, className)}
+      {...rest}
+    >
+      <CardContent>
+        <Grid
+          container
+          direction="column"
+          alignItems="center"
         >
-          <CardContent>
-            <Grid
-              container
-              direction="column"
-              alignItems="center"
+          <Grid item>
+            <Typography
+              align="center"
+              color="textSecondary"
+              gutterBottom
+              variant="h6"
             >
-              <Grid item>
-                <Typography
-                  align="center"
-                  color="textSecondary"
-                  gutterBottom
-                  variant="h6"
-                >
-                  Expected Monthly Interest in {yearsToMature} Years
+              Expected Monthly Interest in {yearsToMature} Years
+        </Typography>
+          </Grid>
+          <Grid item>
+            <Typography
+              color="textPrimary"
+              variant="h3"
+            >
+              £{getExpectedInterestIncomeInXYears()}
             </Typography>
-              </Grid>
-              <Grid item>
-                <Typography
-                  color="textPrimary"
-                  variant="h3"
-                >
-                  £{getExpectedInterestIncomeInXYears()}
-                </Typography>
-              </Grid>
-            </Grid>
-          </CardContent>
-        </Card>
-      )}
-    </InvestmentContextConsumer>
+          </Grid>
+        </Grid>
+      </CardContent>
+    </Card>
   );
 };
 
