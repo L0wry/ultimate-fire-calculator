@@ -1,17 +1,32 @@
-import {all, create} from 'mathjs'
+import { all, create } from 'mathjs'
 
 const BANDS = ['lowerBand', 'mediumBand', 'upperBand']
 
 const math = create(all, {
-  number: 'BigNumber',  
+  number: 'BigNumber',
   precision: 32
 });
 
 const ROUND_AMOUNT = 2
 
 export const calculateIncomeTax = (tax, taxableIncome) => {
+
+  const isSalaryOver100k = taxableIncome > 100000
+
+  if (isSalaryOver100k) {
+    const amountOver = math.subtract(taxableIncome, 100000)
+
+    const amountToRemoveFromPersonalAllowance = Math.floor(math.divide(amountOver, 2))
+    const newTaxFreeAmount = math.subtract(tax.taxFreePersonalAllowance, amountToRemoveFromPersonalAllowance) > 0 ?
+      math.subtract(tax.taxFreePersonalAllowance, amountToRemoveFromPersonalAllowance) :
+      0
+
+    tax.taxFreePersonalAllowanceRemovedBy100kTax = amountToRemoveFromPersonalAllowance > tax.taxFreePersonalAllowance ? tax.taxFreePersonalAllowance : amountToRemoveFromPersonalAllowance
+    tax.taxFreePersonalAllowance = newTaxFreeAmount
+  }
+
   taxableIncome = math.subtract(taxableIncome, tax.taxFreePersonalAllowance)
-  
+
   let carryOver = taxableIncome
 
   for (const band of BANDS) {
@@ -24,7 +39,7 @@ export const calculateIncomeTax = (tax, taxableIncome) => {
       carryOver = math.subtract(carryOver, difference)
 
     } else {
-      tax[band].taxPaid = math.multiply(carryOver, tax[band].taxPercent) > 0 
+      tax[band].taxPaid = math.multiply(carryOver, tax[band].taxPercent) > 0
         ? math.round(math.multiply(carryOver, tax[band].taxPercent), ROUND_AMOUNT)
         : 0
 

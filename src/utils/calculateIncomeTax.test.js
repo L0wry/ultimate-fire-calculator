@@ -42,19 +42,22 @@ describe('Calculate Tax', () => {
     expect(calculateIncomeTax(incomeTaxBands(taxFreePersonalAllowance), taxableIncome).upperBand).toStrictEqual({ "carryOver": 0, "end": 99999999, "start": 150000.01, "taxPaid": 0, "taxPercent": 0.45 })
   })
 
+
+  it("reduces tax free personal allowence to 0 at 125000", () => {
+    const taxableIncome = 125000
+    const tax = calculateIncomeTax(incomeTaxBands(), taxableIncome)
+    expect(tax.taxFreePersonalAllowanceRemovedBy100kTax).toBe(12500)
+    expect(tax.taxFreePersonalAllowance).toBe(0)
+  })
+
+
   it("calculates upper band correctly", () => {
     const taxableIncome = 200000
-    expect(calculateIncomeTax(incomeTaxBands(), taxableIncome).upperBand).toStrictEqual({ "carryOver": 0, "end": 99999999, "start": 150000.01, "taxPaid": 22500.01, "taxPercent": 0.45 })
+    expect(calculateIncomeTax(incomeTaxBands(), taxableIncome).upperBand).toStrictEqual({ "carryOver": 0, "end": 99999999, "start": 150000.01, "taxPaid": 28125.01, "taxPercent": 0.45 })
   })
 
   it('Matches the snapshot', () => {
     const taxableIncome = 200000
-    expect(calculateIncomeTax(incomeTaxBands(), taxableIncome)).toStrictEqual({ 
-    "lowerBand": { "carryOver": 150000.01, "end": 50000, "start": 12500.01, "taxPaid": 7500, "taxPercent": 0.2 }, 
-    "mediumBand": { "carryOver": 50000.02000000002, "end": 150000, "start": 50000.01, "taxPaid": 40000, "taxPercent": 0.4 }, 
-    "taxFreePersonalAllowance": 12500, 
-    "totalIncomeTax": 70000.01, 
-    "upperBand": { "carryOver": 0, "end": 99999999, "start": 150000.01, "taxPaid": 22500.01, "taxPercent": 0.45 } }
-    )
+    expect(calculateIncomeTax(incomeTaxBands(), taxableIncome)).toStrictEqual({"lowerBand": {"carryOver": 162500.01, "end": 50000, "start": 12500.01, "taxPaid": 7500, "taxPercent": 0.2}, "mediumBand": {"carryOver": 62500.02000000002, "end": 150000, "start": 50000.01, "taxPaid": 40000, "taxPercent": 0.4}, "taxFreePersonalAllowance": 0, "taxFreePersonalAllowanceRemovedBy100kTax": 12500, "totalIncomeTax": 75625.01, "upperBand": {"carryOver": 0, "end": 99999999, "start": 150000.01, "taxPaid": 28125.01, "taxPercent": 0.45}})
   })
 })
