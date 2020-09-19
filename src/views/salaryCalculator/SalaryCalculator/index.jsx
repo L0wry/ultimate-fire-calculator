@@ -11,7 +11,6 @@ import IncomeTaxCard from './IncomeTaxCard'
 import NationalInsurance from './NationalInsuranceCard'
 import BreakdownCard from './BreakdownCard';
 import { useSalaryContext } from '../../../context/SalaryContext';
-import { useInvestmentContext } from '../../../context/InvestmentContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,7 +26,6 @@ const SalaryCalculator = () => {
 
   const { setUserFinances, userTax } = useSalaryContext();
 
-  console.log('piss', userTax)
   return (
     <Page
       className={classes.root}
@@ -39,9 +37,8 @@ const SalaryCalculator = () => {
           <Box mt={3} >
             <Grid
               container
-              direction="row"
-              justify="flex-start"
-              alignItems="stretch"
+              justify="space-evenly"
+              // alignItems="stretch"
               spacing={3}
             >
 
@@ -49,7 +46,7 @@ const SalaryCalculator = () => {
                 item
                 lg={6}
                 md={6}
-                xs={6}
+                xs={12}
               >
                 <IncomeTaxCard userTax={userTax} />
               </Grid>
@@ -57,7 +54,7 @@ const SalaryCalculator = () => {
                 item
                 lg={6}
                 md={6}
-                xs={6}
+                xs={12}
               >
                 <NationalInsurance />
               </Grid>
