@@ -10,7 +10,6 @@ import NetWorth from './NetWorth';
 import TasksProgress from './NetWorthTotal';
 import AmountInvestedPerMonth from './AmountInvestedPerMonth';
 import TotalProfit from './ExpectedMonthlyIncome';
-import TrafficByDevice from './SavingPercentage';
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { convertCompoundDataToGraph } from '../../../utils/convertCompoundDataToGraph';
 
@@ -36,47 +35,14 @@ const Dashboard = () => {
       <Container maxWidth={false}>
         <Grid
           container
+          justify="space-evenly"
+          alignItems="stretch"
           spacing={3}
         >
+
           <Grid
             item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <TakeHomeIncome />
-          </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <AmountInvestedPerMonth />
-          </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <TasksProgress />
-          </Grid>
-          <Grid
-            item
-            lg={3}
-            sm={6}
-            xl={3}
-            xs={12}
-          >
-            <TotalProfit />
-          </Grid>
-          <Grid
-            item
-            lg={8}
+            lg={9}
             md={12}
             xl={9}
             xs={12}
@@ -84,22 +50,63 @@ const Dashboard = () => {
             <NetWorth investmentData={convertCompoundDataToGraph(investments)} />
           </Grid>
           <Grid
-            item
-            lg={4}
-            md={6}
-            xl={3}
             xs={12}
-          >
-            <TrafficByDevice />
-          </Grid>
-          <Grid
-            item
-            lg={4}
-            md={6}
+            md={12}
+            lg={3}
             xl={3}
-            xs={12}
+            item
+            container
+            spacing={3}
+            // direction="column"
+            justify="space-evenly"
+            alignItems="stretch"
+
           >
+            <Grid
+              xs={12}
+              md={6}
+              lg={12}
+
+              item
+
+            >
+              <TakeHomeIncome />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={12}
+
+
+
+            >
+              <AmountInvestedPerMonth />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={12}
+
+
+            >
+              <TasksProgress />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={12}
+
+
+            >
+              <TotalProfit />
+            </Grid>
+
+
           </Grid>
+
         </Grid>
       </Container>
     </Page>

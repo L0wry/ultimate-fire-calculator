@@ -88,7 +88,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
       <Divider />
       <CardContent>
         <Box
-          height={600}
+          height={400}
           position="relative"
         >
           <ResponsiveContainer width={"100%"} height="100%">

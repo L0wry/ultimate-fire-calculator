@@ -6,11 +6,11 @@ export const convertCompoundDataToGraph = investments =>
       let isYearInAccum = accum.find(entry => entry.year === year)
       
       if (isYearInAccum) {
-        isYearInAccum[investment.name] = months['Month 1'].balance
+        isYearInAccum[investment.name] = months['Month 12'].balance
       } else {
         accum.push({
           year,
-          [investment.name]: months['Month 1'].balance,
+          [investment.name]: months['Month 12'].balance,
         })
       }
     }
