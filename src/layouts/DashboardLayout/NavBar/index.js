@@ -13,7 +13,8 @@ import {
   BarChart as BarChartIcon,
   TrendingUp,
   DollarSign,
-  Download
+  Download,
+  HelpCircle
 } from 'react-feather';
 import NavItem from './NavItem';
 import { SelectYears } from './SelectYears'
@@ -42,9 +43,14 @@ const items = [
     title: 'Investments'
   },
   {
-    href: '/app/net-worth',
+    href: '/app/dashboard',
     icon: BarChartIcon,
-    title: 'Net Worth'
+    title: 'Dashboard'
+  },
+  {
+    href: '/app/help',
+    icon: HelpCircle,
+    title: 'Help'
   }
 ];
 

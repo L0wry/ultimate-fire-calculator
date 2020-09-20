@@ -37,28 +37,52 @@ const Text = ({ item, drawDownPercent }) => {
 
   return (
     <Typography
-    className={classes.typography}
+      className={classes.typography}
       variant="h5"
       gutterBottom
     >
-      {item.dataKey === "Income From Draw Down" ? `Expected Income from ${drawDownPercent * 100}% Draw Down` : item.dataKey }
+      {item.dataKey === "Income From Draw Down" ? `Expected Income from ${drawDownPercent * 100}% Draw Down` : item.dataKey}
     </Typography>
   )
 }
 
-const LegendText = props => (
+const TextBox = ({ item, drawDownPercent }) => {
+  const useStyles = makeStyles(theme => ({
+    typography: {
+      color: item.color
+    },
+  }));
+
+  const classes = useStyles();
+
+  return (
+    <Typography
+      className={classes.typography}
+      variant="h5"
+      gutterBottom
+    >
+      {item.dataKey === "Income From Draw Down" ? 
+      `Expected Income from ${drawDownPercent * 100}% Draw Down: £${item.value}` :
+      `Expenses Cost: £${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+    </Typography>
+  )
+}
+
+
+const LegendBox = props => (
   <Box>
-    <Grid spacing={3}           
- justify="space-evenly"
- alignItems="stretch"
-           container>
+    <Grid spacing={3}
+      justify="space-evenly"
+      alignItems="stretch"
+      container>
 
       {props.payload.map((item, i) =>
         <Grid
+        key={i}
           item
         >
 
-          <Box key={i}>
+          <Box >
             <Text drawDownPercent={props.drawDownPercent} item={item} />
           </Box>
         </Grid>
@@ -67,7 +91,31 @@ const LegendText = props => (
   </Box>
 )
 
-const Fire = ({ investmentData, drawDownPercent, ...rest }) => {
+const ToolTipBox = props => (props.active) ? (
+  <Card className={clsx(props.classes.root)}>
+    <Box p={1} m={1} >
+
+      <Typography
+        align="center"
+        color="textSecondary"
+        variant="h5"
+        gutterBottom
+      >
+        {props.label}
+
+      </Typography>
+      {props.payload.map((item, i) =>
+        <Box key={i}>
+          <TextBox drawDownPercent={props.drawDownPercent} item={item} />
+        </Box>
+      )}
+    </Box>
+  </Card>
+) : null
+
+
+
+const Fire = ({ fireData, drawDownPercent, ...rest }) => {
   const useStyles = makeStyles(() => ({
     root: {}
   }));
@@ -75,10 +123,9 @@ const Fire = ({ investmentData, drawDownPercent, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
-
-  return investmentData.length > 0 && (
+  return fireData.length > 0 && (
     <Card
-      classes={clsx(classes.root)}
+    className={clsx(classes.root)}
       {...rest}
     >
       <CardHeader
@@ -92,7 +139,8 @@ const Fire = ({ investmentData, drawDownPercent, ...rest }) => {
         >
           <ResponsiveContainer width={"100%"} height="100%">
             <LineChart
-              data={investmentData}
+              syncId="year"
+              data={fireData}
               margin={{
                 top: 0, right: 35, left: 35, bottom: 0,
               }}
@@ -101,11 +149,13 @@ const Fire = ({ investmentData, drawDownPercent, ...rest }) => {
 
               <XAxis dataKey="year" style={{ fontFamily: theme.typography.fontFamily }} />
               <YAxis tickFormatter={amount => `£${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`} style={{ fontFamily: theme.typography.fontFamily }} />
-              <Legend content={<LegendText drawDownPercent={drawDownPercent} classes={classes} />} />
+              <Legend content={<LegendBox drawDownPercent={drawDownPercent} classes={classes} />} />
+
+              <Tooltip content={<ToolTipBox drawDownPercent={drawDownPercent} classes={classes} />} />
 
 
               {
-                Object.keys(investmentData[0])
+                Object.keys(fireData[0])
                   .filter(key => key !== 'year')
                   .map((investmentType, i) =>
                     <Line

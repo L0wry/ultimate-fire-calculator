@@ -21,7 +21,7 @@
 
 ### p1
 
- - [ ] sort out dashboard graph styling
+ - [ x] sort out dashboard graph styling
  - [ ] add expenses to the dashboard to show retirement in years
  - [x] Support student loans
  - [ ] Add secondary tax free income

@@ -105,7 +105,7 @@ const Dashboard = () => {
             xl={9}
             xs={12}
           >
-            <Fire drawDownPercent={drawDownPercent} investmentData={convertInvestmentDataToFire(investments, drawDownPercent, expenseTotal)} />
+            <Fire drawDownPercent={drawDownPercent} fireData={convertInvestmentDataToFire(investments, drawDownPercent, expenseTotal)} />
           </Grid>
         </Grid>
 

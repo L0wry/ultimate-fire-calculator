@@ -90,6 +90,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
         >
           <ResponsiveContainer width={"100%"} height="100%">
             <AreaChart
+              syncId="year"
               data={investmentData}
               margin={{
                 top: 0, right: 35, left: 35, bottom: 0,

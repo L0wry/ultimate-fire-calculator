@@ -7,7 +7,7 @@ import Budget from 'src/views/budget/Budget';
 import NetWorthDashboard from 'src/views/dashboard/DashboardView';
 import NotFoundView from 'src/views/errors/NotFoundView';
 import SalaryCalculator from 'src/views/salaryCalculator/SalaryCalculator';
-import SettingsView from 'src/views/settings/SettingsView';
+import Help from 'src/views/help';
 
 const routes = [
   {
@@ -16,8 +16,9 @@ const routes = [
     children: [
       { path: 'investments', element: <Investments /> },
       { path: 'budget', element: <Budget /> },
-      { path: 'net-worth', element: <NetWorthDashboard /> },
+      { path: 'dashboard', element: <NetWorthDashboard /> },
       { path: 'salary-calculator', element: <SalaryCalculator /> },
+      { path: 'Help', element: <Help /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
