@@ -118,6 +118,8 @@ const HelpPage = ({ className, ...rest }) => {
                             Geared towards PAYE
                             Only supports tax year 2020 - 20201
                             UK focused
+                            Doesn't take into consideration tax free investment types
+                            Doesn't take into consideration annual limits on isa, pension etc
                   </Typography>
                     </Box>
 
