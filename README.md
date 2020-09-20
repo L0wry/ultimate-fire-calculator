@@ -32,6 +32,7 @@
 
 ### p2
 
+ - [ ] Stop contributing  to investment in x years
  - [ ] Finish tax breakdown table
  - [ ] Display compound data in table
  - [ ] child support

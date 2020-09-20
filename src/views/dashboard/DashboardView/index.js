@@ -7,11 +7,14 @@ import {
 import Page from 'src/components/Page';
 import TakeHomeIncome from './TakeHomeIncome';
 import NetWorth from './NetWorth';
+import Fire from './Fire'
 import TasksProgress from './NetWorthTotal';
 import AmountInvestedPerMonth from './AmountInvestedPerMonth';
 import TotalProfit from './ExpectedMonthlyIncome';
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { convertCompoundDataToGraph } from '../../../utils/convertCompoundDataToGraph';
+import { convertInvestmentDataToFire } from '../../../utils/convertInvestmentDataToFire';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,8 +38,6 @@ const Dashboard = () => {
       <Container maxWidth={false}>
         <Grid
           container
-          justify="space-evenly"
-          alignItems="stretch"
           spacing={3}
         >
 
@@ -57,18 +58,14 @@ const Dashboard = () => {
             item
             container
             spacing={3}
-            // direction="column"
             justify="space-evenly"
             alignItems="stretch"
-
           >
             <Grid
               xs={12}
               md={6}
               lg={12}
-
               item
-
             >
               <TakeHomeIncome />
             </Grid>
@@ -77,9 +74,6 @@ const Dashboard = () => {
               xs={12}
               md={6}
               lg={12}
-
-
-
             >
               <AmountInvestedPerMonth />
             </Grid>
@@ -88,8 +82,6 @@ const Dashboard = () => {
               xs={12}
               md={6}
               lg={12}
-
-
             >
               <TasksProgress />
             </Grid>
@@ -98,16 +90,25 @@ const Dashboard = () => {
               xs={12}
               md={6}
               lg={12}
-
-
             >
               <TotalProfit />
             </Grid>
-
-
           </Grid>
-
+       
+          <Grid
+            item
+            lg={9}
+            md={12}
+            xl={9}
+            xs={12}
+          >
+            <Fire investmentData={convertInvestmentDataToFire(investments, 0.04, 3000)} />
+          </Grid>
         </Grid>
+
+    
+        
+       
       </Container>
     </Page>
   );

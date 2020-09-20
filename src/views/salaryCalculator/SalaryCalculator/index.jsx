@@ -38,7 +38,6 @@ const SalaryCalculator = () => {
             <Grid
               container
               justify="space-evenly"
-              // alignItems="stretch"
               spacing={3}
             >
 

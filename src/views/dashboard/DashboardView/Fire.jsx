@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import {
-  AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid, Legend
+  LineChart, Line, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid, Legend
 } from 'recharts';
 
 import {
@@ -14,7 +14,8 @@ import {
   Divider,
   useTheme,
   makeStyles,
-  Typography
+  Typography,
+  Grid
 } from '@material-ui/core';
 
 const colours = [
@@ -26,9 +27,11 @@ const colours = [
   '#1565c0']
 
 const Text = ({ item }) => {
+  {console.log(item)}
+
   const useStyles = makeStyles(theme => ({
     typography: {
-      color: item.stroke
+      color: item.color
     },
   }));
 
@@ -36,37 +39,37 @@ const Text = ({ item }) => {
 
   return (
     <Typography
-      className={classes.typography}
-      variant="h6"
+    className={classes.typography}
+      variant="h5"
+      gutterBottom
     >
-      {`${item.dataKey}: £${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+      {`${item.dataKey}`}
     </Typography>
   )
 }
 
-const ToolTip = props => (props.active) ? (
-  <Card className={clsx(props.classes.root)}>
-    <Box p={1} m={1} >
+const LegendText = props => (
+  <Box>
+    <Grid spacing={3}           
+ justify="space-evenly"
+ alignItems="stretch"
+           container>
 
-      <Typography
-        align="center"
-        color="textSecondary"
-        variant="h5"
-        gutterBottom
-      >
-        {props.label}
-
-      </Typography>
       {props.payload.map((item, i) =>
-        <Box key={i}>
-          <Text item={item} />
-        </Box>
-      )}
-    </Box>
-  </Card>
-) : null
+        <Grid
+          item
+        >
 
-const NetWorth = ({ investmentData, className, ...rest }) => {
+          <Box key={i}>
+            <Text item={item} />
+          </Box>
+        </Grid>
+      )}
+    </Grid>
+  </Box>
+)
+
+const Fire = ({ investmentData, classyear, ...rest }) => {
   const useStyles = makeStyles(() => ({
     root: {}
   }));
@@ -74,13 +77,14 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
+
   return investmentData.length > 0 && (
     <Card
-      className={clsx(classes.root, className)}
+      classyear={clsx(classes.root, classyear)}
       {...rest}
     >
       <CardHeader
-        title="Net Worth Over Time"
+        title="Firing In"
       />
       <Divider />
       <CardContent>
@@ -89,7 +93,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
           position="relative"
         >
           <ResponsiveContainer width={"100%"} height="100%">
-            <AreaChart
+            <LineChart
               data={investmentData}
               margin={{
                 top: 0, right: 35, left: 35, bottom: 0,
@@ -97,15 +101,16 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
             >
               <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
 
-
               <XAxis dataKey="year" style={{ fontFamily: theme.typography.fontFamily }} />
               <YAxis tickFormatter={amount => `£${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`} style={{ fontFamily: theme.typography.fontFamily }} />
-              <Tooltip content={<ToolTip classes={classes} />} />
+              <Legend content={<LegendText classes={classes} />} />
+
+
               {
                 Object.keys(investmentData[0])
                   .filter(key => key !== 'year')
                   .map((investmentType, i) =>
-                    <Area
+                    <Line
                       key={`${investmentType}-${i}`}
                       type="monotone"
                       dataKey={investmentType}
@@ -114,32 +119,18 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
                       fill={colours[i]}
                     />
                   )}
-            </AreaChart>
+            </LineChart>
           </ResponsiveContainer>
 
         </Box>
       </CardContent>
       <Divider />
-      {/* <Box
-        display="flex"
-        justifyContent="flex-end"
-        p={2}
-      >
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon />}
-          size="small"
-          variant="text"
-        >
-          Overview
-        </Button>
-      </Box> */}
     </Card>
   );
 };
 
-NetWorth.propTypes = {
-  className: PropTypes.string
+Fire.propTypes = {
+  classyear: PropTypes.string
 };
 
-export default NetWorth;
+export default Fire;
