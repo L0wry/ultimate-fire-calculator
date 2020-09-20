@@ -82,7 +82,7 @@ const Fire = ({ investmentData, classyear, ...rest }) => {
       {...rest}
     >
       <CardHeader
-        title="Firing In"
+        title="Retiring In..."
       />
       <Divider />
       <CardContent>
