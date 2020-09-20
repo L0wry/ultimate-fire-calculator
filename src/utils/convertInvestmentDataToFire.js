@@ -14,12 +14,12 @@ export const convertInvestmentDataToFire = (investments, drawdownPercent, expens
       const incomeToAdd = math.chain(months['Month 12'].balance).divide(100).multiply(drawdownPercent).round(2).done()
 
       if (isYearInAccum) {
-        isYearInAccum['Income From Drawdown'] = math.add(isYearInAccum['Income From Drawdown'], incomeToAdd)
+        isYearInAccum['Income From Draw Down'] = math.add(isYearInAccum['Income From Draw Down'], incomeToAdd)
       } else {
         accum.push({
           year,
           Expenses: expenseTotal,
-          'Income From Drawdown': incomeToAdd
+          'Income From Draw Down': incomeToAdd
         })
       }   
     }

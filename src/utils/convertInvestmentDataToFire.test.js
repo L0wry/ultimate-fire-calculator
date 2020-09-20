@@ -22,16 +22,16 @@ describe('convertInvestmentDataToFire', () => {
     const expenseTotal = 3000
 
     expect(convertInvestmentDataToFire(investments, drawdownPercent, expenseTotal)).toEqual([
-      { "Expenses": 3000, "Income From Drawdown": 0.04, "year": "Year 1" },
-      { "Expenses": 3000, "Income From Drawdown": 0.04, "year": "Year 2" },
-      { "Expenses": 3000, "Income From Drawdown": 0.06, "year": "Year 3" },
-      { "Expenses": 3000, "Income From Drawdown": 0.06, "year": "Year 4" },
-      { "Expenses": 3000, "Income From Drawdown": 0.06, "year": "Year 5" },
-      { "Expenses": 3000, "Income From Drawdown": 0.08, "year": "Year 6" },
-      { "Expenses": 3000, "Income From Drawdown": 0.08, "year": "Year 7" },
-      { "Expenses": 3000, "Income From Drawdown": 0.08, "year": "Year 8" },
-      { "Expenses": 3000, "Income From Drawdown": 0.1, "year": "Year 9" },
-      { "Expenses": 3000, "Income From Drawdown": 0.1, "year": "Year 10" }]
+      { "Expenses": 3000, "Income From Draw Down": 0.04, "year": "Year 1" },
+      { "Expenses": 3000, "Income From Draw Down": 0.04, "year": "Year 2" },
+      { "Expenses": 3000, "Income From Draw Down": 0.06, "year": "Year 3" },
+      { "Expenses": 3000, "Income From Draw Down": 0.06, "year": "Year 4" },
+      { "Expenses": 3000, "Income From Draw Down": 0.06, "year": "Year 5" },
+      { "Expenses": 3000, "Income From Draw Down": 0.08, "year": "Year 6" },
+      { "Expenses": 3000, "Income From Draw Down": 0.08, "year": "Year 7" },
+      { "Expenses": 3000, "Income From Draw Down": 0.08, "year": "Year 8" },
+      { "Expenses": 3000, "Income From Draw Down": 0.1, "year": "Year 9" },
+      { "Expenses": 3000, "Income From Draw Down": 0.1, "year": "Year 10" }]
     )
   })
 })

@@ -26,7 +26,7 @@ const colours = [
   '#1976d2',
   '#1565c0']
 
-const Text = ({ item }) => {
+const Text = ({ item, drawDownPercent }) => {
   const useStyles = makeStyles(theme => ({
     typography: {
       color: item.color
@@ -41,7 +41,7 @@ const Text = ({ item }) => {
       variant="h5"
       gutterBottom
     >
-      {`${item.dataKey}`}
+      {item.dataKey === "Income From Draw Down" ? `Expected Income from ${drawDownPercent * 100}% Draw Down` : item.dataKey }
     </Typography>
   )
 }
@@ -59,7 +59,7 @@ const LegendText = props => (
         >
 
           <Box key={i}>
-            <Text item={item} />
+            <Text drawDownPercent={props.drawDownPercent} item={item} />
           </Box>
         </Grid>
       )}
@@ -67,7 +67,7 @@ const LegendText = props => (
   </Box>
 )
 
-const Fire = ({ investmentData, classyear, ...rest }) => {
+const Fire = ({ investmentData, drawDownPercent, ...rest }) => {
   const useStyles = makeStyles(() => ({
     root: {}
   }));
@@ -78,7 +78,7 @@ const Fire = ({ investmentData, classyear, ...rest }) => {
 
   return investmentData.length > 0 && (
     <Card
-      classyear={clsx(classes.root, classyear)}
+      classes={clsx(classes.root)}
       {...rest}
     >
       <CardHeader
@@ -101,7 +101,7 @@ const Fire = ({ investmentData, classyear, ...rest }) => {
 
               <XAxis dataKey="year" style={{ fontFamily: theme.typography.fontFamily }} />
               <YAxis tickFormatter={amount => `£${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`} style={{ fontFamily: theme.typography.fontFamily }} />
-              <Legend content={<LegendText classes={classes} />} />
+              <Legend content={<LegendText drawDownPercent={drawDownPercent} classes={classes} />} />
 
 
               {
