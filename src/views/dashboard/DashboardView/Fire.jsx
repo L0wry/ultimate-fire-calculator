@@ -27,8 +27,6 @@ const colours = [
   '#1565c0']
 
 const Text = ({ item }) => {
-  {console.log(item)}
-
   const useStyles = makeStyles(theme => ({
     typography: {
       color: item.color

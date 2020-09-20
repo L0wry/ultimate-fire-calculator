@@ -12,6 +12,8 @@ import TasksProgress from './NetWorthTotal';
 import AmountInvestedPerMonth from './AmountInvestedPerMonth';
 import TotalProfit from './ExpectedMonthlyIncome';
 import { useInvestmentContext } from '../../../context/InvestmentContext';
+import { useBudgetContext } from '../../../context/BudgetContext';
+
 import { convertCompoundDataToGraph } from '../../../utils/convertCompoundDataToGraph';
 import { convertInvestmentDataToFire } from '../../../utils/convertInvestmentDataToFire';
 
@@ -28,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = () => {
   const classes = useStyles();
 
-  const { investments } = useInvestmentContext();
+  const { investments, drawDownPercent } = useInvestmentContext();
+  const { expenseTotal } = useBudgetContext();
 
   return (
     <Page
@@ -102,7 +105,7 @@ const Dashboard = () => {
             xl={9}
             xs={12}
           >
-            <Fire investmentData={convertInvestmentDataToFire(investments, 0.04, 3000)} />
+            <Fire investmentData={convertInvestmentDataToFire(investments, drawDownPercent, expenseTotal)} />
           </Grid>
         </Grid>
 

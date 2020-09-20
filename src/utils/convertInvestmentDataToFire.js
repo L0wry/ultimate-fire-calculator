@@ -9,11 +9,7 @@ export const convertInvestmentDataToFire = (investments, drawdownPercent, expens
   investments.reduce((accum, investment,) => {
 
     for (const [year, months] of Object.entries(investment.compoundData)) {
-
       let isYearInAccum = accum.find(entry => entry.year === year)
-
-
-      console.log({year, balence: months['Month 12'].balance})
       
       const incomeToAdd = math.chain(months['Month 12'].balance).divide(100).multiply(drawdownPercent).round(2).done()
 

@@ -4,7 +4,6 @@ import {
     MenuItem,
     FormControl,
     Select,
-    Button,
     Typography,
     Box
 } from '@material-ui/core';
@@ -18,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const years = new Array(100).fill(0).map((_, i) => i + 1)
+const percentages = new Array(10).fill(0).map((_, i) => i + 1)
 
-export const SelectYears = () => {
+export const SelectDrawDown = () => {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -33,8 +32,9 @@ export const SelectYears = () => {
         setOpen(true);
     };
 
-    const { saveYearsToMature, yearsToMature } = useInvestmentContext();
+    const { saveDrawdown, drawDownPercent } = useInvestmentContext();
 
+    console.log(drawDownPercent)
     return (
         <Box
             display="flex"
@@ -46,7 +46,7 @@ export const SelectYears = () => {
                     gutterBottom
                     variant="h6"
                 >
-                    Predict Net Worth In
+                    Draw Down Percentage
                 </Typography>
                 <Select
                     style={{  textAlign: 'center'}}
@@ -55,11 +55,11 @@ export const SelectYears = () => {
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
-                    value={yearsToMature}
-                    onChange={e => saveYearsToMature(e.target.value)}
+                    value={drawDownPercent * 100}
+                    onChange={e => saveDrawdown(e.target.value)}
                 >
-                    {years.map((year) =>
-                        <MenuItem key={`${year}-Years`} style={{ justifyContent: 'center' }} value={year}>{`${year} Years`}</MenuItem>
+                    {percentages.map((percent) =>
+                        <MenuItem key={percent} style={{ justifyContent: 'center' }} value={percent}>{`${percent}%`}</MenuItem>
                     )}
                 </Select>
             </FormControl>
