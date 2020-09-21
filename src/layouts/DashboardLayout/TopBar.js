@@ -38,7 +38,7 @@ const TopBar = ({
           <Box ml={3}>
             <Typography
               variant="h1">
-              FIRE
+              FIRE In The Booth
           </Typography>
           </Box>
         </Hidden>
@@ -47,7 +47,7 @@ const TopBar = ({
           <Box>
             <Typography
               variant="h1">
-              FIRE
+              FITB
           </Typography>
 
           </Box>
