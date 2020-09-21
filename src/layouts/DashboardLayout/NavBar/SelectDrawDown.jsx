@@ -34,7 +34,6 @@ export const SelectDrawDown = () => {
 
     const { saveDrawdown, drawDownPercent } = useInvestmentContext();
 
-    console.log(drawDownPercent)
     return (
         <Box
             display="flex"

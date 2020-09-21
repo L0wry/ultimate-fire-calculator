@@ -121,6 +121,7 @@ const HelpPage = ({ className, ...rest }) => {
                             Doesn't take into consideration tax free investment types
                             Doesn't take into consideration annual limits on isa, pension etc
                             Doesn't take into consideration SIPP tax relief
+                            Doesn't support inflation for the time being
                   </Typography>
                     </Box>
 
@@ -152,6 +153,14 @@ const HelpPage = ({ className, ...rest }) => {
                            
 
                   </Typography>
+
+                  <Typography
+                            align="left"
+                            color="textPrimary"
+                            variant="body1"
+                        >
+                            Not sure where to start? Check out the UK Personal Finance FlowChart
+                            </Typography>
                     </Box>
 
 

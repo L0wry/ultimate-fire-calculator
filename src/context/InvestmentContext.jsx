@@ -21,7 +21,7 @@ export const InvestmentContextProvider = ({ children }) => {
 
   const saveDrawdown = percent => {
     console.log(percent)
-      setDrawDownPercent(percent /  100)
+      setDrawDownPercent(parseFloat(percent) /  100)
       localStorage.setItem('drawDownPercent', percent /  100)
   }
 
