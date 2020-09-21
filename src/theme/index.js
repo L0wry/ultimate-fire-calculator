@@ -17,7 +17,7 @@ const theme = createMuiTheme({
       paper: colors.common.white
     },
     primary: {
-      main: colors.blue[500]
+      main: colors.lightBlue[800]
     },
     secondary: {
       main: colors.blue[700]

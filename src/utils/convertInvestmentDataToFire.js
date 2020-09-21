@@ -12,7 +12,6 @@ export const convertInvestmentDataToFire = (investments, drawdownPercent, expens
       let isYearInAccum = accum.find(entry => entry.year === year)
       const incomeToAdd = math.chain(months['Month 12'].balance).multiply(drawdownPercent).divide(12).round(2).done()
 
-      console.log({year, incomeToAdd,drawdownPercent, balance: months['Month 12'].balance} )
       if (isYearInAccum) {
         isYearInAccum['Income From Draw Down'] = math.round(math.add(isYearInAccum['Income From Draw Down'], incomeToAdd),2)
       } else {

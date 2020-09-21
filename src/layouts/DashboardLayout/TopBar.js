@@ -17,10 +17,7 @@ import Logo from 'src/components/Logo';
 
 const useStyles = makeStyles(() => ({
   root: {},
-  avatar: {
-    width: 60,
-    height: 60
-  }
+
 }));
 
 const TopBar = ({
@@ -40,9 +37,8 @@ const TopBar = ({
         <Hidden smDown>
           <Box ml={3}>
             <Typography
-              color="textPrimary"
               variant="h1">
-              Ultimate Fire Calculator
+              FIRE
           </Typography>
           </Box>
         </Hidden>
@@ -50,9 +46,8 @@ const TopBar = ({
         <Hidden mdUp>
           <Box>
             <Typography
-              color="textPrimary"
               variant="h1">
-              UFC
+              FIRE
           </Typography>
 
           </Box>

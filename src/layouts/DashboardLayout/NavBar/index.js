@@ -79,7 +79,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
 
   const content = (
 
-    <Box p={2}>
+    <Box p={1}>
       <List>
         {items.map((item) => (
           <NavItem
@@ -92,7 +92,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       </List>
      
 
-      <Box mt={10}>
+      <Box mt={2}>
 
       <Grid
         spacing={3}

@@ -14,11 +14,11 @@ const purposeTexts = [
     'As I started to become more aware of personal finance I found it hard to find the tools online to answer questions like; \n',
     '',
     'If I was to reduce my expenses by X amount and invest the remainder into the market, how would that affect my net work over a given period?',
-    'If I was to increase my salary sacrifice by X%, how would that affect my net work over a given period?',
+    'If I was to increase my salary sacrifice by X%, how would that affect my net worth over a given period?',
     'How much do others my ages spend on expenses?',
     'How much do others my age invest in the market?',
     '                                         ',
-    'This calculator aims to answer some of those questions asked now and I hope at some point it will answer all of them in the future!']
+    'This calculator aims to answer some of those questions and I hope at some point it will answer all of them!']
 
 const HelpPage = ({ className, ...rest }) => {
     return (
@@ -73,7 +73,11 @@ const HelpPage = ({ className, ...rest }) => {
                                 color="textPrimary"
                                 variant="body1"
                             >
-                                getting started
+                                Work your way through each of the tabs on left hand side. <br/>
+                                I would recommend working through from top to bottom. <br/>
+                                If your investments are sitting in global index trackers a good return percentage would be 5% - 7% <br/>
+                                Once you finish entering your finances use the selects on the navigation menu to run predictions over x years.
+                            
                   </Typography>
                         </Box>
                     </Box>
@@ -94,11 +98,19 @@ const HelpPage = ({ className, ...rest }) => {
                             color="textPrimary"
                             variant="h5"
                         >
-                            Draw down
+                            Draw Down 
+                  </Typography>
+
+
+
+                  <Typography
+                            align="left"
+                            color="textPrimary"
+                            variant="body1"
+                        >
+                            Is the percentage amount you wish to withdraw once you have FIRED
                   </Typography>
                     </Box>
-
-
 
                     <Box mt={3}>
                         <Typography
@@ -115,14 +127,15 @@ const HelpPage = ({ className, ...rest }) => {
                             color="textPrimary"
                             variant="body1"
                         >
-                            Geared towards PAYE
-                            Only supports tax year 2020 - 20201
-                            UK focused
-                            Doesn't take into consideration tax free investment types
-                            Doesn't take into consideration annual limits on isa, pension etc
-                            Doesn't take into consideration SIPP tax relief
-                            Doesn't support inflation for the time being
-                  </Typography>
+                            Geared towards PAYE <br />
+                            Only supports tax year 2020 - 20201<br />
+                            UK focused<br />
+                            Doesn't take into consideration tax free investment types<br />
+                            Doesn't support tax on withdrawals <br/>
+                            Doesn't take into consideration annual limits on isa, pension etc<br />
+                            Doesn't take into consideration SIPP tax relief<br />
+                            Doesn't support inflation for the time being<br />
+                        </Typography>
                     </Box>
 
                     <Box mt={3}>
@@ -140,33 +153,29 @@ const HelpPage = ({ className, ...rest }) => {
                             color="textPrimary"
                             variant="body1"
                         >
-                            Should out to the subreddits
+                            Not sure where to start with personal finance? Check out <br />
 
-                           <Link href="https://www.reddit.com/r/UKPersonalFinance/" >
+                            <Link href="https://flowchart.ukpersonal.finance/" >
+                                UK Personal Finance FlowChart
+
+                            </Link>
+                            <br />
+
+                            <Link href="https://www.reddit.com/r/UKPersonalFinance/" >
                                 UKPersonalFinance
 
                             </Link>
-
+                            <br />
                             <Link href="https://www.reddit.com/r/FIREUK/" >
                                 FIREUK
                             </Link>
-                           
 
-                  </Typography>
+                        </Typography>
 
-                  <Typography
-                            align="left"
-                            color="textPrimary"
-                            variant="body1"
-                        >
-                            Not sure where to start? Check out the UK Personal Finance FlowChart
-                            </Typography>
                     </Box>
-
-
                 </CardContent>
             </Card>
-        </div>
+        </div >
     );
 };
 
