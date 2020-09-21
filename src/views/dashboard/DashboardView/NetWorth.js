@@ -62,6 +62,10 @@ const ToolTip = props => (props.active) ? (
           <Text item={item} />
         </Box>
       )}
+      
+       <Box >
+          <Text item={{dataKey: 'Total', value: props.payload.reduce((a, b) => a+ b.value, 0).toFixed(2)}} />
+        </Box>
     </Box>
   </Card>
 ) : null

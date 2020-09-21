@@ -6,10 +6,11 @@ import {
     Card,
     CardContent,
     Typography,
-    Divider
+    Divider,
+    Link
 } from '@material-ui/core';
 const purposeTexts = [
-    'Personal finance was not something that was taught me at school or by my parents.It has only been very recently that I have taken an interest in it.',
+    'Personal finance was not something that was taught me at school. It has only been very recently that I have taken an interest in it.',
     'As I started to become more aware of personal finance I found it hard to find the tools online to answer questions like; \n',
     '',
     'If I was to reduce my expenses by X amount and invest the remainder into the market, how would that affect my net work over a given period?',
@@ -20,7 +21,6 @@ const purposeTexts = [
     'This calculator aims to answer some of those questions asked now and I hope at some point it will answer all of them in the future!']
 
 const HelpPage = ({ className, ...rest }) => {
-
     return (
         <div
             className={clsx(className)}
@@ -54,7 +54,7 @@ const HelpPage = ({ className, ...rest }) => {
                                 variant="body1"
                             >
                                 {purposeText}
-                                <br/>
+                                <br />
                             </Typography>
                         ))}
 
@@ -120,6 +120,37 @@ const HelpPage = ({ className, ...rest }) => {
                             UK focused
                             Doesn't take into consideration tax free investment types
                             Doesn't take into consideration annual limits on isa, pension etc
+                            Doesn't take into consideration SIPP tax relief
+                  </Typography>
+                    </Box>
+
+                    <Box mt={3}>
+                        <Typography
+                            align="left"
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h4"
+                        >
+                            Resources
+                  </Typography>
+
+                        <Typography
+                            align="left"
+                            color="textPrimary"
+                            variant="body1"
+                        >
+                            Should out to the subreddits
+
+                           <Link href="https://www.reddit.com/r/UKPersonalFinance/" >
+                                UKPersonalFinance
+
+                            </Link>
+
+                            <Link href="https://www.reddit.com/r/FIREUK/" >
+                                FIREUK
+                            </Link>
+                           
+
                   </Typography>
                     </Box>
 

@@ -41,7 +41,7 @@ const Text = ({ item, drawDownPercent }) => {
       variant="h5"
       gutterBottom
     >
-      {item.dataKey === "Income From Draw Down" ? `Expected Income from ${drawDownPercent * 100}% Draw Down` : item.dataKey}
+      {item.dataKey === "Income From Draw Down" ? `Expected Monthly Income from ${drawDownPercent * 100}% Draw Down` : item.dataKey}
     </Typography>
   )
 }
@@ -62,7 +62,7 @@ const TextBox = ({ item, drawDownPercent }) => {
       gutterBottom
     >
       {item.dataKey === "Income From Draw Down" ? 
-      `Expected Income from ${drawDownPercent * 100}% Draw Down: £${item.value}` :
+      `Expected Monthly Income from ${drawDownPercent * 100}% Draw Down: £${item.value}` :
       `Expenses Cost: £${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
     </Typography>
   )
