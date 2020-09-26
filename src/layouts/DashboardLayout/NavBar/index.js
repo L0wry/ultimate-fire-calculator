@@ -7,7 +7,8 @@ import {
   Hidden,
   List,
   makeStyles,
-  Grid
+  Grid,
+  Typography
 } from '@material-ui/core';
 import {
   BarChart as BarChartIcon,
@@ -56,12 +57,12 @@ const items = [
 
 const useStyles = makeStyles((theme) => ({
   mobileDrawer: {
-    width: 256
+    width: 256,
+    backgroundColor: theme.palette.primary.main
   },
   desktopDrawer: {
     width: 256,
-    top: 64,
-    height: 'calc(100% - 64px)'
+    backgroundColor: theme.palette.primary.main,
   }
 }));
 
@@ -81,17 +82,17 @@ const NavBar = ({ onMobileClose, openMobile }) => {
 
     <Box p={1}>
       <List>
-        {items.map((item) => (
+        {items.map((item, i) => (
           <NavItem
             href={item.href}
             key={item.title}
             title={item.title}
             icon={item.icon}
+            selected={location.pathname === item.href}
           />
         ))}
       </List>
      
-
       <Box mt={2}>
 
       <Grid
@@ -120,7 +121,6 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           <Grid
             item >
             <AmountInvested />
-
           </Grid>
       </Grid>
     </Box>
@@ -131,6 +131,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
     <>
       <Hidden lgUp>
         <Drawer
+          elevation={12}
           anchor="left"
           classes={{ paper: classes.mobileDrawer }}
           onClose={onMobileClose}
@@ -142,6 +143,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       </Hidden>
       <Hidden mdDown>
         <Drawer
+          elevation={12}
           anchor="left"
           classes={{ paper: classes.desktopDrawer }}
           open

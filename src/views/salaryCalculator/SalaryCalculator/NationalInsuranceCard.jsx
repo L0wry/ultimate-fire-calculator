@@ -18,13 +18,9 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column'
   },
-  statsItem: {
-    alignItems: 'center',
-    display: 'flex'
+  text: {
+    color: theme.palette.text.secondary
   },
-  statsIcon: {
-    marginRight: theme.spacing(1)
-  }
 }));
 
 const NationalInsuranceCard = ({ className, ...rest }) => {
@@ -42,93 +38,82 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
   } = useSalaryContext();
 
   return (
-    <>
-      {salary > 0 && (
-        <Card
-          className={clsx(classes.root, className)}
-          {...rest}
-        >
-          <CardContent>
+    <Box boxShadow={3} p={2}  >
+      <Typography
+        align="center"
+        className={classes.text}
+        gutterBottom
+        variant="h4"
+      >
+        National Insurance
+        </Typography>
 
+      <Box mt={3}>
+        <Grid
+          container
+          spacing={3}
+        >
+
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
             <Typography
               align="center"
-              color="textPrimary"
-              gutterBottom
-              variant="h4"
+              className={classes.text}
+              variant="body1"
             >
-              National Insurance
-        </Typography>
-            <Divider />
-            <Box mt={3}>
-              <Grid
-                container
-                spacing={3}
-              >
-
-                <Grid
-                  item
-                  lg={6}
-                  md={6}
-                  xs={12}
-                >
-                  <Typography
-                    align="center"
-                    color="textPrimary"
-                    variant="body1"
-                  >
-                    Total N.I. Paid: £{totalNationalInsuranceTax}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  lg={6}
-                  md={6}
-                  xs={12}
-                >
-                  <Typography
-                    align="center"
-                    color="textPrimary"
-                    variant="body1"
-                  >
-                    Tax paid at lower band: £{lowerBand.taxPaid}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  lg={6}
-                  md={6}
-                  xs={12}
-                >
-                  <Typography
-                    align="center"
-                    color="textPrimary"
-                    variant="body1"
-                  >
-                    Tax paid at medium band: £{mediumBand.taxPaid}
-                  </Typography>
-                </Grid>
-                <Grid
-                  item
-                  lg={6}
-                  md={6}
-                  xs={12}
-                >
-                  <Typography
-                    align="center"
-                    color="textPrimary"
-                    variant="body1"
-                  >
-                    Tax paid at higher band: £{upperBand.taxPaid}
-                  </Typography>
-                </Grid>
-              </Grid>
-            </Box>
-          </CardContent>
-          <Box />
-          <Divider />
-        </Card>
-      )}
-    </>
+              Total N.I. Paid: £{totalNationalInsuranceTax}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              align="center"
+              className={classes.text}
+              variant="body1"
+            >
+              Tax paid at lower band: £{lowerBand.taxPaid}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              align="center"
+              className={classes.text}
+              variant="body1"
+            >
+              Tax paid at medium band: £{mediumBand.taxPaid}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              align="center"
+              className={classes.text}
+              variant="body1"
+              gutterBottom
+            >
+              Tax paid at higher band: £{upperBand.taxPaid}
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
+    </Box>
   );
 };
 

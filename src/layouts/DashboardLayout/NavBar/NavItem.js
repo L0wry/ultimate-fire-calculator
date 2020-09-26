@@ -24,18 +24,21 @@ const useStyles = makeStyles((theme) => ({
     width: '100%'
   },
   icon: {
-    marginRight: theme.spacing(1)
+    marginRight: theme.spacing(1),
+    color: theme.palette.text.primary
   },
   title: {
-    marginRight: 'auto'
+    marginRight: 'auto',
+    color: theme.palette.text.primary
   },
   active: {
-    color: theme.palette.primary.main,
+    backgroundColor: '#867ABC',
+    color: theme.palette.text.primary,
     '& $title': {
-      fontWeight: theme.typography.fontWeightMedium
+      fontWeight: theme.typography.fontWeightBold
     },
     '& $icon': {
-      color: theme.palette.primary.main
+      color: theme.palette.text.primary
     }
   }
 }));

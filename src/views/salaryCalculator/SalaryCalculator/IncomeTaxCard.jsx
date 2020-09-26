@@ -17,173 +17,162 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column'
   },
-  statsItem: {
-    alignItems: 'center',
-    display: 'flex'
+  text: {
+    color: theme.palette.text.secondary
   },
-  statsIcon: {
-    marginRight: theme.spacing(1)
-  }
 }));
 
 const IncomeTaxCard = ({ className, userTax, ...rest }) => {
   const classes = useStyles();
 
   const {
-      incomeTax: {
-        taxFreePersonalAllowance,
-        totalIncomeTax,
-        lowerBand,
-        mediumBand,
-        upperBand,
-      },
-      taxableIncome,
-      studentLoan,
+    incomeTax: {
+      taxFreePersonalAllowance,
+      totalIncomeTax,
+      lowerBand,
+      mediumBand,
+      upperBand,
+    },
+    taxableIncome,
+    studentLoan,
   } = userTax;
 
-  return userTax.salary > 0 && (
-
-    <Box>
-      <Card
-        className={clsx(classes.root, className)}
-        {...rest}
+  return (
+    <Box boxShadow={3} p={2} >
+      <Typography
+        align="center"
+        gutterBottom
+        className={classes.text}
+        variant="h4"
       >
-        <CardContent>
-          <Typography
-            align="center"
-            color="textPrimary"
-            gutterBottom
-            variant="h4"
-          >
-            Income Tax
+        Income Tax
         </Typography>
-          <Divider />
-          <Box mt={3} >
-            <Grid
-              container
-              spacing={3}
-            >
-              <Grid
-                item
-                lg={6}
-                md={6}
-                xs={12}
-              >
-                <Typography
-                  align="center"
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  Tax free allowance: £{taxFreePersonalAllowance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </Typography>
-              </Grid>
-              {userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax && (
-                <Grid
-                item
-                lg={6}
-                md={6}
-                xs={12}
-              >
-                <Typography
-                  align="center"
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  100k Personal Allowance Deduction: £{userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </Typography>
-              </Grid>
-              )}
+      <Box mt={3}>
+        <Grid
+          container
+          spacing={3}
+        >
 
-              <Grid
-                item
-                lg={6}
-                md={6}
-                xs={12}
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              className={classes.text}
+              align="center"
+              variant="body1"
+            >
+              Tax free allowance: £{taxFreePersonalAllowance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Typography>
+          </Grid>
+          {userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax && (
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xs={12}
+            >
+              <Typography
+                align="center"
+                variant="body1"
+                className={classes.text}
+
               >
-                <Typography
-                  align="center"
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  Total Income Tax: £{totalIncomeTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                lg={6}
-                md={6}
-                xs={12}
-              >
-                <Typography
-                  align="center"
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  Taxable Income: £{taxableIncome.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </Typography>
-              </Grid>       <Grid
-                item
-                lg={6}
-                md={6}
-                xs={12}
-              >
-                <Typography
-                  align="center"
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  Tax paid at lower band: £{lowerBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </Typography>
-              </Grid>       <Grid
-                item
-                lg={6}
-                md={6}
-                xs={12}
-              >
-                <Typography
-                  align="center"
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  Tax paid at medium band: £{mediumBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </Typography>
-              </Grid>
-              <Grid
-                item
-                lg={6}
-                md={6}
-                xs={12}
-              >
-                <Typography
-                  align="center"
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  Tax paid at higher band: £{upperBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                </Typography>
-              </Grid>
-              {studentLoan?.yearlyAmountPaid > 0 && (
-                <Grid
-                  item
-                  lg={6}
-                  md={6}
-                  xs={12}
-                >
-                  <Typography
-                    align="center"
-                    color="textPrimary"
-                    variant="body1"
-                  >
-                    Student Loan Paid: £{studentLoan?.yearlyAmountPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  </Typography>
-                </Grid>
-              )}
+                100k Personal Allowance Deduction: £{userTax.incomeTax.taxFreePersonalAllowanceRemovedBy100kTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Typography>
             </Grid>
-          </Box>
-        </CardContent>
-        <Box flexGrow={1} />
-        <Divider />
-      </Card>
+          )}
+
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              align="center"
+              className={classes.text}
+
+              variant="body1"
+            >
+              Total Income Tax: £{totalIncomeTax.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              className={classes.text}
+              align="center"
+              variant="body1"
+            >
+              Taxable Income: £{taxableIncome.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Typography>
+          </Grid>       <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              className={classes.text}
+              align="center"
+              variant="body1"
+            >
+              Tax paid at lower band: £{lowerBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Typography>
+          </Grid>       <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              className={classes.text}
+              align="center"
+              variant="body1"
+            >
+              Tax paid at medium band: £{mediumBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Typography>
+          </Grid>
+          <Grid
+            item
+            lg={6}
+            md={6}
+            xs={12}
+          >
+            <Typography
+              className={classes.text}
+              align="center"
+              variant="body1"
+            >
+              Tax paid at higher band: £{upperBand.taxPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            </Typography>
+          </Grid>
+          {studentLoan?.yearlyAmountPaid > 0 && (
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xs={12}
+            >
+              <Typography
+                className={classes.text}
+                align="center"
+                variant="body1"
+                gutterBottom
+              >
+                Student Loan Paid: £{studentLoan?.yearlyAmountPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </Typography>
+            </Grid>
+          )}
+        </Grid>
+      </Box>
     </Box>
   );
 };

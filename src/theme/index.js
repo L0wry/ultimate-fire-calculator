@@ -2,29 +2,24 @@ import { createMuiTheme, colors } from '@material-ui/core';
 import shadows from './shadows';
 import typography from './typography';
 
+
 const theme = createMuiTheme({
-  typography: {
-    "fontFamily": `"Roboto", "Helvetica", "Arial", sans-serif`,
-    "fontSize": 14,
-    "fontWeightLight": 300,
-    "fontWeightRegular": 400,
-    "fontWeightMedium": 500
-  },
   palette: {
     background: {
-      dark: '#F4F6F8',
-      default: colors.common.white,
-      paper: colors.common.white
+      dark: '#FFFFFF',
+      default: '#FFFFFF',
+      paper: '#FFFFFF'
     },
     primary: {
-      main: colors.lightBlue[800]
+      main: '#AC9CF8'
     },
     secondary: {
-      main: colors.blue[700]
+      main: '#AC9CF8'
     },
     text: {
-      primary: colors.blueGrey[900],
-      secondary: colors.blueGrey[600]
+      primary: '#FFFFFF',
+      secondary: '#4F5E71',
+      tertiary: '#AC9CF8'
     }
   },
   shadows,
