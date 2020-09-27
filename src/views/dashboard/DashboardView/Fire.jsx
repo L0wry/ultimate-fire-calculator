@@ -18,13 +18,7 @@ import {
   Grid
 } from '@material-ui/core';
 
-const colours = [
-  '#64b5f6',
-  '#42a5f5',
-  '#2196f3',
-  '#1e88e5',
-  '#1976d2',
-  '#1565c0']
+const colours = ['#7543E8', '#1B005A']
 
 const Text = ({ item, drawDownPercent }) => {
   const useStyles = makeStyles(theme => ({
@@ -61,9 +55,9 @@ const TextBox = ({ item, drawDownPercent }) => {
       variant="h5"
       gutterBottom
     >
-      {item.dataKey === "Income From Draw Down" ? 
-      `Expected Monthly Income from ${drawDownPercent * 100}% Draw Down: £${item.value}` :
-      `Expenses Cost: £${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
+      {item.dataKey === "Income From Draw Down" ?
+        `Expected Monthly Income from ${drawDownPercent * 100}% Draw Down: £${item.value}` :
+        `Expenses Cost: £${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
     </Typography>
   )
 }
@@ -78,7 +72,7 @@ const LegendBox = props => (
 
       {props.payload.map((item, i) =>
         <Grid
-        key={i}
+          key={i}
           item
         >
 
@@ -116,64 +110,66 @@ const ToolTipBox = props => (props.active) ? (
 
 
 const Fire = ({ fireData, drawDownPercent, ...rest }) => {
-  const useStyles = makeStyles(() => ({
-    root: {}
+  const useStyles = makeStyles((theme) => ({
+    root: {},
+    text: {
+      color: theme.palette.text.secondary
+    },
   }));
 
   const classes = useStyles();
   const theme = useTheme();
 
   return fireData.length > 0 && (
-    <Card
-    className={clsx(classes.root)}
-      {...rest}
-    >
-      <CardHeader
-        title="Retiring In..."
-      />
-      <Divider />
-      <CardContent>
-        <Box
-          height={400}
-          position="relative"
-        >
-          <ResponsiveContainer width={"100%"} height="100%">
-            <LineChart
-              syncId="year"
-              data={fireData}
-              margin={{
-                top: 0, right: 35, left: 35, bottom: 0,
-              }}
-            >
-              <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+    <Box p={2}  >
+      <Typography
+        align="center"
+        className={classes.text}
+        gutterBottom
+        variant="h4"
+      >
+        Retiring In
+        </Typography>
+      <Box
+        mt={3}
+        height={300}
+        position="relative"
+      >
+        <ResponsiveContainer width={"100%"} height="100%">
+          <LineChart
+            syncId="year"
+            data={fireData}
+            margin={{
+              top: 0, right: 35, left: 35, bottom: 0,
+            }}
+          >
+            <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
 
-              <XAxis dataKey="year" style={{ fontFamily: theme.typography.fontFamily }} />
-              <YAxis tickFormatter={amount => `£${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`} style={{ fontFamily: theme.typography.fontFamily }} />
-              <Legend content={<LegendBox drawDownPercent={drawDownPercent} classes={classes} />} />
+            <XAxis dataKey="year" style={{ fontFamily: theme.typography.fontFamily }} />
+            <YAxis tickFormatter={amount => `£${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`} style={{ fontFamily: theme.typography.fontFamily }} />
+            <Legend content={<LegendBox drawDownPercent={drawDownPercent} classes={classes} />} />
 
-              <Tooltip content={<ToolTipBox drawDownPercent={drawDownPercent} classes={classes} />} />
+            <Tooltip content={<ToolTipBox drawDownPercent={drawDownPercent} classes={classes} />} />
 
 
-              {
-                Object.keys(fireData[0])
-                  .filter(key => key !== 'year')
-                  .map((investmentType, i) =>
-                    <Line
-                      key={`${investmentType}-${i}`}
-                      type="monotone"
-                      dataKey={investmentType}
-                      stackId='1'
-                      stroke={colours[i]}
-                      fill={colours[i]}
-                    />
-                  )}
-            </LineChart>
-          </ResponsiveContainer>
+            {
+              Object.keys(fireData[0])
+                .filter(key => key !== 'year')
+                .map((investmentType, i) =>
+                  <Line
+                    key={`${investmentType}-${i}`}
+                    type="monotone"
+                    dataKey={investmentType}
+                    stackId='1'
+                    stroke={colours[i]}
+                    fill={colours[i]}
+                  />
+                )}
+          </LineChart>
+        </ResponsiveContainer>
 
-        </Box>
-      </CardContent>
-      <Divider />
-    </Card>
+      </Box>
+    </Box>
   );
 };
 

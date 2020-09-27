@@ -12,6 +12,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%'
   },
+  box: {
+    backgroundColor: theme.palette.primary.main,
+  },
     text: {
     color: theme.palette.text.tertiary
 }
@@ -23,7 +26,7 @@ const NetWorthTotal = () => {
   const { getTotalNetWorthInXYears, yearsToMature } = useInvestmentContext();
 
   return (
-    <Box boxShadow={20} padding={3}>
+    <Box boxShadow={20} padding={3}  className={classes.box} >
       <Grid
         container
         direction="column"

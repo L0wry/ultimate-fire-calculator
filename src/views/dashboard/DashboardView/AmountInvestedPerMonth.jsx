@@ -13,6 +13,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%'
   },
+  box: {
+    backgroundColor: theme.palette.primary.main,
+  },
   text: {
     color: theme.palette.text.tertiary
 }
@@ -24,7 +27,7 @@ const AmountInvestedPerMonth = ({ className, ...rest }) => {
   const { getAmountInvestedPerMonth } = useInvestmentContext();
 
   return (
-    <Box boxShadow={20} padding={3}>
+    <Box className={classes.box} boxShadow={20} padding={3}>
       <Grid
         container
         direction="column"

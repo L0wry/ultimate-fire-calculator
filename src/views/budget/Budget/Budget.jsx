@@ -66,8 +66,6 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
       className={clsx(className)}
       {...rest}
     >
-
-
       <Typography
         align="left"
         className={classes.header}

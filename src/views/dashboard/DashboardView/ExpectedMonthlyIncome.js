@@ -11,7 +11,10 @@ import {
 const useStyles = makeStyles((theme) => ({
   text: {
       color: theme.palette.text.tertiary
-  }
+  },
+  box: {
+    backgroundColor: theme.palette.primary.main,
+  },
 }));
 
 
@@ -21,7 +24,7 @@ const ExpectedMonthlyIncome = () => {
   const { getExpectedInterestIncomeInXYears, yearsToMature } = useInvestmentContext();
 
   return (
-    <Box boxShadow={20} padding={3}>
+    <Box  className={classes.box}  boxShadow={20} padding={3}>
 
       <Grid
         container

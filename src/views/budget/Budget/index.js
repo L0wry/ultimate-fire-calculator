@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Box,
   Container,
   makeStyles
 } from '@material-ui/core';
@@ -25,9 +24,7 @@ const Index = () => {
       title="Budget"
     >
       <Container maxWidth={false}>
-        <Box>
           <Budget />
-        </Box>
       </Container>
     </Page>
   );

@@ -20,7 +20,7 @@ const theme = createMuiTheme({
       primary: '#AC9CF8',
       secondary: '#4F5E71',
       tertiary: '#FFFFFF'
-    }
+    },
   },
   shadows,
   typography

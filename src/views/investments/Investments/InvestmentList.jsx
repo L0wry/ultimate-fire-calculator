@@ -14,7 +14,7 @@ import {
     TableRow,
     IconButton,
     TextField,
-    Button,
+    makeStyles,
     InputAdornment
 } from '@material-ui/core';
 import { DeleteOutlined, Edit, EditOutlined, SaveOutlined, Save } from '@material-ui/icons';
@@ -23,15 +23,30 @@ import { string, number, object } from "yup";
 import { all, create } from 'mathjs'
 
 const math = create(all, {
-	number: 'BigNumber',
-	precision: 32
+    number: 'BigNumber',
+    precision: 32
 });
+
+const useStyles = makeStyles((theme) => ({
+    root: {},
+    input: {
+        color: theme.palette.text.secondary,
+    },
+    header: {
+        color: theme.palette.text.primary
+    },
+    tableCell: {
+        color: theme.palette.text.secondary
+    }
+}));
 
 
 const Input = ({ label, inputProps, ...props }) => {
     // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
     // which we can spread on <input> and alse replace ErrorMessage entirely.
     const [field, meta] = useField(props);
+    const classes = useStyles();
+
     return (
         <>
             <TextField
@@ -40,7 +55,10 @@ const Input = ({ label, inputProps, ...props }) => {
                 variant="standard"
                 required
                 fullWidth
-                InputProps={inputProps ? inputProps : null}
+                InputProps={{
+                    className: classes.input,
+                    ...inputProps
+                }}
                 {...field} {...props} />
             {meta.touched && meta.error ? (
                 <div className="error">{meta.error}</div>
@@ -51,183 +69,176 @@ const Input = ({ label, inputProps, ...props }) => {
 
 
 export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemRemove, onItemSave, onItemCheck, ...rest }) => {
+    const classes = useStyles();
 
-        return (
-            <Box
-                mt={3}
+    return (
+        <Box
+            mt={3}
+        >
+
+            <Typography
+                align="left"
+                color="textPrimary"
+                gutterBottom
+                variant="h2"
             >
-                <Card
-                    className={clsx(className)}
-                    {...rest}
-                >
-                    <CardContent>
-
-                        <Typography
-                            align="left"
-                            color="textPrimary"
-                            gutterBottom
-                            variant="h4"
-                        >
-                            Investments
+                Assets
                     </Typography>
-                        <Divider />
 
-                        <Box mt={3}>
-                            <TableContainer>
-                                <Table>
-                                    <TableHead>
-                                        <TableRow>
-                                            <TableCell align="center"></TableCell>
-                                            <TableCell align="center">Name</TableCell>
-                                            <TableCell align="center">Initial Amount</TableCell>
-                                            <TableCell align="center">Expected Annual Return</TableCell>
-                                            <TableCell align="center">Monthly Contribution</TableCell>
-                                            <TableCell align="center">Annual Charge</TableCell>
-                                            <TableCell />
+            <Box mt={3}>
+                <TableContainer>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell className={classes.tableCell} align="center"></TableCell>
+                                <TableCell className={classes.tableCell} align="center">Name</TableCell>
+                                <TableCell className={classes.tableCell} align="center">Initial Amount</TableCell>
+                                <TableCell className={classes.tableCell} align="center">Expected Annual Return</TableCell>
+                                <TableCell className={classes.tableCell} align="center">Monthly Contribution</TableCell>
+                                <TableCell className={classes.tableCell} align="center">Annual Charge</TableCell>
+                                <TableCell />
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {items.map((investment, idx) =>
+                                investment.editMode ? (
+                                    <Formik
+                                        key={`form-${idx}`}
+                                        initialValues={{
+                                            name: investment.name,
+                                            initialAmount: investment.initialAmount,
+                                            expectedReturn: math.round(math.multiply(investment.expectedReturn, 100), 2),
+                                            monthlyContribution: investment.monthlyContribution,
+                                            annualCharge: math.round(math.multiply(investment.annualCharge, 100), 2)
+                                        }}
+                                        validationSchema={object({
+                                            name: string(),
+                                            initialAmount: number(),
+                                            expectedReturn: number(),
+                                            monthlyContribution: number(),
+                                            annualCharge: number()
+                                        })}
+                                        onSubmit={(investment, { setStatus }) => {
+                                            setStatus()
+                                            onItemSave(investment, idx)
+                                        }}
+                                    >{({ submitForm }) => (
+                                        <TableRow key={idx}>
+                                            <TableCell align="center">
+                                                <Save onClick={submitForm} >
+                                                    <SaveOutlined />
+                                                </Save>
+                                            </TableCell>
+                                            <TableCell align="center" >
+                                                <Input
+                                                    label="Investment Name"
+                                                    name="name"
+                                                    type="text"
+                                                />
+                                            </TableCell>
+                                            <TableCell align="center" >
+                                                <Input
+                                                    label="Current Value"
+                                                    name="initialAmount"
+                                                    type="text"
+                                                    inputProps={{
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <Typography >
+                                                                    £
+                                                                    </Typography>
+                                                            </InputAdornment>)
+                                                    }}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="center" >
+                                                <Input
+                                                    label="Annual Return"
+                                                    name="expectedReturn"
+                                                    type="text"
+                                                    inputProps={{
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                <Typography >
+                                                                    %
+                                                                    </Typography>
+                                                            </InputAdornment>)
+                                                    }}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="center" >
+                                                <Input
+                                                    label="Monthly Contribution"
+                                                    name="monthlyContribution"
+                                                    type="text"
+                                                    inputProps={{
+                                                        startAdornment: (
+                                                            <InputAdornment position="start">
+                                                                <Typography >
+                                                                    £
+                                                                    </Typography>
+                                                            </InputAdornment>)
+                                                    }}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="center" >
+                                                <Input
+                                                    label="Annual Charge"
+                                                    name="annualCharge"
+                                                    type="text"
+                                                    inputProps={{
+                                                        endAdornment: (
+                                                            <InputAdornment position="end">
+                                                                <Typography >
+                                                                    %
+                                                                    </Typography>
+                                                            </InputAdornment>)
+                                                    }}
+                                                />
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
+                                                    <DeleteOutlined />
+                                                </IconButton>
+                                            </TableCell>
                                         </TableRow>
-                                    </TableHead>
-                                    <TableBody>
-                                        {items.map((investment, idx) => 
-                                            investment.editMode ? (
-                                                <Formik
-                                                    key={`form-${idx}`}
-                                                    initialValues={{
-                                                        name: investment.name,
-                                                        initialAmount: investment.initialAmount,
-                                                        expectedReturn: math.round(math.multiply(investment.expectedReturn, 100), 2),
-                                                        monthlyContribution: investment.monthlyContribution,
-                                                        annualCharge: math.round(math.multiply(investment.annualCharge, 100), 2)
-                                                    }}
-                                                    validationSchema={object({
-                                                        name: string(),
-                                                        initialAmount: number(),
-                                                        expectedReturn: number(),
-                                                        monthlyContribution: number(),
-                                                        annualCharge: number()
-                                                    })}
-                                                    onSubmit={(investment, { setStatus }) => {
-                                                        setStatus()
-                                                        onItemSave(investment, idx)
-                                                    }}
-                                                >{({ submitForm }) => (
-                                                    <TableRow key={idx}>
-                                                        <TableCell align="center">
-                                                            <Save onClick={submitForm} >
-                                                                <SaveOutlined />
-                                                            </Save>
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            <Input
-                                                                label="Investment Name"
-                                                                name="name"
-                                                                type="text"
-                                                            />
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            <Input
-                                                                label="Current Value"
-                                                                name="initialAmount"
-                                                                type="text"
-                                                                inputProps={{
-                                                                    startAdornment: (
-                                                                        <InputAdornment position="start">
-                                                                            <Typography >
-                                                                                £
-                                                                    </Typography>
-                                                                        </InputAdornment>)
-                                                                }}
-                                                            />
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            <Input
-                                                                label="Annual Return"
-                                                                name="expectedReturn"
-                                                                type="text"
-                                                                inputProps={{
-                                                                    endAdornment: (
-                                                                        <InputAdornment position="end">
-                                                                            <Typography >
-                                                                                %
-                                                                    </Typography>
-                                                                        </InputAdornment>)
-                                                                }}
-                                                            />
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            <Input
-                                                                label="Monthly Contribution"
-                                                                name="monthlyContribution"
-                                                                type="text"
-                                                                inputProps={{
-                                                                    startAdornment: (
-                                                                        <InputAdornment position="start">
-                                                                            <Typography >
-                                                                                £
-                                                                    </Typography>
-                                                                        </InputAdornment>)
-                                                                }}
-                                                            />
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            <Input
-                                                                label="Annual Charge"
-                                                                name="annualCharge"
-                                                                type="text"
-                                                                inputProps={{
-                                                                    endAdornment: (
-                                                                        <InputAdornment position="end">
-                                                                            <Typography >
-                                                                                %
-                                                                    </Typography>
-                                                                        </InputAdornment>)
-                                                                }}
-                                                            />
-                                                        </TableCell>
-                                                        <TableCell align="center">
-                                                            <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
-                                                                <DeleteOutlined />
-                                                            </IconButton>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                )}
-                                                </Formik>
+                                    )}
+                                    </Formik>
 
-                                            ) : (
-                                                    <TableRow key={idx}>
-                                                        <TableCell align="center">
-                                                            <Edit onClick={() => onItemEdit(idx)}>
-                                                                <EditOutlined />
-                                                            </Edit>
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            {investment.name}
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            £{investment.initialAmount}
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            {math.round(math.multiply(investment.expectedReturn, 100), 2)}%
+                                ) : (
+                                        <TableRow key={idx}>
+                                            <TableCell align="center">
+                                                <Edit onClick={() => onItemEdit(idx)}>
+                                                    <EditOutlined />
+                                                </Edit>
                                             </TableCell>
-                                                        <TableCell align="center" >
-                                                            £{investment.monthlyContribution}
-                                                        </TableCell>
-                                                        <TableCell align="center" >
-                                                            {math.round(math.multiply(investment.annualCharge, 100), 2)}%
+                                            <TableCell className={classes.tableCell} align="center" >
+                                                {investment.name}
                                             </TableCell>
-                                                        <TableCell align="center">
-                                                            <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
-                                                                <DeleteOutlined />
-                                                            </IconButton>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                )
-                                        )}
-                                    </TableBody>
-                                </Table>
-                            </TableContainer>
-                        </Box>
-                    </CardContent>
-                </Card>
-            </Box >
-        )
-    })
+                                            <TableCell className={classes.tableCell} align="center" >
+                                                £{investment.initialAmount}
+                                            </TableCell>
+                                            <TableCell className={classes.tableCell} align="center" >
+                                                {math.round(math.multiply(investment.expectedReturn, 100), 2)}%
+                                            </TableCell>
+                                            <TableCell className={classes.tableCell} align="center" >
+                                                £{investment.monthlyContribution}
+                                            </TableCell>
+                                            <TableCell className={classes.tableCell} align="center" >
+                                                {math.round(math.multiply(investment.annualCharge, 100), 2)}%
+                                            </TableCell>
+                                            <TableCell align="center">
+                                                <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
+                                                    <DeleteOutlined />
+                                                </IconButton>
+                                            </TableCell>
+                                        </TableRow>
+                                    )
+                            )}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </Box>
+        </Box >
+    )
+})

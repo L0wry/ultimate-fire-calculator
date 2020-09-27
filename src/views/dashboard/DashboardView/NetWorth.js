@@ -9,21 +9,12 @@ import {
 import {
   Box,
   Card,
-  CardContent,
-  CardHeader,
-  Divider,
   useTheme,
   makeStyles,
   Typography
 } from '@material-ui/core';
 
-const colours = [
-  '#64b5f6',
-  '#42a5f5',
-  '#2196f3',
-  '#1e88e5',
-  '#1976d2',
-  '#1565c0']
+const colours = ['#1B005A', '#7543E8', '#8956FF', '#8049FF', '#1B005A', '#7543E8', '#8956FF', '#8049FF' ]
 
 const Text = ({ item }) => {
   const useStyles = makeStyles(theme => ({
@@ -37,7 +28,7 @@ const Text = ({ item }) => {
   return (
     <Typography
       className={classes.typography}
-      variant="h6"
+      variant="h5"
     >
       {`${item.dataKey}: £${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
     </Typography>
@@ -62,34 +53,39 @@ const ToolTip = props => (props.active) ? (
           <Text item={item} />
         </Box>
       )}
-      
-       <Box >
-          <Text item={{dataKey: 'Total', value: props.payload.reduce((a, b) => a+ b.value, 0).toFixed(2)}} />
-        </Box>
+
+      <Box >
+        <Text item={{ dataKey: 'Total', value: props.payload.reduce((a, b) => a + b.value, 0).toFixed(2) }} />
+      </Box>
     </Box>
   </Card>
 ) : null
 
 const NetWorth = ({ investmentData, className, ...rest }) => {
-  const useStyles = makeStyles(() => ({
-    root: {}
-  }));
+  const useStyles = makeStyles((theme) => ({
+    root: {},
+text: {
+      color: theme.palette.text.secondary
+    },    
+    }));
 
   const classes = useStyles();
   const theme = useTheme();
 
   return investmentData.length > 0 && (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardHeader
-        title="Net Worth Over Time"
-      />
-      <Divider />
-      <CardContent>
-        <Box
-          height={400}
+    <Box  p={2}  >
+
+      <Typography
+        align="center"
+        className={classes.text}
+        gutterBottom
+        variant="h4"
+      >
+        Net Worth Over Time
+        </Typography>
+        <Box 
+          mt={3}
+          height={300}
           position="relative"
         >
           <ResponsiveContainer width={"100%"} height="100%">
@@ -123,9 +119,8 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
           </ResponsiveContainer>
 
         </Box>
-      </CardContent>
-      <Divider />
-      {/* <Box
+      {/* <Divider />
+      <Box
         display="flex"
         justifyContent="flex-end"
         p={2}
@@ -139,7 +134,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
           Overview
         </Button>
       </Box> */}
-    </Card>
+    </Box>
   );
 };
 
