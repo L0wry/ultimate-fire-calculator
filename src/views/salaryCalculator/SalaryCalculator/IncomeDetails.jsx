@@ -32,10 +32,16 @@ const useStyles = makeStyles((theme) => ({
   },
   button: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.text.primary
+    color: theme.palette.text.tertiary,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.dark,
+    }
   },
   header: {
-    color: theme.palette.text.tertiary
+    color: theme.palette.text.primary
+  },
+  input: {
+    color: theme.palette.text.tertiary,
   },
   importButton: {
     marginRight: theme.spacing(1)
@@ -56,7 +62,7 @@ const Input = ({ label, type, inputProps, ...props }) => {
       <TextField
         type={type}
         label={label}
-        className="text-input"
+        className={classes.input}
         variant="outlined"
         required
         fullWidth

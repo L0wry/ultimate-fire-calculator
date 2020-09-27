@@ -1,9 +1,6 @@
 import React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
 import {
-  Card,
-  CardContent,
+  Box,
   Grid,
   Typography,
   makeStyles,
@@ -11,55 +8,49 @@ import {
 } from '@material-ui/core';
 import { useInvestmentContext } from '../../../context/InvestmentContext'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%'
-  }
+  },
+    text: {
+    color: theme.palette.text.tertiary
+}
 }));
 
-const NetWorthTotal = ({ className, ...rest }) => {
+const NetWorthTotal = () => {
   const classes = useStyles();
 
   const { getTotalNetWorthInXYears, yearsToMature } = useInvestmentContext();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardContent>
-        <Grid
-         container
-         direction="column"
-         alignItems="center"
-         justify="center"
-        >
-          <Grid item>
-            <Typography
-              align="center"
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
-              Total Net Worth in {yearsToMature} Years
+    <Box boxShadow={20} padding={3}>
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        justify="center"
+      >
+        <Grid item>
+          <Typography
+            align="center"
+            className={classes.text}
+            gutterBottom
+            variant="h5"
+          >
+            Total Net Worth in {yearsToMature} Years
             </Typography>
-            </Grid>
-            <Grid item> 
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              £{getTotalNetWorthInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </Typography>
-          </Grid>
         </Grid>
-      </CardContent>
-    </Card>
+        <Grid item>
+          <Typography
+            className={classes.text}
+            variant="h3"
+          >
+            £{getTotalNetWorthInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </Typography>
+        </Grid>
+      </Grid>
+      </Box>
   );
-};
-
-NetWorthTotal.propTypes = {
-  className: PropTypes.string
 };
 
 export default NetWorthTotal;

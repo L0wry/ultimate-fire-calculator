@@ -15,7 +15,18 @@ const useStyles = makeStyles((theme) => ({
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
+        width: "100%"
     },
+    select: {
+      backgroundColor: theme.palette.primary.main,
+      color: theme.palette.text.tertiary,
+      justifyContent: 'center',
+      width: "100%",
+      textAlign: 'center'
+    },
+    text: {
+      color: theme.palette.text.tertiary
+  }
 }));
 
 const years = new Array(100).fill(0).map((_, i) => i + 1)
@@ -39,17 +50,17 @@ export const SelectYears = () => {
         <Box
             display="flex"
             alignItems="center">
-            <FormControl style={{ width: "100%"}} className={classes.formControl}>
+            <FormControl className={classes.formControl}>
                 <Typography
                     align="center"
-                    color="textSecondary"
+                    className={classes.text}
                     gutterBottom
-                    variant="h6"
+                    variant="h5"
                 >
                     Predict Net Worth In
                 </Typography>
                 <Select
-                    style={{  textAlign: 'center'}}
+                    className={classes.select}
                     labelId="open-select-label"
                     id="open-select"
                     open={open}
@@ -59,7 +70,7 @@ export const SelectYears = () => {
                     onChange={e => saveYearsToMature(e.target.value)}
                 >
                     {years.map((year) =>
-                        <MenuItem key={`${year}-Years`} style={{ justifyContent: 'center' }} value={year}>{`${year} Years`}</MenuItem>
+                        <MenuItem key={`${year}-Years`} className={classes.select} value={year}>{`${year} Years`}</MenuItem>
                     )}
                 </Select>
             </FormControl>

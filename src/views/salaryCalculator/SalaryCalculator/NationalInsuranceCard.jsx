@@ -27,7 +27,6 @@ const NationalInsuranceCard = ({ className, ...rest }) => {
   const classes = useStyles();
   const {
     userTax: {
-      salary,
       nationalInsuranceTax: {
         totalNationalInsuranceTax,
         lowerBand,

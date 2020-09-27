@@ -1,59 +1,53 @@
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { useInvestmentContext } from '../../../context/InvestmentContext'
 import {
-  Card,
-  CardContent,
+  Box,
   Grid,
   Typography,
   makeStyles,
-  colors
 } from '@material-ui/core';
 
-const useStyles = makeStyles(() => ({
-  root: {
-    height: '100%'
+const useStyles = makeStyles((theme) => ({
+  text: {
+      color: theme.palette.text.tertiary
   }
 }));
 
-const ExpectedMonthlyIncome = ({ className, ...rest }) => {
+
+const ExpectedMonthlyIncome = () => {
   const classes = useStyles();
 
   const { getExpectedInterestIncomeInXYears, yearsToMature } = useInvestmentContext();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardContent>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-        >
-          <Grid item>
-            <Typography
-              align="center"
-              color="textSecondary"
-              gutterBottom
-              variant="h6"
-            >
-              Expected Monthly Interest in {yearsToMature} Years
+    <Box boxShadow={20} padding={3}>
+
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+      >
+        <Grid item>
+          <Typography
+            align="center"
+            className={classes.text}
+            gutterBottom
+            variant="h5"
+          >
+            Expected Monthly Interest in {yearsToMature} Years
         </Typography>
-          </Grid>
-          <Grid item>
-            <Typography
-              color="textPrimary"
-              variant="h3"
-            >
-              £{getExpectedInterestIncomeInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </Typography>
-          </Grid>
         </Grid>
-      </CardContent>
-    </Card>
+        <Grid item>
+          <Typography
+            className={classes.text}
+            variant="h3"
+          >
+            £{getExpectedInterestIncomeInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </Typography>
+        </Grid>
+      </Grid>
+    </Box >
   );
 };
 

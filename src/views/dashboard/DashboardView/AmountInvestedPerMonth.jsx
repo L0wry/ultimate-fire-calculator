@@ -1,9 +1,7 @@
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
-  Card,
-  CardContent,
+  Box,
   Grid,
   Typography,
   makeStyles,
@@ -11,10 +9,13 @@ import {
 } from '@material-ui/core';
 import { useInvestmentContext } from '../../../context/InvestmentContext'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: '100%'
-  }
+  },
+  text: {
+    color: theme.palette.text.tertiary
+}
 }));
 
 const AmountInvestedPerMonth = ({ className, ...rest }) => {
@@ -23,39 +24,34 @@ const AmountInvestedPerMonth = ({ className, ...rest }) => {
   const { getAmountInvestedPerMonth } = useInvestmentContext();
 
   return (
-    <Card
-      className={clsx(classes.root, className)}
-      {...rest}
-    >
-      <CardContent>
-        <Grid
-          container
-          direction="column"
-          alignItems="center"
-          justify="center"
-        >
-          <Grid item>
-            <Typography
-              align="center"
-              color="textSecondary"
-              variant="h6"
-            >
-              Amount Invested Per Month
+    <Box boxShadow={20} padding={3}>
+      <Grid
+        container
+        direction="column"
+        alignItems="center"
+        justify="center"
+      >
+        <Grid item>
+          <Typography
+            align="center"
+            className={classes.text}
+            variant="h5"
+          >
+            Amount Invested Per Month
             </Typography>
-            </Grid>
-            <Grid item> 
-            
-            <Typography
-              gutterBottom
-              color="textPrimary"
-              variant="h3"
-            >
-              £{getAmountInvestedPerMonth().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-            </Typography>
-          </Grid>
         </Grid>
-      </CardContent>
-    </Card >
+        <Grid item>
+
+          <Typography
+            gutterBottom
+            className={classes.text}
+            variant="h3"
+          >
+            £{getAmountInvestedPerMonth().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+          </Typography>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 
