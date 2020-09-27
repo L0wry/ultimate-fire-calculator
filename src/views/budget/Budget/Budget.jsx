@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
   Box,
-  Card,
-  CardContent,
+  makeStyles,
   Typography,
   Grid,
   Divider
@@ -20,6 +19,16 @@ const math = create(all, {
   number: 'BigNumber',
   precision: 32
 });
+
+const useStyles = makeStyles((theme) => ({
+  root: {},
+  text: {
+    color: theme.palette.text.primary
+  },
+  header: {
+    color: theme.palette.text.primary
+  },
+}));
 
 const ExpenseHeaderCard = ({ className, ...rest }) => {
   const { userTax } = useSalaryContext();
@@ -49,63 +58,69 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
     // subscribe to changes in userTax and expense total to trigger effect
   }, [userTax, expenseTotal]);
 
+  const classes = useStyles()
+
+
   return (
     <div
       className={clsx(className)}
       {...rest}
     >
-      <Card>
-        <CardContent>
 
-          <Typography
-            align="left"
-            color="textPrimary"
-            gutterBottom
-            variant="h3"
-          >
-            Budget
+
+      <Typography
+        align="left"
+        className={classes.header}
+        gutterBottom
+        variant="h1"
+      >
+        Budget
                   </Typography>
-          <Divider />
-          <Box mt={3}>
-            <Grid
-              container
-              direction="row"
-              justify="flex-start"
-              alignItems="stretch"
-              spacing={3}
-            >
-              <Grid
-                item
-                lg={6}
-                sm={6}
-                xl={6}
-                xs={6}
-              >
-                <AddExpenses
-                  addExpense={addExpense}
-                />
-                {expenses.length > 0 && (
-                  <ExpenseList
-                    items={expenses}
-                    onItemCheck={idx => checkExpense(idx)}
-                    onItemRemove={idx => removeExpense(idx)}
-                  />
-                )}
-              </Grid>
+      <Typography
+        gutterBottom
+        variant="body1"
+      >
+        List Your Monthly Expenses
+        </Typography>
+      <Box mt={3}>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="stretch"
+          spacing={3}
+        >
+          <Grid
+            item
+            lg={6}
+            sm={6}
+            xl={6}
+            xs={6}
+          >
+            <AddExpenses
+              addExpense={addExpense}
+            />
+            {expenses.length > 0 && (
+              <ExpenseList
+                items={expenses}
+                onItemCheck={idx => checkExpense(idx)}
+                onItemRemove={idx => removeExpense(idx)}
+              />
+            )}
+          </Grid>
 
-              <Grid
-                item
-                lg={6}
-                sm={6}
-                xl={6}
-                xs={6}
-              >
-                <MonthlyTakeHomeCard {...takeHome} />
-              </Grid>
-            </Grid>
-          </Box>
-        </CardContent>
-      </Card>
+          <Grid
+            item
+            lg={6}
+            sm={6}
+            xl={6}
+            xs={6}
+          >
+            <MonthlyTakeHomeCard {...takeHome} />
+          </Grid>
+        </Grid>
+      </Box>
+
     </div>
   );
 };

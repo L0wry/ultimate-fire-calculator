@@ -230,8 +230,6 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
 
               <Grid
                 item
-                lg={6}
-                md={6}
                 xs={12}>
 
                 <InputLabel id="plan-name">Student Loan Type</InputLabel>
@@ -251,18 +249,16 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                   <MenuItem className={classes.text} key={'plan2'} value={2}>{`Plan 2 (after 1 September 2012)`}</MenuItem>
                 </Select>
               </Grid>
-            </Grid>
-            <Box
-              display="flex"
-              justifyContent="center"
-              p={2}
-              mt={3}>
+
+              <Grid item xs={12} >
               <Button
                 type="submit"
                 className={classes.button}
                 fullWidth
                 variant="text">Calculate</Button>
-            </Box>
+              </Grid>
+            </Grid>
+          
           </Form>
         )}
         </Formik>

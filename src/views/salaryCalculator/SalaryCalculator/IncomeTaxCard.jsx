@@ -13,10 +13,7 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
+  root: {},
   text: {
     color: theme.palette.text.secondary
   },
