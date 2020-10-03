@@ -18,13 +18,15 @@ export const SalaryContextProvider = ({ children }) => {
 		taxFreePersonalAllowance,
 		personalPensionContribution = 0,
 		employerPensionContribution = 0,
-		studentLoanPlanType = 0
+		studentLoanPlanType = 0,
+		secondaryIncomeAfterTax = 0
 	}, addMultipleInvestments) => {
 		const tax = calculateAllTax({
 			salary,
 			taxFreePersonalAllowance,
 			employerPensionContributionPercent: employerPensionContribution / 100,
 			personalPensionContributionPercent: personalPensionContribution / 100,
+			secondaryIncomeAfterTax,
 			studentLoanPlanType
 		})
 		setUserTax(tax)

@@ -27,7 +27,7 @@ const AmountInvestedPerMonth = ({ className, ...rest }) => {
   const { getAmountInvestedPerMonth } = useInvestmentContext();
 
   return (
-    <Box className={classes.box} boxShadow={20} padding={3}>
+    <Box className={classes.box}  padding={3}>
       <Grid
         container
         direction="column"

@@ -24,7 +24,7 @@ const ExpectedMonthlyIncome = () => {
   const { getExpectedInterestIncomeInXYears, yearsToMature } = useInvestmentContext();
 
   return (
-    <Box  className={classes.box}  boxShadow={20} padding={3}>
+    <Box  className={classes.box} padding={3}>
 
       <Grid
         container

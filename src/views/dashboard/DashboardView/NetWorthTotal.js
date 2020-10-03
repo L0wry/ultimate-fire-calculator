@@ -26,7 +26,7 @@ const NetWorthTotal = () => {
   const { getTotalNetWorthInXYears, yearsToMature } = useInvestmentContext();
 
   return (
-    <Box boxShadow={20} padding={3}  className={classes.box} >
+    <Box padding={3}  className={classes.box} >
       <Grid
         container
         direction="column"

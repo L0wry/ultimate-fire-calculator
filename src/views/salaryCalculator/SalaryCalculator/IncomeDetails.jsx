@@ -16,7 +16,7 @@ import {
   Grid,
   Divider
 } from '@material-ui/core';
-import { Formik, Form, useField } from "formik";
+import { Formik, Form, useField, ErrorMessage, Field } from "formik";
 import { number, object } from "yup";
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { all, create } from 'mathjs'
@@ -37,8 +37,8 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.dark,
     }
   },
-  header: {
-    color: theme.palette.text.primary
+  error: {
+    color: 'red'
   },
   input: {
     color: theme.palette.text.tertiary,
@@ -72,7 +72,17 @@ const Input = ({ label, type, inputProps, ...props }) => {
         }}
         {...field} {...props} />
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
+        <div className="error">
+          <Typography
+            className={classes.error}
+            align="center"
+            gutterBottom
+            variant="body1"
+          >
+            Please only use numbers
+          </Typography>
+
+        </div>
       ) : null}
     </>
   );
@@ -100,14 +110,6 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
       {...rest}
     >
       <Typography
-        className={classes.header}
-        align="left"
-        gutterBottom
-        variant="h1"
-      >
-        Salary Calculator
-                  </Typography>
-      <Typography
         align="left"
         gutterBottom
         variant="body1"
@@ -121,14 +123,16 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
             personalPensionContribution: userTax.personalPensionContributionPercent ? math.round(math.multiply(userTax.personalPensionContributionPercent, 100), 2) : 0,
             employerPensionContribution: userTax.employerPensionContributionPercent ? math.round(math.multiply(userTax.employerPensionContributionPercent, 100), 2) : 0,
             taxFreePersonalAllowance: userTax.taxFreePersonalAllowance || 12500,
-            studentLoanPlanType: userTax.studentLoan?.studentLoanPlanType || 0
+            studentLoanPlanType: userTax.studentLoan?.studentLoanPlanType || 0,
+            secondaryIncomeAfterTax: userTax.secondaryIncomeAfterTax || 0
           }}
-          validationSchema={object({
-            salary: number(),
-            personalPensionContribution: number(),
-            employerPensionContribution: number(),
-            taxFreePersonalAllowance: number(),
-            studentLoanPlanType: number()
+          validationSchema={object().shape({
+            salary: number('Please type a number').required(),
+            personalPensionContribution: number('Please type a number').required(),
+            employerPensionContribution: number('Please type a number').required(),
+            taxFreePersonalAllowance: number().required(),
+            studentLoanPlanType: number(),
+            secondaryIncomeAfterTax: number('Please type a number')
           })}
           onSubmit={(userFinance, { setSubmitting }) => {
             setUserFinances(userFinance, addMultipleInvestments)
@@ -230,6 +234,28 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
 
               <Grid
                 item
+                lg={6}
+                md={6}
+                xs={12}
+              >
+                <Input
+                  label="Secondary Income After Tax"
+                  name="secondaryIncomeAfterTax"
+                  type="tel"
+                  inputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <Typography >
+                          £
+                                    </Typography>
+                      </InputAdornment>)
+                  }}
+                />
+              </Grid>
+
+
+              <Grid
+                item
                 xs={12}>
 
                 <InputLabel id="plan-name">Student Loan Type</InputLabel>
@@ -251,14 +277,14 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
               </Grid>
 
               <Grid item xs={12} >
-              <Button
-                type="submit"
-                className={classes.button}
-                fullWidth
-                variant="text">Calculate</Button>
+                <Button
+                  type="submit"
+                  className={classes.button}
+                  fullWidth
+                  variant="text">Calculate</Button>
               </Grid>
             </Grid>
-          
+
           </Form>
         )}
         </Formik>

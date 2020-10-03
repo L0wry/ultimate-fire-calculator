@@ -15,7 +15,8 @@ export default function calculateAllTax({
   taxFreePersonalAllowance = 12500,
   employerPensionContributionPercent = 0,
   personalPensionContributionPercent = 0,
-  studentLoanPlanType = 0 }) {
+  studentLoanPlanType = 0,
+  secondaryIncomeAfterTax }) {
 
 
   const personalPensionContribution = math.multiply(personalPensionContributionPercent, salary)
@@ -33,6 +34,7 @@ export default function calculateAllTax({
       monthlyAmountPaid,
       yearlyAmountPaid
     },
+    secondaryIncomeAfterTax,
     employerPensionContributionPercent,
     personalPensionContributionPercent,
     personalPensionContribution,
@@ -47,6 +49,7 @@ export default function calculateAllTax({
       .subtract(incomeTax.totalIncomeTax)
       .subtract(nationalInsuranceTax.totalNationalInsuranceTax)
       .subtract(yearlyAmountPaid)
+      .add(math.divide(secondaryIncomeAfterTax, 12))
       .round(2)
       .done()
   }

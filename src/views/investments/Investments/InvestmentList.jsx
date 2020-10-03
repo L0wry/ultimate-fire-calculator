@@ -37,7 +37,10 @@ const useStyles = makeStyles((theme) => ({
     },
     tableCell: {
         color: theme.palette.text.secondary
-    }
+    },
+    error: {
+        color: 'red'
+      },
 }));
 
 
@@ -61,7 +64,14 @@ const Input = ({ label, inputProps, ...props }) => {
                 }}
                 {...field} {...props} />
             {meta.touched && meta.error ? (
-                <div className="error">{meta.error}</div>
+                 <Typography
+                 className={classes.error}
+                 align="center"
+                 gutterBottom
+                 variant="body1"
+               >
+                 Please only use numbers
+               </Typography>
             ) : null}
         </>
     );

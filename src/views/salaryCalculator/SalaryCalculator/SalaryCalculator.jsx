@@ -17,10 +17,13 @@ import { useSalaryContext } from '../../../context/SalaryContext';
 
 const useStyles = makeStyles((theme) => ({
     root: {},
+    header: {
+        color: theme.palette.text.primary
+      },
     text: {
         color: theme.palette.text.primary
-      }
-  }));
+    }
+}));
 
 const SalaryCalculator = ({ className, ...rest }) => {
 
@@ -31,6 +34,14 @@ const SalaryCalculator = ({ className, ...rest }) => {
             className={clsx(className)}
             {...rest}
         >
+            <Typography
+                className={classes.header}
+                align="left"
+                gutterBottom
+                variant="h1"
+            >
+                Salary Calculator
+                  </Typography>
             <IncomeDetails userTax={userTax} setUserFinances={setUserFinances} />
             {userTax.salary > 0 && (
 

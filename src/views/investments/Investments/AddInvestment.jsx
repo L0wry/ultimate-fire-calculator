@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   input: {
     color: theme.palette.text.tertiary,
   },
+  error: {
+    color: 'red'
+  },
   button: {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.text.tertiary,
@@ -48,7 +51,14 @@ const Input = ({ label, inputProps, ...props }) => {
         }}
         {...field} {...props} />
       {meta.touched && meta.error ? (
-        <div className="error">{meta.error}</div>
+         <Typography
+         className={classes.error}
+         align="center"
+         gutterBottom
+         variant="body1"
+       >
+         Please only use numbers
+       </Typography>
       ) : null}
     </>
   );
