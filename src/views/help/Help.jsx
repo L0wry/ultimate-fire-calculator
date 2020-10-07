@@ -8,16 +8,7 @@ import {
 } from '@material-ui/core';
 import TopBar from '../../layouts/MainLayout/TopBar.js'
 
-const purposeTexts = [
-    'Personal finance was not something that was taught me at school. It has only been very recently that I have taken an interest in it.',
-    'As I started to become more aware of personal finance I found it hard to find the tools online to answer questions like; \n',
-    '',
-    'If I was to reduce my expenses by X amount and invest the remainder into the market, how would that affect my net work over a given period?',
-    'If I was to increase my salary sacrifice by X%, how would that affect my net worth over a given period?',
-    'How much do others my ages spend on expenses?',
-    'How much do others my age invest in the market?',
-    '                                         ',
-    'This calculator aims to answer some of those questions and I hope at some point it will answer all of them!']
+
 
 const HelpPage = ({ className, ...rest }) => {
     return (
@@ -27,6 +18,34 @@ const HelpPage = ({ className, ...rest }) => {
         >
             <TopBar header="Help" />
 
+            <Typography
+                // align="left"
+                color="textPrimary"
+                gutterBottom
+                variant="h4"
+            >
+                Purpose
+                  </Typography>
+
+
+                <Typography
+                    align="left"
+                    color="textSecondary"
+                    variant="body1"
+                >
+Personal finance was not something that was taught me at school. It has only been very recently that I have taken an interest in it and self learn. <br/>
+As I started to become more aware of personal finance I found it hard to find the tools online to answer questions like;<br/>
+<br/>
+If I was to reduce my expenses by X amount and invest the remainder into the market, how would that affect my Net Worth over a given period?<br/>
+If I was to increase my salary sacrifice by X%, how would that affect my net worth over a given period?<br/>
+How much do others my ages spend on expenses?<br/>
+How much do others my age invest in the market?<br/><br/>
+
+This calculator aims to answer some of those questions and hopefully at some point will answer all of them!<br/>
+
+                    <br />
+                </Typography>
+            
 
             <Box mt={3}>
                 <Typography
@@ -35,41 +54,20 @@ const HelpPage = ({ className, ...rest }) => {
                     gutterBottom
                     variant="h4"
                 >
-                    Purpose
-                  </Typography>
-                {purposeTexts.map(purposeText => (
-                    <Typography
-                        align="left"
-                        color="textPrimary"
-                        variant="body1"
-                    >
-                        {purposeText}
-                        <br />
-                    </Typography>
-                ))}
-
-                <Box mt={3}>
-                    <Typography
-                        align="left"
-                        color="textPrimary"
-                        gutterBottom
-                        variant="h4"
-                    >
-                        Getting Started
+                    Getting Started
                   </Typography>
 
-                    <Typography
-                        align="left"
-                        color="textPrimary"
-                        variant="body1"
-                    >
-                        Work your way through each of the tabs on left hand side. <br />
+                <Typography
+                    align="left"
+                    color="textSecondary"
+                    variant="body1"
+                >
+                    Work your way through each of the tabs on left hand side. <br />
                                 I would recommend working through from top to bottom. <br />
                                 If your investments are sitting in global index trackers a good return percentage would be 5% - 7% <br />
                                 Once you finish entering your finances use the selects on the navigation menu to run predictions over x years.
 
                   </Typography>
-                </Box>
             </Box>
 
 
@@ -85,20 +83,11 @@ const HelpPage = ({ className, ...rest }) => {
 
                 <Typography
                     align="left"
-                    color="textPrimary"
-                    variant="h5"
-                >
-                    Draw Down
-                  </Typography>
-
-
-
-                <Typography
-                    align="left"
-                    color="textPrimary"
+                    color="textSecondary"
                     variant="body1"
                 >
-                    Is the percentage amount you wish to withdraw once you have FIRED
+                    Draw Down: Is the percentage amount you wish to withdraw from your Net Worth once you have FIRED
+
                   </Typography>
             </Box>
 
@@ -114,17 +103,17 @@ const HelpPage = ({ className, ...rest }) => {
 
                 <Typography
                     align="left"
-                    color="textPrimary"
+                    color="textSecondary"
                     variant="body1"
                 >
                     Geared towards PAYE <br />
-                            Only supports tax year 2020 - 20201<br />
-                            UK focused<br />
-                            Doesn't take into consideration tax free investment types<br />
-                            Doesn't support tax on withdrawals <br />
-                            Doesn't take into consideration annual limits on isa, pension etc<br />
-                            Doesn't take into consideration SIPP tax relief<br />
-                            Doesn't support inflation for the time being<br />
+                    Only supports tax year 2020 - 20201<br />
+                    UK focused<br />
+                    Doesn't take into consideration tax free investment types<br />
+                    Doesn't support tax on withdrawals <br />
+                    Doesn't take into consideration annual limits on isa, pension etc<br />
+                    Doesn't take into consideration SIPP tax relief<br />
+                    Doesn't support inflation for the time being<br />
                 </Typography>
             </Box>
 
@@ -140,7 +129,7 @@ const HelpPage = ({ className, ...rest }) => {
 
                 <Typography
                     align="left"
-                    color="textPrimary"
+                    color="textSecondary"
                     variant="body1"
                 >
                     Not sure where to start with personal finance? Check out <br />

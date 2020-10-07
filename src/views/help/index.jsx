@@ -25,9 +25,7 @@ const Help = () => {
       title="Help"
     >
       <Container maxWidth="lg">
-        <Box mt={3}>
-          <HelpPage />
-        </Box>
+        <HelpPage />
       </Container>
     </Page>
   );
