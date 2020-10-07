@@ -8,7 +8,7 @@ import {
   Typography,
   Box,
   Hidden,
-
+  IconButton
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useMobileContext } from '../../context/MobileContext';
@@ -17,13 +17,13 @@ import { useMobileContext } from '../../context/MobileContext';
 const useStyles = makeStyles(theme => ({
   root: {},
   toolbar: {
-    height: 64,
     backgroundColor: theme.palette.background.default
   },
   text: {
     color: theme.palette.text.primary
   },
   button: {
+    marginLeft: 'auto',
     color: theme.palette.text.primary
   }
 }));
@@ -46,7 +46,7 @@ const TopBar = ({ className, header, ...rest }) => {
         <Toolbar className={classes.toolbar}>
           <Hidden mdDown>
 
-            <Box mt={6} mb={3} ml={32}>
+            <Box mt={3} ml={32}>
               <Typography
                 className={classes.text}
                 align="left"
@@ -60,7 +60,7 @@ const TopBar = ({ className, header, ...rest }) => {
 
           <Hidden lgUp>
 
-            <Box mt={6} mb={3} >
+            <Box display='flex' flexGrow={1} mt={3}>
               <Typography
                 className={classes.text}
                 align="left"
@@ -69,14 +69,20 @@ const TopBar = ({ className, header, ...rest }) => {
               >
                 {header}
               </Typography>
-              <MenuIcon fontSize="large" className={classes.button} onClick={() => toggleMobileNav(!isMobileNavOpen)} />
 
+                <IconButton
+                  className={classes.button}
+                  color="inherit"
+                  onClick={() => toggleMobileNav(!isMobileNavOpen)}
+                >
+                  <MenuIcon fontSize="large" className={classes.button} />
+                </IconButton>
             </Box>
           </Hidden>
 
         </Toolbar>
       </AppBar>
-      <Box mt={6} />
+      <Box mt={7} />
     </>
   );
 };

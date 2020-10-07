@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import {
   AppBar,
   Typography,
-  Badge,
+  IconButton,
   Box,
   Hidden,
   IconButton,
