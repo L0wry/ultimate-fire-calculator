@@ -9,7 +9,7 @@ import {
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { AddInvestment } from './AddInvestment'
 import { InvestmentList } from './InvestmentList'
-
+import TopBar from '../../../layouts/MainLayout/TopBar.js'
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -31,21 +31,14 @@ const Investments = ({ className, ...rest }) => {
       className={clsx(className)}
       {...rest}
     >
+      <TopBar header="Investments" />
       <Typography
-        align="left"
-        className={classes.header}
-        gutterBottom
-        variant="h1"
-      >
-        Investments
-                  </Typography>
-                  <Typography
         gutterBottom
         variant="body1"
       >
         Add your investments
         </Typography>
-      
+
       <Box mt={3}>
         <AddInvestment addInvestment={addInvestment} />
         {investments.length > 0 && (

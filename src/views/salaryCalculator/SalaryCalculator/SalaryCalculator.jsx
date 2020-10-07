@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     Box,
-    Container,
+    AppBar,
     Grid,
     makeStyles,
     Typography
@@ -13,13 +13,11 @@ import IncomeTaxCard from './IncomeTaxCard'
 import NationalInsurance from './NationalInsuranceCard'
 import BreakdownCard from './BreakdownCard';
 import { useSalaryContext } from '../../../context/SalaryContext';
+import TopBar from '../../../layouts/MainLayout/TopBar.js'
 
 
 const useStyles = makeStyles((theme) => ({
     root: {},
-    header: {
-        color: theme.palette.text.primary
-      },
     text: {
         color: theme.palette.text.primary
     }
@@ -34,14 +32,8 @@ const SalaryCalculator = ({ className, ...rest }) => {
             className={clsx(className)}
             {...rest}
         >
-            <Typography
-                className={classes.header}
-                align="left"
-                gutterBottom
-                variant="h1"
-            >
-                Salary Calculator
-                  </Typography>
+            <TopBar header="Salary Calculator" />
+
             <IncomeDetails userTax={userTax} setUserFinances={setUserFinances} />
             {userTax.salary > 0 && (
 

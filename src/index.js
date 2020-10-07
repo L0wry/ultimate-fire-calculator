@@ -5,7 +5,7 @@ import * as serviceWorker from './serviceWorker';
 import { SalaryContextProvider } from './context/SalaryContext'
 import { BudgetContextProvider } from './context/BudgetContext'
 import { InvestmentContextProvider } from './context/InvestmentContext'
-
+import { MobileContextProvider } from './context/MobileContext';
 import App from './App';
 
 ReactDOM.render((
@@ -13,7 +13,9 @@ ReactDOM.render((
     <SalaryContextProvider>
       <BudgetContextProvider>
         <InvestmentContextProvider>
+          <MobileContextProvider>
           <App />
+          </MobileContextProvider>
         </InvestmentContextProvider>
       </BudgetContextProvider>
     </SalaryContextProvider>

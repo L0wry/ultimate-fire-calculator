@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    Typography,
+  Typography,
   Grid,
   makeStyles
 } from '@material-ui/core';
@@ -15,15 +15,16 @@ import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { useBudgetContext } from '../../../context/BudgetContext';
 import { convertCompoundDataToGraph } from '../../../utils/convertCompoundDataToGraph';
 import { convertInvestmentDataToFire } from '../../../utils/convertInvestmentDataToFire';
+import TopBar from '../../../layouts/MainLayout/TopBar.js'
 
 const useStyles = makeStyles((theme) => ({
-    root: {},
-    text: {
-      color: theme.palette.text.primary
-    },
-    header: {
-      color: theme.palette.text.primary
-    },
+  root: {},
+  text: {
+    color: theme.palette.text.primary
+  },
+  header: {
+    color: theme.palette.text.primary
+  },
 }));
 
 const Dashboard = ({ className, ...rest }) => {
@@ -34,85 +35,79 @@ const Dashboard = ({ className, ...rest }) => {
 
   return (
     <div
-    className={clsx(className)}
-    {...rest}
->
-<Typography
-        align="left"
-        className={classes.header}
-        gutterBottom
-        variant="h1"
-      >
-        Dashboarding
-                  </Typography>
-                  <Typography
+      className={clsx(className)}
+      {...rest}
+    >
+      <TopBar header="Dashboarding" />
+
+      <Typography
         gutterBottom
         variant="body1"
       >
         Predict how your investments will mature over time
         </Typography>
-        
+
+      <Grid
+        container
+        spacing={3}
+      >
         <Grid
+          item
+          lg={9}
+          md={12}
+          xl={9}
+          xs={12}
+        >
+          <NetWorth investmentData={convertCompoundDataToGraph(investments)} />
+        </Grid>
+        <Grid
+          xs={12}
+          md={12}
+          lg={3}
+          xl={3}
+          item
           container
           spacing={3}
+          justify="space-evenly"
+          alignItems="stretch"
         >
           <Grid
             item
-            lg={9}
-            md={12}
-            xl={9}
             xs={12}
+            md={6}
+            lg={12}
           >
-            <NetWorth investmentData={convertCompoundDataToGraph(investments)} />
+            <AmountInvestedPerMonth />
           </Grid>
           <Grid
-            xs={12}
-            md={12}
-            lg={3}
-            xl={3}
             item
-            container
-            spacing={3}
-            justify="space-evenly"
-            alignItems="stretch"
+            xs={12}
+            md={6}
+            lg={12}
           >
-            <Grid
-              item
-              xs={12}
-              md={6}
-              lg={12}
-            >
-              <AmountInvestedPerMonth />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={6}
-              lg={12}
-            >
-              <TasksProgress />
-            </Grid>
-            <Grid
-              item
-              xs={12}
-              md={6}
-              lg={12}
-            >
-              <TotalProfit />
-            </Grid>
+            <TasksProgress />
           </Grid>
-       
           <Grid
             item
-            lg={9}
-            md={12}
-            xl={9}
             xs={12}
+            md={6}
+            lg={12}
           >
-            <Fire drawDownPercent={drawDownPercent} fireData={convertInvestmentDataToFire(investments, drawDownPercent, expenseTotal)} />
+            <TotalProfit />
           </Grid>
         </Grid>
-     </div>
+
+        <Grid
+          item
+          lg={9}
+          md={12}
+          xl={9}
+          xs={12}
+        >
+          <Fire drawDownPercent={drawDownPercent} fireData={convertInvestmentDataToFire(investments, drawDownPercent, expenseTotal)} />
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 

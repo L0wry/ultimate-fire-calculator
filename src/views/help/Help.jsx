@@ -3,12 +3,11 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
     Box,
-    Card,
-    CardContent,
     Typography,
-    Divider,
     Link
 } from '@material-ui/core';
+import TopBar from '../../layouts/MainLayout/TopBar.js'
+
 const purposeTexts = [
     'Personal finance was not something that was taught me at school. It has only been very recently that I have taken an interest in it.',
     'As I started to become more aware of personal finance I found it hard to find the tools online to answer questions like; \n',
@@ -26,155 +25,142 @@ const HelpPage = ({ className, ...rest }) => {
             className={clsx(className)}
             {...rest}
         >
-            <Card>
-                <CardContent>
+            <TopBar header="Help" />
 
+
+            <Box mt={3}>
+                <Typography
+                    align="left"
+                    color="textPrimary"
+                    gutterBottom
+                    variant="h4"
+                >
+                    Purpose
+                  </Typography>
+                {purposeTexts.map(purposeText => (
+                    <Typography
+                        align="left"
+                        color="textPrimary"
+                        variant="body1"
+                    >
+                        {purposeText}
+                        <br />
+                    </Typography>
+                ))}
+
+                <Box mt={3}>
                     <Typography
                         align="left"
                         color="textPrimary"
                         gutterBottom
-                        variant="h3"
+                        variant="h4"
                     >
-                        Help
-                  </Typography>
-                    <Divider />
-                    <Box mt={3}>
-                        <Typography
-                            align="left"
-                            color="textPrimary"
-                            gutterBottom
-                            variant="h4"
-                        >
-                            Purpose
-                  </Typography>
-                        {purposeTexts.map(purposeText => (
-                            <Typography
-                                align="left"
-                                color="textPrimary"
-                                variant="body1"
-                            >
-                                {purposeText}
-                                <br />
-                            </Typography>
-                        ))}
-
-                        <Box mt={3}>
-                            <Typography
-                                align="left"
-                                color="textPrimary"
-                                gutterBottom
-                                variant="h4"
-                            >
-                                Getting Started
+                        Getting Started
                   </Typography>
 
-                            <Typography
-                                align="left"
-                                color="textPrimary"
-                                variant="body1"
-                            >
-                                Work your way through each of the tabs on left hand side. <br/>
-                                I would recommend working through from top to bottom. <br/>
-                                If your investments are sitting in global index trackers a good return percentage would be 5% - 7% <br/>
+                    <Typography
+                        align="left"
+                        color="textPrimary"
+                        variant="body1"
+                    >
+                        Work your way through each of the tabs on left hand side. <br />
+                                I would recommend working through from top to bottom. <br />
+                                If your investments are sitting in global index trackers a good return percentage would be 5% - 7% <br />
                                 Once you finish entering your finances use the selects on the navigation menu to run predictions over x years.
-                            
+
                   </Typography>
-                        </Box>
-                    </Box>
+                </Box>
+            </Box>
 
 
-                    <Box mt={3}>
-                        <Typography
-                            align="left"
-                            color="textPrimary"
-                            gutterBottom
-                            variant="h4"
-                        >
-                            Terminology
-                  </Typography>
-
-                        <Typography
-                            align="left"
-                            color="textPrimary"
-                            variant="h5"
-                        >
-                            Draw Down 
+            <Box mt={3}>
+                <Typography
+                    align="left"
+                    color="textPrimary"
+                    gutterBottom
+                    variant="h4"
+                >
+                    Terminology
                   </Typography>
 
-
-
-                  <Typography
-                            align="left"
-                            color="textPrimary"
-                            variant="body1"
-                        >
-                            Is the percentage amount you wish to withdraw once you have FIRED
-                  </Typography>
-                    </Box>
-
-                    <Box mt={3}>
-                        <Typography
-                            align="left"
-                            color="textPrimary"
-                            gutterBottom
-                            variant="h4"
-                        >
-                            Limitations
+                <Typography
+                    align="left"
+                    color="textPrimary"
+                    variant="h5"
+                >
+                    Draw Down
                   </Typography>
 
-                        <Typography
-                            align="left"
-                            color="textPrimary"
-                            variant="body1"
-                        >
-                            Geared towards PAYE <br />
+
+
+                <Typography
+                    align="left"
+                    color="textPrimary"
+                    variant="body1"
+                >
+                    Is the percentage amount you wish to withdraw once you have FIRED
+                  </Typography>
+            </Box>
+
+            <Box mt={3}>
+                <Typography
+                    align="left"
+                    color="textPrimary"
+                    gutterBottom
+                    variant="h4"
+                >
+                    Limitations
+                  </Typography>
+
+                <Typography
+                    align="left"
+                    color="textPrimary"
+                    variant="body1"
+                >
+                    Geared towards PAYE <br />
                             Only supports tax year 2020 - 20201<br />
                             UK focused<br />
                             Doesn't take into consideration tax free investment types<br />
-                            Doesn't support tax on withdrawals <br/>
+                            Doesn't support tax on withdrawals <br />
                             Doesn't take into consideration annual limits on isa, pension etc<br />
                             Doesn't take into consideration SIPP tax relief<br />
                             Doesn't support inflation for the time being<br />
-                        </Typography>
-                    </Box>
+                </Typography>
+            </Box>
 
-                    <Box mt={3}>
-                        <Typography
-                            align="left"
-                            color="textPrimary"
-                            gutterBottom
-                            variant="h4"
-                        >
-                            Resources
+            <Box mt={3}>
+                <Typography
+                    align="left"
+                    color="textPrimary"
+                    gutterBottom
+                    variant="h4"
+                >
+                    Resources
                   </Typography>
 
-                        <Typography
-                            align="left"
-                            color="textPrimary"
-                            variant="body1"
-                        >
-                            Not sure where to start with personal finance? Check out <br />
+                <Typography
+                    align="left"
+                    color="textPrimary"
+                    variant="body1"
+                >
+                    Not sure where to start with personal finance? Check out <br />
 
-                            <Link href="https://flowchart.ukpersonal.finance/" >
-                                UK Personal Finance FlowChart
-
-                            </Link>
-                            <br />
-
-                            <Link href="https://www.reddit.com/r/UKPersonalFinance/" >
-                                UKPersonalFinance
+                    <Link href="https://flowchart.ukpersonal.finance/" >
+                        UK Personal Finance FlowChart
 
                             </Link>
-                            <br />
-                            <Link href="https://www.reddit.com/r/FIREUK/" >
-                                FIREUK
+                    <br />
+
+                    <Link href="https://www.reddit.com/r/UKPersonalFinance/" >
+                        UKPersonalFinance
+
                             </Link>
-
-                        </Typography>
-
-                    </Box>
-                </CardContent>
-            </Card>
+                    <br />
+                    <Link href="https://www.reddit.com/r/FIREUK/" >
+                        FIREUK
+                            </Link>
+                </Typography>
+            </Box>
         </div >
     );
 };

@@ -14,6 +14,7 @@ import ExpenseList from './ExpenseList'
 import { useSalaryContext } from '../../../context/SalaryContext';
 import { useBudgetContext } from '../../../context/BudgetContext';
 import { all, create } from 'mathjs'
+import TopBar from '../../../layouts/MainLayout/TopBar.js'
 
 const math = create(all, {
   number: 'BigNumber',
@@ -66,14 +67,7 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
       className={clsx(className)}
       {...rest}
     >
-      <Typography
-        align="left"
-        className={classes.header}
-        gutterBottom
-        variant="h1"
-      >
-        Budget
-                  </Typography>
+      <TopBar header="Budget" />
       <Typography
         gutterBottom
         variant="body1"
