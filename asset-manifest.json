@@ -1,22 +1,18 @@
 {
   "files": {
-    "main.js": "/ultimate-fire-calculator/static/js/main.95917c5e.chunk.js",
-    "main.js.map": "/ultimate-fire-calculator/static/js/main.95917c5e.chunk.js.map",
-    "runtime-main.js": "/ultimate-fire-calculator/static/js/runtime-main.c9ccb031.js",
-    "runtime-main.js.map": "/ultimate-fire-calculator/static/js/runtime-main.c9ccb031.js.map",
-    "static/css/2.18fb2ca0.chunk.css": "/ultimate-fire-calculator/static/css/2.18fb2ca0.chunk.css",
-    "static/js/2.dd9abe92.chunk.js": "/ultimate-fire-calculator/static/js/2.dd9abe92.chunk.js",
-    "static/js/2.dd9abe92.chunk.js.map": "/ultimate-fire-calculator/static/js/2.dd9abe92.chunk.js.map",
-    "index.html": "/ultimate-fire-calculator/index.html",
-    "precache-manifest.c9bff0e898d077f0f2821676c6535630.js": "/ultimate-fire-calculator/precache-manifest.c9bff0e898d077f0f2821676c6535630.js",
-    "service-worker.js": "/ultimate-fire-calculator/service-worker.js",
-    "static/css/2.18fb2ca0.chunk.css.map": "/ultimate-fire-calculator/static/css/2.18fb2ca0.chunk.css.map",
-    "static/js/2.dd9abe92.chunk.js.LICENSE.txt": "/ultimate-fire-calculator/static/js/2.dd9abe92.chunk.js.LICENSE.txt"
+    "main.js": "/static/js/main.2c81232b.chunk.js",
+    "runtime-main.js": "/static/js/runtime-main.6a771f16.js",
+    "static/css/2.849a7a81.chunk.css": "/static/css/2.849a7a81.chunk.css",
+    "static/js/2.dd9abe92.chunk.js": "/static/js/2.dd9abe92.chunk.js",
+    "index.html": "/index.html",
+    "precache-manifest.bfc10a7c3f07e0214f59b5bc4437bc6e.js": "/precache-manifest.bfc10a7c3f07e0214f59b5bc4437bc6e.js",
+    "service-worker.js": "/service-worker.js",
+    "static/js/2.dd9abe92.chunk.js.LICENSE.txt": "/static/js/2.dd9abe92.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c9ccb031.js",
-    "static/css/2.18fb2ca0.chunk.css",
+    "static/js/runtime-main.6a771f16.js",
+    "static/css/2.849a7a81.chunk.css",
     "static/js/2.dd9abe92.chunk.js",
-    "static/js/main.95917c5e.chunk.js"
+    "static/js/main.2c81232b.chunk.js"
   ]
 }
