@@ -5,7 +5,6 @@ import MainLayout from 'src/layouts/MainLayout';
 import Investments from 'src/views/investments/Investments';
 import Budget from 'src/views/budget/Budget';
 import NetWorthDashboard from 'src/views/dashboard/DashboardView';
-import NotFoundView from 'src/views/errors/NotFoundView';
 import SalaryCalculator from 'src/views/salaryCalculator/SalaryCalculator';
 import Help from 'src/views/help';
 
@@ -26,9 +25,9 @@ const routes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: '404', element: <NotFoundView /> },
+      { path: '404', element: <Navigate to="/app/salary-calculator" />},
       { path: '/', element: <Navigate to="/app/salary-calculator" /> },
-      { path: '*', element: <Navigate to="/404" /> }
+      { path: '*', element:<Navigate to="/app/salary-calculator" /> }
     ]
   }
 ];
