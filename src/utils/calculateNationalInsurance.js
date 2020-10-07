@@ -40,6 +40,7 @@ export const calculateNationalInsurance = (tax, taxableIncome) => {
     }
   }
 
+  BANDS.forEach(band => tax[band].taxPaid = math.round(math.multiply(tax[band].taxPaid, WEEKS_IN_YEAR), ROUND_AMOUNT))
   tax.totalNationalInsuranceTax = math.round(math.multiply(tax.weeklyNationalInsuranceTax, WEEKS_IN_YEAR), ROUND_AMOUNT)
   return tax
 }

@@ -2,10 +2,10 @@
   "name": "react-material-dashboard",
   "licence": "MIT",
   "version": "1.1.0",
-  "homepage": "https://l0wry.github.io/ultimate-fire-calculator",
+  "homepage": "http://www.gofire.co.uk",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
