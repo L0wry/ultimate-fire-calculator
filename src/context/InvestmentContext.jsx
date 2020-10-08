@@ -158,7 +158,7 @@ export const InvestmentContextProvider = ({ children }) => {
     0
 
   const getAmountInvestedPerMonth = () => investments.length > 0 ?
-    investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0) :
+    math.round(investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0), 2) :
     0
 
   return (

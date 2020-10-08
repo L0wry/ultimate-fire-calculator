@@ -2,7 +2,7 @@
   "name": "react-material-dashboard",
   "licence": "MIT",
   "version": "1.1.0",
-  "homepage": "http://www.gofire.co.uk",
+  "homepage": "http://www.gofire.co.uk/#",
   "scripts": {
     "start": "react-scripts start",
     "build": "GENERATE_SOURCEMAP=false react-scripts build",

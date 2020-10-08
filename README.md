@@ -41,5 +41,23 @@
  - [ ] sort out crappy duplicated objects in investment context
 
 
+### Requested
+Draw down rename
+Scotland tax
+Student Tax 
+help boxes
+Putting nothing (for zero) in a box should default to a zero appearing. Takes out a step
+
+Looking at in portrait on my Samsung, the entered expenses are largely hidden on the page and can't be deleted. (I just saw your update! But thought I'd mention anyway)
+
+A suggestion from me which I believe other FIRErs would be interested in, is some sort of goalseek function or alert relating to where to set pension contributions so as not to hit the LTA. In reality who knows what the LTA will be in a few decades, but it's still something to be mindful of when saving!
+
+Can you graph the net worth with monthly expenses deducted after retirement? Or maybe allow a set retirement in years then start expense deductions
+
+The ability to edit expenses
+
+
+Start drawdown from year x. new graph => net worth - drawdown % 
+
 ### Other ideas
 - Add debts such as loans, credit cards etc
