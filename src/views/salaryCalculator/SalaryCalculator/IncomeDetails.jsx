@@ -60,6 +60,7 @@ const Input = ({ label, type, inputProps, ...props }) => {
   return (
     <>
       <TextField
+        autoComplete="off"
         type={type}
         label={label}
         className={classes.input}
@@ -152,7 +153,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                 <Input
                   label="Annual Salary"
                   name="salary"
-                  type="tel"
+                  type="number"
                   inputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -174,7 +175,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                 <Input
                   label="Personal Pension Contribution Percentage"
                   name="personalPensionContribution"
-                  type="tel"
+                  type="number"
                   inputProps={{
                     endAdornment: (
                       <InputAdornment position="start">
@@ -197,7 +198,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                 <Input
                   label="Employer Pension Contribution Percentage"
                   name="employerPensionContribution"
-                  type="tel"
+                  type="number"
                   inputProps={{
                     endAdornment: (
                       <InputAdornment position="start">
@@ -219,7 +220,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                 <Input
                   label="Tax Free Personal Allowance"
                   name="taxFreePersonalAllowance"
-                  type="tel"
+                  type="number"
                   inputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -240,7 +241,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                 <Input
                   label="Secondary Income After Tax"
                   name="secondaryIncomeAfterTax"
-                  type="tel"
+                  type="number"
                   inputProps={{
                     startAdornment: (
                       <InputAdornment position="start">

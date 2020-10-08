@@ -70,27 +70,6 @@ This calculator aims to answer some of those questions and hopefully at some poi
                   </Typography>
             </Box>
 
-
-            <Box mt={3}>
-                <Typography
-                    align="left"
-                    color="textPrimary"
-                    gutterBottom
-                    variant="h4"
-                >
-                    Terminology
-                  </Typography>
-
-                <Typography
-                    align="left"
-                    color="textSecondary"
-                    variant="body1"
-                >
-                    Draw Down: Is the percentage amount you wish to withdraw from your Net Worth once you have FIRED
-
-                  </Typography>
-            </Box>
-
             <Box mt={3}>
                 <Typography
                     align="left"
@@ -108,7 +87,7 @@ This calculator aims to answer some of those questions and hopefully at some poi
                 >
                     Geared towards PAYE <br />
                     Only supports tax year 2020 - 20201<br />
-                    UK focused<br />
+                    England focused<br />
                     Doesn't take into consideration tax free investment types<br />
                     Doesn't support tax on withdrawals <br />
                     Doesn't take into consideration annual limits on isa, pension etc<br />

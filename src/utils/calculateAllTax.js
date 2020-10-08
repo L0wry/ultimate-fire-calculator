@@ -22,9 +22,14 @@ export default function calculateAllTax({
   const personalPensionContribution = math.multiply(personalPensionContributionPercent, salary)
   const employerPensionContribution = math.multiply(employerPensionContributionPercent, salary)
   const { monthlyAmountPaid, yearlyAmountPaid } = calculateStudentLoan({ studentLoanPlanType , salary})
-  const { taxBreaksTotal, taxableIncome } = calculatePreTaxDeductions({ taxFreePersonalAllowance, salary, personalPensionContribution }) //TODO : Tax breaks
+  let { taxBreaksTotal, taxableIncome } = calculatePreTaxDeductions({ taxFreePersonalAllowance, salary, personalPensionContribution }) //TODO : Tax breaks
 
   const incomeTax = calculateIncomeTax(incomeTaxBands(taxFreePersonalAllowance), taxableIncome)
+  
+  taxableIncome = math.subtract(taxableIncome, taxFreePersonalAllowance) > 0
+    ? math.subtract(taxableIncome, taxFreePersonalAllowance)
+    : 0
+
   const nationalInsuranceTax = calculateNationalInsurance(nationalInsuranceTaxBands, taxableIncome)
 
   return {

@@ -40,6 +40,7 @@ const Input = ({ label, inputProps, ...props }) => {
   return (
     <>
       <TextField
+        autoComplete="off"
         label={label}
         className="text-input"
         variant="outlined"
@@ -119,7 +120,7 @@ export const AddInvestment = ({ className, addInvestment, ...rest }) => {
               <Input
                 label="Current Value"
                 name="initialAmount"
-                type="text"
+                type="number"
                 inputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -139,7 +140,7 @@ export const AddInvestment = ({ className, addInvestment, ...rest }) => {
               <Input
                 label="Annual Return"
                 name="expectedReturn"
-                type="text"
+                type="number"
                 inputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -160,7 +161,7 @@ export const AddInvestment = ({ className, addInvestment, ...rest }) => {
               <Input
                 label="Monthly Contribution"
                 name="monthlyContribution"
-                type="text"
+                type="number"
                 inputProps={{
                   startAdornment: (
                     <InputAdornment position="start">

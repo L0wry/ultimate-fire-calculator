@@ -42,6 +42,7 @@ const Input = ({ label, type, inputProps, ...props }) => {
   return (
     <>
       <TextField
+        autoComplete="off"
         type={type}
         label={label}
         className={classes.input}
@@ -122,7 +123,7 @@ const Expenses = ({ className, addExpense, ...rest }) => {
                 <Input
                   label="Expense cost"
                   name="cost"
-                  type="tel"
+                  type="number"
                   inputProps={{
                     startAdornment: (
                       <InputAdornment position="start">

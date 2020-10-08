@@ -23,7 +23,7 @@
 
  - [ x] sort out dashboard graph styling
  - [ x] add expenses to the dashboard to show retirement in years
- - [x] Support student loans
+  - [x] Support student loans
  - [ x] suport 100K plus salaries
  - [ x] Handle form validation
  - [ x] Use Yup package? https://formik.org/docs/guides/validation
@@ -43,10 +43,11 @@
 
 ### Requested
 - [ x] Draw down rename
-Scotland tax
+- []  Scotland tax
 - [ x] Student Tax 
 - [ x] help boxes
 - [ x] Putting nothing (for zero) in a box should default to a zero appearing. Takes out a step
+- [ ] Start retirment in
 
 
 A suggestion from me which I believe other FIRErs would be interested in, is some sort of goalseek function or alert relating to where to set pension contributions so as not to hit the LTA. In reality who knows what the LTA will be in a few decades, but it's still something to be mindful of when saving!
