@@ -6,14 +6,18 @@ import {
   makeStyles,
   Typography,
   Grid,
-  Divider
+  Hidden,
+  Button
 } from '@material-ui/core';
+import { NavLink as RouterLink } from 'react-router-dom';
+
 import MonthlyTakeHomeCard from './MonthlyTakeHomeCard'
 import AddExpenses from './AddExpenses'
 import ExpenseList from './ExpenseList'
 import { useSalaryContext } from '../../../context/SalaryContext';
 import { useBudgetContext } from '../../../context/BudgetContext';
 import { all, create } from 'mathjs'
+import TopBar from '../../../layouts/MainLayout/TopBar.js'
 
 const math = create(all, {
   number: 'BigNumber',
@@ -28,6 +32,10 @@ const useStyles = makeStyles((theme) => ({
   header: {
     color: theme.palette.text.primary
   },
+  navButton: {
+    backgroundColor: theme.palette.text.primary,
+    color: theme.palette.text.tertiary
+}
 }));
 
 const ExpenseHeaderCard = ({ className, ...rest }) => {
@@ -66,14 +74,8 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
       className={clsx(className)}
       {...rest}
     >
-      <Typography
-        align="left"
-        className={classes.header}
-        gutterBottom
-        variant="h1"
-      >
-        Budget
-                  </Typography>
+      <TopBar header="Budget" />
+
       <Typography
         gutterBottom
         variant="body1"
@@ -134,6 +136,24 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                 />
               )}
             </Grid>
+
+            <Hidden lgUp>
+
+                                <Grid item
+                                    lg={12}
+                                    md={12}
+                                    xs={12}>
+                                    <Button
+                                        fullWidth
+                                        className={classes.navButton}
+                                        component={RouterLink}
+                                        to={'/app/investments'}
+
+                                    >
+                                        Add Your Investments
+                                </Button>
+                                </Grid>
+                            </Hidden>
         </Grid>
       </Box>
 

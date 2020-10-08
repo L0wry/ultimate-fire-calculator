@@ -26,7 +26,7 @@
  - [x] Support student loans
  - [ x] suport 100K plus salaries
  - [ x] Handle form validation
-	 - [ x] Use Yup package? https://formik.org/docs/guides/validation
+ - [ x] Use Yup package? https://formik.org/docs/guides/validation
  - [ ] automatic enrollement into investment
 
 ### p2
@@ -48,7 +48,6 @@ Scotland tax
 - [ x] help boxes
 - [ x] Putting nothing (for zero) in a box should default to a zero appearing. Takes out a step
 
-Looking at in portrait on my Samsung, the entered expenses are largely hidden on the page and can't be deleted. (I just saw your update! But thought I'd mention anyway)
 
 A suggestion from me which I believe other FIRErs would be interested in, is some sort of goalseek function or alert relating to where to set pension contributions so as not to hit the LTA. In reality who knows what the LTA will be in a few decades, but it's still something to be mindful of when saving!
 

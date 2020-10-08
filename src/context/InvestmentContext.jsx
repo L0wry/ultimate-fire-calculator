@@ -11,7 +11,7 @@ const InvestmentContext = React.createContext({});
 
 export const InvestmentContextProvider = ({ children }) => {
   const investmentState = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
-  const yearState = localStorage.getItem('yearsToMature') || 1
+  const yearState = localStorage.getItem('yearsToMature') || 10
   const safeWithdrawalPercentState = localStorage.getItem('safeWithdrawalPercent') || 0.04
   
   const [investments, setInvestments] = useState(investmentState);

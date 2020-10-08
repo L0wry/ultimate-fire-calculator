@@ -1,12 +1,14 @@
 import React from 'react';
 import {
     Box,
-    AppBar,
+    Button,
     Grid,
     makeStyles,
-    Typography
+    Typography,
+    Hidden
 } from '@material-ui/core';
 import clsx from 'clsx';
+import { NavLink as RouterLink } from 'react-router-dom';
 
 import IncomeDetails from './IncomeDetails';
 import IncomeTaxCard from './IncomeTaxCard'
@@ -20,7 +22,12 @@ const useStyles = makeStyles((theme) => ({
     root: {},
     text: {
         color: theme.palette.text.primary
+    },
+    navButton: {
+        backgroundColor: theme.palette.text.primary,
+        color: theme.palette.text.tertiary
     }
+
 }));
 
 const SalaryCalculator = ({ className, ...rest }) => {
@@ -73,8 +80,27 @@ const SalaryCalculator = ({ className, ...rest }) => {
                             >
                                 <NationalInsurance />
                             </Grid>
+                            <Hidden lgUp>
+
+                                <Grid item
+                                    lg={12}
+                                    md={12}
+                                    xs={12}>
+                                    <Button
+                                        fullWidth
+                                        className={classes.navButton}
+                                        component={RouterLink}
+                                        to={'/app/budget'}
+
+                                    >
+                                        Add Your Monthly Expenses
+                                </Button>
+                                </Grid>
+                            </Hidden>
+
                         </Grid>
                         {/* <BreakdownCard /> */}
+
                     </Box>
                 </Box>
             )}

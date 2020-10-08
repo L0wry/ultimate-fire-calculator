@@ -5,10 +5,13 @@ import {
   Box,
   Typography,
   makeStyles,
+  Hidden,
+  Button
 } from '@material-ui/core';
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { AddInvestment } from './AddInvestment'
 import { InvestmentList } from './InvestmentList'
+import { NavLink as RouterLink } from 'react-router-dom';
 import TopBar from '../../../layouts/MainLayout/TopBar.js'
 
 const useStyles = makeStyles((theme) => ({
@@ -19,11 +22,15 @@ const useStyles = makeStyles((theme) => ({
   header: {
     color: theme.palette.text.primary
   },
+  navButton: {
+    backgroundColor: theme.palette.text.primary,
+    color: theme.palette.text.tertiary
+}
 }));
 
 const Investments = ({ className, ...rest }) => {
 
-  const { onItemSave, editInvestment, removeInvestment, investments, addInvestment } = useInvestmentContext();
+  const { onItemSave, editInvestment, removeInvestment, investments, addInvestment, yearsToMature } = useInvestmentContext();
   const classes = useStyles()
 
   return (
@@ -45,6 +52,22 @@ const Investments = ({ className, ...rest }) => {
           <InvestmentList onItemSave={onItemSave} onItemEdit={editInvestment} onItemRemove={removeInvestment} items={investments} />
         )}
       </Box>
+
+      <Hidden lgUp>
+
+        <Box mt={3} >
+          <Button
+
+            fullWidth
+            className={classes.navButton}
+            component={RouterLink}
+            to={'/app/dashboard'}
+
+          >
+            Predict your Net Worth in {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
+        </Button>
+        </Box>
+      </Hidden>
 
     </div>
   );
