@@ -38,7 +38,7 @@ const ExpectedMonthlyIncome = () => {
             gutterBottom
             variant="h5"
           >
-            Expected Monthly Interest in {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
+            Expected Gross Monthly Income From Investments In {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
         </Typography>
         </Grid>
         <Grid item>

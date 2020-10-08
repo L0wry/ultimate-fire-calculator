@@ -56,7 +56,7 @@ const TextBox = ({ item, safeWithdrawalPercent }) => {
       gutterBottom
     >
       {item.dataKey === "Income From Draw Down" ?
-        `Expected Monthly Income from ${Math.round(safeWithdrawalPercent * 100)}% Draw Down: £${item.value}` :
+        `Expected Gross Monthly Income from ${Math.round(safeWithdrawalPercent * 100)}% Draw Down: £${item.value}` :
         `Expenses Cost: £${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
     </Typography>
   )
