@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
 const Dashboard = ({ className, ...rest }) => {
   const classes = useStyles();
 
-  const { investments, drawDownPercent } = useInvestmentContext();
+  const { investments, safeWithdrawalPercent } = useInvestmentContext();
   const { expenseTotal } = useBudgetContext();
 
   return (
@@ -104,7 +104,7 @@ const Dashboard = ({ className, ...rest }) => {
           xl={9}
           xs={12}
         >
-          <Fire drawDownPercent={drawDownPercent} fireData={convertInvestmentDataToFire(investments, drawDownPercent, expenseTotal)} />
+          <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments, safeWithdrawalPercent, expenseTotal)} />
         </Grid>
       </Grid>
     </div>

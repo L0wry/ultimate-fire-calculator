@@ -4,12 +4,11 @@ import {
     MenuItem,
     FormControl,
     Select,
-    Button,
     Typography,
     Box
 } from '@material-ui/core';
 import { useInvestmentContext } from '../../../context/InvestmentContext';
-
+import HelpPopOver from '../../../components/HelpPopOver'
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -51,14 +50,18 @@ export const SelectYears = () => {
             display="flex"
             alignItems="center">
             <FormControl className={classes.formControl}>
+            <Box display='flex' flexGrow={1} >
                 <Typography
                     align="center"
                     className={classes.text}
                     gutterBottom
                     variant="h5"
                 >
-                    Predict Net Worth In
+                    Predict Your Total Net Worth In
                 </Typography>
+                <HelpPopOver helpTextToRender={
+                        `See how your Net Worth will mature over a set number of years.`}/>
+                        </Box>
                 <Select
                     className={classes.select}
                     labelId="open-select-label"
@@ -70,7 +73,7 @@ export const SelectYears = () => {
                     onChange={e => saveYearsToMature(e.target.value)}
                 >
                     {years.map((year) =>
-                        <MenuItem key={`${year}-Years`} className={classes.select} value={year}>{`${year} Years`}</MenuItem>
+                        <MenuItem key={`${year}-Years`} className={classes.select} value={year}>{year === 1 ? `${year} Year` : `${year} Years`}</MenuItem>
                     )}
                 </Select>
             </FormControl>

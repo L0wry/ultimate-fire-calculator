@@ -12,17 +12,16 @@ const InvestmentContext = React.createContext({});
 export const InvestmentContextProvider = ({ children }) => {
   const investmentState = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
   const yearState = localStorage.getItem('yearsToMature') || 1
-  const drawdownState = localStorage.getItem('drawDownPercent') || 0.04
+  const safeWithdrawalPercentState = localStorage.getItem('safeWithdrawalPercent') || 0.04
   
   const [investments, setInvestments] = useState(investmentState);
   const [yearsToMature, setYearsToMature] = useState(yearState)
-  const [drawDownPercent, setDrawDownPercent] = useState(drawdownState)
+  const [safeWithdrawalPercent, setSafeWithdrawalPercent] = useState(safeWithdrawalPercentState)
 
 
-  const saveDrawdown = percent => {
-    console.log(percent)
-      setDrawDownPercent(parseFloat(percent) /  100)
-      localStorage.setItem('drawDownPercent', percent /  100)
+  const saveSafeWithdrawalPercent = percent => {
+    setSafeWithdrawalPercent(parseFloat(percent) /  100)
+      localStorage.setItem('safeWithdrawalPercent', percent /  100)
   }
 
   const saveYearsToMature = years => {
@@ -162,7 +161,7 @@ export const InvestmentContextProvider = ({ children }) => {
     0
 
   return (
-    <InvestmentContext.Provider value={{ drawDownPercent, saveDrawdown, investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
+    <InvestmentContext.Provider value={{ safeWithdrawalPercent: safeWithdrawalPercentState, saveSafeWithdrawalPercent, investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
       {children}
     </InvestmentContext.Provider>
   )

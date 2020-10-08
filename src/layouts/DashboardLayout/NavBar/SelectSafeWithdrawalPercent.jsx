@@ -5,10 +5,12 @@ import {
     FormControl,
     Select,
     Typography,
-    Box
+    Box,
+
 } from '@material-ui/core';
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 
+import HelpPopOver from '../../../components/HelpPopOver'
 
 const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -25,12 +27,14 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         color: theme.palette.text.tertiary
-    }
+    },
 }));
 
 const percentages = new Array(10).fill(0).map((_, i) => i + 1)
 
-export const SelectDrawDown = () => {
+
+
+export const SelectSafeWithdrawalPercent = () => {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -43,21 +47,28 @@ export const SelectDrawDown = () => {
         setOpen(true);
     };
 
-    const { saveDrawdown, drawDownPercent } = useInvestmentContext();
+    const { saveSafeWithdrawalPercent, safeWithdrawalPercent } = useInvestmentContext();
 
     return (
         <Box
             display="flex"
             alignItems="center">
             <FormControl className={classes.formControl}>
-                <Typography
-                    align="center"
-                    className={classes.text}
-                    gutterBottom
-                    variant="h5"
-                >
-                    Draw Down Percentage
+                <Box display='flex' flexGrow={1} >
+                    <Typography
+                        align="center"
+                        className={classes.text}
+                        gutterBottom
+                        variant="h5"
+                    >
+                        Safe Withdrawal Percentage
                 </Typography>
+                    <HelpPopOver helpTextToRender={
+                        `Safe Withdrawal rate is the amount you 
+                        wish to withdraw from your overall Net Worth.
+                        This will provide you a monthly income.
+                        3-4% is usually considered safe.`}/>
+                </Box>
                 <Select
                     className={classes.select}
                     labelId="open-select-label"
@@ -65,11 +76,11 @@ export const SelectDrawDown = () => {
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
-                    value={drawDownPercent * 100}
-                    onChange={e => saveDrawdown(e.target.value)}
+                    value={Math.floor(safeWithdrawalPercent * 100)}
+                    onChange={e => saveSafeWithdrawalPercent(e.target.value)}
                 >
                     {percentages.map((percent) =>
-                        <MenuItem key={percent} className={classes.select}  value={percent}>{`${percent}%`}</MenuItem>
+                        <MenuItem key={percent} className={classes.select} value={percent}>{`${percent}%`}</MenuItem>
                     )}
                 </Select>
             </FormControl>

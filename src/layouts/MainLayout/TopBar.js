@@ -69,7 +69,6 @@ const TopBar = ({ className, header, ...rest }) => {
               >
                 {header}
               </Typography>
-
                 <IconButton
                   className={classes.button}
                   color="inherit"

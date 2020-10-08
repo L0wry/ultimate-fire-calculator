@@ -20,7 +20,7 @@ import {
 
 const colours = ['#7543E8', '#1B005A']
 
-const Text = ({ item, drawDownPercent }) => {
+const Text = ({ item, safeWithdrawalPercent }) => {
   const useStyles = makeStyles(theme => ({
     typography: {
       color: item.color
@@ -35,12 +35,12 @@ const Text = ({ item, drawDownPercent }) => {
       variant="h5"
       gutterBottom
     >
-      {item.dataKey === "Income From Draw Down" ? `Expected Monthly Income from ${drawDownPercent * 100}% Draw Down` : item.dataKey}
+      {item.dataKey === "Income From Draw Down" ? `Expected Monthly Income from ${safeWithdrawalPercent * 100}% Draw Down` : item.dataKey}
     </Typography>
   )
 }
 
-const TextBox = ({ item, drawDownPercent }) => {
+const TextBox = ({ item, safeWithdrawalPercent }) => {
   const useStyles = makeStyles(theme => ({
     typography: {
       color: item.color
@@ -56,7 +56,7 @@ const TextBox = ({ item, drawDownPercent }) => {
       gutterBottom
     >
       {item.dataKey === "Income From Draw Down" ?
-        `Expected Monthly Income from ${drawDownPercent * 100}% Draw Down: £${item.value}` :
+        `Expected Monthly Income from ${safeWithdrawalPercent * 100}% Draw Down: £${item.value}` :
         `Expenses Cost: £${item.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`}
     </Typography>
   )
@@ -77,7 +77,7 @@ const LegendBox = props => (
         >
 
           <Box >
-            <Text drawDownPercent={props.drawDownPercent} item={item} />
+            <Text safeWithdrawalPercent={props.safeWithdrawalPercent} item={item} />
           </Box>
         </Grid>
       )}
@@ -100,7 +100,7 @@ const ToolTipBox = props => (props.active) ? (
       </Typography>
       {props.payload.map((item, i) =>
         <Box key={i}>
-          <TextBox drawDownPercent={props.drawDownPercent} item={item} />
+          <TextBox safeWithdrawalPercent={props.safeWithdrawalPercent} item={item} />
         </Box>
       )}
     </Box>
@@ -109,7 +109,7 @@ const ToolTipBox = props => (props.active) ? (
 
 
 
-const Fire = ({ fireData, drawDownPercent, ...rest }) => {
+const Fire = ({ fireData, safeWithdrawalPercent, ...rest }) => {
   const useStyles = makeStyles((theme) => ({
     root: {},
     text: {
@@ -147,9 +147,9 @@ const Fire = ({ fireData, drawDownPercent, ...rest }) => {
 
             <XAxis dataKey="year" style={{ fontFamily: theme.typography.fontFamily }} />
             <YAxis tickFormatter={amount => `£${amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`} style={{ fontFamily: theme.typography.fontFamily }} />
-            <Legend content={<LegendBox drawDownPercent={drawDownPercent} classes={classes} />} />
+            <Legend content={<LegendBox safeWithdrawalPercent={safeWithdrawalPercent} classes={classes} />} />
 
-            <Tooltip content={<ToolTipBox drawDownPercent={drawDownPercent} classes={classes} />} />
+            <Tooltip content={<ToolTipBox safeWithdrawalPercent={safeWithdrawalPercent} classes={classes} />} />
 
 
             {

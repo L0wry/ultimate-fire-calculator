@@ -18,10 +18,10 @@ describe('convertInvestmentDataToFire', () => {
       { compoundData: calculateYearlyCompoundWithCharge({ ...investment, name: 'investment 2' }) }
     ]
 
-    const drawdownPercent = .02
+    const safeWithdrawalPercent = .02
     const expenseTotal = 3000
 
-    expect(convertInvestmentDataToFire(investments, drawdownPercent, expenseTotal)).toEqual([
+    expect(convertInvestmentDataToFire(investments, safeWithdrawalPercent, expenseTotal)).toEqual([
       { "Expenses": 3000, "Income From Draw Down": 0.04, "year": "Year 1" },
       { "Expenses": 3000, "Income From Draw Down": 0.04, "year": "Year 2" },
       { "Expenses": 3000, "Income From Draw Down": 0.06, "year": "Year 3" },

@@ -19,7 +19,7 @@ import {
 } from 'react-feather';
 import NavItem from './NavItem';
 import { SelectYears } from './SelectYears'
-import { SelectDrawDown } from './SelectDrawDown'
+import { SelectSafeWithdrawalPercent } from './SelectSafeWithdrawalPercent'
 
 import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
 import NetWorthTotal from '../../../views/dashboard/DashboardView/NetWorthTotal';
@@ -106,7 +106,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           <SelectYears/>
         </Grid>
         <Grid item>
-          <SelectDrawDown/>
+          <SelectSafeWithdrawalPercent/>
         </Grid>
           <Grid
             item >
