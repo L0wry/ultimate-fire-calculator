@@ -164,7 +164,7 @@ const IncomeTaxCard = ({ className, userTax, ...rest }) => {
                 variant="body1"
                 gutterBottom
               >
-                Student Loan Paid: £{studentLoan?.monthlyAmountPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                Student Loan Paid: £{studentLoan?.yearlyAmountPaid.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
               </Typography>
             </Grid>
           )}

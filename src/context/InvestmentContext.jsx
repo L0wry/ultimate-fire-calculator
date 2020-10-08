@@ -161,7 +161,7 @@ export const InvestmentContextProvider = ({ children }) => {
     0
 
   return (
-    <InvestmentContext.Provider value={{ safeWithdrawalPercent: safeWithdrawalPercentState, saveSafeWithdrawalPercent, investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
+    <InvestmentContext.Provider value={{ safeWithdrawalPercent, saveSafeWithdrawalPercent, investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
       {children}
     </InvestmentContext.Provider>
   )

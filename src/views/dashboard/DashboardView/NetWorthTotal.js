@@ -40,7 +40,7 @@ const NetWorthTotal = () => {
             gutterBottom
             variant="h5"
           >
-            Total Net Worth in {yearsToMature} Years
+            Total Net Worth in {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
             </Typography>
         </Grid>
         <Grid item>
