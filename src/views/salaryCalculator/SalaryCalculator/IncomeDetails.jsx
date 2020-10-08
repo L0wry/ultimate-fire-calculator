@@ -64,7 +64,6 @@ const Input = ({ label, type, inputProps, ...props }) => {
         label={label}
         className={classes.input}
         variant="outlined"
-        required
         fullWidth
         InputProps={{
           className: classes.text,
@@ -127,10 +126,10 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
             secondaryIncomeAfterTax: userTax.secondaryIncomeAfterTax || 0
           }}
           validationSchema={object().shape({
-            salary: number('Please type a number').required(),
-            personalPensionContribution: number('Please type a number').required(),
-            employerPensionContribution: number('Please type a number').required(),
-            taxFreePersonalAllowance: number().required(),
+            salary: number('Please type a number'),
+            personalPensionContribution: number('Please type a number'),
+            employerPensionContribution: number('Please type a number'),
+            taxFreePersonalAllowance: number(),
             studentLoanPlanType: number(),
             secondaryIncomeAfterTax: number('Please type a number')
           })}

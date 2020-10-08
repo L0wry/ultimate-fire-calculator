@@ -42,11 +42,11 @@
 
 
 ### Requested
-Draw down rename
+- [ x] Draw down rename
 Scotland tax
 Student Tax 
-help boxes
-Putting nothing (for zero) in a box should default to a zero appearing. Takes out a step
+- [ x] help boxes
+- [ x] Putting nothing (for zero) in a box should default to a zero appearing. Takes out a step
 
 Looking at in portrait on my Samsung, the entered expenses are largely hidden on the page and can't be deleted. (I just saw your update! But thought I'd mention anyway)
 

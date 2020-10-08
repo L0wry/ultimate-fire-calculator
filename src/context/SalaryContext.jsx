@@ -14,7 +14,7 @@ export const SalaryContextProvider = ({ children }) => {
 	const [userTax, setUserTax] = useState(state)
 
 	const setUserFinances = ({
-		salary,
+		salary = 0,
 		taxFreePersonalAllowance,
 		personalPensionContribution = 0,
 		employerPensionContribution = 0,
