@@ -60,7 +60,8 @@ const TopBar = ({ className, header, ...rest }) => {
 
           <Hidden lgUp>
 
-            <Box display='flex' flexGrow={1} mt={3}>
+            <Box display='flex' flexGrow={1}>
+              <Box  mt={3}>
               <Typography
                 className={classes.text}
                 align="left"
@@ -69,6 +70,8 @@ const TopBar = ({ className, header, ...rest }) => {
               >
                 {header}
               </Typography>
+              </Box>
+              <Box display='flex' flexGrow={1}  mt={2}>
                 <IconButton
                   className={classes.button}
                   color="inherit"
@@ -76,6 +79,7 @@ const TopBar = ({ className, header, ...rest }) => {
                 >
                   <MenuIcon fontSize="large" className={classes.button} />
                 </IconButton>
+                </Box>
             </Box>
           </Hidden>
 
