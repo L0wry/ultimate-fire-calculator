@@ -56,7 +56,6 @@ const MonthlyTakeHomeCard = ({ className, expensesCost, totalTakeHome, differenc
                     <Grid item>
                         <Typography
                             className={classes.text}
-
                             color="textSecondary"
                             gutterBottom
                             variant="h4"
@@ -65,7 +64,6 @@ const MonthlyTakeHomeCard = ({ className, expensesCost, totalTakeHome, differenc
                                 </Typography>
                         <Typography
                             className={classes.text}
-
                             color="textPrimary"
                             variant="h4"
                         >
@@ -85,7 +83,6 @@ const MonthlyTakeHomeCard = ({ className, expensesCost, totalTakeHome, differenc
                                 </Typography>
                         <Typography
                             className={classes.text}
-s
                             color="textPrimary"
                             variant="h4"
                         >

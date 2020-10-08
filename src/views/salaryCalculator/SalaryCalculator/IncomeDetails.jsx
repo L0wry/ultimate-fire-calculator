@@ -52,8 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Input = ({ label, type, inputProps, ...props }) => {
-  // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
-  // which we can spread on <input> and alse replace ErrorMessage entirely.
+
   const [field, meta] = useField(props);
   const classes = useStyles();
 
@@ -70,7 +69,10 @@ const Input = ({ label, type, inputProps, ...props }) => {
           className: classes.text,
           ...inputProps
         }}
-        {...field} {...props} />
+        {...field}
+        
+        
+        />
       {meta.touched && meta.error ? (
         <div className="error">
           <Typography

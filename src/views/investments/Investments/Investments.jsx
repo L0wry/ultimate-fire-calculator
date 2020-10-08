@@ -24,7 +24,10 @@ const useStyles = makeStyles((theme) => ({
   },
   navButton: {
     backgroundColor: theme.palette.text.primary,
-    color: theme.palette.text.tertiary
+    color: theme.palette.text.tertiary,
+    '&:hover': {
+      backgroundColor: theme.palette.primary.dark,
+    }
   }
 }));
 
