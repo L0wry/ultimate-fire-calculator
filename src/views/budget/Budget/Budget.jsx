@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   navButton: {
     backgroundColor: theme.palette.text.primary,
     color: theme.palette.text.tertiary
-}
+  }
 }));
 
 const ExpenseHeaderCard = ({ className, ...rest }) => {
@@ -109,51 +109,53 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
               />
             </Grid>
 
-              <Grid
-                item
-                lg={6}
-                xl={6}
-                sm={12}
-                xs={12}
-              >
-
-                <MonthlyTakeHomeCard {...takeHome} />
-              </Grid>
-          </Grid>
-
-          <Grid
+            <Grid
               item
-              lg={12}
+              lg={6}
+              xl={6}
               sm={12}
-              xl={12}
               xs={12}
             >
-              {expenses.length > 0 && (
+
+              <MonthlyTakeHomeCard {...takeHome} />
+            </Grid>
+          </Grid>
+
+          {expenses.length > 0 && (
+            <>
+              <Grid
+                item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+              >
                 <ExpenseList
                   items={expenses}
                   onItemCheck={idx => checkExpense(idx)}
                   onItemRemove={idx => removeExpense(idx)}
                 />
-              )}
-            </Grid>
+              </Grid>
 
-            <Hidden lgUp>
+              <Hidden lgUp>
 
-                                <Grid item
-                                    lg={12}
-                                    md={12}
-                                    xs={12}>
-                                    <Button
-                                        fullWidth
-                                        className={classes.navButton}
-                                        component={RouterLink}
-                                        to={'/app/investments'}
+                <Grid item
+                  lg={12}
+                  md={12}
+                  xs={12}>
+                  <Button
+                    fullWidth
+                    className={classes.navButton}
+                    component={RouterLink}
+                    to={'/app/investments'}
 
-                                    >
-                                        Add Your Investments
-                                </Button>
-                                </Grid>
-                            </Hidden>
+                  >
+                    Add Your Investments
+              </Button>
+                </Grid>
+              </Hidden>
+            </>
+          )}
         </Grid>
       </Box>
 

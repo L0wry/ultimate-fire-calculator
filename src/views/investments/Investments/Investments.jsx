@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   navButton: {
     backgroundColor: theme.palette.text.primary,
     color: theme.palette.text.tertiary
-}
+  }
 }));
 
 const Investments = ({ className, ...rest }) => {
@@ -48,26 +48,30 @@ const Investments = ({ className, ...rest }) => {
 
       <Box mt={3}>
         <AddInvestment addInvestment={addInvestment} />
-        {investments.length > 0 && (
-          <InvestmentList onItemSave={onItemSave} onItemEdit={editInvestment} onItemRemove={removeInvestment} items={investments} />
-        )}
       </Box>
+      {investments.length > 0 && (
+        <>
+          <InvestmentList onItemSave={onItemSave} onItemEdit={editInvestment} onItemRemove={removeInvestment} items={investments} />
 
-      <Hidden lgUp>
 
-        <Box mt={3} >
-          <Button
 
-            fullWidth
-            className={classes.navButton}
-            component={RouterLink}
-            to={'/app/dashboard'}
+          <Hidden lgUp>
 
-          >
-            Predict your Net Worth in {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
-        </Button>
-        </Box>
-      </Hidden>
+            <Box mt={3} >
+              <Button
+
+                fullWidth
+                className={classes.navButton}
+                component={RouterLink}
+                to={'/app/dashboard'}
+
+              >
+                Predict your Net Worth in {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
+              </Button>
+            </Box>
+          </Hidden>
+        </>
+      )}
 
     </div>
   );
