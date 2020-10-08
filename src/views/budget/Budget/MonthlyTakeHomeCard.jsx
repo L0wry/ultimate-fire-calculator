@@ -7,7 +7,6 @@ import {
     CardContent,
     Grid,
     Typography,
-    colors,
     makeStyles
 } from '@material-ui/core';
 
@@ -15,17 +14,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         height: '100%'
     },
-    avatar: {
-        backgroundColor: colors.red[600],
-        height: 56,
-        width: 56
-    },
-    differenceIcon: {
-        color: colors.red[900]
-    },
-    differenceValue: {
-        color: colors.red[900],
-        marginRight: theme.spacing(1)
+    text: {
+        textAlign: 'center'
     }
 }));
 
@@ -41,36 +31,43 @@ const MonthlyTakeHomeCard = ({ className, expensesCost, totalTakeHome, differenc
             <CardContent>
                 <Grid
                     container
-                    direction="column"
-                    justify="space-between"
+                    direction="row"
+                    justify="center"
                     spacing={3}
                 >
                     <Grid item>
                         <Typography
+                            className={classes.text}
                             color="textSecondary"
                             gutterBottom
-                            variant="h5"
+                            variant="h4"
                         >
                             Monthly Net Income
                                 </Typography>
                         <Typography
+                            className={classes.text}
+
                             color="textPrimary"
-                            variant="h3"
+                            variant="h4"
                         >
                             £{totalTakeHome}
                         </Typography>
                     </Grid>
                     <Grid item>
                         <Typography
+                            className={classes.text}
+
                             color="textSecondary"
                             gutterBottom
-                            variant="h5"
+                            variant="h4"
                         >
                             Total Expenses
                                 </Typography>
                         <Typography
+                            className={classes.text}
+
                             color="textPrimary"
-                            variant="h3"
+                            variant="h4"
                         >
                             £{expensesCost}
                         </Typography>
@@ -78,15 +75,19 @@ const MonthlyTakeHomeCard = ({ className, expensesCost, totalTakeHome, differenc
 
                     <Grid item>
                         <Typography
+                            className={classes.text}
+
                             color="textSecondary"
                             gutterBottom
-                            variant="h5"
+                            variant="h4"
                         >
                             Amount Left Over
                                 </Typography>
                         <Typography
+                            className={classes.text}
+s
                             color="textPrimary"
-                            variant="h3"
+                            variant="h4"
                         >
                             £{difference}
                         </Typography>

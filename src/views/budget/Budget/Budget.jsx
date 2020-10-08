@@ -14,7 +14,6 @@ import ExpenseList from './ExpenseList'
 import { useSalaryContext } from '../../../context/SalaryContext';
 import { useBudgetContext } from '../../../context/BudgetContext';
 import { all, create } from 'mathjs'
-import TopBar from '../../../layouts/MainLayout/TopBar.js'
 
 const math = create(all, {
   number: 'BigNumber',
@@ -67,7 +66,14 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
       className={clsx(className)}
       {...rest}
     >
-      <TopBar header="Budget" />
+      <Typography
+        align="left"
+        className={classes.header}
+        gutterBottom
+        variant="h1"
+      >
+        Budget
+                  </Typography>
       <Typography
         gutterBottom
         variant="body1"
@@ -78,38 +84,56 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
         <Grid
           container
           direction="row"
-          justify="flex-start"
-          alignItems="stretch"
           spacing={3}
         >
+
           <Grid
+            container
             item
-            lg={6}
-            sm={6}
-            xl={6}
-            xs={6}
+            direction="row"
+            alignItems="center"
+            spacing={3}
           >
-            <AddExpenses
-              addExpense={addExpense}
-            />
-            {expenses.length > 0 && (
-              <ExpenseList
-                items={expenses}
-                onItemCheck={idx => checkExpense(idx)}
-                onItemRemove={idx => removeExpense(idx)}
+
+            <Grid
+              item
+              lg={6}
+              xl={6}
+              sm={12}
+              xs={12}
+            >
+              <AddExpenses
+                addExpense={addExpense}
               />
-            )}
+            </Grid>
+
+              <Grid
+                item
+                lg={6}
+                xl={6}
+                sm={12}
+                xs={12}
+              >
+
+                <MonthlyTakeHomeCard {...takeHome} />
+              </Grid>
           </Grid>
 
           <Grid
-            item
-            lg={6}
-            sm={6}
-            xl={6}
-            xs={6}
-          >
-            <MonthlyTakeHomeCard {...takeHome} />
-          </Grid>
+              item
+              lg={12}
+              sm={12}
+              xl={12}
+              xs={12}
+            >
+              {expenses.length > 0 && (
+                <ExpenseList
+                  items={expenses}
+                  onItemCheck={idx => checkExpense(idx)}
+                  onItemRemove={idx => removeExpense(idx)}
+                />
+              )}
+            </Grid>
         </Grid>
       </Box>
 
