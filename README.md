@@ -27,12 +27,20 @@
  - [ x] suport 100K plus salaries
  - [ x] Handle form validation
  - [ x] Use Yup package? https://formik.org/docs/guides/validation
- - [ ] automatic enrollement into investment
+ - [ ] Finish tax breakdown table
+ - [] Show retirement income with tax after years
+ - [] Begineer mode
+ - []  capture age and data
+ - [] Suggest what others are doing based on age
+ - [] reconmendations on how to get started (Isa etc)
+ - [] lifetime allowance
+ - [] monthly allowences
+ - [] not allowed to contribute more than salary to pension
 
 ### p2
+ - [ ] automatic enrollement into investment
 
  - [ ] Stop contributing  to investment in x years
- - [ ] Finish tax breakdown table
  - [ ] Display compound data in table
  - [ ] child support
  - [ ] dividend options on investment
@@ -58,6 +66,8 @@ The ability to edit expenses
 
 
 Start drawdown from year x. new graph => net worth - drawdown % 
+
+
 
 ### Other ideas
 - Add debts such as loans, credit cards etc
