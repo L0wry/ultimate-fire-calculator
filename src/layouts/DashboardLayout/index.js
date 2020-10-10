@@ -6,7 +6,7 @@ import { useMobileContext } from '../../context/MobileContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.dark,
+    backgroundColor: theme.palette.background.default,
     display: 'flex',
     height: '100%',
     overflow: 'hidden',

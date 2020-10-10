@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.text.primary,
     color: theme.palette.text.tertiary,
     '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
+      backgroundColor: theme.palette.primary.default,
     }
   }
 }));

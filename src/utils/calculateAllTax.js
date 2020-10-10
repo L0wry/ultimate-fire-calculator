@@ -26,12 +26,13 @@ export default function calculateAllTax({
 
   const incomeTax = calculateIncomeTax(incomeTaxBands(taxFreePersonalAllowance), taxableIncome)
   
+  
+  const nationalInsuranceTax = calculateNationalInsurance(nationalInsuranceTaxBands, taxableIncome)
+  
   taxableIncome = math.subtract(taxableIncome, taxFreePersonalAllowance) > 0
     ? math.subtract(taxableIncome, taxFreePersonalAllowance)
     : 0
-
-  const nationalInsuranceTax = calculateNationalInsurance(nationalInsuranceTaxBands, taxableIncome)
-
+    
   return {
     salary,
     studentLoan: {

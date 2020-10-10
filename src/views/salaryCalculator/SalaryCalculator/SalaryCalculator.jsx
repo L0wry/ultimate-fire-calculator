@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.text.primary,
         color: theme.palette.text.tertiary,
         '&:hover': {
-            backgroundColor: theme.palette.primary.dark,
-          }
+            backgroundColor: theme.palette.primary.default,
+        }
     }
 
 }));
@@ -65,24 +65,15 @@ const SalaryCalculator = ({ className, ...rest }) => {
                         >
 
                             <Grid
-                                item
-                                style={{ height: '100%' }}
-                                lg={6}
-                                md={6}
-                                xs={12}
-                            >
-                                <IncomeTaxCard userTax={userTax} />
-                            </Grid>
-                            <Grid
-                                style={{ height: '100%' }}
 
                                 item
-                                lg={6}
-                                md={6}
+                                lg={12}
+                                md={12}
                                 xs={12}
                             >
-                                <NationalInsurance />
+                                <BreakdownCard userTax={userTax} />
                             </Grid>
+
                             <Hidden lgUp>
 
                                 <Grid item
@@ -102,7 +93,6 @@ const SalaryCalculator = ({ className, ...rest }) => {
                             </Hidden>
 
                         </Grid>
-                        {/* <BreakdownCard /> */}
 
                     </Box>
                 </Box>
