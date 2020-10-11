@@ -11,11 +11,6 @@ describe('Pre Tax Deductions', () => {
     expect(calculatePreTaxDeductions(userFinance)).toStrictEqual({"taxBreaksTotal": 0, "taxableIncome": 10000})
   })
 
-  it('always returns 0', () => {
-    const userFinance = {salary: 20000,personalPensionContribution: 1000000 }
-    expect(calculatePreTaxDeductions(userFinance)).toStrictEqual({"taxBreaksTotal": 0, "taxableIncome": 0})
-  })
-
   it('removes tax breaks', () => {
     const taxBreaks = [{name: 'cycle to work', amount: 500}, {name: 'other', amount: 1000}]
     const userFinance = {salary: 20000,personalPensionContribution: 0 }

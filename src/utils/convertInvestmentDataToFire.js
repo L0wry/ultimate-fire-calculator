@@ -27,4 +27,3 @@ export const convertInvestmentDataToFire = (investments, safeWithdrawalPercent, 
   }, [])
 
 
-  // investment.compoundData[`Year ${yearsToMature}`]['Month 12'].balance

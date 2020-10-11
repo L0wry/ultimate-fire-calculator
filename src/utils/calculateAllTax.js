@@ -16,7 +16,7 @@ export default function calculateAllTax({
   employerPensionContributionPercent = 0,
   personalPensionContributionPercent = 0,
   studentLoanPlanType = 0,
-  secondaryIncomeAfterTax }) {
+  secondaryIncomeAfterTax =  0}) {
 
 
   const personalPensionContribution = math.multiply(personalPensionContributionPercent, salary)

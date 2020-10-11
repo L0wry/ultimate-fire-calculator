@@ -12,7 +12,7 @@ export function calculatePreTaxDeductions({ salary = 0, personalPensionContribut
     .chain(salary)
     .subtract(personalPensionContribution)
     .subtract(taxBreaksTotal)
-    .done()
+    .done()    
 
   return {
     taxBreaksTotal,
