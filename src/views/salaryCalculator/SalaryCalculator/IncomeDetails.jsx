@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Input = ({ label, type, inputProps, ...props }) => {
+const Input = ({ label, type, inputProps, setFieldValue, ...props }) => {
 
   const [field, meta] = useField(props);
   const classes = useStyles();
@@ -64,6 +64,11 @@ const Input = ({ label, type, inputProps, ...props }) => {
         label={label}
         className={classes.input}
         variant="outlined"
+        onClick={() => {
+          if(field.value === 0) {
+            setFieldValue(field.name, '')
+          }
+        }}
         fullWidth
         InputProps={{
           className: classes.text,
@@ -140,7 +145,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
             setUserFinances(userFinance, addMultipleInvestments)
             setSubmitting(false);
           }}
-        >{({ values, handleChange }) => (
+        >{({ values, handleChange, setFieldValue }) => (
           <Form>
             <Grid
               container
@@ -156,6 +161,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                   label="Annual Salary"
                   name="salary"
                   type="number"
+                  setFieldValue={setFieldValue}
                   inputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -178,6 +184,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                   label="Personal Pension Contribution Percentage"
                   name="personalPensionContribution"
                   type="number"
+                  setFieldValue={setFieldValue}
                   inputProps={{
                     endAdornment: (
                       <InputAdornment position="start">
@@ -201,6 +208,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                   label="Employer Pension Contribution Percentage"
                   name="employerPensionContribution"
                   type="number"
+                  setFieldValue={setFieldValue}
                   inputProps={{
                     endAdornment: (
                       <InputAdornment position="start">
@@ -223,6 +231,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                   label="Tax Free Personal Allowance"
                   name="taxFreePersonalAllowance"
                   type="number"
+                  setFieldValue={setFieldValue}
                   inputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
@@ -244,6 +253,7 @@ const IncomeDetails = ({ setUserFinances, userTax, className, ...rest }) => {
                   label="Secondary Income After Tax"
                   name="secondaryIncomeAfterTax"
                   type="number"
+                  setFieldValue={setFieldValue}
                   inputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
