@@ -48,29 +48,16 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
     addExpense,
     checkExpense,
     removeExpense,
-    expenseTotal
+    expenseTotal,
+    difference,
+    calculateDifference
   } = useBudgetContext();
 
-  const [takeHome, setTakeHome] = useState({
-    totalTakeHome: 0,
-    difference: 0,
-    expensesCost: 0,
-  });
+  const totalTakeHome = math.round(math.divide(userTax.totalTakeHome || 0, 12), 2)
 
-  const totalTakeHome = userTax.totalTakeHome || 0
-
-  useEffect(() => {
-    setTakeHome((prevState) => ({
-      ...prevState,
-      totalTakeHome: math.round(math.divide(totalTakeHome, 12), 2),
-      difference: math.round(math.subtract(math.divide(totalTakeHome, 12), expenseTotal), 2),
-      expensesCost: expenseTotal,
-    }))
-    // subscribe to changes in userTax and expense total to trigger effect
-  }, [userTax, expenseTotal]);
+  calculateDifference(totalTakeHome)
 
   const classes = useStyles()
-
 
   return (
     <div
@@ -120,7 +107,7 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
               xs={12}
             >
 
-              <MonthlyTakeHomeCard {...takeHome} />
+              <MonthlyTakeHomeCard expenseTotal={expenseTotal} totalTakeHome={totalTakeHome} difference={difference} />
             </Grid>
           </Grid>
 

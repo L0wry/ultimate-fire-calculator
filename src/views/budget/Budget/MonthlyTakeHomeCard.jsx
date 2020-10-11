@@ -19,86 +19,74 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MonthlyTakeHomeCard = ({ className, expensesCost, totalTakeHome, difference, ...rest }) => {
+const MonthlyTakeHomeCard = ({ className, expenseTotal, totalTakeHome, difference, ...rest }) => {
     const classes = useStyles();
 
     return (
-
-        <Card
-            className={clsx(classes.root, className)}
-            {...rest}
+        <Grid
+            container
+            direction="row"
+            justify="space-around"
+            alignItems="center"
+            spacing={3}
         >
-            <CardContent>
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    spacing={3}
+            <Grid item>
+                <Typography
+                    className={classes.text}
+                    color="textSecondary"
+                    gutterBottom
+                    variant="h3"
                 >
-                    <Grid item>
-                        <Typography
-                            className={classes.text}
-                            color="textSecondary"
-                            gutterBottom
-                            variant="h4"
-                        >
-                            Monthly Net Income
+                    Monthly Net Income
                                 </Typography>
-                        <Typography
-                            className={classes.text}
+                <Typography
+                    className={classes.text}
 
-                            color="textPrimary"
-                            variant="h4"
-                        >
-                            £{totalTakeHome}
-                        </Typography>
-                    </Grid>
-                    <Grid item>
-                        <Typography
-                            className={classes.text}
-                            color="textSecondary"
-                            gutterBottom
-                            variant="h4"
-                        >
-                            Total Expenses
-                                </Typography>
-                        <Typography
-                            className={classes.text}
-                            color="textPrimary"
-                            variant="h4"
-                        >
-                            £{expensesCost}
-                        </Typography>
-                    </Grid>
-
-                    <Grid item>
-                        <Typography
-                            className={classes.text}
-
-                            color="textSecondary"
-                            gutterBottom
-                            variant="h4"
-                        >
-                            Amount Left Over
-                                </Typography>
-                        <Typography
-                            className={classes.text}
-                            color="textPrimary"
-                            variant="h4"
-                        >
-                            £{difference}
-                        </Typography>
-                    </Grid>
-
-                </Grid>
-                <Box
-                    mt={2}
-                    display="flex"
-                    alignItems="center"
+                    color="textPrimary"
+                    variant="h4"
                 >
-                </Box>
-            </CardContent>
-        </Card>
+                    £{totalTakeHome}
+                </Typography>
+            </Grid>
+            <Grid item>
+                <Typography
+                    className={classes.text}
+                    color="textSecondary"
+                    gutterBottom
+                    variant="h3"
+                >
+                    Total Expenses
+                                </Typography>
+                <Typography
+                    className={classes.text}
+                    color="textPrimary"
+                    variant="h4"
+                >
+                    £{expenseTotal}
+                </Typography>
+            </Grid>
+
+            <Grid item>
+                <Typography
+                    className={classes.text}
+
+                    color="textSecondary"
+                    gutterBottom
+                    variant="h3"
+                >
+                    Amount Left Over
+                                </Typography>
+                <Typography
+                    className={classes.text}
+                    color="textPrimary"
+                    variant="h4"
+                >
+                    £{difference}
+                </Typography>
+            </Grid>
+
+        </Grid>
+
     );
 };
 
