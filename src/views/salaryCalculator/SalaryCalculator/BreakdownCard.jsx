@@ -68,9 +68,9 @@ const Headers = () => (
         <TableRow>
             <StyledTableCell />
             <StyledTableCell align="center">Yearly</StyledTableCell>
-            <StyledTableCell align="center">Monthly</StyledTableCell>
-            <StyledTableCell align="center">Weekly</StyledTableCell>
-            <StyledTableCell align="center">Daily</StyledTableCell>
+            <StyledTableCell size="small" align="center">Monthly</StyledTableCell>
+            <StyledTableCell size="small" align="center">Weekly</StyledTableCell>
+            <StyledTableCell size="small" align="center">Daily</StyledTableCell>
         </TableRow>
     </TableHead >
 )
@@ -81,7 +81,7 @@ const TaxTableRow = ({ name, amount, stripedRows }) => (
         <StyledTableCell align="center" >
             {name}
         </StyledTableCell>
-        <StyledTableCell align="center">£{amount}</StyledTableCell>
+        <StyledTableCell align="center">£{formatNumber(amount)}</StyledTableCell>
         <StyledTableCell align="center">£{formatNumber(math.round(math.divide(amount, 12), 2))}</StyledTableCell>
         <StyledTableCell align="center">£{formatNumber(math.round(math.divide(amount, 52), 2))}</StyledTableCell>
         <StyledTableCell align="center">£{formatNumber(math.round(math.divide(amount, 365), 2))}</StyledTableCell>
