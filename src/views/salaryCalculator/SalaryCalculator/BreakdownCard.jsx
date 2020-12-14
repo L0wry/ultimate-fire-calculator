@@ -99,7 +99,6 @@ const BreakdownCard = ({ className, userTax, ...rest }) => {
                     <Table className={classes.table} aria-label="simple table">
                         <Headers />
 
-                        {console.log(userTax)}
                         <TableBody>
                             <TaxTableRow name={'Gross Income'} amount={userTax.salary} />
                             <TaxTableRow name={'Taxable Income'} amount={userTax.taxableIncome} />

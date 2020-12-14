@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { calculateYearlyCompoundWithCharge } from 'src/utils/calculateCompoundInterest';
 import { all, create } from 'mathjs'
+import { Investment } from '../investments/Investment';
 
 const math = create(all, {
   number: 'BigNumber',
@@ -10,14 +10,22 @@ const math = create(all, {
 const InvestmentContext = React.createContext({});
 
 export const InvestmentContextProvider = ({ children }) => {
-  const investmentState = JSON.parse(localStorage.getItem('investments')) ? JSON.parse(localStorage.getItem('investments')) : []
   const yearState = localStorage.getItem('yearsToMature') || 10
+  const investmentState = JSON.parse(localStorage.getItem('investments')) 
+  ? JSON.parse(localStorage.getItem('investments')).map(investment => new Investment({
+          investmentType: investment._investmentType,
+          initialAmount: investment._initialAmount,
+          expectedReturn: investment._expectedReturn,
+          monthlyContribution: investment._monthlyContribution ,
+          noOfYearsToMature: yearState,
+          annualCharge: investment._annualCharge,
+          compoundData: investment._compoundData
+  })) 
+  : []
   const safeWithdrawalPercentState = localStorage.getItem('safeWithdrawalPercent') || 0.04
-  
   const [investments, setInvestments] = useState(investmentState);
   const [yearsToMature, setYearsToMature] = useState(yearState)
   const [safeWithdrawalPercent, setSafeWithdrawalPercent] = useState(safeWithdrawalPercentState)
-
 
   const saveSafeWithdrawalPercent = percent => {
     setSafeWithdrawalPercent(parseFloat(percent) /  100)
@@ -28,17 +36,10 @@ export const InvestmentContextProvider = ({ children }) => {
     setYearsToMature(years)
 
     const newInvestments = [...investments].map(investment => {
-      const investmentToRecalculate = {
-        ...investment,
-        noOfYearsToMature: years,
-      }
-
-      return {
-        ...investmentToRecalculate,
-        compoundData: calculateYearlyCompoundWithCharge(investmentToRecalculate)
-      }
+      investment.noOfYearsToMature = years
+      return investment 
     })
-
+ 
     setInvestments(newInvestments)
 
     localStorage.setItem('investments', JSON.stringify(newInvestments))
@@ -55,35 +56,21 @@ export const InvestmentContextProvider = ({ children }) => {
 
     for (const newInvestment of investmentsToAdd) {
 
-      let isInvestmentAlreadyInList = copy.findIndex(oldInvestments => oldInvestments.name === newInvestment.name)
+      let isInvestmentAlreadyInList = copy.findIndex(oldInvestments => oldInvestments.investmentType === newInvestment.name)
 
       if (isInvestmentAlreadyInList > -1) {
         const { monthlyContribution } = newInvestment
-        const investment = {
-          ...copy[isInvestmentAlreadyInList],
-          monthlyContribution: parseFloat(monthlyContribution),
-        }
-
-        copy[isInvestmentAlreadyInList] = {
-          ...investment,
-          compoundData: calculateYearlyCompoundWithCharge(investment)
-        }
+        copy[isInvestmentAlreadyInList].monthlyContribution = monthlyContribution
 
       } else {
-        const investment = {
-          name: newInvestment.name,
-          initialAmount: 0,
-          expectedReturn: 0,
-          annualCharge: 0,
-          monthlyContribution: parseFloat(newInvestment.monthlyContribution),
-          editMode: false,
+        copy.push(new Investment({
+          investmentType: newInvestment.name,
+          initialAmount: newInvestment.initialAmount,
+          expectedReturn: newInvestment.expectedReturn,
+          monthlyContribution: newInvestment.monthlyContribution ,
           noOfYearsToMature: yearsToMature,
-        }
-
-        copy.push({
-          ...investment,
-          compoundData: calculateYearlyCompoundWithCharge(investment)
-        })
+          annualCharge: newInvestment.annualCharge
+        }))
       }
 
     }
@@ -92,22 +79,19 @@ export const InvestmentContextProvider = ({ children }) => {
   }
 
   const addInvestment = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
-    const investment = {
-      name,
-      initialAmount: parseFloat(initialAmount),
-      expectedReturn: math.round(math.divide(expectedReturn, 100), 2),
-      monthlyContribution: parseFloat(monthlyContribution),
+
+    const investment = new Investment({
+      investmentType: name,
+      initialAmount,
+      expectedReturn,
+      monthlyContribution,
       noOfYearsToMature: yearsToMature,
-      annualCharge: math.divide(annualCharge, 100),
-      editMode: false,
-    }
+      annualCharge
+    })
 
     saveInvestments([
-      ...investments.filter(investment => investment.name !== name),
-      {
-        ...investment,
-        compoundData: calculateYearlyCompoundWithCharge(investment)
-      }
+      ...investments.filter(investment => investment.investmentType !== name),
+      investment
     ])
   }
 
@@ -124,22 +108,17 @@ export const InvestmentContextProvider = ({ children }) => {
   }
 
   const onItemSave = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }, idx) => {
-    const investment = {
-      name,
-      initialAmount: parseFloat(initialAmount),
-      expectedReturn: math.divide(expectedReturn, 100),
-      monthlyContribution: parseFloat(monthlyContribution),
-      noOfYearsToMature: yearsToMature,
-      annualCharge: math.divide(annualCharge, 100),
-      editMode: false,
-    }
-
+ 
     const investmentCopy = [...investments]
 
-    investmentCopy[idx] = {
-      ...investment,
-      compoundData: calculateYearlyCompoundWithCharge(investment)
-    }
+    investmentCopy[idx] = new Investment({
+      investmentType: name,
+      initialAmount,
+      expectedReturn,
+      monthlyContribution,
+      noOfYearsToMature: yearsToMature,
+      annualCharge
+    })
 
     saveInvestments(investmentCopy)
   }
