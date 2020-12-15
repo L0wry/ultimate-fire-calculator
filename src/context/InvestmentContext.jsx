@@ -12,27 +12,32 @@ const InvestmentContext = React.createContext({});
 
 export const InvestmentContextProvider = ({ children }) => {
   const yearState = localStorage.getItem('yearsToMature') || 10
-  const investmentState = JSON.parse(localStorage.getItem('investments')) 
-  ? JSON.parse(localStorage.getItem('investments')).map(investment => new Investment({
+  const investmentState = JSON.parse(localStorage.getItem('investments'))
+    ? JSON.parse(localStorage.getItem('investments')).map(investment => {
+      if (investment._investmentType) {
+        new Investment({
           isOverAnnualAllowance: investment._isOverAnnualAllowance,
           investmentType: investment._investmentType,
           investmentName: investment._investmentName,
           initialAmount: investment._initialAmount,
           expectedReturn: investment._expectedReturn,
-          monthlyContribution: investment._monthlyContribution ,
+          monthlyContribution: investment._monthlyContribution,
           noOfYearsToMature: yearState,
           annualCharge: investment._annualCharge,
           compoundData: investment._compoundData
-  })) 
-  : []
+        })
+      }
+    }
+    )
+    : []
   const safeWithdrawalPercentState = localStorage.getItem('safeWithdrawalPercent') || 0.04
   const [investments, setInvestments] = useState(investmentState);
   const [yearsToMature, setYearsToMature] = useState(yearState)
   const [safeWithdrawalPercent, setSafeWithdrawalPercent] = useState(safeWithdrawalPercentState)
 
   const saveSafeWithdrawalPercent = percent => {
-    setSafeWithdrawalPercent(parseFloat(percent) /  100)
-      localStorage.setItem('safeWithdrawalPercent', percent /  100)
+    setSafeWithdrawalPercent(parseFloat(percent) / 100)
+    localStorage.setItem('safeWithdrawalPercent', percent / 100)
   }
 
   const saveYearsToMature = years => {
@@ -40,16 +45,16 @@ export const InvestmentContextProvider = ({ children }) => {
 
     const newInvestments = [...investments].map(investment => {
       investment.noOfYearsToMature = years
-      return investment 
+      return investment
     })
- 
+
     setInvestments(newInvestments)
 
     localStorage.setItem('investments', JSON.stringify(newInvestments))
     localStorage.setItem('yearsToMature', years)
   }
   const saveInvestments = (investmentToSave) => {
-    
+
     setInvestments(validateInvestments(investmentToSave))
     localStorage.setItem('investments', JSON.stringify(investmentToSave))
   }
@@ -72,7 +77,7 @@ export const InvestmentContextProvider = ({ children }) => {
           investmentType: newInvestment.investmentType,
           initialAmount: newInvestment.initialAmount,
           expectedReturn: newInvestment.expectedReturn,
-          monthlyContribution: newInvestment.monthlyContribution ,
+          monthlyContribution: newInvestment.monthlyContribution,
           noOfYearsToMature: yearsToMature,
           annualCharge: newInvestment.annualCharge
         }))
@@ -114,7 +119,7 @@ export const InvestmentContextProvider = ({ children }) => {
   }
 
   const onItemSave = ({ name = '', investmentType, initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }, idx) => {
- 
+
     const investmentCopy = [...investments]
 
     investmentCopy[idx] = new Investment({
