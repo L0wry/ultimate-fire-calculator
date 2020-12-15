@@ -15,33 +15,33 @@ export const calculateYearlyCompoundWithCharge = ({
   annualCharge = 0,
   noOfYearsToMature = 0
 }) => {
-  const compoundInterest = {}
+  const CumulativeInterest = {}
   let totalAmount = initialAmount;
 
   // forgive for starting at 1 plz god. Makes years easier
   for (let i = 1; i <= noOfYearsToMature; i++ ) {  
-    compoundInterest[`Year ${i}`] = calculateMonthlyCompoundInterest({
+    CumulativeInterest[`Year ${i}`] = calculateMonthlyCumulativeInterest({
       totalAmount, 
       expectedReturn, 
       monthlyContribution
     })
 
-    const totalAmountAfterMaturing = compoundInterest[`Year ${i}`][`Month ${MONTHS_OF_THE_YEAR}`].balance
+    const totalAmountAfterMaturing = CumulativeInterest[`Year ${i}`][`Month ${MONTHS_OF_THE_YEAR}`].balance
     
     totalAmount = annualCharge
     ? math.round(math.subtract(totalAmountAfterMaturing, math.multiply(totalAmountAfterMaturing, annualCharge)), ROUND_AMOUNT)
     : totalAmountAfterMaturing
   }
 
-  return compoundInterest
+  return CumulativeInterest
 }
 
-export const calculateMonthlyCompoundInterest = ({
+export const calculateMonthlyCumulativeInterest = ({
     totalAmount, 
     expectedReturn, 
     monthlyContribution,
   }) => {
-  const compoundInterest = {}
+  const CumulativeInterest = {}
 
   let balance = totalAmount
   let  cumulativeInterest = 0;
@@ -53,12 +53,12 @@ export const calculateMonthlyCompoundInterest = ({
 
     balance =  math.chain(balance).add(monthlyContribution).add(earnedInterest).round(ROUND_AMOUNT).done()
     
-    compoundInterest[`Month ${i}`] = {
+    CumulativeInterest[`Month ${i}`] = {
       earnedInterest,
       balance,
       cumulativeInterest
     }
   }
 
-  return compoundInterest
+  return CumulativeInterest
 }

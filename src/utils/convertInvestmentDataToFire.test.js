@@ -1,5 +1,5 @@
 import { convertInvestmentDataToFire } from './convertInvestmentDataToFire'
-import { calculateYearlyCompoundWithCharge } from './calculateCompoundInterest'
+import { calculateYearlyCompoundWithCharge } from './calculateCumulativeInterest'
 
 describe('convertInvestmentDataToFire', () => {
 

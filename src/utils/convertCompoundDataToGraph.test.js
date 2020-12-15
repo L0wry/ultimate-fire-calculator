@@ -1,5 +1,5 @@
 import { convertCompoundDataToGraph } from './convertCompoundDataToGraph'
-import { calculateYearlyCompoundWithCharge } from './calculateCompoundInterest'
+import { calculateYearlyCompoundWithCharge } from './calculateCumulativeInterest'
 
 describe('Convert Compound Data To Graph', () => {
   it('works', () => {

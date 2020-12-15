@@ -1,4 +1,4 @@
-import { calculateYearlyCompoundWithCharge } from './calculateCompoundInterest'
+import { calculateYearlyCompoundWithCharge } from './calculateCumulativeInterest'
 
 
 describe('Compound Interest', () => {

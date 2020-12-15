@@ -27,7 +27,7 @@
  - [ x] suport 100K plus salaries
  - [ x] Handle form validation
  - [ x] Use Yup package? https://formik.org/docs/guides/validation
- - [ ] Finish tax breakdown table
+ - [ x] Finish tax breakdown table
  - [] Show retirement income with tax after years
  - [] Begineer mode
  - []  capture age and data
@@ -46,7 +46,6 @@
  - [ ] dividend options on investment
  - [ ] sort out crappy < Input > components that I have duplicated
        everywhere
- - [ ] sort out crappy duplicated objects in investment context
 
 
 ### Requested

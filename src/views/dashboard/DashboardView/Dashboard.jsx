@@ -5,7 +5,6 @@ import {
   makeStyles
 } from '@material-ui/core';
 import clsx from 'clsx';
-import TakeHomeIncome from './TakeHomeIncome';
 import NetWorth from './NetWorth';
 import Fire from './Fire'
 import TasksProgress from './NetWorthTotal';
@@ -16,6 +15,7 @@ import { useBudgetContext } from '../../../context/BudgetContext';
 import { convertCompoundDataToGraph } from '../../../utils/convertCompoundDataToGraph';
 import { convertInvestmentDataToFire } from '../../../utils/convertInvestmentDataToFire';
 import TopBar from '../../../layouts/MainLayout/TopBar.js'
+import Interest from './Interest';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -96,7 +96,6 @@ const Dashboard = ({ className, ...rest }) => {
             <TotalProfit />
           </Grid>
         </Grid>
-
         <Grid
           item
           lg={9}
@@ -106,6 +105,19 @@ const Dashboard = ({ className, ...rest }) => {
         >
           <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments, safeWithdrawalPercent, expenseTotal)} />
         </Grid>
+
+        <Grid
+          item
+          lg={9}
+          md={12}
+          xl={9}
+          xs={12}
+        >
+          <Interest investmentData={convertCompoundDataToGraph(investments, "earnedInterest")} />
+        </Grid>
+
+
+       
       </Grid>
     </div>
   );
