@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import calculateAllTax from '../utils/calculateAllTax'
 import { all, create } from 'mathjs'
+import { INVESTMENT_TYPES } from '../investments/investmentMetaData';
 
 const math = create(all, {
 	number: 'BigNumber',
@@ -34,11 +35,14 @@ export const SalaryContextProvider = ({ children }) => {
 
 		addMultipleInvestments([{
 				name: 'Workplace Pension (employer contribution)',
-				monthlyContribution: math.round(math.divide(tax.employerPensionContribution, 12), 2)
+				monthlyContribution: math.round(math.divide(tax.employerPensionContribution, 12), 2),
+				investmentType: INVESTMENT_TYPES.PENSION
 			},
 			{
 				name: 'Workplace Pension (personal contribution)',
-				monthlyContribution: math.round(math.divide(tax.personalPensionContribution, 12), 2)
+				monthlyContribution: math.round(math.divide(tax.personalPensionContribution, 12), 2),
+				investmentType: INVESTMENT_TYPES.PENSION
+
 			}
 		])
 	}

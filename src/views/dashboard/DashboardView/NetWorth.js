@@ -105,11 +105,11 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
             {
               Object.keys(investmentData[0])
                 .filter(key => key !== 'year')
-                .map((investmentType, i) =>
+                .map((investmentName, i) =>
                   <Area
-                    key={`${investmentType}-${i}`}
+                    key={`${investmentName}-${i}`}
                     type="monotone"
-                    dataKey={investmentType}
+                    dataKey={investmentName}
                     stackId='1'
                     stroke={colours[i]}
                     fill={colours[i]}

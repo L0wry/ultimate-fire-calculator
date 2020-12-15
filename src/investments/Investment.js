@@ -8,15 +8,16 @@ const math = create(all, {
 
 export class Investment {
   constructor({
+    investmentName,
     investmentType,
     initialAmount = 0,
     expectedReturn = 0,
-    monthlyContribution =0,
+    monthlyContribution = 0,
     noOfYearsToMature = 10,
     annualCharge = 0,
     compoundData = 0,
   }) {
-
+    this._investmentName = investmentName
     this._investmentType = investmentType
     this._initialAmount = parseFloat(initialAmount)
     this._expectedReturn = math.round(math.divide(expectedReturn, 100), 2)
@@ -32,7 +33,20 @@ export class Investment {
       noOfYearsToMature: this._noOfYearsToMature
     })
 
+    this._isOverAnnualAllowance = false
     this._editMode = false
+  }
+
+  get isOverAnnualAllowance() {
+    return this._isOverAnnualAllowance
+  }
+
+  set isOverAnnualAllowance(bool) {
+    this._isOverAnnualAllowance = bool
+  }
+
+  get investmentName() {
+    return this._investmentName
   }
 
   get investmentType() {

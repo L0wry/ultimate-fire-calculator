@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { all, create } from 'mathjs'
 import { Investment } from '../investments/Investment';
+import { validateInvestments } from '../investments/validateInvestments'
 
 const math = create(all, {
   number: 'BigNumber',
@@ -14,6 +15,7 @@ export const InvestmentContextProvider = ({ children }) => {
   const investmentState = JSON.parse(localStorage.getItem('investments')) 
   ? JSON.parse(localStorage.getItem('investments')).map(investment => new Investment({
           investmentType: investment._investmentType,
+          investmentName: investment._investmentName,
           initialAmount: investment._initialAmount,
           expectedReturn: investment._expectedReturn,
           monthlyContribution: investment._monthlyContribution ,
@@ -46,7 +48,8 @@ export const InvestmentContextProvider = ({ children }) => {
     localStorage.setItem('yearsToMature', years)
   }
   const saveInvestments = (investmentToSave) => {
-    setInvestments(investmentToSave)
+    
+    setInvestments(validateInvestments(investmentToSave))
     localStorage.setItem('investments', JSON.stringify(investmentToSave))
   }
 
@@ -56,7 +59,7 @@ export const InvestmentContextProvider = ({ children }) => {
 
     for (const newInvestment of investmentsToAdd) {
 
-      let isInvestmentAlreadyInList = copy.findIndex(oldInvestments => oldInvestments.investmentType === newInvestment.name)
+      let isInvestmentAlreadyInList = copy.findIndex(oldInvestments => oldInvestments.investmentName === newInvestment.name)
 
       if (isInvestmentAlreadyInList > -1) {
         const { monthlyContribution } = newInvestment
@@ -64,7 +67,8 @@ export const InvestmentContextProvider = ({ children }) => {
 
       } else {
         copy.push(new Investment({
-          investmentType: newInvestment.name,
+          investmentName: newInvestment.name,
+          investmentType: newInvestment.investmentType,
           initialAmount: newInvestment.initialAmount,
           expectedReturn: newInvestment.expectedReturn,
           monthlyContribution: newInvestment.monthlyContribution ,
@@ -78,10 +82,11 @@ export const InvestmentContextProvider = ({ children }) => {
     saveInvestments(copy)
   }
 
-  const addInvestment = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
+  const addInvestment = ({ name = '', investmentType, initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
 
     const investment = new Investment({
-      investmentType: name,
+      investmentName: name,
+      investmentType: investmentType || name, //TODO: sort out type
       initialAmount,
       expectedReturn,
       monthlyContribution,
@@ -90,7 +95,7 @@ export const InvestmentContextProvider = ({ children }) => {
     })
 
     saveInvestments([
-      ...investments.filter(investment => investment.investmentType !== name),
+      ...investments.filter(investment => investment.investmentName !== name),
       investment
     ])
   }
@@ -107,12 +112,13 @@ export const InvestmentContextProvider = ({ children }) => {
     );
   }
 
-  const onItemSave = ({ name = '', initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }, idx) => {
+  const onItemSave = ({ name = '', investmentType, initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }, idx) => {
  
     const investmentCopy = [...investments]
 
     investmentCopy[idx] = new Investment({
-      investmentType: name,
+      investmentName: name,
+      investmentType: investmentType || name, //TODO: sort out type
       initialAmount,
       expectedReturn,
       monthlyContribution,
@@ -138,6 +144,7 @@ export const InvestmentContextProvider = ({ children }) => {
   const getAmountInvestedPerMonth = () => investments.length > 0 ?
     math.round(investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0), 2) :
     0
+    console.log({investments})
 
   return (
     <InvestmentContext.Provider value={{ safeWithdrawalPercent, saveSafeWithdrawalPercent, investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>

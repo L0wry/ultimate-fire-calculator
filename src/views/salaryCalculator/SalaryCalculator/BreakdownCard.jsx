@@ -89,7 +89,7 @@ const TaxTableRow = ({ name, amount, stripedRows }) => (
 
 )
 
-const BreakdownCard = ({ className, userTax, ...rest }) => {
+const BreakdownCard = ({ className, userTax}) => {
     const classes = useStyles();
 
     return (

@@ -116,7 +116,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                     <Formik
                                         key={`form-${idx}`}
                                         initialValues={{
-                                            name: investment.investmentType,
+                                            name: investment.investmentName,
                                             initialAmount: investment.initialAmount,
                                             expectedReturn: math.round(math.multiply(investment.expectedReturn, 100), 2),
                                             monthlyContribution: investment.monthlyContribution,
@@ -224,7 +224,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                                 </Edit>
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
-                                                {investment.investmentType}
+                                                {investment.investmentName}
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
                                                 £{investment.initialAmount}

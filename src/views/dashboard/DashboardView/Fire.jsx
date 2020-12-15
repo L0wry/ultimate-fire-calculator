@@ -155,11 +155,11 @@ const Fire = ({ fireData, safeWithdrawalPercent, ...rest }) => {
             {
               Object.keys(fireData[0])
                 .filter(key => key !== 'year')
-                .map((investmentType, i) =>
+                .map((investmentName, i) =>
                   <Line
-                    key={`${investmentType}-${i}`}
+                    key={`${investmentName}-${i}`}
                     type="monotone"
-                    dataKey={investmentType}
+                    dataKey={investmentName}
                     stackId='1'
                     stroke={colours[i]}
                     fill={colours[i]}
