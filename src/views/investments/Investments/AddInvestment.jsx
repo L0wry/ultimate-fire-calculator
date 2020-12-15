@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -6,10 +6,15 @@ import {
   makeStyles,
   Button,
   TextField,
-  InputAdornment
+  InputAdornment,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl
 } from '@material-ui/core';
 import { Formik, Form, useField } from "formik";
-import { string, number, object } from "yup";
+import { string, number, object } from "yup"
+import { INVESTMENT_TYPES } from '../../../investments/investmentMetaData';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -29,12 +34,20 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.primary.default,
     }
   },
+  select: {
+
+    justifyContent: 'center',
+    width: "100%",
+    height: "100%",
+    textAlign: 'center'
+  },
 }))
 
 const Input = ({ label, inputProps, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
+
   const classes = useStyles();
 
   return (
@@ -52,35 +65,36 @@ const Input = ({ label, inputProps, ...props }) => {
         }}
         {...field} {...props} />
       {meta.touched && meta.error ? (
-         <Typography
-         className={classes.error}
-         align="center"
-         gutterBottom
-         variant="body1"
-       >
-         Please only use numbers
-       </Typography>
+        <Typography
+          className={classes.error}
+          align="center"
+          gutterBottom
+          variant="body1"
+        >
+          Please only use numbers
+        </Typography>
       ) : null}
     </>
   );
 };
 
 
-export const AddInvestment = ({ className, addInvestment, ...rest }) => {
+export const AddInvestment = ({ className, addInvestment, }) => {
   const classes = useStyles();
 
   return (
     <Box mt={3}>
-
       <Formik
         initialValues={{
           name: "",
+          investmentType: "",
           initialAmount: "",
           expectedReturn: "",
           monthlyContribution: ""
         }}
         validationSchema={object({
           name: string(),
+          investmentType: string(),
           initialAmount: number(),
           expectedReturn: number(),
           monthlyContribution: number()
@@ -91,7 +105,7 @@ export const AddInvestment = ({ className, addInvestment, ...rest }) => {
           resetForm({})
           setSubmitting(false);
         }}
-      >
+      >{({ values, setFieldValue }) => (
         <Form>
           <Grid
             container
@@ -109,6 +123,37 @@ export const AddInvestment = ({ className, addInvestment, ...rest }) => {
                 name="name"
                 type="text"
               />
+            </Grid>
+
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xs={12}
+            >
+
+              <FormControl variant="outlined" className={classes.select}>
+                <InputLabel id="demo-simple-select-outlined-label">Investment Type</InputLabel>
+                <Select
+                  className={classes.select}
+                  labelId="investmentType"
+                  label="Investment Type"
+                  id="investmentType"
+                  value={values.investmentType}
+                  onChange={e => setFieldValue('investmentType', e.target.value)}
+                  required
+                >
+                  {
+                    Object.values(INVESTMENT_TYPES).map((type) =>
+                      <MenuItem key={type} className={classes.select} value={type}>{type}</MenuItem>)
+                  }
+                </Select>
+              </FormControl>
+
+
+
+
+
             </Grid>
 
             <Grid
@@ -183,6 +228,7 @@ export const AddInvestment = ({ className, addInvestment, ...rest }) => {
 
           </Grid>
         </Form>
+      )}
       </Formik>
     </Box>
   );

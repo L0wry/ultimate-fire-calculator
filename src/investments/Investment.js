@@ -16,6 +16,7 @@ export class Investment {
     noOfYearsToMature = 10,
     annualCharge = 0,
     compoundData = 0,
+    isOverAnnualAllowance = false,
   }) {
     this._investmentName = investmentName
     this._investmentType = investmentType
@@ -33,7 +34,7 @@ export class Investment {
       noOfYearsToMature: this._noOfYearsToMature
     })
 
-    this._isOverAnnualAllowance = false
+    this._isOverAnnualAllowance = isOverAnnualAllowance
     this._editMode = false
   }
 

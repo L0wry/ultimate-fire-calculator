@@ -1,8 +1,9 @@
 export const INVESTMENT_TYPES = {
-  PENSION: 'pension',
-  ISA: 'isa',
-  LISA: 'lisa',
-  GENERAL: 'general'
+  PENSION: 'Pension',
+  ISA: 'Isa',
+  LISA: 'Lisa',
+  GENERAL: 'General',
+  OTHER: 'Other'
 }
 
 export default {

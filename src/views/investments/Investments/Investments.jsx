@@ -9,6 +9,7 @@ import {
   Button,
   Grid
 } from '@material-ui/core';
+import { Alert, AlertTitle } from '@material-ui/lab';
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { AddInvestment } from './AddInvestment'
 import { InvestmentList } from './InvestmentList'
@@ -16,6 +17,8 @@ import { NavLink as RouterLink } from 'react-router-dom';
 import TopBar from '../../../layouts/MainLayout/TopBar.js'
 import BudgetRemaining from './BudgetRemaining';
 import { useBudgetContext } from 'src/context/BudgetContext';
+import investmentMetaData from '../../../investments/investmentMetaData'
+import { fNum } from '../../../utils/formatNumber';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -102,6 +105,29 @@ const Investments = ({ className, ...rest }) => {
 
               </Grid>
 
+              {investments
+              .filter(investment => investment.isOverAnnualAllowance)
+              .reduce((accum, investment) => {
+                if(!accum.find(existing => existing.investmentType === investment.investmentType)) accum.push(investment)
+
+                return accum
+              },[])
+              .map((investment, i) => (
+
+                <Grid
+                  key={`alert-${i}`}
+                  item
+                  lg={12}
+                  sm={12}
+                  xl={12}
+                  xs={12}
+                >
+                  <Alert severity="warning">
+                    <AlertTitle>Warning!</AlertTitle>
+        You're contributing over the <strong>{investment.investmentType}</strong> annual allowance of £{fNum(investmentMetaData[investment.investmentType].annualAllowance)}
+                  </Alert>
+                </Grid>
+              ))}
               <Hidden lgUp>
                 <Grid
                   item

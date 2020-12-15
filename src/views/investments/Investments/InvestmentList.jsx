@@ -21,6 +21,7 @@ import { DeleteOutlined, Edit, EditOutlined, SaveOutlined, Save } from '@materia
 import { Formik, useField } from "formik";
 import { string, number, object } from "yup";
 import { all, create } from 'mathjs'
+import { fNum } from '../../../utils/formatNumber';
 
 const math = create(all, {
     number: 'BigNumber',
@@ -117,6 +118,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                         key={`form-${idx}`}
                                         initialValues={{
                                             name: investment.investmentName,
+                                            investmentType: investment.investmentType,
                                             initialAmount: investment.initialAmount,
                                             expectedReturn: math.round(math.multiply(investment.expectedReturn, 100), 2),
                                             monthlyContribution: investment.monthlyContribution,
@@ -227,16 +229,16 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                                 {investment.investmentName}
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
-                                                £{investment.initialAmount}
+                                                £{fNum(investment.initialAmount)}
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
-                                                {math.round(math.multiply(investment.expectedReturn, 100), 2)}%
+                                                {fNum(math.round(math.multiply(investment.expectedReturn, 100), 2))}%
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
-                                                £{investment.monthlyContribution}
+                                                £{fNum(investment.monthlyContribution)}
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
-                                                {math.round(math.multiply(investment.annualCharge, 100), 2)}%
+                                                {fNum(math.round(math.multiply(investment.annualCharge, 100), 2))}%
                                             </TableCell>
                                             <TableCell align="center">
                                                 <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>

@@ -20,7 +20,10 @@ export function validateInvestments(investments) {
         return investment
       }))
     } else {
-      validatedInvestments.push(...filteredInvestments)
+      validatedInvestments.push(...filteredInvestments.map(investment => {
+        investment.isOverAnnualAllowance = false
+        return investment
+      }))
     }
   }
 

@@ -14,6 +14,7 @@ export const InvestmentContextProvider = ({ children }) => {
   const yearState = localStorage.getItem('yearsToMature') || 10
   const investmentState = JSON.parse(localStorage.getItem('investments')) 
   ? JSON.parse(localStorage.getItem('investments')).map(investment => new Investment({
+          isOverAnnualAllowance: investment._isOverAnnualAllowance,
           investmentType: investment._investmentType,
           investmentName: investment._investmentName,
           initialAmount: investment._initialAmount,
@@ -86,7 +87,7 @@ export const InvestmentContextProvider = ({ children }) => {
 
     const investment = new Investment({
       investmentName: name,
-      investmentType: investmentType || name, //TODO: sort out type
+      investmentType,
       initialAmount,
       expectedReturn,
       monthlyContribution,
@@ -118,7 +119,7 @@ export const InvestmentContextProvider = ({ children }) => {
 
     investmentCopy[idx] = new Investment({
       investmentName: name,
-      investmentType: investmentType || name, //TODO: sort out type
+      investmentType,
       initialAmount,
       expectedReturn,
       monthlyContribution,
