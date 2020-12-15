@@ -20,11 +20,11 @@ export class Investment {
   }) {
     this._investmentName = investmentName
     this._investmentType = investmentType
-    this._initialAmount = parseFloat(initialAmount)
-    this._expectedReturn = math.round(math.divide(expectedReturn, 100), 2)
+    this._initialAmount =  parseFloat(initialAmount)
+    this._expectedReturn = parseFloat(expectedReturn)
     this._monthlyContribution = parseFloat(monthlyContribution)
     this._noOfYearsToMature = noOfYearsToMature
-    this._annualCharge = math.divide(annualCharge, 100)
+    this._annualCharge = annualCharge
 
     this._compoundData = compoundData || calculateYearlyCompoundWithCharge({
       initialAmount: this._initialAmount,

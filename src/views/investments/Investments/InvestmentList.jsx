@@ -120,9 +120,9 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                             name: investment.investmentName,
                                             investmentType: investment.investmentType,
                                             initialAmount: investment.initialAmount,
-                                            expectedReturn: math.round(math.multiply(investment.expectedReturn, 100), 2),
+                                            expectedReturn: math.round(math.multiply(investment.expectedReturn,100), 4),
                                             monthlyContribution: investment.monthlyContribution,
-                                            annualCharge: math.round(math.multiply(investment.annualCharge, 100), 2)
+                                            annualCharge: math.round(math.multiply(investment.annualCharge, 100), 4)
                                         }}
                                         validationSchema={object({
                                             name: string(),
@@ -232,13 +232,13 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                                 £{fNum(investment.initialAmount)}
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
-                                                {fNum(math.round(math.multiply(investment.expectedReturn, 100), 2))}%
+                                                {fNum(math.round(math.multiply(investment.expectedReturn, 100), 4))}%
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
                                                 £{fNum(investment.monthlyContribution)}
                                             </TableCell>
                                             <TableCell className={classes.tableCell} align="center" >
-                                                {fNum(math.round(math.multiply(investment.annualCharge, 100), 2))}%
+                                                {fNum(math.round(math.multiply(investment.annualCharge, 100), 4))}%
                                             </TableCell>
                                             <TableCell align="center">
                                                 <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>

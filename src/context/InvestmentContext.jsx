@@ -89,10 +89,10 @@ export const InvestmentContextProvider = ({ children }) => {
       investmentName: name,
       investmentType,
       initialAmount,
-      expectedReturn,
+      expectedReturn: math.divide(expectedReturn, 100),
       monthlyContribution,
       noOfYearsToMature: yearsToMature,
-      annualCharge
+      annualCharge: math.divide(annualCharge, 100),
     })
 
     saveInvestments([
@@ -121,10 +121,10 @@ export const InvestmentContextProvider = ({ children }) => {
       investmentName: name,
       investmentType,
       initialAmount,
-      expectedReturn,
+      expectedReturn: math.divide(expectedReturn, 100),
       monthlyContribution,
       noOfYearsToMature: yearsToMature,
-      annualCharge
+      annualCharge: math.divide(annualCharge, 100),
     })
 
     saveInvestments(investmentCopy)
@@ -145,7 +145,6 @@ export const InvestmentContextProvider = ({ children }) => {
   const getAmountInvestedPerMonth = () => investments.length > 0 ?
     math.round(investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0), 2) :
     0
-    console.log({investments})
 
   return (
     <InvestmentContext.Provider value={{ safeWithdrawalPercent, saveSafeWithdrawalPercent, investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>

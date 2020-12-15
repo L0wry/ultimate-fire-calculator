@@ -18,5 +18,8 @@ export default {
   },
   [INVESTMENT_TYPES.GENERAL]: {
     annualAllowance: 9999999999999,
+  },
+  [INVESTMENT_TYPES.OTHER]: {
+    annualAllowance: 9999999999999,
   }
 }
