@@ -16,6 +16,7 @@ import { convertCompoundDataToGraph } from '../../../utils/convertCompoundDataTo
 import { convertInvestmentDataToFire } from '../../../utils/convertInvestmentDataToFire';
 import TopBar from '../../../layouts/MainLayout/TopBar.js'
 import Interest from './Interest';
+import RetiringIn from './RetiringIn';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -96,6 +97,7 @@ const Dashboard = ({ className, ...rest }) => {
             <TotalProfit />
           </Grid>
         </Grid>
+
         <Grid
           item
           lg={9}
@@ -104,6 +106,26 @@ const Dashboard = ({ className, ...rest }) => {
           xs={12}
         >
           <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments, safeWithdrawalPercent, expenseTotal)} />
+        </Grid>
+        <Grid
+          xs={12}
+          md={12}
+          lg={3}
+          xl={3}
+          item
+          container
+          spacing={3}
+          justify="space-evenly"
+          alignItems="stretch"
+        >
+          <Grid
+            item
+            xs={12}
+            md={6}
+            lg={12}
+          >
+            <RetiringIn />
+          </Grid>
         </Grid>
 
         <Grid
@@ -117,7 +139,7 @@ const Dashboard = ({ className, ...rest }) => {
         </Grid>
 
 
-       
+
       </Grid>
     </div>
   );

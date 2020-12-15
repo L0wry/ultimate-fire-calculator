@@ -24,7 +24,7 @@ import { SelectSafeWithdrawalPercent } from './SelectSafeWithdrawalPercent'
 import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
 import NetWorthTotal from '../../../views/dashboard/DashboardView/NetWorthTotal';
 import AmountInvested from '../../../views/dashboard/DashboardView/AmountInvestedPerMonth';
-
+import RetiringIn from '../../../views/dashboard/DashboardView/RetiringIn';
 
 const items = [
   {
@@ -108,6 +108,10 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         <Grid item>
           <SelectSafeWithdrawalPercent/>
         </Grid>
+          <Grid
+            item >
+            <RetiringIn />
+          </Grid>
           <Grid
             item >
             <ExpectedMonthlyIncome />
