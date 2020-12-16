@@ -24,7 +24,8 @@ export const InvestmentContextProvider = ({ children }) => {
         monthlyContribution: investment._monthlyContribution,
         noOfYearsToMature: yearState,
         annualCharge: investment._annualCharge,
-        compoundData: investment._compoundData
+        compoundData: investment._compoundData,
+        stopContributingInYear: investment._stopContributingInYear || 0
       })
     )
     : []
@@ -78,7 +79,8 @@ export const InvestmentContextProvider = ({ children }) => {
           expectedReturn: newInvestment.expectedReturn,
           monthlyContribution: newInvestment.monthlyContribution,
           noOfYearsToMature: yearsToMature,
-          annualCharge: newInvestment.annualCharge
+          annualCharge: newInvestment.annualCharge,
+          stopContributingInYear: newInvestment.stopContributingInYear
         }))
       }
 
@@ -87,7 +89,7 @@ export const InvestmentContextProvider = ({ children }) => {
     saveInvestments(copy)
   }
 
-  const addInvestment = ({ name = '', investmentType, initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
+  const addInvestment = ({ name = '', investmentType, stopContributingInYear, initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }) => {
 
     const investment = new Investment({
       investmentName: name,
@@ -97,6 +99,7 @@ export const InvestmentContextProvider = ({ children }) => {
       monthlyContribution,
       noOfYearsToMature: yearsToMature,
       annualCharge: math.divide(annualCharge, 100),
+      stopContributingInYear
     })
 
     saveInvestments([
@@ -117,7 +120,7 @@ export const InvestmentContextProvider = ({ children }) => {
     );
   }
 
-  const onItemSave = ({ name = '', investmentType, initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }, idx) => {
+  const onItemSave = ({ name = '', investmentType, stopContributingInYear = 0, initialAmount = 0, expectedReturn = 0, monthlyContribution = 0, annualCharge = 0 }, idx) => {
 
     const investmentCopy = [...investments]
 
@@ -129,6 +132,7 @@ export const InvestmentContextProvider = ({ children }) => {
       monthlyContribution,
       noOfYearsToMature: yearsToMature,
       annualCharge: math.divide(annualCharge, 100),
+      stopContributingInYear
     })
 
     saveInvestments(investmentCopy)

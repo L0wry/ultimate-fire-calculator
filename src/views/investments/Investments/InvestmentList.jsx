@@ -11,7 +11,10 @@ import {
   IconButton,
   TextField,
   makeStyles,
-  InputAdornment
+  InputAdornment,
+  Select,
+  MenuItem,
+  FormControl
 } from '@material-ui/core';
 import { DeleteOutlined, Edit, EditOutlined, SaveOutlined, Save } from '@material-ui/icons';
 import { Formik, useField } from "formik";
@@ -26,6 +29,9 @@ const math = create(all, {
 
 const useStyles = makeStyles((theme) => ({
   root: {},
+  centerText: {
+    textAlign: "center"            
+  },
   input: {
     color: theme.palette.text.secondary,
   },
@@ -37,6 +43,10 @@ const useStyles = makeStyles((theme) => ({
   },
   error: {
     color: 'red'
+  },
+  select: {
+    justifyContent: 'center',
+    textAlign: 'center',
   },
 }));
 
@@ -56,6 +66,7 @@ const Input = ({ label, inputProps, ...props }) => {
         variant="standard"
         required
         fullWidth
+        inputProps={{style: { textAlign: 'center' }}} 
         InputProps={{
           className: classes.input,
           ...inputProps
@@ -99,10 +110,11 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
             <TableHead>
               <TableRow>
                 <TableCell className={classes.tableCell} align="center"></TableCell>
-                <TableCell className={classes.tableCell} align="center">Name</TableCell>
+                <TableCell className={classes.tableCell} align="center">Investment Name</TableCell>
                 <TableCell className={classes.tableCell} align="center">Initial Amount</TableCell>
                 <TableCell className={classes.tableCell} align="center">Expected Annual Return</TableCell>
                 <TableCell className={classes.tableCell} align="center">Monthly Contribution</TableCell>
+                <TableCell className={classes.tableCell} align="center">Contributing For</TableCell>
                 <TableCell className={classes.tableCell} align="center">Annual Charge</TableCell>
                 <TableCell />
               </TableRow>
@@ -118,20 +130,22 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                       initialAmount: investment.initialAmount,
                       expectedReturn: math.round(math.multiply(investment.expectedReturn, 100), 4),
                       monthlyContribution: investment.monthlyContribution,
-                      annualCharge: math.round(math.multiply(investment.annualCharge, 100), 4)
+                      annualCharge: math.round(math.multiply(investment.annualCharge, 100), 4),
+                      stopContributingInYear: investment.stopContributingInYear
                     }}
                     validationSchema={object({
                       name: string(),
                       initialAmount: number(),
                       expectedReturn: number(),
                       monthlyContribution: number(),
-                      annualCharge: number()
+                      annualCharge: number(),
+                      stopContributingInYear: number()
                     })}
                     onSubmit={(investment, { setStatus }) => {
                       setStatus()
                       onItemSave(investment, idx)
                     }}
-                  >{({ submitForm }) => (
+                  >{({ submitForm, values, setFieldValue}) => (
                     <TableRow key={idx}>
                       <TableCell align="center">
                         <Save onClick={submitForm} >
@@ -140,19 +154,19 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                       </TableCell>
                       <TableCell align="center" >
                         <Input
-                          label="Investment Name"
                           name="name"
                           type="text"
                         />
                       </TableCell>
                       <TableCell align="center" >
                         <Input
-                          label="Current Value"
                           name="initialAmount"
                           type="number"
                           inputProps={{
                             startAdornment: (
-                              <InputAdornment position="start">
+                              <InputAdornment                  
+                                classes={{ positionStart: classes.centerStartAdornment}}
+                               position="start">
                                 <Typography >
                                   £
                                                                     </Typography>
@@ -162,12 +176,13 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                       </TableCell>
                       <TableCell align="center" >
                         <Input
-                          label="Annual Return"
                           name="expectedReturn"
                           type="number"
                           inputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
+                              <InputAdornment 
+                              classes={{ positionEnd: classes.centerEndAdornment}}
+                              position="end">
                                 <Typography >
                                   %
                                                                     </Typography>
@@ -177,12 +192,13 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                       </TableCell>
                       <TableCell align="center" >
                         <Input
-                          label="Monthly Contribution"
                           name="monthlyContribution"
                           type="number"
                           inputProps={{
                             startAdornment: (
-                              <InputAdornment position="start">
+                              <InputAdornment 
+                              classes={{ positionStart: classes.centerStartAdornment}}
+                              position="start">
                                 <Typography >
                                   £
                                                                     </Typography>
@@ -191,13 +207,32 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                         />
                       </TableCell>
                       <TableCell align="center" >
+                        <FormControl  className={classes.select}>
+                          <Select
+                            className={classes.select}
+                            labelId="stopContributingInYear"
+                            label="stopContributingInYear"
+                            id="stopContributingInYear"
+                            value={values.stopContributingInYear}
+                            onChange={e => setFieldValue('stopContributingInYear', e.target.value)}
+                            required
+                          >
+                            {
+                              new Array(100).fill(0).map((_, i) =>
+                                <MenuItem key={i} className={classes.select} value={i}>{i === 0 ? 'Life' : i === 1 ? `${i} Year` : `${i} Years`}</MenuItem>)
+                            }
+                          </Select>
+                        </FormControl>
+                      </TableCell>
+                      <TableCell align="center" >
                         <Input
-                          label="Annual Charge"
                           name="annualCharge"
                           type="number"
                           inputProps={{
                             endAdornment: (
-                              <InputAdornment position="end">
+                              <InputAdornment 
+                              classes={{ positionEnd: classes.centerEndAdornment}}
+                              position="end">
                                 <Typography >
                                   %
                                                                     </Typography>
@@ -233,6 +268,11 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                       <TableCell className={classes.tableCell} align="center" >
                         £{fNum(investment.monthlyContribution)}
                       </TableCell>
+
+                      <TableCell className={classes.tableCell} align="center" >
+                        {`${investment.stopContributingInYear === 0 ? 'Life' : investment.stopContributingInYear === 1 ? `${investment.stopContributingInYear} Year` : `${investment.stopContributingInYear} Years`}`}
+                      </TableCell>
+
                       <TableCell className={classes.tableCell} align="center" >
                         {fNum(math.round(math.multiply(investment.annualCharge, 100), 4))}%
                                             </TableCell>
@@ -259,6 +299,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                 <TableCell className={classes.tableCell} align="center" >
                   <strong>£{fNum(items.reduce((a, b) => a + b.monthlyContribution, 0))}</strong>
                 </TableCell>
+                <TableCell className={classes.tableCell} align="center" />
                 <TableCell className={classes.tableCell} align="center" />
 
                 <TableCell align="center" />

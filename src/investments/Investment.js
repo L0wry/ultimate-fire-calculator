@@ -11,6 +11,7 @@ export class Investment {
     annualCharge = 0,
     compoundData = 0,
     isOverAnnualAllowance = false,
+    stopContributingInYear
   }) {
     this._investmentName = investmentName;
     this._investmentType = investmentType;
@@ -19,17 +20,27 @@ export class Investment {
     this._monthlyContribution = parseFloat(monthlyContribution);
     this._noOfYearsToMature = noOfYearsToMature;
     this._annualCharge = annualCharge;
+    this._stopContributingInYear = stopContributingInYear
 
     this._compoundData = compoundData || calculateYearlyCompoundWithCharge({
       initialAmount: this._initialAmount,
       expectedReturn: this._expectedReturn,
       monthlyContribution: this._monthlyContribution,
       annualCharge: this._annualCharge,
-      noOfYearsToMature: this._noOfYearsToMature
+      noOfYearsToMature: this._noOfYearsToMature,
+      stopContributingInYear: this._stopContributingInYear
     });
 
     this._isOverAnnualAllowance = isOverAnnualAllowance;
     this._editMode = false;
+  }
+
+  get stopContributingInYear() {
+    return this._stopContributingInYear
+  }
+
+  set stopContributingInYear(year) {
+    this._stopContributingInYear = year
   }
 
   get isOverAnnualAllowance() {
@@ -59,7 +70,8 @@ export class Investment {
       expectedReturn: this._expectedReturn,
       monthlyContribution: this._monthlyContribution,
       annualCharge: this._annualCharge,
-      noOfYearsToMature: this._noOfYearsToMature
+      noOfYearsToMature: this._noOfYearsToMature,
+      stopContributingInYear: this._stopContributingInYear
     });
   }
 
@@ -78,7 +90,8 @@ export class Investment {
       expectedReturn: this._expectedReturn,
       monthlyContribution: this._monthlyContribution,
       annualCharge: this._annualCharge,
-      noOfYearsToMature: this._noOfYearsToMature
+      noOfYearsToMature: this._noOfYearsToMature,
+      stopContributingInYear: this._stopContributingInYear
     });
   }
 

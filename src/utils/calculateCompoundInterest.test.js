@@ -37,4 +37,13 @@ describe('Compound Interest', () => {
       }
     });
   });
+
+  it('support stopping contribution in x years', () => {
+    expect(calculateYearlyCompoundWithCharge({
+      initialAmount: 0,
+      monthlyContribution: 10,
+      noOfYearsToMature: 10,
+      stopContributingInYear: 5
+    })['Year 10']['Month 12'].balance).toBe(600)
+  })
 });

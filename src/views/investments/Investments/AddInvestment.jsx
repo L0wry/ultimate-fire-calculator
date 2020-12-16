@@ -78,7 +78,7 @@ const Input = ({ label, inputProps, ...props }) => {
 };
 
 
-export const AddInvestment = ({ className, addInvestment, }) => {
+export const AddInvestment = ({ addInvestment, }) => {
   const classes = useStyles();
 
   return (
@@ -89,15 +89,16 @@ export const AddInvestment = ({ className, addInvestment, }) => {
           investmentType: "",
           initialAmount: "",
           expectedReturn: "",
-          monthlyContribution: ""
+          monthlyContribution: "",
+          stopContributingInYear: 0
         }}
         validationSchema={object({
           name: string(),
           investmentType: string(),
           initialAmount: number(),
           expectedReturn: number(),
-          monthlyContribution: number()
-
+          monthlyContribution: number(),
+          stopContributingInYear: number()
         })}
         onSubmit={(investment, { setSubmitting, resetForm }) => {
           addInvestment(investment)
@@ -130,7 +131,6 @@ export const AddInvestment = ({ className, addInvestment, }) => {
               md={6}
               xs={12}
             >
-
               <FormControl variant="outlined" className={classes.select}>
                 <InputLabel id="demo-simple-select-outlined-label">Investment Type</InputLabel>
                 <Select
@@ -148,12 +148,8 @@ export const AddInvestment = ({ className, addInvestment, }) => {
                   }
                 </Select>
               </FormControl>
-
-
-
-
-
             </Grid>
+     
 
             <Grid
               item
@@ -216,6 +212,32 @@ export const AddInvestment = ({ className, addInvestment, }) => {
                 }}
               />
             </Grid>
+
+            <Grid
+              item
+              lg={6}
+              md={6}
+              xs={12}
+            >
+              <FormControl variant="outlined" className={classes.select}>
+                <InputLabel id="demo-simple-select-outlined-label">Contribute Monthly For</InputLabel>
+                <Select
+                  className={classes.select}
+                  labelId="stopContributingInYear"
+                  label="stopContributingInYear Type"
+                  id="stopContributingInYear"
+                  value={values.stopContributingInYear}
+                  onChange={e => setFieldValue('stopContributingInYear', e.target.value)}
+                  required
+                >
+                  {
+                    new Array(100).fill(0).map((_, i) =>
+                      <MenuItem key={i} className={classes.select} value={i}>{i === 0 ? 'Life' : i === 1 ? `${i} Year` : `${i} Years`}</MenuItem>)
+                  }
+                </Select>
+              </FormControl>
+            </Grid>
+
             <Grid item xs={12} >
               <Button
                 className={classes.button}
