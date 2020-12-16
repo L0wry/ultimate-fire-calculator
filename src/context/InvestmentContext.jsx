@@ -25,7 +25,9 @@ export const InvestmentContextProvider = ({ children }) => {
         noOfYearsToMature: yearState,
         annualCharge: investment._annualCharge,
         compoundData: investment._compoundData,
-        stopContributingInYear: investment._stopContributingInYear || 0
+        stopContributingInYear: investment._stopContributingInYear || 0,
+        overLifetimeAllowanceBy: investment._overLifetimeAllowanceBy,
+        isOverLifetimeAllowance: investment._isOverLifetimeAllowance
       })
     )
     : []

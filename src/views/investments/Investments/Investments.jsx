@@ -139,6 +139,31 @@ const Investments = ({ className, ...rest }) => {
                     </Alert>
                   </Grid>
                 ))}
+
+              {investments
+                .filter(investment => investment.isOverLifetimeAllowance)
+                .reduce((accum, investment) => {
+                  if (!accum.find(existing => existing.investmentType === investment.investmentType)) accum.push(investment)
+                  return accum
+                }, [])
+                .map((investment, i) => (
+
+                  <Grid
+                    key={`alert-${i}`}
+                    item
+                    lg={12}
+                    sm={12}
+                    xl={12}
+                    xs={12}
+                  >
+                    <Alert severity="warning">
+                      <AlertTitle>Warning!</AlertTitle>
+        You are above the <strong>{investment.investmentType} Lifetime Allowance </strong> of <strong>£{fNum(investmentMetaData[investment.investmentType].lifeTimeAllowance) }</strong> by <strong>£{fNum(investment.overLifetimeAllowanceBy)}</strong> and will be subjected to increased tax.
+                    </Alert>
+                  </Grid>
+                ))}
+
+
               <Hidden lgUp>
                 <Grid
                   item

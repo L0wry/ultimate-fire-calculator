@@ -11,7 +11,9 @@ export class Investment {
     annualCharge = 0,
     compoundData = 0,
     isOverAnnualAllowance = false,
-    stopContributingInYear
+    isOverLifetimeAllowance = false,
+    stopContributingInYear,
+    overLifetimeAllowanceBy = 0
   }) {
     this._investmentName = investmentName;
     this._investmentType = investmentType;
@@ -32,6 +34,8 @@ export class Investment {
     });
 
     this._isOverAnnualAllowance = isOverAnnualAllowance;
+    this._isOverLifetimeAllowance = isOverLifetimeAllowance
+    this._overLifetimeAllowanceBy = overLifetimeAllowanceBy
     this._editMode = false;
   }
 
@@ -41,6 +45,23 @@ export class Investment {
 
   set stopContributingInYear(year) {
     this._stopContributingInYear = year
+  }
+
+  get overLifetimeAllowanceBy() {
+    return this._overLifetimeAllowanceBy;
+  }
+
+  set overLifetimeAllowanceBy(amount) {
+    this._overLifetimeAllowanceBy = amount;
+  }
+
+
+  get isOverLifetimeAllowance() {
+    return this._isOverLifetimeAllowance;
+  }
+
+  set isOverLifetimeAllowance(bool) {
+    this._isOverLifetimeAllowance = bool;
   }
 
   get isOverAnnualAllowance() {
@@ -93,6 +114,10 @@ export class Investment {
       noOfYearsToMature: this._noOfYearsToMature,
       stopContributingInYear: this._stopContributingInYear
     });
+  }
+
+  get noOfYearsToMature() {
+    return this._noOfYearsToMature
   }
 
   get monthlyContribution() {
