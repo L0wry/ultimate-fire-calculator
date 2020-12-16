@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
 import {
-  AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid, Legend
+  AreaChart, Area, XAxis, YAxis, ResponsiveContainer, Tooltip, CartesianGrid
 } from 'recharts';
 
 import {

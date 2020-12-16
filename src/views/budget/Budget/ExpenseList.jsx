@@ -3,7 +3,6 @@ import {
     Box,
     makeStyles,
     Typography,
-    Divider,
     Table,
     TableBody,
     TableCell,

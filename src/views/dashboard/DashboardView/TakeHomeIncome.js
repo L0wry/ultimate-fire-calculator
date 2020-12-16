@@ -2,20 +2,15 @@ import React from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
-  Avatar,
-  Box,
   Card,
   CardContent,
   Grid,
   Typography,
-  colors,
   makeStyles
 } from '@material-ui/core';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
-import MoneyIcon from '@material-ui/icons/Money';
 import { useSalaryContext } from 'src/context/SalaryContext';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     height: '100%'
   }
@@ -44,19 +39,20 @@ const TakeHomeIncome = ({ className, ...rest }) => {
             <Typography
               color="textSecondary"
               variant="h6"
-              >
+            >
               Annual Take Home Pay
             </Typography>
-            </Grid>
+          </Grid>
 
-            <Grid item> 
+          <Grid item>
             <Typography
               color="textPrimary"
               gutterBottom
               variant="h3"
             >
-              £{totalTakeHome.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-          </Typography>
+              £
+              {totalTakeHome.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+            </Typography>
           </Grid>
         </Grid>
       </CardContent>

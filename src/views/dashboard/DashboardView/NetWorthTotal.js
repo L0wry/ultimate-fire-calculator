@@ -4,9 +4,8 @@ import {
   Grid,
   Typography,
   makeStyles,
-  colors
 } from '@material-ui/core';
-import { useInvestmentContext } from '../../../context/InvestmentContext'
+import { useInvestmentContext } from '../../../context/InvestmentContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,9 +14,9 @@ const useStyles = makeStyles((theme) => ({
   box: {
     backgroundColor: theme.palette.primary.main,
   },
-    text: {
+  text: {
     color: theme.palette.text.tertiary
-}
+  }
 }));
 
 const NetWorthTotal = () => {
@@ -26,7 +25,7 @@ const NetWorthTotal = () => {
   const { getTotalNetWorthInXYears, yearsToMature } = useInvestmentContext();
 
   return (
-    <Box padding={3}  className={classes.box} >
+    <Box padding={3} className={classes.box}>
       <Grid
         container
         direction="column"
@@ -40,19 +39,24 @@ const NetWorthTotal = () => {
             gutterBottom
             variant="h5"
           >
-            Total Net Worth in {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
-            </Typography>
+            Total Net Worth in
+            {' '}
+            {yearsToMature}
+            {' '}
+            {yearsToMature === 1 ? 'year' : 'years'}
+          </Typography>
         </Grid>
         <Grid item>
           <Typography
             className={classes.text}
             variant="h3"
           >
-            £{getTotalNetWorthInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            £
+            {getTotalNetWorthInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </Typography>
         </Grid>
       </Grid>
-      </Box>
+    </Box>
   );
 };
 

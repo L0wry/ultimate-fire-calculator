@@ -4,10 +4,10 @@ export const INVESTMENT_TYPES = {
   LISA: 'Lisa',
   GENERAL: 'General',
   OTHER: 'Other'
-}
+};
 
 export default {
-  [INVESTMENT_TYPES.PENSION]:  {
+  [INVESTMENT_TYPES.PENSION]: {
     annualAllowance: 40000,
   },
   [INVESTMENT_TYPES.ISA]: {
@@ -22,4 +22,4 @@ export default {
   [INVESTMENT_TYPES.OTHER]: {
     annualAllowance: 9999999999999,
   }
-}
+};

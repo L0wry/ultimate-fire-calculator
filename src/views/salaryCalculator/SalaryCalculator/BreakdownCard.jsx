@@ -6,7 +6,6 @@ import {
     Box,
     makeStyles,
     withStyles,
-    Collapse,
     Table,
     TableBody,
     TableCell,
@@ -14,7 +13,6 @@ import {
     TableHead,
     TableRow,
     Paper,
-    IconButton
 } from '@material-ui/core';
 
 const math = create(all, {
@@ -33,9 +31,6 @@ const useStyles = makeStyles((theme) => ({
     tableBold: {
         color: theme.palette.text.secondary,
         backgroundColor: theme.palette.default
-    },
-    table: {
-
     }
 }));
 
@@ -76,7 +71,7 @@ const Headers = () => (
 )
 const formatNumber = number => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
-const TaxTableRow = ({ name, amount, stripedRows }) => (
+const TaxTableRow = ({ name, amount }) => (
     <StyledTableRow key={name}>
         <StyledTableCell align="center" >
             {name}
@@ -89,7 +84,7 @@ const TaxTableRow = ({ name, amount, stripedRows }) => (
 
 )
 
-const BreakdownCard = ({ className, userTax}) => {
+const BreakdownCard = ({ userTax}) => {
     const classes = useStyles();
 
     return (

@@ -25,9 +25,9 @@ const routes = [
     path: '/',
     element: <MainLayout />,
     children: [
-      { path: '404', element: <Navigate to="/app/salary-calculator" />},
+      { path: '404', element: <Navigate to="/app/salary-calculator" /> },
       { path: '/', element: <Navigate to="/app/salary-calculator" /> },
-      { path: '*', element:<Navigate to="/app/salary-calculator" /> }
+      { path: '*', element: <Navigate to="/app/salary-calculator" /> }
     ]
   }
 ];

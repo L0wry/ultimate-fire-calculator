@@ -11,8 +11,7 @@ import clsx from 'clsx';
 import { NavLink as RouterLink } from 'react-router-dom';
 
 import IncomeDetails from './IncomeDetails';
-import IncomeTaxCard from './IncomeTaxCard'
-import NationalInsurance from './NationalInsuranceCard'
+
 import BreakdownCard from './BreakdownCard';
 import { useSalaryContext } from '../../../context/SalaryContext';
 import TopBar from '../../../layouts/MainLayout/TopBar.js'

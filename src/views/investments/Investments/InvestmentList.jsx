@@ -1,11 +1,7 @@
 import React, { memo } from 'react';
-import clsx from 'clsx';
 import {
   Box,
-  Card,
-  CardContent,
   Typography,
-  Divider,
   Table,
   TableBody,
   TableCell,

@@ -1,16 +1,14 @@
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
     Box,
-    Card,
-    CardContent,
+  
     Grid,
     Typography,
     makeStyles
 } from '@material-ui/core';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
     root: {
         height: '100%'
     },
@@ -19,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const BudgetRemaining = ({ className, difference, ...rest }) => {
+const BudgetRemaining = ({ className, difference }) => {
     const classes = useStyles();
 
     return (

@@ -1,10 +1,6 @@
 import React from 'react';
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import {
-    Box,
-    Card,
-    CardContent,
     Grid,
     Typography,
     makeStyles
@@ -19,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MonthlyTakeHomeCard = ({ className, expenseTotal, totalTakeHome, difference, ...rest }) => {
+const MonthlyTakeHomeCard = ({ className, expenseTotal, totalTakeHome, difference }) => {
     const classes = useStyles();
 
     return (

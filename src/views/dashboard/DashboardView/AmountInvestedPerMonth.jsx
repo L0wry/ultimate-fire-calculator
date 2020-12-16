@@ -5,7 +5,6 @@ import {
   Grid,
   Typography,
   makeStyles,
-  colors
 } from '@material-ui/core';
 import { useInvestmentContext } from '../../../context/InvestmentContext'
 

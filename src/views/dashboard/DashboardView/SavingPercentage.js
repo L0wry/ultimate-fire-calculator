@@ -13,16 +13,15 @@ import {
   useTheme
 } from '@material-ui/core';
 import {
-  PieChart, Pie, Tooltip, Cell, ResponsiveContainer
+  PieChart, Pie, Cell, ResponsiveContainer
 } from 'recharts';
-
 
 const data = [
   { name: 'Pre Tax', value: 38 },
   { name: 'Post Tax', value: 40 },
 
 ];
-const colours = Object.values(colors.green)
+const colours = Object.values(colors.green);
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -33,8 +32,6 @@ const useStyles = makeStyles(() => ({
 const TrafficByDevice = ({ className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
-
-
 
   return (
     <Card
@@ -48,8 +45,8 @@ const TrafficByDevice = ({ className, ...rest }) => {
           height={300}
           position="relative"
         >
-          <ResponsiveContainer width={"100%"} height="100%">
-            <PieChart >
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
               <Pie
                 data={data}
                 startAngle={180}
@@ -79,26 +76,26 @@ const TrafficByDevice = ({ className, ...rest }) => {
             name,
             value
           }) => (
-              <Box
-                key={name}
-                p={1}
-                textAlign="center"
+            <Box
+              key={name}
+              p={1}
+              textAlign="center"
+            >
+              <Typography
+                color="textPrimary"
+                variant="body1"
               >
-                <Typography
-                  color="textPrimary"
-                  variant="body1"
-                >
-                  {name}
-                </Typography>
-                <Typography
-                  style={{ color }}
-                  variant="h2"
-                >
-                  {value}
+                {name}
+              </Typography>
+              <Typography
+                style={{ color }}
+                variant="h2"
+              >
+                {value}
                 %
               </Typography>
-              </Box>
-            ))}
+            </Box>
+          ))}
         </Box>
       </CardContent>
     </Card>

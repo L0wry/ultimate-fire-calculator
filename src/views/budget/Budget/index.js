@@ -4,7 +4,7 @@ import {
   makeStyles
 } from '@material-ui/core';
 import Page from 'src/components/Page';
-import Budget from './Budget'
+import Budget from './Budget';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,7 +24,7 @@ const Index = () => {
       title="Budget"
     >
       <Container maxWidth={false}>
-          <Budget />
+        <Budget />
       </Container>
     </Page>
   );

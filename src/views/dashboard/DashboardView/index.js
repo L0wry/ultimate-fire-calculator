@@ -6,7 +6,6 @@ import {
 import Page from 'src/components/Page';
 import Dashboard from './Dashboard';
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
@@ -25,8 +24,8 @@ const Index = () => {
       title="Dashboard"
     >
       <Container maxWidth={false}>
-        
-      <Dashboard/>
+
+        <Dashboard />
       </Container>
     </Page>
   );

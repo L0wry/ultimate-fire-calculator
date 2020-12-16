@@ -1,22 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useInvestmentContext } from '../../../context/InvestmentContext'
 import {
   Box,
   Grid,
   Typography,
   makeStyles,
 } from '@material-ui/core';
+import { useInvestmentContext } from '../../../context/InvestmentContext';
 
 const useStyles = makeStyles((theme) => ({
   text: {
-      color: theme.palette.text.tertiary
+    color: theme.palette.text.tertiary
   },
   box: {
     backgroundColor: theme.palette.primary.main,
   },
 }));
-
 
 const ExpectedMonthlyIncome = () => {
   const classes = useStyles();
@@ -24,7 +22,7 @@ const ExpectedMonthlyIncome = () => {
   const { getExpectedInterestIncomeInXYears, yearsToMature } = useInvestmentContext();
 
   return (
-    <Box  className={classes.box} padding={3}>
+    <Box className={classes.box} padding={3}>
 
       <Grid
         container
@@ -38,24 +36,25 @@ const ExpectedMonthlyIncome = () => {
             gutterBottom
             variant="h5"
           >
-            Expected Gross Monthly Income From Investments In {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
-        </Typography>
+            Expected Gross Monthly Income From Investments In
+            {' '}
+            {yearsToMature}
+            {' '}
+            {yearsToMature === 1 ? 'year' : 'years'}
+          </Typography>
         </Grid>
         <Grid item>
           <Typography
             className={classes.text}
             variant="h3"
           >
-            £{getExpectedInterestIncomeInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+            £
+            {getExpectedInterestIncomeInXYears().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
           </Typography>
         </Grid>
       </Grid>
-    </Box >
+    </Box>
   );
-};
-
-ExpectedMonthlyIncome.propTypes = {
-  className: PropTypes.string
 };
 
 export default ExpectedMonthlyIncome;

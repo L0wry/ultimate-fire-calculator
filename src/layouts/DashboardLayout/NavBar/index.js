@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
@@ -8,7 +8,6 @@ import {
   List,
   makeStyles,
   Grid,
-  Typography
 } from '@material-ui/core';
 import {
   BarChart as BarChartIcon,
@@ -18,8 +17,8 @@ import {
   HelpCircle
 } from 'react-feather';
 import NavItem from './NavItem';
-import { SelectYears } from './SelectYears'
-import { SelectSafeWithdrawalPercent } from './SelectSafeWithdrawalPercent'
+import { SelectYears } from './SelectYears';
+import { SelectSafeWithdrawalPercent } from './SelectSafeWithdrawalPercent';
 
 import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
 import NetWorthTotal from '../../../views/dashboard/DashboardView/NetWorthTotal';
@@ -66,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 const NavBar = ({ onMobileClose, openMobile }) => {
   const location = useLocation();
   const classes = useStyles();
@@ -82,7 +80,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
 
     <Box p={1}>
       <List>
-        {items.map((item, i) => (
+        {items.map((item) => (
           <NavItem
             href={item.href}
             key={item.title}
@@ -92,42 +90,46 @@ const NavBar = ({ onMobileClose, openMobile }) => {
           />
         ))}
       </List>
-     
+
       <Box mt={2}>
 
-      <Grid
-        spacing={3}
-        container
-        direction="column"
-        justify="flex-end"
-        alignItems="stretch"
-      >
-        <Grid item>
-          <SelectYears/>
-        </Grid>
-        <Grid item>
-          <SelectSafeWithdrawalPercent/>
-        </Grid>
+        <Grid
+          spacing={3}
+          container
+          direction="column"
+          justify="flex-end"
+          alignItems="stretch"
+        >
+          <Grid item>
+            <SelectYears />
+          </Grid>
+          <Grid item>
+            <SelectSafeWithdrawalPercent />
+          </Grid>
           <Grid
-            item >
+            item
+          >
             <RetiringIn />
           </Grid>
           <Grid
-            item >
+            item
+          >
             <ExpectedMonthlyIncome />
 
           </Grid>
           <Grid
-            item >
+            item
+          >
             <NetWorthTotal />
 
           </Grid>
           <Grid
-            item >
+            item
+          >
             <AmountInvested />
           </Grid>
-      </Grid>
-    </Box>
+        </Grid>
+      </Box>
     </Box>
   );
 

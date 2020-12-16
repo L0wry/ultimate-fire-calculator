@@ -1,9 +1,9 @@
-import { all, create } from 'mathjs'
-import { calculatePreTaxDeductions } from './calculatePreTaxDeductions'
-import { calculateIncomeTax } from './calculateIncomeTax'
+import { all, create } from 'mathjs';
+import { calculatePreTaxDeductions } from './calculatePreTaxDeductions';
+import { calculateIncomeTax } from './calculateIncomeTax';
 import { incomeTaxBands, nationalInsuranceTaxBands } from './taxTypes';
-import { calculateNationalInsurance } from './calculateNationalInsurance'
-import { calculateStudentLoan } from './calculateStudentLoan'
+import { calculateNationalInsurance } from './calculateNationalInsurance';
+import { calculateStudentLoan } from './calculateStudentLoan';
 
 const math = create(all, {
   number: 'BigNumber',
@@ -16,23 +16,21 @@ export default function calculateAllTax({
   employerPensionContributionPercent = 0,
   personalPensionContributionPercent = 0,
   studentLoanPlanType = 0,
-  secondaryIncomeAfterTax =  0}) {
+  secondaryIncomeAfterTax = 0
+}) {
+  const personalPensionContribution = math.multiply(personalPensionContributionPercent, salary);
+  const employerPensionContribution = math.multiply(employerPensionContributionPercent, salary);
+  const { monthlyAmountPaid, yearlyAmountPaid } = calculateStudentLoan({ studentLoanPlanType, salary });
+  const { taxBreaksTotal, taxableIncome } = calculatePreTaxDeductions({ taxFreePersonalAllowance, salary, personalPensionContribution }); // TODO : Tax breaks
 
+  const incomeTax = calculateIncomeTax(incomeTaxBands(taxFreePersonalAllowance), taxableIncome);
 
-  const personalPensionContribution = math.multiply(personalPensionContributionPercent, salary)
-  const employerPensionContribution = math.multiply(employerPensionContributionPercent, salary)
-  const { monthlyAmountPaid, yearlyAmountPaid } = calculateStudentLoan({ studentLoanPlanType , salary})
-  let { taxBreaksTotal, taxableIncome } = calculatePreTaxDeductions({ taxFreePersonalAllowance, salary, personalPensionContribution }) //TODO : Tax breaks
+  const nationalInsuranceTax = calculateNationalInsurance(nationalInsuranceTaxBands, taxableIncome);
 
-  const incomeTax = calculateIncomeTax(incomeTaxBands(taxFreePersonalAllowance), taxableIncome)
-  
-  
-  const nationalInsuranceTax = calculateNationalInsurance(nationalInsuranceTaxBands, taxableIncome)
-  
-  taxableIncome = math.subtract(taxableIncome, taxFreePersonalAllowance) > 0
+  const newTaxableIncome = math.subtract(taxableIncome, taxFreePersonalAllowance) > 0
     ? math.subtract(taxableIncome, taxFreePersonalAllowance)
-    : 0
-    
+    : 0;
+
   return {
     salary,
     studentLoan: {
@@ -46,7 +44,7 @@ export default function calculateAllTax({
     personalPensionContribution,
     employerPensionContribution,
     taxBreaksTotal,
-    taxableIncome,
+    taxableIncome: newTaxableIncome,
     incomeTax,
     nationalInsuranceTax,
     totalTakeHome: math
@@ -58,5 +56,5 @@ export default function calculateAllTax({
       .add(math.divide(secondaryIncomeAfterTax, 12))
       .round(2)
       .done()
-  }
+  };
 }

@@ -13,8 +13,7 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import { useMobileContext } from '../../context/MobileContext';
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   toolbar: {
     backgroundColor: theme.palette.background.default
@@ -34,7 +33,6 @@ const TopBar = ({ className, header, ...rest }) => {
   const {
     isMobileNavOpen, toggleMobileNav
   } = useMobileContext();
-
 
   return (
     <>
@@ -60,18 +58,18 @@ const TopBar = ({ className, header, ...rest }) => {
 
           <Hidden lgUp>
 
-            <Box display='flex' flexGrow={1}>
-              <Box  mt={3}>
-              <Typography
-                className={classes.text}
-                align="left"
-                gutterBottom
-                variant="h1"
-              >
-                {header}
-              </Typography>
+            <Box display="flex" flexGrow={1}>
+              <Box mt={3}>
+                <Typography
+                  className={classes.text}
+                  align="left"
+                  gutterBottom
+                  variant="h1"
+                >
+                  {header}
+                </Typography>
               </Box>
-              <Box display='flex' flexGrow={1}  mt={2}>
+              <Box display="flex" flexGrow={1} mt={2}>
                 <IconButton
                   className={classes.button}
                   color="inherit"
@@ -79,7 +77,7 @@ const TopBar = ({ className, header, ...rest }) => {
                 >
                   <MenuIcon fontSize="large" className={classes.button} />
                 </IconButton>
-                </Box>
+              </Box>
             </Box>
           </Hidden>
 
@@ -91,7 +89,8 @@ const TopBar = ({ className, header, ...rest }) => {
 };
 
 TopBar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  header: PropTypes.string,
 };
 
 export default TopBar;

@@ -6,17 +6,14 @@ import {
   InputLabel,
   Select,
   Button,
-  Card,
   MenuItem,
-  CardContent,
   TextField,
   InputAdornment,
   Typography,
   makeStyles,
   Grid,
-  Divider
 } from '@material-ui/core';
-import { Formik, Form, useField, ErrorMessage, Field } from "formik";
+import { Formik, Form, useField } from "formik";
 import { number, object } from "yup";
 import { useInvestmentContext } from '../../../context/InvestmentContext';
 import { all, create } from 'mathjs'

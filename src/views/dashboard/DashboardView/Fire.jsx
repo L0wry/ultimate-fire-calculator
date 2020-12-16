@@ -9,9 +9,6 @@ import {
 import {
   Box,
   Card,
-  CardContent,
-  CardHeader,
-  Divider,
   useTheme,
   makeStyles,
   Typography,
