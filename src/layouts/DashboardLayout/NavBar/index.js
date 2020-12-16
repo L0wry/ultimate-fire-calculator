@@ -12,13 +12,13 @@ import {
 import {
   BarChart as BarChartIcon,
   TrendingUp,
-  DollarSign,
   Download,
   HelpCircle
 } from 'react-feather';
 import NavItem from './NavItem';
 import { SelectYears } from './SelectYears';
 import { SelectSafeWithdrawalPercent } from './SelectSafeWithdrawalPercent';
+import {ReactComponent as PoundSign} from './pound.svg'
 
 import ExpectedMonthlyIncome from '../../../views/dashboard/DashboardView/ExpectedMonthlyIncome';
 import NetWorthTotal from '../../../views/dashboard/DashboardView/NetWorthTotal';
@@ -28,7 +28,7 @@ import RetiringIn from '../../../views/dashboard/DashboardView/RetiringIn';
 const items = [
   {
     href: '/app/salary-calculator',
-    icon: DollarSign,
+    icon: PoundSign,
     title: 'Salary Calculator'
   },
   {

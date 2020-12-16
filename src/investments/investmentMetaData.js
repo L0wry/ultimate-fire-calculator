@@ -9,6 +9,7 @@ export const INVESTMENT_TYPES = {
 export default {
   [INVESTMENT_TYPES.PENSION]: {
     annualAllowance: 40000,
+    lifeTimeAllowance: 1073100
   },
   [INVESTMENT_TYPES.ISA]: {
     annualAllowance: 20000,

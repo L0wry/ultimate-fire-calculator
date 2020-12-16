@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Input = ({ label, inputProps, ...props }) => {
+const Input = ({ label, inputProps, setFieldValue, ...props }) => {
   // useField() returns [formik.getFieldProps(), formik.getFieldMeta()]
   // which we can spread on <input> and alse replace ErrorMessage entirely.
   const [field, meta] = useField(props);
@@ -58,6 +58,11 @@ const Input = ({ label, inputProps, ...props }) => {
         variant="outlined"
         required
         fullWidth
+        onClick={() => {
+          if(field.value === 0) {
+            setFieldValue(field.name, '')
+          }
+        }}
         InputProps={{
           className: classes.text,
           ...inputProps
@@ -87,9 +92,9 @@ export const AddInvestment = ({ addInvestment, }) => {
         initialValues={{
           name: "",
           investmentType: "",
-          initialAmount: "",
-          expectedReturn: "",
-          monthlyContribution: "",
+          initialAmount: 0,
+          expectedReturn: 0,
+          monthlyContribution: 0,
           stopContributingInYear: 0
         }}
         validationSchema={object({
@@ -122,6 +127,7 @@ export const AddInvestment = ({ addInvestment, }) => {
                 label="Investment Name"
                 name="name"
                 type="text"
+                setFieldValue={setFieldValue}
               />
             </Grid>
 
@@ -161,6 +167,7 @@ export const AddInvestment = ({ addInvestment, }) => {
                 label="Current Value"
                 name="initialAmount"
                 type="number"
+                setFieldValue={setFieldValue}
                 inputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -181,6 +188,7 @@ export const AddInvestment = ({ addInvestment, }) => {
                 label="Annual Return"
                 name="expectedReturn"
                 type="number"
+                setFieldValue={setFieldValue}
                 inputProps={{
                   endAdornment: (
                     <InputAdornment position="end">
@@ -202,6 +210,7 @@ export const AddInvestment = ({ addInvestment, }) => {
                 label="Monthly Contribution"
                 name="monthlyContribution"
                 type="number"
+                setFieldValue={setFieldValue}
                 inputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
