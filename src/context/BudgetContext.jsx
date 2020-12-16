@@ -10,11 +10,7 @@ const BudgetContext = React.createContext({});
 
 export const BudgetContextProvider = ({ children }) => {
   const state = JSON.parse(localStorage.getItem('expenses')) ? JSON.parse(localStorage.getItem('expenses')) : []
-  const differenceState = localStorage.getItem('expenseDifference') || 0
-
   const [expenses, setExpenses] = useState(state);
-
-  const [difference, setDifference] = useState(differenceState)
 
   const addExpense = ({ name, cost }) => {
     if (name !== "" || !cost) {
@@ -51,12 +47,6 @@ export const BudgetContextProvider = ({ children }) => {
     expenses.filter(item => item.checked).reduce((acc, i) => math.add(acc, i.cost), 0) :
     0
 
-  const calculateDifference = (totalTakeHome = 0) => {
-    const newDifference = math.round(math.subtract(totalTakeHome, expenseTotal), 2)
-    setDifference(newDifference)
-    localStorage.setItem('expenseDifference', newDifference)
-  }
-
   return (
     <BudgetContext.Provider value={{
       expenses,
@@ -64,8 +54,7 @@ export const BudgetContextProvider = ({ children }) => {
       checkExpense,
       removeExpense,
       expenseTotal,
-      difference,
-      calculateDifference
+
     }}>
       {children}
     </BudgetContext.Provider>

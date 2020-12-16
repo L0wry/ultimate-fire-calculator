@@ -35,7 +35,7 @@ const Text = ({ item, safeWithdrawalPercent }) => {
       variant="h5"
       gutterBottom
     >
-      {item.dataKey === "Income From Draw Down" ? `Expected Monthly Income from ${Math.round(safeWithdrawalPercent * 100)}% Draw Down` : item.dataKey}
+      {item.dataKey === "Income From Draw Down" ? `Expected Gross Monthly Income from ${Math.round(safeWithdrawalPercent * 100)}% Draw Down` : item.dataKey}
     </Typography>
   )
 }

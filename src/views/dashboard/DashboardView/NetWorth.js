@@ -72,7 +72,7 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  return investmentData.length > 0 ? (
+  return investmentData.length > 0 && (
     <Box p={2}  >
 
       <Typography
@@ -119,35 +119,8 @@ const NetWorth = ({ investmentData, className, ...rest }) => {
         </ResponsiveContainer>
 
       </Box>
-      {/* <Divider />
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        p={2}
-      >
-        <Button
-          color="primary"
-          endIcon={<ArrowRightIcon />}
-          size="small"
-          variant="text"
-        >
-          Overview
-        </Button>
-      </Box> */}
     </Box>
-  ) : (
-      <Box p={6}  >
-
-        <Typography
-          align="center"
-          className={classes.text}
-          gutterBottom
-          variant="h4"
-        >
-          Add some investments to see dashboards
-      </Typography>
-      </Box>
-    )
+  )
 };
 
 NetWorth.propTypes = {

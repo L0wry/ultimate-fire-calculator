@@ -5,7 +5,7 @@ const math = create(all, {
   precision: 32
 });
 
-export const convertInvestmentDataToFire = (investments, safeWithdrawalPercent, expenseTotal) =>
+export const convertInvestmentDataToFire = (investments, safeWithdrawalPercent, expenseTotal) => 
   investments.reduce((accum, investment,) => {
 
     for (const [year, months] of Object.entries(investment.compoundData)) {

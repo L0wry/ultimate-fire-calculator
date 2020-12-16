@@ -16,9 +16,16 @@ import { InvestmentList } from './InvestmentList'
 import { NavLink as RouterLink } from 'react-router-dom';
 import TopBar from '../../../layouts/MainLayout/TopBar.js'
 import BudgetRemaining from './BudgetRemaining';
-import { useBudgetContext } from 'src/context/BudgetContext';
+import { useBudgetContext } from '../../../context/BudgetContext';
+import { useSalaryContext } from '../../../context/SalaryContext';
 import investmentMetaData from '../../../investments/investmentMetaData'
 import { fNum } from '../../../utils/formatNumber';
+import { all, create } from 'mathjs'
+
+const math = create(all, {
+  number: 'BigNumber',
+  precision: 32
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -38,10 +45,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Investments = ({ className, ...rest }) => {
-
+  const { userTax } = useSalaryContext();
+  const { expenseTotal } = useBudgetContext();
   const { onItemSave, editInvestment, removeInvestment, investments, addInvestment, yearsToMature } = useInvestmentContext();
-  const { difference } = useBudgetContext()
   const classes = useStyles()
+
+  const totalTakeHome = math.round(math.divide(userTax.totalTakeHome || 0, 12), 2)
+  const difference = math.round(math.subtract(totalTakeHome, expenseTotal), 2)
+
 
   return (
     <div
@@ -92,7 +103,7 @@ const Investments = ({ className, ...rest }) => {
               <BudgetRemaining difference={difference} />
             </Grid>
           </Grid>
-          {investments.length > 0 && (
+          {investments.length > 0 && investments[0]?.compoundData && (
             <>
               <Grid
                 item
@@ -106,28 +117,28 @@ const Investments = ({ className, ...rest }) => {
               </Grid>
 
               {investments
-              .filter(investment => investment.isOverAnnualAllowance)
-              .reduce((accum, investment) => {
-                if(!accum.find(existing => existing.investmentType === investment.investmentType)) accum.push(investment)
+                .filter(investment => investment.isOverAnnualAllowance)
+                .reduce((accum, investment) => {
+                  if (!accum.find(existing => existing.investmentType === investment.investmentType)) accum.push(investment)
 
-                return accum
-              },[])
-              .map((investment, i) => (
+                  return accum
+                }, [])
+                .map((investment, i) => (
 
-                <Grid
-                  key={`alert-${i}`}
-                  item
-                  lg={12}
-                  sm={12}
-                  xl={12}
-                  xs={12}
-                >
-                  <Alert severity="warning">
-                    <AlertTitle>Warning!</AlertTitle>
+                  <Grid
+                    key={`alert-${i}`}
+                    item
+                    lg={12}
+                    sm={12}
+                    xl={12}
+                    xs={12}
+                  >
+                    <Alert severity="warning">
+                      <AlertTitle>Warning!</AlertTitle>
         You're contributing over the <strong>{investment.investmentType}</strong> annual allowance of £{fNum(investmentMetaData[investment.investmentType].annualAllowance)}
-                  </Alert>
-                </Grid>
-              ))}
+                    </Alert>
+                  </Grid>
+                ))}
               <Hidden lgUp>
                 <Grid
                   item

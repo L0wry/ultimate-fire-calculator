@@ -11,7 +11,7 @@ export function validateInvestments(investments) {
 
   for (const [investmentType, metaData] of Object.entries(investmentMetaData)) {
 
-    const filteredInvestments = investments.filter(investment => investment.investmentType === investmentType)
+    const filteredInvestments = investments.filter(investment => investment?.investmentType === investmentType)
 
     const filteredInvestmentsTotal = math.multiply(filteredInvestments.reduce((a, b) => a + b.monthlyContribution, 0), 12)
     if (filteredInvestmentsTotal > metaData.annualAllowance) {

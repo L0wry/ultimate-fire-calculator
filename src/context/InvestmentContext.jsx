@@ -12,23 +12,21 @@ const InvestmentContext = React.createContext({});
 
 export const InvestmentContextProvider = ({ children }) => {
   const yearState = localStorage.getItem('yearsToMature') || 10
-  const investmentState = JSON.parse(localStorage.getItem('investments'))
+  const investmentState = JSON.parse(localStorage.getItem('investments')) && 
+    JSON.parse(localStorage.getItem('investments'))[0]?._investmentType
     ? JSON.parse(localStorage.getItem('investments')).map(investment => {
-      if (investment._investmentType) {
-        new Investment({
-          isOverAnnualAllowance: investment._isOverAnnualAllowance,
-          investmentType: investment._investmentType,
-          investmentName: investment._investmentName,
-          initialAmount: investment._initialAmount,
-          expectedReturn: investment._expectedReturn,
-          monthlyContribution: investment._monthlyContribution,
-          noOfYearsToMature: yearState,
-          annualCharge: investment._annualCharge,
-          compoundData: investment._compoundData
-        })
-      }
-    }
-    )
+      new Investment({
+        isOverAnnualAllowance: investment._isOverAnnualAllowance,
+        investmentType: investment._investmentType,
+        investmentName: investment._investmentName,
+        initialAmount: investment._initialAmount,
+        expectedReturn: investment._expectedReturn,
+        monthlyContribution: investment._monthlyContribution,
+        noOfYearsToMature: yearState,
+        annualCharge: investment._annualCharge,
+        compoundData: investment._compoundData
+      })
+    })
     : []
   const safeWithdrawalPercentState = localStorage.getItem('safeWithdrawalPercent') || 0.04
   const [investments, setInvestments] = useState(investmentState);
@@ -65,7 +63,7 @@ export const InvestmentContextProvider = ({ children }) => {
 
     for (const newInvestment of investmentsToAdd) {
 
-      let isInvestmentAlreadyInList = copy.findIndex(oldInvestments => oldInvestments.investmentName === newInvestment.name)
+      let isInvestmentAlreadyInList = copy.findIndex(oldInvestments => oldInvestments?.investmentName === newInvestment.name)
 
       if (isInvestmentAlreadyInList > -1) {
         const { monthlyContribution } = newInvestment
@@ -139,15 +137,15 @@ export const InvestmentContextProvider = ({ children }) => {
     saveInvestments(investments.filter((_, index) => idx !== index));
   }
 
-  const getExpectedInterestIncomeInXYears = () => investments.length > 0 ?
+  const getExpectedInterestIncomeInXYears = () => investments.length > 0 && investments[0]?.compoundData ?
     math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].earnedInterest, 0), 2) :
     0
 
-  const getTotalNetWorthInXYears = () => investments.length > 0 ?
+  const getTotalNetWorthInXYears = () => investments.length > 0 && investments[0]?.compoundData ?
     math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].balance, 0), 2) :
     0
 
-  const getAmountInvestedPerMonth = () => investments.length > 0 ?
+  const getAmountInvestedPerMonth = () => investments.length > 0 && investments[0]?.compoundData ?
     math.round(investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0), 2) :
     0
 

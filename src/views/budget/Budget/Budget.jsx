@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import {
@@ -49,13 +49,10 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
     checkExpense,
     removeExpense,
     expenseTotal,
-    difference,
-    calculateDifference
   } = useBudgetContext();
 
   const totalTakeHome = math.round(math.divide(userTax.totalTakeHome || 0, 12), 2)
-
-  calculateDifference(totalTakeHome)
+  const difference = math.round(math.subtract(totalTakeHome, expenseTotal), 2)
 
   const classes = useStyles()
 

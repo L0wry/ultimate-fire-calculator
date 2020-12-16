@@ -72,7 +72,7 @@ const Interest = ({ investmentData }) => {
   const classes = useStyles();
   const theme = useTheme();
 
-  return investmentData.length > 0 ? (
+  return investmentData.length > 0 && (
     <Box p={2}  >
 
       <Typography
@@ -121,19 +121,7 @@ const Interest = ({ investmentData }) => {
       </Box>
      
     </Box>
-  ) : (
-      <Box p={6}  >
-
-        <Typography
-          align="center"
-          className={classes.text}
-          gutterBottom
-          variant="h4"
-        >
-          Add some investments to see dashboards
-      </Typography>
-      </Box>
-    )
+  )
 };
 
 Interest.propTypes = {

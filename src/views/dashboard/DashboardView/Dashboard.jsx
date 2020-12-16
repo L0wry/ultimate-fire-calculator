@@ -2,7 +2,8 @@ import React from 'react';
 import {
   Typography,
   Grid,
-  makeStyles
+  makeStyles,
+  Box
 } from '@material-ui/core';
 import clsx from 'clsx';
 import NetWorth from './NetWorth';
@@ -48,101 +49,118 @@ const Dashboard = ({ className, ...rest }) => {
         Predict how your investments will mature over time
         </Typography>
 
-      <Grid
-        container
-        spacing={3}
-      >
+
+      {investments && investments[0]?.compoundData ? (
         <Grid
-          item
-          lg={9}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <NetWorth investmentData={convertCompoundDataToGraph(investments)} />
-        </Grid>
-        <Grid
-          xs={12}
-          md={12}
-          lg={3}
-          xl={3}
-          item
           container
           spacing={3}
-          justify="space-evenly"
-          alignItems="stretch"
         >
           <Grid
             item
+            lg={9}
+            md={12}
+            xl={9}
             xs={12}
-            md={6}
-            lg={12}
           >
-            <AmountInvestedPerMonth />
+            <NetWorth investmentData={convertCompoundDataToGraph(investments)} />
           </Grid>
           <Grid
-            item
             xs={12}
-            md={6}
-            lg={12}
+            md={12}
+            lg={3}
+            xl={3}
+            item
+            container
+            spacing={3}
+            justify="space-evenly"
+            alignItems="stretch"
           >
-            <TasksProgress />
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={12}
+            >
+              <AmountInvestedPerMonth />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={12}
+            >
+              <TasksProgress />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={12}
+            >
+              <TotalProfit />
+            </Grid>
           </Grid>
+
           <Grid
             item
+            lg={9}
+            md={12}
+            xl={9}
             xs={12}
-            md={6}
-            lg={12}
           >
-            <TotalProfit />
+            <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments, safeWithdrawalPercent, expenseTotal)} />
           </Grid>
-        </Grid>
+          <Grid
+            xs={12}
+            md={12}
+            lg={3}
+            xl={3}
+            item
+            container
+            spacing={3}
+            justify="space-evenly"
+            alignItems="stretch"
+          >
+            <Grid
+              item
+              xs={12}
+              md={6}
+              lg={12}
+            >
+              <RetiringIn />
+            </Grid>
+          </Grid>
 
-        <Grid
-          item
-          lg={9}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments, safeWithdrawalPercent, expenseTotal)} />
-        </Grid>
-        <Grid
-          xs={12}
-          md={12}
-          lg={3}
-          xl={3}
-          item
-          container
-          spacing={3}
-          justify="space-evenly"
-          alignItems="stretch"
-        >
           <Grid
             item
+            lg={9}
+            md={12}
+            xl={9}
             xs={12}
-            md={6}
-            lg={12}
           >
-            <RetiringIn />
+            <Interest investmentData={convertCompoundDataToGraph(investments, "earnedInterest")} />
           </Grid>
         </Grid>
 
-        <Grid
-          item
-          lg={9}
-          md={12}
-          xl={9}
-          xs={12}
-        >
-          <Interest investmentData={convertCompoundDataToGraph(investments, "earnedInterest")} />
-        </Grid>
+      ) : (
+          <Box p={6}  >
+
+            <Typography
+              align="center"
+              className={classes.text}
+              gutterBottom
+              variant="h4"
+            >
+              Add some investments to see dashboards
+        </Typography>
+          </Box>
+
+        )}
 
 
 
-      </Grid>
     </div>
-  );
+  )
 };
 
 export default Dashboard;
