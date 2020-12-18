@@ -36,7 +36,9 @@
  - [] lifetime allowance
  - [] monthly allowences
  - [] not allowed to contribute more than salary to pension
-
+- [] SORT OUT THE SELF EMPLOYED
+- [] include investments
+- [] Icome tax is slighlty offf
 ### p2
  - [ ] automatic enrollement into investment
 

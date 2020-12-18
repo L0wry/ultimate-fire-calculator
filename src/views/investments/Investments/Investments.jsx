@@ -158,7 +158,7 @@ const Investments = ({ className, ...rest }) => {
                   >
                     <Alert severity="warning">
                       <AlertTitle>Warning!</AlertTitle>
-        You are above the <strong>{investment.investmentType} Lifetime Allowance </strong> of <strong>£{fNum(investmentMetaData[investment.investmentType].lifeTimeAllowance) }</strong> by <strong>£{fNum(investment.overLifetimeAllowanceBy)}</strong> and will be subjected to increased tax.
+        In <strong>{investment.noOfYearsToMature} years</strong> you will be above the <strong>{investment.investmentType} Lifetime Allowance </strong> of <strong>£{fNum(investmentMetaData[investment.investmentType].lifeTimeAllowance) }</strong> by <strong>£{fNum(investment.overLifetimeAllowanceBy)}</strong> and subjected to increased tax.
                     </Alert>
                   </Grid>
                 ))}

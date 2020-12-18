@@ -40,7 +40,7 @@ const RetiringIn = () => {
                 direction="column"
                 alignItems="center"
             >
-                {fireYear?.year ? (
+                {expenseTotal !== 0 && fireYear?.year ? (
                     <>
                         <Grid item>
                             <Typography
