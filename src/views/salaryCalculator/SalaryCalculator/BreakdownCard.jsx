@@ -36,10 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.common.white,
-        fontSize: 16,
-
+        color: theme.palette.text.secondary
     },
     body: {
         fontSize: 14,
@@ -49,7 +46,7 @@ const StyledTableCell = withStyles((theme) => ({
 
 const StyledTableRow = withStyles((theme) => ({
     root: {
-        '&:nth-of-type(even)': {
+        '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.dark,
         },
     },
@@ -90,7 +87,7 @@ const BreakdownCard = ({ userTax}) => {
     return (
         <Box mt={3}>
             <Box mt={3}>
-                <TableContainer component={Paper}>
+                <TableContainer >
                     <Table className={classes.table} aria-label="simple table">
                         <Headers />
 

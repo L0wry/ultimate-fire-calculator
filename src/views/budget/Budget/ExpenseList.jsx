@@ -10,7 +10,8 @@ import {
     TableHead,
     TableRow,
     IconButton,
-    Checkbox
+    Checkbox,
+    withStyles
 } from '@material-ui/core';
 import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 
@@ -23,6 +24,22 @@ const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.secondary
     }
   }));
+
+  const StyledTableCell = withStyles((theme) => ({
+    body: {
+        fontSize: 14,
+        color: theme.palette.text.secondary
+    },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+    root: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.background.dark,
+        },
+    },
+}))(TableRow);
+
 
 const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ...rest }) => {
     
@@ -43,41 +60,40 @@ const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ..
                     </Typography>
 
             <Box  
-            boxShadow={3}
             p={2} 
             mt={3}>
                 <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell className={classes.tableCell} align="left">Include?</TableCell>
-                                <TableCell className={classes.tableCell} align="center">Name</TableCell>
-                                <TableCell className={classes.tableCell} align="center">Cost</TableCell>
-                                <TableCell className={classes.tableCell} align="center">Remove</TableCell>
+                                <StyledTableCell className={classes.tableCell} align="left">Include?</StyledTableCell>
+                                <StyledTableCell className={classes.tableCell} align="center">Name</StyledTableCell>
+                                <StyledTableCell className={classes.tableCell} align="center">Cost</StyledTableCell>
+                                <StyledTableCell className={classes.tableCell} align="center">Remove</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {items.map((expense, idx) => (
-                                <TableRow key={idx}>
-                                    <TableCell align="center" padding="checkbox">
+                                <StyledTableRow key={idx}>
+                                    <StyledTableCell align="center" padding="checkbox">
                                         <Checkbox
                                             onClick={() => onItemCheck(idx)}
                                             checked={expense.checked}
                                         />
-                                    </TableCell>
-                                    <TableCell className={classes.tableCell} align="center" >
+                                    </StyledTableCell>
+                                    <StyledTableCell className={classes.tableCell} align="center" >
                                         {expense.name}
-                                    </TableCell>
-                                    <TableCell className={classes.tableCell} align="center" >
+                                    </StyledTableCell>
+                                    <StyledTableCell className={classes.tableCell} align="center" >
                                         £{expense.cost}
-                                    </TableCell>
-                                    <TableCell className={classes.tableCell} align="center">
+                                    </StyledTableCell>
+                                    <StyledTableCell className={classes.tableCell} align="center">
                                         <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
                                             <DeleteOutlined />
                                         </IconButton>
-                                    </TableCell>
+                                    </StyledTableCell>
 
-                                </TableRow>
+                                </StyledTableRow>
                             ))}
                         </TableBody>
                     </Table>

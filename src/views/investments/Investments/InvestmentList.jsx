@@ -15,7 +15,8 @@ import {
   Select,
   MenuItem,
   FormControl,
-  Checkbox
+  Checkbox,
+  withStyles
 } from '@material-ui/core';
 import { DeleteOutlined, Edit, EditOutlined, SaveOutlined, Save } from '@material-ui/icons';
 import { Formik, useField } from "formik";
@@ -50,6 +51,22 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
   },
 }));
+
+
+const StyledTableCell = withStyles((theme) => ({
+  body: {
+      fontSize: 14,
+      color: theme.palette.text.secondary
+  },
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+  root: {
+      '&:nth-of-type(odd)': {
+          backgroundColor: theme.palette.background.dark,
+      },
+  },
+}))(TableRow);
 
 
 const Input = ({ label, inputProps, ...props }) => {
@@ -110,15 +127,15 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
           <Table>
             <TableHead>
               <TableRow>
-                <TableCell className={classes.tableCell} align="center">Edit</TableCell>
-                <TableCell className={classes.tableCell} align="left">Include?</TableCell>
-                <TableCell className={classes.tableCell} align="center">Investment Name</TableCell>
-                <TableCell className={classes.tableCell} align="center">Initial Amount</TableCell>
-                <TableCell className={classes.tableCell} align="center">Expected Annual Return</TableCell>
-                <TableCell className={classes.tableCell} align="center">Monthly Contribution</TableCell>
-                <TableCell className={classes.tableCell} align="center">Contributing For</TableCell>
-                <TableCell className={classes.tableCell} align="center">Annual Charge</TableCell>
-                <TableCell />
+                <StyledTableCell className={classes.tableCell} align="center">Edit</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="left">Include?</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Investment Name</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Initial Amount</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Expected Annual Return</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Monthly Contribution</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Contributing For</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Annual Charge</StyledTableCell>
+                <StyledTableCell />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -148,21 +165,21 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                       onItemSave(investment, idx)
                     }}
                   >{({ submitForm, values, setFieldValue }) => (
-                    <TableRow key={idx}>
-                      <TableCell align="center">
+                    <StyledTableRow key={idx}>
+                      <StyledTableCell align="center">
                         <Save onClick={submitForm} >
                           <SaveOutlined />
                         </Save>
-                      </TableCell>
-                      <TableCell className={classes.tableCell} align="center"></TableCell>
+                      </StyledTableCell>
+                      <StyledTableCell className={classes.tableCell} align="center"></StyledTableCell>
 
-                      <TableCell align="center" >
+                      <StyledTableCell align="center" >
                         <Input
                           name="name"
                           type="text"
                         />
-                      </TableCell>
-                      <TableCell align="center" >
+                      </StyledTableCell>
+                      <StyledTableCell align="center" >
                         <Input
                           name="initialAmount"
                           type="number"
@@ -177,8 +194,8 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                               </InputAdornment>)
                           }}
                         />
-                      </TableCell>
-                      <TableCell align="center" >
+                      </StyledTableCell>
+                      <StyledTableCell align="center" >
                         <Input
                           name="expectedReturn"
                           type="number"
@@ -193,8 +210,8 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                               </InputAdornment>)
                           }}
                         />
-                      </TableCell>
-                      <TableCell align="center" >
+                      </StyledTableCell>
+                      <StyledTableCell align="center" >
                         <Input
                           name="monthlyContribution"
                           type="number"
@@ -209,8 +226,8 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                               </InputAdornment>)
                           }}
                         />
-                      </TableCell>
-                      <TableCell align="center" >
+                      </StyledTableCell>
+                      <StyledTableCell align="center" >
                         <FormControl className={classes.select}>
                           <Select
                             className={classes.select}
@@ -227,8 +244,8 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                             }
                           </Select>
                         </FormControl>
-                      </TableCell>
-                      <TableCell align="center" >
+                      </StyledTableCell>
+                      <StyledTableCell align="center" >
                         <Input
                           name="annualCharge"
                           type="number"
@@ -243,78 +260,78 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                               </InputAdornment>)
                           }}
                         />
-                      </TableCell>
-                      <TableCell align="center">
+                      </StyledTableCell>
+                      <StyledTableCell align="center">
                         <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
                           <DeleteOutlined />
                         </IconButton>
-                      </TableCell>
-                    </TableRow>
+                      </StyledTableCell>
+                    </StyledTableRow>
                   )}
                   </Formik>
 
                 ) : (
-                    <TableRow key={idx}>
-                      <TableCell align="center">
+                    <StyledTableRow key={idx}>
+                      <StyledTableCell align="center">
                         <Edit onClick={() => onItemEdit(idx)}>
                           <EditOutlined />
                         </Edit>
-                      </TableCell>
-                      <TableCell align="center" padding="checkbox">
+                      </StyledTableCell>
+                      <StyledTableCell align="center" padding="checkbox">
                         <Checkbox
                           onClick={() => onItemInclude(idx)}
                           checked={investment.isIncluded}
                         />
-                      </TableCell>
-                      <TableCell className={classes.tableCell} align="center" >
+                      </StyledTableCell>
+                      <StyledTableCell className={classes.tableCell} align="center" >
                         {investment.investmentName}
-                      </TableCell>
-                      <TableCell className={classes.tableCell} align="center" >
+                      </StyledTableCell>
+                      <StyledTableCell className={classes.tableCell} align="center" >
                         £{fNum(investment.initialAmount)}
-                      </TableCell>
-                      <TableCell className={classes.tableCell} align="center" >
+                      </StyledTableCell>
+                      <StyledTableCell className={classes.tableCell} align="center" >
                         {fNum(math.round(math.multiply(investment.expectedReturn, 100), 4))}%
-                                            </TableCell>
-                      <TableCell className={classes.tableCell} align="center" >
+                                            </StyledTableCell>
+                      <StyledTableCell className={classes.tableCell} align="center" >
                         £{fNum(investment.monthlyContribution)}
-                      </TableCell>
+                      </StyledTableCell>
 
-                      <TableCell className={classes.tableCell} align="center" >
+                      <StyledTableCell className={classes.tableCell} align="center" >
                         {`${investment.stopContributingInYear === 0 ? 'Life' : investment.stopContributingInYear === 1 ? `${investment.stopContributingInYear} Year` : `${investment.stopContributingInYear} Years`}`}
-                      </TableCell>
+                      </StyledTableCell>
 
-                      <TableCell className={classes.tableCell} align="center" >
+                      <StyledTableCell className={classes.tableCell} align="center" >
                         {fNum(math.round(math.multiply(investment.annualCharge, 100), 4))}%
-                                            </TableCell>
-                      <TableCell align="center">
+                                            </StyledTableCell>
+                      <StyledTableCell align="center">
                         <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
                           <DeleteOutlined />
                         </IconButton>
-                      </TableCell>
-                    </TableRow>
+                      </StyledTableCell>
+                    </StyledTableRow>
 
                   )
               )}
-              <TableRow>
-                <TableCell className={classes.tableCell} align="center">
+              <StyledTableRow>
+                <StyledTableCell className={classes.tableCell} align="center">
                   <strong>Totals</strong>
-                </TableCell>
-                <TableCell className={classes.tableCell} align="center" />
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center" />
 
-                <TableCell className={classes.tableCell} align="center" >
+                <StyledTableCell className={classes.tableCell} align="center" >
                   <strong>£{fNum(items.reduce((a, b) => a + b.initialAmount, 0))}</strong>
-                </TableCell>
-                <TableCell className={classes.tableCell} align="center" />
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center" />
 
-                <TableCell className={classes.tableCell} align="center" >
+                <StyledTableCell className={classes.tableCell} align="center" >
                   <strong>£{fNum(items.reduce((a, b) => a + b.monthlyContribution, 0))}</strong>
-                </TableCell>
-                <TableCell className={classes.tableCell} align="center" />
-                <TableCell className={classes.tableCell} align="center" />
+                </StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center" />
+                <StyledTableCell className={classes.tableCell} align="center" />
 
-                <TableCell align="center" />
+                <StyledTableCell align="center" />
 
-              </TableRow>
+              </StyledTableRow>
             </TableBody>
           </Table>
         </TableContainer>
