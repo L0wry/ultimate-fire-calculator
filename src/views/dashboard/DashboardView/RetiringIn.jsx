@@ -19,6 +19,38 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+const NoExpenses = ({ classes }) => (
+
+    <Grid item>
+        <Typography
+            align="center"
+            className={classes.text}
+            gutterBottom
+            variant="h5"
+        >
+            Before We Predict When You Could Retire   Add Some Expenses
+        </Typography>
+    </Grid>
+
+
+)
+
+const NoInvestments = ({ classes }) => (
+
+    <Grid item>
+        <Typography
+            align="center"
+            className={classes.text}
+            gutterBottom
+            variant="h5"
+        >
+            Before We Predict When You Could Retire Add Some Investments
+</Typography>
+    </Grid>
+
+
+)
+
 
 const RetiringIn = () => {
     const classes = useStyles();
@@ -26,12 +58,15 @@ const RetiringIn = () => {
     const { investments, safeWithdrawalPercent } = useInvestmentContext();
     const { expenseTotal } = useBudgetContext();
 
-    const fireData = investments && investments[0]?.compoundData ? convertInvestmentDataToFire(investments, safeWithdrawalPercent, expenseTotal) : []
+    const fireData = investments && investments[0]?.compoundData ? convertInvestmentDataToFire(investments.filter(i => i.isIncluded), safeWithdrawalPercent, expenseTotal) : []
 
     const fireYear = fireData.find(item => item['Income From Draw Down'] >= item["Expenses"])
 
     const formattedYear = fireYear?.year?.split(' ')[1]
-    
+
+    const ShowErr = expenseTotal === 0 ? NoExpenses : investments?.filter(i => i.isIncluded).length === 0 ? NoInvestments : null
+
+
     return (
         <Box className={classes.box} padding={3}>
 
@@ -40,7 +75,10 @@ const RetiringIn = () => {
                 direction="column"
                 alignItems="center"
             >
-                {expenseTotal !== 0 && fireYear?.year ? (
+
+                {ShowErr ? (<ShowErr classes={classes} />
+
+                ) : fireYear ? (
                     <>
                         <Grid item>
                             <Typography
@@ -62,28 +100,28 @@ const RetiringIn = () => {
                         </Grid>
                     </>
                 ) : (
-                        <>
-                            <Grid item>
-                                <Typography
-                                    align="center"
-                                    className={classes.text}
-                                    gutterBottom
-                                    variant="h5"
-                                >
-                                    Based On Your Current Situation
+                            <>
+                                <Grid item>
+                                    <Typography
+                                        align="center"
+                                        className={classes.text}
+                                        gutterBottom
+                                        variant="h5"
+                                    >
+                                        Based On Your Current Situation
                     </Typography>
-                            </Grid>
-                            <Grid item>
-                                <Typography
-                                    className={classes.text}
-                                    variant="h5"
-                                >
-                                    Retiring Looks Unlikely
+                                </Grid>
+                                <Grid item>
+                                    <Typography
+                                        className={classes.text}
+                                        variant="h5"
+                                    >
+                                        Retiring Looks Unlikely
                                 </Typography>
-                            </Grid>
-                        </>
+                                </Grid>
+                            </>
 
-                    )}
+                        )}
 
             </Grid>
         </Box >
