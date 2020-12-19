@@ -72,9 +72,6 @@ const SalaryCalculator = ({ className, ...rest }) => {
                             >
                                 <BreakdownCard userTax={userTax} />
                             </Grid>
-
-                            <Hidden lgUp>
-
                                 <Grid item
                                     lg={12}
                                     md={12}
@@ -89,8 +86,6 @@ const SalaryCalculator = ({ className, ...rest }) => {
                                         Add Your Monthly Expenses
                                 </Button>
                                 </Grid>
-                            </Hidden>
-
                         </Grid>
 
                     </Box>

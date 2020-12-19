@@ -11,11 +11,12 @@ const math = create(all, {
 const InvestmentContext = React.createContext({});
 
 export const InvestmentContextProvider = ({ children }) => {
-  const yearState = localStorage.getItem('yearsToMature') || 10
+  const yearState = localStorage.getItem('yearsToMature') || 30
   const investmentState = JSON.parse(localStorage.getItem('investments')) && 
     JSON.parse(localStorage.getItem('investments'))[0]?._investmentType
-    ? JSON.parse(localStorage.getItem('investments')).map(investment =>
-      new Investment({
+    ? JSON.parse(localStorage.getItem('investments')).map(investment =>{
+
+    return new Investment({
         isOverAnnualAllowance: investment._isOverAnnualAllowance,
         investmentType: investment._investmentType,
         investmentName: investment._investmentName,
@@ -27,9 +28,10 @@ export const InvestmentContextProvider = ({ children }) => {
         compoundData: investment._compoundData,
         stopContributingInYear: investment._stopContributingInYear || 0,
         overLifetimeAllowanceBy: investment._overLifetimeAllowanceBy,
-        isOverLifetimeAllowance: investment._isOverLifetimeAllowance
+        isOverLifetimeAllowance: investment._isOverLifetimeAllowance,
+        isIncluded: investment._isIncluded
       })
-    )
+    })
     : []
 
   const safeWithdrawalPercentState = localStorage.getItem('safeWithdrawalPercent') || 0.04
@@ -140,24 +142,36 @@ export const InvestmentContextProvider = ({ children }) => {
     saveInvestments(investmentCopy)
   }
 
+  const includeInvestment = idx => {
+    saveInvestments(
+      investments.map((investment, index) => {
+        if (idx === index) {
+          investment.isIncluded = !investment.isIncluded;
+        }
+
+        return investment;
+      })
+    );
+  }
+
   const removeInvestment = idx => {
     saveInvestments(investments.filter((_, index) => idx !== index));
   }
 
   const getExpectedInterestIncomeInXYears = () => investments.length > 0 && investments[0]?.compoundData ?
-    math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].earnedInterest, 0), 2) :
+    math.round(investments.filter(i => i.isIncluded).reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].earnedInterest, 0), 2) :
     0
 
   const getTotalNetWorthInXYears = () => investments.length > 0 && investments[0]?.compoundData ?
-    math.round(investments.reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].balance, 0), 2) :
+    math.round(investments.filter(i => i.isIncluded).reduce((accum, investment) => accum + investment.compoundData[`Year ${yearsToMature}`]['Month 12'].balance, 0), 2) :
     0
 
   const getAmountInvestedPerMonth = () => investments.length > 0 && investments[0]?.compoundData ?
-    math.round(investments.reduce((accum, investment) => accum + investment.monthlyContribution, 0), 2) :
+    math.round(investments.filter(i => i.isIncluded).reduce((accum, investment) => accum + investment.monthlyContribution, 0), 2) :
     0
 
   return (
-    <InvestmentContext.Provider value={{ safeWithdrawalPercent, saveSafeWithdrawalPercent, investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
+    <InvestmentContext.Provider value={{ includeInvestment, safeWithdrawalPercent, saveSafeWithdrawalPercent, investments, saveYearsToMature, yearsToMature, onItemSave, addInvestment, getAmountInvestedPerMonth, getTotalNetWorthInXYears, addMultipleInvestments, removeInvestment, editInvestment, getExpectedInterestIncomeInXYears }}>
       {children}
     </InvestmentContext.Provider>
   )

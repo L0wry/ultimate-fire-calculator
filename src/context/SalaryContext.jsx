@@ -36,12 +36,16 @@ export const SalaryContextProvider = ({ children }) => {
 		addMultipleInvestments([{
 				name: 'Workplace Pension (employer contribution)',
 				monthlyContribution: math.round(math.divide(tax.employerPensionContribution, 12), 2),
-				investmentType: INVESTMENT_TYPES.PENSION
+				investmentType: INVESTMENT_TYPES.PENSION,
+				expectedReturn: 0.05,
+				stopContributingInYear: 0
 			},
 			{
 				name: 'Workplace Pension (personal contribution)',
 				monthlyContribution: math.round(math.divide(tax.personalPensionContribution, 12), 2),
-				investmentType: INVESTMENT_TYPES.PENSION
+				investmentType: INVESTMENT_TYPES.PENSION,
+				expectedReturn: 0.05,
+				stopContributingInYear: 0
 
 			}
 		])

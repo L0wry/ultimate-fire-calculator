@@ -37,8 +37,9 @@
  - [] monthly allowences
  - [] not allowed to contribute more than salary to pension
 - [] SORT OUT THE SELF EMPLOYED
-- [] include investments
-- [] Icome tax is slighlty offf
+- [] include/exclude investments
+- [] bonus / send bonus to pension 
+-[] Dashboard to see once you reach your prediction year, see how your investments decline whilst living off them whilst not giving monthly contributions. 
 ### p2
  - [ ] automatic enrollement into investment
 

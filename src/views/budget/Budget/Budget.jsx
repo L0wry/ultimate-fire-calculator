@@ -123,24 +123,20 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                   onItemRemove={idx => removeExpense(idx)}
                 />
               </Grid>
+              <Grid item
+                lg={12}
+                md={12}
+                xs={12}>
+                <Button
+                  fullWidth
+                  className={classes.navButton}
+                  component={RouterLink}
+                  to={'/app/investments'}
 
-              <Hidden lgUp>
-
-                <Grid item
-                  lg={12}
-                  md={12}
-                  xs={12}>
-                  <Button
-                    fullWidth
-                    className={classes.navButton}
-                    component={RouterLink}
-                    to={'/app/investments'}
-
-                  >
-                    Add Your Investments
+                >
+                  Add Your Investments
               </Button>
-                </Grid>
-              </Hidden>
+              </Grid>
             </>
           )}
         </Grid>

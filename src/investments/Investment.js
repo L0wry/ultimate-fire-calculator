@@ -13,7 +13,8 @@ export class Investment {
     isOverAnnualAllowance = false,
     isOverLifetimeAllowance = false,
     stopContributingInYear,
-    overLifetimeAllowanceBy = 0
+    overLifetimeAllowanceBy = 0,
+    isIncluded = true
   }) {
     this._investmentName = investmentName;
     this._investmentType = investmentType;
@@ -23,6 +24,7 @@ export class Investment {
     this._noOfYearsToMature = noOfYearsToMature;
     this._annualCharge = annualCharge;
     this._stopContributingInYear = stopContributingInYear
+    this._isIncluded = isIncluded
 
     this._compoundData = compoundData || calculateYearlyCompoundWithCharge({
       initialAmount: this._initialAmount,
@@ -37,6 +39,14 @@ export class Investment {
     this._isOverLifetimeAllowance = isOverLifetimeAllowance
     this._overLifetimeAllowanceBy = overLifetimeAllowanceBy
     this._editMode = false;
+  }
+
+  get isIncluded(){
+    return this._isIncluded
+  }
+
+  set isIncluded(bool) {
+    this._isIncluded = bool
   }
 
   get stopContributingInYear() {

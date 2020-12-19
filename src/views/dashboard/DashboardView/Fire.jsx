@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ memo } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
@@ -106,7 +106,7 @@ const ToolTipBox = props => (props.active) ? (
 
 
 
-const Fire = ({ fireData, safeWithdrawalPercent, ...rest }) => {
+const Fire = memo(({ fireData, safeWithdrawalPercent, ...rest }) => {
   const useStyles = makeStyles((theme) => ({
     root: {},
     text: {
@@ -168,7 +168,7 @@ const Fire = ({ fireData, safeWithdrawalPercent, ...rest }) => {
       </Box>
     </Box>
   );
-};
+});
 
 Fire.propTypes = {
   classyear: PropTypes.string

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
@@ -74,7 +74,7 @@ ToolTip.propTypes = {
   payload: PropTypes.array
 };
 
-const NetWorth = ({ investmentData }) => {
+const NetWorth = memo(({ investmentData }) => {
   const useStyles = makeStyles((theme) => ({
     root: {},
     text: {
@@ -134,7 +134,7 @@ const NetWorth = ({ investmentData }) => {
       </Box>
     </Box>
   );
-};
+});
 
 NetWorth.propTypes = {
   investmentData: PropTypes.array

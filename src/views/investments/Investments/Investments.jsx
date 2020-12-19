@@ -47,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 const Investments = ({ className, ...rest }) => {
   const { userTax } = useSalaryContext();
   const { expenseTotal } = useBudgetContext();
-  const { onItemSave, editInvestment, removeInvestment, investments, addInvestment, yearsToMature } = useInvestmentContext();
+  const { includeInvestment, onItemSave, editInvestment, removeInvestment, investments, addInvestment, yearsToMature } = useInvestmentContext();
   const classes = useStyles()
 
   const totalTakeHome = math.round(math.divide(userTax.totalTakeHome || 0, 12), 2)
@@ -112,7 +112,7 @@ const Investments = ({ className, ...rest }) => {
                 xl={12}
                 xs={12}
               >
-                <InvestmentList onItemSave={onItemSave} onItemEdit={editInvestment} onItemRemove={removeInvestment} items={investments} />
+                <InvestmentList onItemInclude={includeInvestment} onItemSave={onItemSave} onItemEdit={editInvestment} onItemRemove={removeInvestment} items={investments} />
 
               </Grid>
 
@@ -158,33 +158,29 @@ const Investments = ({ className, ...rest }) => {
                   >
                     <Alert severity="warning">
                       <AlertTitle>Warning!</AlertTitle>
-        In <strong>{investment.noOfYearsToMature} years</strong> you will be above the <strong>{investment.investmentType} Lifetime Allowance </strong> of <strong>£{fNum(investmentMetaData[investment.investmentType].lifeTimeAllowance) }</strong> by <strong>£{fNum(investment.overLifetimeAllowanceBy)}</strong> and subjected to increased tax.
+        In <strong>{investment.noOfYearsToMature} years</strong> you will be above the <strong>{investment.investmentType} Lifetime Allowance </strong> of <strong>£{fNum(investmentMetaData[investment.investmentType].lifeTimeAllowance)}</strong> by <strong>£{fNum(investment.overLifetimeAllowanceBy)}</strong> and subjected to increased tax.
                     </Alert>
                   </Grid>
                 ))}
 
+              <Grid
+                item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+              >
+                <Button
 
-              <Hidden lgUp>
-                <Grid
-                  item
-                  lg={12}
-                  sm={12}
-                  xl={12}
-                  xs={12}
+                  fullWidth
+                  className={classes.navButton}
+                  component={RouterLink}
+                  to={'/app/dashboard'}
+
                 >
-                  <Button
-
-                    fullWidth
-                    className={classes.navButton}
-                    component={RouterLink}
-                    to={'/app/dashboard'}
-
-                  >
-                    Predict your Net Worth in {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
-                  </Button>
-                </Grid>
-              </Hidden>
-
+                  Predict your Net Worth in {yearsToMature} {yearsToMature === 1 ? 'year' : 'years'}
+                </Button>
+              </Grid>
             </>
 
           )}

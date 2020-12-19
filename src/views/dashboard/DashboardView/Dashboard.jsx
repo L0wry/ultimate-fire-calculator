@@ -62,7 +62,7 @@ const Dashboard = ({ className, ...rest }) => {
             xl={9}
             xs={12}
           >
-            <NetWorth investmentData={convertCompoundDataToGraph(investments)} />
+            <NetWorth investmentData={convertCompoundDataToGraph(investments.filter(i => i.isIncluded))} />
           </Grid>
           <Grid
             xs={12}
@@ -108,7 +108,7 @@ const Dashboard = ({ className, ...rest }) => {
             xl={9}
             xs={12}
           >
-            <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments, safeWithdrawalPercent, expenseTotal)} />
+            <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments.filter(i => i.isIncluded), safeWithdrawalPercent, expenseTotal)} />
           </Grid>
           <Grid
             xs={12}
@@ -138,7 +138,7 @@ const Dashboard = ({ className, ...rest }) => {
             xl={9}
             xs={12}
           >
-            <Interest investmentData={convertCompoundDataToGraph(investments, "earnedInterest")} />
+            <Interest investmentData={convertCompoundDataToGraph(investments.filter(i => i.isIncluded), "earnedInterest")} />
           </Grid>
         </Grid>
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 
@@ -61,7 +61,7 @@ const ToolTip = props => (props.active) ? (
   </Card>
 ) : null
 
-const Interest = ({ investmentData }) => {
+const Interest = memo(({ investmentData }) => {
   const useStyles = makeStyles((theme) => ({
     root: {},
     text: {
@@ -122,7 +122,7 @@ const Interest = ({ investmentData }) => {
      
     </Box>
   )
-};
+});
 
 Interest.propTypes = {
   className: PropTypes.string

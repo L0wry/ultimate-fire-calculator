@@ -87,10 +87,8 @@ This calculator aims to answer some of those questions and hopefully at some poi
                 >
                     Geared towards PAYE <br />
                     Only supports tax year 2020 - 20201<br />
-                    England focused<br />
-                    Doesn't take into consideration tax free investment types<br />
+                    Focused for Briton<br />
                     Doesn't support tax on withdrawals <br />
-                    Doesn't take into consideration annual limits on isa, pension etc<br />
                     Doesn't take into consideration SIPP tax relief<br />
                     Doesn't support inflation for the time being<br />
                 </Typography>
