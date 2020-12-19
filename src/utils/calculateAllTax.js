@@ -63,7 +63,7 @@ export default function calculateAllTax({
       .subtract(incomeTax.totalIncomeTax)
       .subtract(nationalInsuranceTax.totalNationalInsuranceTax)
       .subtract(yearlyAmountPaid)
-      .add(math.divide(secondaryIncomeAfterTax, 12))
+      .add(secondaryIncomeAfterTax)
       .round(2)
       .done()
   };
