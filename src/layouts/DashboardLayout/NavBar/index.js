@@ -12,8 +12,9 @@ import {
 import {
   BarChart as BarChartIcon,
   TrendingUp,
-  Download,
-  HelpCircle
+  Home,
+  HelpCircle,
+  ShoppingCart
 } from 'react-feather';
 import NavItem from './NavItem';
 import { SelectYears } from './SelectYears';
@@ -29,29 +30,34 @@ const items = [
   {
     href: '/app/salary-calculator',
     icon: PoundSign,
-    title: 'Salary Calculator'
+    title: 'Calculate Salary'
+  },
+  {
+    href: '/app/debt',
+    icon: Home,
+    title: 'Add Debt'
   },
   {
     href: '/app/budget',
-    icon: Download,
-    title: 'Budget'
+    icon: ShoppingCart,
+    title: 'Create Budget'
   },
 
   {
     href: '/app/investments',
     icon: TrendingUp,
-    title: 'Investments'
+    title: 'Add Investments'
   },
   {
     href: '/app/dashboard',
     icon: BarChartIcon,
-    title: 'Dashboard'
+    title: 'View Dashboard'
   },
-  {
-    href: '/app/help',
-    icon: HelpCircle,
-    title: 'Help'
-  }
+  // {
+  //   href: '/app/help',
+  //   icon: HelpCircle,
+  //   title: 'Help'
+  // }
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -94,7 +100,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       <Box mt={2}>
 
         <Grid
-          spacing={3}
+          spacing={1}
           container
           direction="column"
           justify="flex-end"

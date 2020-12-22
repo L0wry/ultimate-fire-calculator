@@ -20,26 +20,18 @@
 ## Features To build
 
 ### p1
-
- - [ x] sort out dashboard graph styling
- - [ x] add expenses to the dashboard to show retirement in years
-  - [x] Support student loans
- - [ x] suport 100K plus salaries
- - [ x] Handle form validation
- - [ x] Use Yup package? https://formik.org/docs/guides/validation
- - [ x] Finish tax breakdown table
  - [] Show retirement income with tax after years
- - [] Begineer mode
  - []  capture age and data
  - [] Suggest what others are doing based on age
  - [] reconmendations on how to get started (Isa etc)
- - [] lifetime allowance
- - [] monthly allowences
+
  - [] not allowed to contribute more than salary to pension
 - [] SORT OUT THE SELF EMPLOYED
 - [] include/exclude investments
 - [] bonus / send bonus to pension 
 -[] Dashboard to see once you reach your prediction year, see how your investments decline whilst living off them whilst not giving monthly contributions. 
+- [] advanced mode (setting to do things like, play with inflation, increase salary)
+- [] begineer mode (help popups)
 ### p2
  - [ ] automatic enrollement into investment
 
@@ -52,11 +44,9 @@
 
 
 ### Requested
-- [ x] Draw down rename
+
 - []  Scotland tax
-- [ x] Student Tax 
-- [ x] help boxes
-- [ x] Putting nothing (for zero) in a box should default to a zero appearing. Takes out a step
+-
 - [ ] Start retirment in
 
 
@@ -70,6 +60,18 @@ The ability to edit expenses
 Start drawdown from year x. new graph => net worth - drawdown % 
 
 
+### Done
 
-### Other ideas
-- Add debts such as loans, credit cards etc
+ [ x] Student Tax 
+- [ x] help boxes
+- [ x] Putting nothing (for zero) in a box should default to a zero appearing. Takes out a step
+- [ x] Draw down rename
+ - [x] lifetime allowance
+ - [x] monthly allowences
+ - [ x] sort out dashboard graph styling
+ - [ x] add expenses to the dashboard to show retirement in years
+  - [x] Support student loans
+ - [ x] suport 100K plus salaries
+ - [ x] Handle form validation
+ - [ x] Use Yup package? https://formik.org/docs/guides/validation
+ - [ x] Finish tax breakdown table

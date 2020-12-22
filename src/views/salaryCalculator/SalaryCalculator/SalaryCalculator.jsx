@@ -80,10 +80,10 @@ const SalaryCalculator = ({ className, ...rest }) => {
                                         fullWidth
                                         className={classes.navButton}
                                         component={RouterLink}
-                                        to={'/app/budget'}
+                                        to={'/app/debt'}
 
                                     >
-                                        Add Your Monthly Expenses
+                                        Add Your Debt
                                 </Button>
                                 </Grid>
                         </Grid>

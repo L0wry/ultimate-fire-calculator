@@ -9,8 +9,68 @@ const math = create(all, {
 const BudgetContext = React.createContext({});
 
 export const BudgetContextProvider = ({ children }) => {
-  const state = JSON.parse(localStorage.getItem('expenses')) ? JSON.parse(localStorage.getItem('expenses')) : []
-  const [expenses, setExpenses] = useState(state);
+  const budgetState = JSON.parse(localStorage.getItem('expenses')) ? JSON.parse(localStorage.getItem('expenses')) : []
+  const [expenses, setExpenses] = useState(budgetState);
+
+  const debtState = JSON.parse(localStorage.getItem('debts')) ? JSON.parse(localStorage.getItem('debts')) : []
+  const [debts, setDebts] = useState(debtState)
+
+  const saveDebts = debtsToSave => {
+    setDebts(debtsToSave);
+    localStorage.setItem('debts', JSON.stringify(debtsToSave))
+  }
+
+  const addDebt = ({
+    name,
+    outstandingAmountDue = 0,
+    interestRate = 0,
+    yearsLeftToPay = 0
+  }) => {
+    const newDebts = debts.concat({
+      name,
+      outstandingAmountDue,
+      interestRate: math.divide(interestRate, 100),
+      yearsLeftToPay,
+      editMode: false
+    })
+
+    saveDebts(newDebts);
+  }
+
+  const onDebtSave = ({
+    name = "",
+    outstandingAmountDue = 0,
+    interestRate =0,
+    yearsLeftToPay=0
+  }, idx) =>{
+    const debtCopy = [...debts]
+
+    debtCopy[idx] = {
+      name,
+      outstandingAmountDue,
+      interestRate: math.divide(interestRate, 100),
+      yearsLeftToPay,
+      editMode: false
+    }
+
+    saveDebts(debtCopy)
+  }
+
+  const removeDebt = idx => {
+    saveDebts(debts.filter((_, index) => idx !== index));
+  }
+
+  const editDebt = idx => {
+    saveDebts(
+      debts.map((debt, index) => {
+        if (idx === index) {
+          debt.editMode = true;
+        }
+
+        return debt;
+      })
+    );
+  }
 
   const addExpense = ({ name, cost }) => {
     if (name !== "" || !cost) {
@@ -49,6 +109,11 @@ export const BudgetContextProvider = ({ children }) => {
 
   return (
     <BudgetContext.Provider value={{
+      debts,
+      addDebt,
+      editDebt,
+      removeDebt,
+      onDebtSave,
       expenses,
       addExpense,
       checkExpense,

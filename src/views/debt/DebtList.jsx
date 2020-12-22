@@ -22,7 +22,7 @@ import { DeleteOutlined, Edit, EditOutlined, SaveOutlined, Save } from '@materia
 import { Formik, useField } from "formik";
 import { string, number, object } from "yup";
 import { all, create } from 'mathjs'
-import { fNum } from '../../../utils/formatNumber';
+import { fNum } from '../../utils/formatNumber';
 
 const math = create(all, {
   number: 'BigNumber',
@@ -55,16 +55,16 @@ const useStyles = makeStyles((theme) => ({
 
 const StyledTableCell = withStyles((theme) => ({
   body: {
-      fontSize: 14,
-      color: theme.palette.text.secondary
+    fontSize: 14,
+    color: theme.palette.text.secondary
   },
 }))(TableCell);
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
-      '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.background.dark,
-      },
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.dark,
+    },
   },
 }))(TableRow);
 
@@ -105,7 +105,7 @@ const Input = ({ label, inputProps, ...props }) => {
 };
 
 
-export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemRemove, onItemSave, onItemInclude }) => {
+export const DebtList = memo(({ items = [], onItemEdit, onItemRemove, onItemSave, onItemInclude }) => {
   const classes = useStyles();
 
   return (
@@ -119,7 +119,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
         gutterBottom
         variant="h2"
       >
-        Assets
+        Liabilities
                     </Typography>
 
       <Box mt={3}>
@@ -128,41 +128,33 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
             <TableHead>
               <TableRow>
                 <StyledTableCell className={classes.tableCell} align="center">Edit</StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="left">Include?</StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center">Investment Name</StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center">Initial Amount</StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center">Expected Annual Return</StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center">Monthly Contribution</StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center">Contributing For</StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center">Annual Charge</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Name</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Outstanding Amount Due</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Interest Rate</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Years Left To Pay</StyledTableCell>
                 <StyledTableCell />
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((investment, idx) =>
-                investment.editMode ? (
+              {items.map((debt, idx) =>
+                debt.editMode ? (
                   <Formik
                     key={`form-${idx}`}
                     initialValues={{
-                      name: investment.investmentName,
-                      investmentType: investment.investmentType,
-                      initialAmount: investment.initialAmount,
-                      expectedReturn: math.round(math.multiply(investment.expectedReturn, 100), 4),
-                      monthlyContribution: investment.monthlyContribution,
-                      annualCharge: math.round(math.multiply(investment.annualCharge, 100), 4),
-                      stopContributingInYear: investment.stopContributingInYear
+                      name: debt.name,
+                      outstandingAmountDue: debt.outstandingAmountDue,
+                      interestRate: math.round(math.multiply(debt.interestRate, 100), 4),
+                      yearsLeftToPay: debt.yearsLeftToPay || 25
                     }}
                     validationSchema={object({
                       name: string(),
-                      initialAmount: number(),
-                      expectedReturn: number(),
-                      monthlyContribution: number(),
-                      annualCharge: number(),
-                      stopContributingInYear: number()
+                      outstandingAmountDue: number(),
+                      interestRate: number(),
+                      yearsLeftToPay: number()
                     })}
-                    onSubmit={(investment, { setStatus }) => {
+                    onSubmit={(debt, { setStatus }) => {
                       setStatus()
-                      onItemSave(investment, idx)
+                      onItemSave(debt, idx)
                     }}
                   >{({ submitForm, values, setFieldValue }) => (
                     <StyledTableRow key={idx}>
@@ -171,7 +163,6 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                           <SaveOutlined />
                         </Save>
                       </StyledTableCell>
-                      <StyledTableCell className={classes.tableCell} align="center"></StyledTableCell>
 
                       <StyledTableCell align="center" >
                         <Input
@@ -181,7 +172,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                       </StyledTableCell>
                       <StyledTableCell align="center" >
                         <Input
-                          name="initialAmount"
+                          name="outstandingAmountDue"
                           type="number"
                           inputProps={{
                             startAdornment: (
@@ -197,7 +188,7 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                       </StyledTableCell>
                       <StyledTableCell align="center" >
                         <Input
-                          name="expectedReturn"
+                          name="interestRate"
                           type="number"
                           inputProps={{
                             endAdornment: (
@@ -206,22 +197,6 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                                 position="end">
                                 <Typography >
                                   %
-                                                                    </Typography>
-                              </InputAdornment>)
-                          }}
-                        />
-                      </StyledTableCell>
-                      <StyledTableCell align="center" >
-                        <Input
-                          name="monthlyContribution"
-                          type="number"
-                          inputProps={{
-                            startAdornment: (
-                              <InputAdornment
-                                classes={{ positionStart: classes.centerStartAdornment }}
-                                position="start">
-                                <Typography >
-                                  £
                                                                     </Typography>
                               </InputAdornment>)
                           }}
@@ -231,35 +206,21 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                         <FormControl className={classes.select}>
                           <Select
                             className={classes.select}
-                            labelId="stopContributingInYear"
-                            label="stopContributingInYear"
-                            id="stopContributingInYear"
-                            value={values.stopContributingInYear}
-                            onChange={e => setFieldValue('stopContributingInYear', e.target.value)}
+                            labelId="yearsLeftToPay"
+                            label="yearsLeftToPay"
+                            id="yearsLeftToPay"
+                            value={values.yearsLeftToPay}
+                            onChange={e => setFieldValue('yearsLeftToPay', e.target.value)}
                             required
                           >
                             {
-                              new Array(100).fill(0).map((_, i) =>
-                                <MenuItem key={i} className={classes.select} value={i}>{i === 0 ? 'Life' : i === 1 ? `${i} Year` : `${i} Years`}</MenuItem>)
+                              new Array(100).fill(0).map((_, i) => {
+                                i++
+                                return <MenuItem key={i} className={classes.select} value={i}>{i === 0 ? 'Life' : i === 1 ? `${i} Year` : `${i} Years`}</MenuItem>
+                              })
                             }
                           </Select>
                         </FormControl>
-                      </StyledTableCell>
-                      <StyledTableCell align="center" >
-                        <Input
-                          name="annualCharge"
-                          type="number"
-                          inputProps={{
-                            endAdornment: (
-                              <InputAdornment
-                                classes={{ positionEnd: classes.centerEndAdornment }}
-                                position="end">
-                                <Typography >
-                                  %
-                                                                    </Typography>
-                              </InputAdornment>)
-                          }}
-                        />
                       </StyledTableCell>
                       <StyledTableCell align="center">
                         <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
@@ -277,32 +238,21 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
                           <EditOutlined />
                         </Edit>
                       </StyledTableCell>
-                      <StyledTableCell align="center" padding="checkbox">
-                        <Checkbox
-                          onClick={() => onItemInclude(idx)}
-                          checked={investment.isIncluded}
-                        />
+                      <StyledTableCell className={classes.tableCell} align="center" >
+                        {debt.name}
                       </StyledTableCell>
                       <StyledTableCell className={classes.tableCell} align="center" >
-                        {investment.investmentName}
+                        £{fNum(debt.outstandingAmountDue)}
                       </StyledTableCell>
                       <StyledTableCell className={classes.tableCell} align="center" >
-                        £{fNum(investment.initialAmount)}
-                      </StyledTableCell>
-                      <StyledTableCell className={classes.tableCell} align="center" >
-                        {fNum(math.round(math.multiply(investment.expectedReturn, 100), 4))}%
+                        {fNum(math.round(math.multiply(debt.interestRate, 100), 4))}%
                                             </StyledTableCell>
-                      <StyledTableCell className={classes.tableCell} align="center" >
-                        £{fNum(investment.monthlyContribution)}
-                      </StyledTableCell>
 
                       <StyledTableCell className={classes.tableCell} align="center" >
-                        {`${investment.stopContributingInYear === 0 ? 'Life' : investment.stopContributingInYear === 1 ? `${investment.stopContributingInYear} Year` : `${investment.stopContributingInYear} Years`}`}
+                        {`${debt.yearsLeftToPay === 1 ? `${debt.yearsLeftToPay} Year` : `${debt.yearsLeftToPay} Years`}`}
                       </StyledTableCell>
 
-                      <StyledTableCell className={classes.tableCell} align="center" >
-                        {fNum(math.round(math.multiply(investment.annualCharge, 100), 4))}%
-                                            </StyledTableCell>
+
                       <StyledTableCell align="center">
                         <IconButton aria-label="Delete Item" onClick={() => onItemRemove(idx)}>
                           <DeleteOutlined />
@@ -312,28 +262,6 @@ export const InvestmentList = memo(({ className, items = [], onItemEdit, onItemR
 
                   )
               )}
-              <StyledTableRow>
-                <StyledTableCell className={classes.tableCell} align="center">
-                  <strong>Totals</strong>
-                </StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center" />
-
-                <StyledTableCell className={classes.tableCell} align="center" />
-
-                <StyledTableCell className={classes.tableCell} align="center" >
-                  <strong>£{fNum(items.reduce((a, b) => a + b.initialAmount, 0))}</strong>
-                </StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center" />
-
-                <StyledTableCell className={classes.tableCell} align="center" >
-                  <strong>£{fNum(items.reduce((a, b) => a + b.monthlyContribution, 0))}</strong>
-                </StyledTableCell>
-                <StyledTableCell className={classes.tableCell} align="center" />
-                <StyledTableCell className={classes.tableCell} align="center" />
-
-                <StyledTableCell align="center" />
-
-              </StyledTableRow>
             </TableBody>
           </Table>
         </TableContainer>
