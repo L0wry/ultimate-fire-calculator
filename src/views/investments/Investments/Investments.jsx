@@ -5,7 +5,6 @@ import {
   Box,
   Typography,
   makeStyles,
-  Hidden,
   Button,
   Grid
 } from '@material-ui/core';

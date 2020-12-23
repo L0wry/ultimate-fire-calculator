@@ -56,9 +56,9 @@ const RetiringIn = () => {
     const classes = useStyles();
 
     const { investments, safeWithdrawalPercent } = useInvestmentContext();
-    const { allExpensesTotal } = useBudgetContext();
+    const { allBudgetItems, allExpensesTotal } = useBudgetContext();
 
-    const fireData = investments && investments[0]?.compoundData ? convertInvestmentDataToFire(investments.filter(i => i.isIncluded), safeWithdrawalPercent, allExpensesTotal) : []
+    const fireData = investments && investments[0]?.compoundData ? convertInvestmentDataToFire(investments.filter(i => i.isIncluded), safeWithdrawalPercent, allBudgetItems) : []
 
     const fireYear = fireData.find(item => item['Income From Draw Down'] >= item["Expenses"])
 

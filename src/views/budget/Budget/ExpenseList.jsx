@@ -97,14 +97,23 @@ const ExpenseList = memo(({ className, expenses = [], debts = [], onItemRemove, 
                             ))}
                             {debts.map((debt, idx) => (
                                 <StyledTableRow key={`debt=${idx}`}>
-                                    <StyledTableCell align="center" />
+                                    <StyledTableCell align="center" padding="checkbox">
+                                        <Checkbox
+                                            disabled
+                                            checked={true}
+                                        />
+                                    </StyledTableCell>
                                     <StyledTableCell className={classes.tableCell} align="center" >
                                         {debt.name}
                                     </StyledTableCell>
                                     <StyledTableCell className={classes.tableCell} align="center" >
                                         £{debt.monthlyPayments}
                                     </StyledTableCell>
-                                    <StyledTableCell className={classes.tableCell} align="center" />
+                                    <StyledTableCell className={classes.tableCell} align="center">
+                                        <IconButton aria-label="Delete Item" disabled>
+                                            <DeleteOutlined />
+                                        </IconButton>
+                                    </StyledTableCell>
                                 </StyledTableRow>
                             ))}
                         </TableBody>

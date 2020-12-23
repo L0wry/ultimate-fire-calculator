@@ -45,7 +45,7 @@ const Debt = ({ className, ...rest }) => {
         gutterBottom
         variant="body1"
       >
-        Add any debt to be repaid  such as a mortgage, loans or credit card
+        Add any debt to be repaid  such as a mortgage or loan
         </Typography>
 
       <Box mt={3} >
@@ -79,12 +79,11 @@ const Debt = ({ className, ...rest }) => {
               xl={6}
               sm={12}
               xs={12}
-            >
+            />
 
-              {/* <BudgetRemaining difference={0} /> */}
-            </Grid>
+
           </Grid>
-          {debts?.length  && (
+          {debts.length > 0 ? (
             <>
               <Grid
                 item
@@ -116,8 +115,27 @@ const Debt = ({ className, ...rest }) => {
               </Grid>
             </>
 
-          )}
+          ) : (
+              <Grid
+                item
+                lg={12}
+                sm={12}
+                xl={12}
+                xs={12}
+              >
+                <Button
 
+                  fullWidth
+                  className={classes.navButton}
+                  component={RouterLink}
+                  to={'/app/budget'}
+
+                >
+                  Add Your Monthly Expenses Without Debt
+            </Button>
+              </Grid>
+
+          )}
         </Grid>
       </Box>
     </div >

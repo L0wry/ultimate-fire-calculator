@@ -33,7 +33,7 @@ const Dashboard = ({ className, ...rest }) => {
   const classes = useStyles();
 
   const { investments, safeWithdrawalPercent } = useInvestmentContext();
-  const { allExpensesTotal } = useBudgetContext();
+  const { allBudgetItems } = useBudgetContext();
 
   return (
     <div
@@ -108,7 +108,7 @@ const Dashboard = ({ className, ...rest }) => {
             xl={9}
             xs={12}
           >
-            <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments.filter(i => i.isIncluded), safeWithdrawalPercent, allExpensesTotal)} />
+            <Fire safeWithdrawalPercent={safeWithdrawalPercent} fireData={convertInvestmentDataToFire(investments.filter(i => i.isIncluded), safeWithdrawalPercent, allBudgetItems)} />
           </Grid>
           <Grid
             xs={12}

@@ -112,10 +112,15 @@ export const BudgetContextProvider = ({ children }) => {
     0
 
   const debtMonthlyTotal = debts.length > 0 ?
-  debts.reduce((acc, i) => math.add(acc, i.monthlyPayments), 0) :
+    debts.reduce((acc, i) => math.add(acc, i.monthlyPayments), 0) :
     0
 
-  const allExpensesTotal = math.add(expenseTotal, debtMonthlyTotal) 
+  const allExpensesTotal = math.round(math.add(expenseTotal, debtMonthlyTotal), 2)
+
+  const allBudgetItems = {
+    expenses, 
+    debts,
+  }
 
   return (
     <BudgetContext.Provider value={{
@@ -129,8 +134,8 @@ export const BudgetContextProvider = ({ children }) => {
       checkExpense,
       removeExpense,
       expenseTotal,
-      allExpensesTotal
-
+      allExpensesTotal,
+      allBudgetItems
     }}>
       {children}
     </BudgetContext.Provider>

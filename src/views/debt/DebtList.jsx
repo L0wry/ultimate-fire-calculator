@@ -220,7 +220,7 @@ export const DebtList = memo(({ items = [], onItemEdit, onItemRemove, onItemSave
                             required
                           >
                             {
-                              new Array(100).fill(0).map((_, i) => {
+                              new Array(100).fill(null).map((_, i) => {
                                 i++
                                 return <MenuItem key={i} className={classes.select} value={i}>{i === 0 ? 'Life' : i === 1 ? `${i} Year` : `${i} Years`}</MenuItem>
                               })

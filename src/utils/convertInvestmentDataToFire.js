@@ -5,7 +5,7 @@ const math = create(all, {
   precision: 32
 });
 
-export const convertInvestmentDataToFire = (investments, safeWithdrawalPercent, expenseTotal) => investments.reduce((accum, investment,) => {
+export const convertInvestmentDataToFire = (investments, safeWithdrawalPercent, allExpenses) => investments.reduce((accum, investment) => {
   for (const [year, months] of Object.entries(investment.compoundData)) {
     const isYearInAccum = accum.find((entry) => entry.year === year);
     const incomeToAdd = math.chain(months['Month 12'].balance).multiply(safeWithdrawalPercent).divide(12).round(2)
@@ -14,9 +14,11 @@ export const convertInvestmentDataToFire = (investments, safeWithdrawalPercent, 
     if (isYearInAccum) {
       isYearInAccum['Income From Draw Down'] = math.round(math.add(isYearInAccum['Income From Draw Down'], incomeToAdd), 2);
     } else {
+      const debtCostsForYear = allExpenses?.debts?.reduce((accum, debt) => parseInt(year.split(' ')[1]) <= debt.yearsLeftToPay ? debt.monthlyPayments + accum : accum, 0)
+      const expensesCostForYear =  allExpenses?.expenses?.reduce((a, b) => a + b.cost, 0)
       accum.push({
         year,
-        Expenses: expenseTotal,
+        Expenses: debtCostsForYear + expensesCostForYear,
         'Income From Draw Down': math.round(incomeToAdd, 2)
       });
     }

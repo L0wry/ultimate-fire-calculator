@@ -57,6 +57,8 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
 
   const classes = useStyles()
 
+  const showExpenseList = expenses.length > 0  || debts.length > 0
+  
   return (
     <div
       className={clsx(className)}
@@ -109,7 +111,7 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
             </Grid>
           </Grid>
 
-          {expenses.length > 0 && (
+          {showExpenseList && (
             <>
               <Grid
                 item
