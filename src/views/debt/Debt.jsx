@@ -8,7 +8,6 @@ import {
   Button,
   Grid
 } from '@material-ui/core';
-import { useInvestmentContext } from '../../context/InvestmentContext';
 import { AddDebt } from './AddDebt'
 import { DebtList } from './DebtList'
 import { NavLink as RouterLink } from 'react-router-dom';
@@ -34,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Debt = ({ className, ...rest }) => {
   const { debts, addDebt, onDebtSave, removeDebt, editDebt } = useBudgetContext();
-  const { includeInvestment, onItemSave, editInvestment, removeInvestment, addInvestment, yearsToMature } = useInvestmentContext();
   const classes = useStyles()
 
   return (

@@ -131,6 +131,7 @@ export const DebtList = memo(({ items = [], onItemEdit, onItemRemove, onItemSave
                 <StyledTableCell className={classes.tableCell} align="center">Name</StyledTableCell>
                 <StyledTableCell className={classes.tableCell} align="center">Outstanding Amount Due</StyledTableCell>
                 <StyledTableCell className={classes.tableCell} align="center">Interest Rate</StyledTableCell>
+                <StyledTableCell className={classes.tableCell} align="center">Monthly Repayment</StyledTableCell>
                 <StyledTableCell className={classes.tableCell} align="center">Years Left To Pay</StyledTableCell>
                 <StyledTableCell />
               </TableRow>
@@ -144,13 +145,15 @@ export const DebtList = memo(({ items = [], onItemEdit, onItemRemove, onItemSave
                       name: debt.name,
                       outstandingAmountDue: debt.outstandingAmountDue,
                       interestRate: math.round(math.multiply(debt.interestRate, 100), 4),
-                      yearsLeftToPay: debt.yearsLeftToPay || 25
+                      yearsLeftToPay: debt.yearsLeftToPay || 25,
+                      monthlyPayments: debt.monthlyPayments || 0
                     }}
                     validationSchema={object({
                       name: string(),
                       outstandingAmountDue: number(),
                       interestRate: number(),
-                      yearsLeftToPay: number()
+                      yearsLeftToPay: number(),
+                      monthlyPayments: number()
                     })}
                     onSubmit={(debt, { setStatus }) => {
                       setStatus()
@@ -202,6 +205,9 @@ export const DebtList = memo(({ items = [], onItemEdit, onItemRemove, onItemSave
                           }}
                         />
                       </StyledTableCell>
+                      <StyledTableCell className={classes.tableCell} align="center" >
+                        £{fNum(debt.monthlyPayments)}
+                      </StyledTableCell>
                       <StyledTableCell align="center" >
                         <FormControl className={classes.select}>
                           <Select
@@ -247,7 +253,9 @@ export const DebtList = memo(({ items = [], onItemEdit, onItemRemove, onItemSave
                       <StyledTableCell className={classes.tableCell} align="center" >
                         {fNum(math.round(math.multiply(debt.interestRate, 100), 4))}%
                                             </StyledTableCell>
-
+                      <StyledTableCell className={classes.tableCell} align="center" >
+                        £{fNum(debt.monthlyPayments)}
+                      </StyledTableCell>
                       <StyledTableCell className={classes.tableCell} align="center" >
                         {`${debt.yearsLeftToPay === 1 ? `${debt.yearsLeftToPay} Year` : `${debt.yearsLeftToPay} Years`}`}
                       </StyledTableCell>

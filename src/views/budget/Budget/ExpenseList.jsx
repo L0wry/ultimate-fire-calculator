@@ -18,14 +18,14 @@ import DeleteOutlined from '@material-ui/icons/DeleteOutlined';
 const useStyles = makeStyles((theme) => ({
     root: {},
     header: {
-      color: theme.palette.text.primary
+        color: theme.palette.text.primary
     },
     tableCell: {
         color: theme.palette.text.secondary
     }
-  }));
+}));
 
-  const StyledTableCell = withStyles((theme) => ({
+const StyledTableCell = withStyles((theme) => ({
     body: {
         fontSize: 14,
         color: theme.palette.text.secondary
@@ -41,8 +41,8 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 
-const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ...rest }) => {
-    
+const ExpenseList = memo(({ className, expenses = [], debts = [], onItemRemove, onItemCheck, ...rest }) => {
+
     const classes = useStyles();
 
     return (
@@ -59,9 +59,9 @@ const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ..
                 Expenses
                     </Typography>
 
-            <Box  
-            p={2} 
-            mt={3}>
+            <Box
+                p={2}
+                mt={3}>
                 <TableContainer>
                     <Table>
                         <TableHead>
@@ -73,8 +73,8 @@ const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ..
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {items.map((expense, idx) => (
-                                <StyledTableRow key={idx}>
+                            {expenses.map((expense, idx) => (
+                                <StyledTableRow key={`expense-${idx}`}>
                                     <StyledTableCell align="center" padding="checkbox">
                                         <Checkbox
                                             onClick={() => onItemCheck(idx)}
@@ -93,6 +93,18 @@ const ExpenseList = memo(({ className, items = [], onItemRemove, onItemCheck, ..
                                         </IconButton>
                                     </StyledTableCell>
 
+                                </StyledTableRow>
+                            ))}
+                            {debts.map((debt, idx) => (
+                                <StyledTableRow key={`debt=${idx}`}>
+                                    <StyledTableCell align="center" />
+                                    <StyledTableCell className={classes.tableCell} align="center" >
+                                        {debt.name}
+                                    </StyledTableCell>
+                                    <StyledTableCell className={classes.tableCell} align="center" >
+                                        £{debt.monthlyPayments}
+                                    </StyledTableCell>
+                                    <StyledTableCell className={classes.tableCell} align="center" />
                                 </StyledTableRow>
                             ))}
                         </TableBody>

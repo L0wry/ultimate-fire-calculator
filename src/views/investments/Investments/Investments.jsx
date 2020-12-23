@@ -46,12 +46,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Investments = ({ className, ...rest }) => {
   const { userTax } = useSalaryContext();
-  const { expenseTotal } = useBudgetContext();
+  const { allExpensesTotal } = useBudgetContext();
   const { includeInvestment, onItemSave, editInvestment, removeInvestment, investments, addInvestment, yearsToMature } = useInvestmentContext();
   const classes = useStyles()
 
   const totalTakeHome = math.round(math.divide(userTax.totalTakeHome || 0, 12), 2)
-  const difference = math.round(math.subtract(totalTakeHome, expenseTotal), 2)
+  const difference = math.round(math.subtract(totalTakeHome, allExpensesTotal), 2)
 
 
   return (

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { all, create } from 'mathjs'
+import mortgageHelpers from 'mortgage-helpers'
+
 
 const math = create(all, {
   number: 'BigNumber',
@@ -31,7 +33,8 @@ export const BudgetContextProvider = ({ children }) => {
       outstandingAmountDue,
       interestRate: math.divide(interestRate, 100),
       yearsLeftToPay,
-      editMode: false
+      editMode: false,
+      monthlyPayments: mortgageHelpers.getMonthlyPayments(outstandingAmountDue, interestRate, math.multiply(yearsLeftToPay, 12)),
     })
 
     saveDebts(newDebts);
@@ -40,9 +43,9 @@ export const BudgetContextProvider = ({ children }) => {
   const onDebtSave = ({
     name = "",
     outstandingAmountDue = 0,
-    interestRate =0,
-    yearsLeftToPay=0
-  }, idx) =>{
+    interestRate = 0,
+    yearsLeftToPay = 0,
+  }, idx) => {
     const debtCopy = [...debts]
 
     debtCopy[idx] = {
@@ -50,7 +53,8 @@ export const BudgetContextProvider = ({ children }) => {
       outstandingAmountDue,
       interestRate: math.divide(interestRate, 100),
       yearsLeftToPay,
-      editMode: false
+      editMode: false,
+      monthlyPayments: mortgageHelpers.getMonthlyPayments(outstandingAmountDue, interestRate, math.multiply(yearsLeftToPay, 12)),
     }
 
     saveDebts(debtCopy)
@@ -107,6 +111,12 @@ export const BudgetContextProvider = ({ children }) => {
     expenses.filter(item => item.checked).reduce((acc, i) => math.add(acc, i.cost), 0) :
     0
 
+  const debtMonthlyTotal = debts.length > 0 ?
+  debts.reduce((acc, i) => math.add(acc, i.monthlyPayments), 0) :
+    0
+
+  const allExpensesTotal = math.add(expenseTotal, debtMonthlyTotal) 
+
   return (
     <BudgetContext.Provider value={{
       debts,
@@ -119,6 +129,7 @@ export const BudgetContextProvider = ({ children }) => {
       checkExpense,
       removeExpense,
       expenseTotal,
+      allExpensesTotal
 
     }}>
       {children}

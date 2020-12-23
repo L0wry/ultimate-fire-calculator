@@ -48,11 +48,12 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
     addExpense,
     checkExpense,
     removeExpense,
-    expenseTotal,
+    allExpensesTotal,
+    debts
   } = useBudgetContext();
 
   const totalTakeHome = math.round(math.divide(userTax.totalTakeHome || 0, 12), 2)
-  const difference = math.round(math.subtract(totalTakeHome, expenseTotal), 2)
+  const difference = math.round(math.subtract(totalTakeHome, allExpensesTotal), 2)
 
   const classes = useStyles()
 
@@ -104,7 +105,7 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
               xs={12}
             >
 
-              <MonthlyTakeHomeCard expenseTotal={expenseTotal} totalTakeHome={totalTakeHome} difference={difference} />
+              <MonthlyTakeHomeCard allExpensesTotal={allExpensesTotal} totalTakeHome={totalTakeHome} difference={difference} />
             </Grid>
           </Grid>
 
@@ -118,7 +119,8 @@ const ExpenseHeaderCard = ({ className, ...rest }) => {
                 xs={12}
               >
                 <ExpenseList
-                  items={expenses}
+                  expenses={expenses}
+                  debts={debts}
                   onItemCheck={idx => checkExpense(idx)}
                   onItemRemove={idx => removeExpense(idx)}
                 />

@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const MonthlyTakeHomeCard = ({ className, expenseTotal, totalTakeHome, difference }) => {
+const MonthlyTakeHomeCard = ({ className, allExpensesTotal, totalTakeHome, difference }) => {
     const classes = useStyles();
 
     return (
@@ -58,7 +58,7 @@ const MonthlyTakeHomeCard = ({ className, expenseTotal, totalTakeHome, differenc
                     color="textPrimary"
                     variant="h4"
                 >
-                    £{expenseTotal}
+                    £{allExpensesTotal}
                 </Typography>
             </Grid>
 
