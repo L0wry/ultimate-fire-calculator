@@ -12,6 +12,7 @@ const ROUND_AMOUNT = 2;
 export const calculateIncomeTax = (tax, taxableIncome) => {
   let carryOver = taxableIncome;
 
+ 
   for (const band of TAX_BANDS) {
     const taxableAmount = math.subtract(tax[band].end, tax[band].start);
 
